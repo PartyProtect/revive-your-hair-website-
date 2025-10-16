@@ -14,7 +14,9 @@ class ComponentLoader {
    * Get the correct path to components based on current page depth
    */
   getComponentsPath() {
-    // Use absolute paths from the root
+    // Since we publish 'src' folder on Netlify, components are at root /components/
+    // But if accessed directly in src folder locally, need different path
+    // Try to detect environment and use appropriate path
     return '/components/';
   }
 
@@ -46,9 +48,12 @@ class ComponentLoader {
    */
   async loadComponent(componentName, targetId) {
     try {
-      const response = await fetch(`${this.componentsPath}${componentName}.html`);
+      const componentUrl = `${this.componentsPath}${componentName}.html`;
+      console.log(`Loading component from: ${componentUrl}`); // Debug log
+      const response = await fetch(componentUrl);
       
       if (!response.ok) {
+        console.error(`Failed to load ${componentName}: ${response.status} ${response.statusText}`);
         throw new Error(`Failed to load ${componentName}: ${response.status}`);
       }
       
@@ -57,6 +62,7 @@ class ComponentLoader {
       
       if (targetElement) {
         targetElement.innerHTML = html;
+        console.log(`Successfully loaded ${componentName}`); // Debug log
         
         // If it's the header, set active nav state
         if (componentName === 'header') {
