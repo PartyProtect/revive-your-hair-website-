@@ -108,12 +108,31 @@
   border: none;
   color: var(--charcoal);
   cursor: pointer;
-  padding: 8px;
+  padding: 12px;
+  min-width: 48px;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1001;
+}
+
+.mobile-menu-button:hover {
+  background: var(--gray-100);
+  border-radius: 8px;
+}
+
+.mobile-menu-button:active {
+  background: var(--gray-200);
+  transform: scale(0.95);
 }
 
 .mobile-menu-button svg {
   width: 24px;
   height: 24px;
+  pointer-events: none;
 }
 
 /* Mobile Responsive Styles */
@@ -161,7 +180,7 @@
   }
 
   .mobile-menu-button {
-    display: block;
+    display: flex;
   }
 }
 
