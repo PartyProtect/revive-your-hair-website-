@@ -14,16 +14,8 @@ class ComponentLoader {
    * Get the correct path to components based on current page depth
    */
   getComponentsPath() {
-    const path = window.location.pathname;
-    
-    // Count directory depth
-    if (path.includes('/blog/') || path.includes('/legal/')) {
-      return '../../components/';
-    } else if (path.includes('/pages/')) {
-      return '../components/';
-    } else {
-      return '/src/components/';
-    }
+    // Use absolute paths from the root
+    return '/components/';
   }
 
   /**
