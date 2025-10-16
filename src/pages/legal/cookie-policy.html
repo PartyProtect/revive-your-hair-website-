@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Cookie Policy - Revive Your Hair</title>
+  
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#047857">
+  
+  <!-- Security -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  
+  <link rel="stylesheet" href="../../styles/color-palette.css">
+  <link rel="stylesheet" href="../../styles/main.css">
+  <link rel="stylesheet" href="../../styles/components.css">
+  
+  <!-- i18n -->
+  <script src="../../scripts/i18n.js"></script>
+  
+  <!-- Scripts -->
+  <script src="../../scripts/component-loader.js"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .page-wrapper {
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .policy-header {
+      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      color: white;
+      padding: 60px 40px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .policy-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.1), transparent);
+      pointer-events: none;
+    }
+
+    .policy-header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .policy-title {
+      font-size: 2.5em;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--warm-gold);
+    }
+
+    .policy-effective {
+      font-size: 1em;
+      opacity: 0.9;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Content */
+    .policy-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      background: white;
+      margin-top: -20px;
+      position: relative;
+      z-index: 10;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .policy-intro {
+      background: var(--gray-50);
+      padding: 32px;
+      border-radius: 8px;
+      margin-bottom: 48px;
+      border-left: 4px solid var(--forest-green);
+    }
+
+    .policy-intro p {
+      font-size: 1.15em;
+      color: var(--gray-dark);
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section-title {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--gray-200);
+    }
+
+    .section-content p {
+      font-size: 1.05em;
+      color: var(--gray-dark);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .section-content ul {
+      margin: 16px 0;
+      padding-left: 24px;
+    }
+
+    .section-content li {
+      font-size: 1.05em;
+      color: var(--gray-dark);
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+
+    .contact-box {
+      background: var(--gray-50);
+      padding: 32px;
+      border-radius: 8px;
+      margin-top: 24px;
+    }
+
+    .contact-box strong {
+      color: var(--charcoal);
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.1em;
+    }
+
+    .contact-box p {
+      margin: 4px 0;
+      color: var(--gray-dark);
+    }
+
+    /* Cookie Table */
+    .cookie-table-wrapper {
+      overflow-x: auto;
+      margin: 24px 0;
+      border-radius: 8px;
+      border: 2px solid var(--gray-200);
+    }
+
+    .cookie-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+
+    .cookie-table thead {
+      background: var(--forest-green);
+      color: white;
+    }
+
+    .cookie-table th {
+      padding: 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.9em;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cookie-table td {
+      padding: 16px;
+      border-bottom: 1px solid var(--gray-200);
+      font-size: 0.95em;
+      color: var(--gray-dark);
+    }
+
+    .cookie-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .cookie-table tbody tr:hover {
+      background: var(--gray-50);
+    }
+
+    .cookie-name {
+      font-family: monospace;
+      font-weight: 600;
+      color: var(--charcoal);
+      font-size: 0.9em;
+    }
+
+    .cookie-type {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.8em;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .cookie-type.essential {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .cookie-type.preference {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .cookie-type.analytics {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .cookie-type.marketing {
+      background: #fce7f3;
+      color: #831843;
+    }
+
+    /* Highlight boxes */
+    .highlight-box {
+      background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+      border-left: 4px solid var(--warm-gold);
+      padding: 24px;
+      border-radius: 8px;
+      margin: 24px 0;
+    }
+
+    .highlight-box strong {
+      color: var(--warm-gold-dark);
+      display: block;
+      margin-bottom: 12px;
+      font-size: 1.1em;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      color: var(--charcoal);
+    }
+
+    /* Links */
+    a {
+      color: var(--forest-green);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: var(--forest-green-dark);
+      text-decoration: underline;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .policy-header {
+        padding: 40px 20px 30px;
+      }
+
+      .policy-title {
+        font-size: 2em;
+      }
+
+      .policy-content {
+        padding: 40px 20px;
+        margin-top: 0;
+        border-radius: 0;
+      }
+
+      .section-title {
+        font-size: 1.5em;
+      }
+
+      .cookie-table {
+        font-size: 0.85em;
+      }
+
+      .cookie-table th,
+      .cookie-table td {
+        padding: 12px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    
+    <!-- Header Component -->
+    <div id="header-root"></div>
+
+    <!-- Header -->
+    <header class="policy-header">
+      <div class="policy-header-content">
+        <h1 class="policy-title">Cookie Policy</h1>
+        <p class="policy-effective">Effective Date: November 1, 2025</p>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="policy-content">
+      
+      <!-- Intro -->
+      <div class="policy-intro">
+        <p>This Cookie Policy explains how Tomann & Alberts Enterprises (trading as ReviveYourHair) uses cookies and similar technologies on reviveyourhair.eu. It should be read together with our <a href="privacy-policy.html">Privacy Policy</a> for details on how we process personal data.</p>
+      </div>
+
+      <!-- What are cookies -->
+      <section class="section">
+        <h2 class="section-title">What Are Cookies?</h2>
+        <div class="section-content">
+          <p>Cookies are small text files stored on your device when you visit a website. They enable core site features, help us improve performance, and—if you agree—allow us to personalize marketing.</p>
+        </div>
+      </section>
+
+      <!-- Controller -->
+      <section class="section">
+        <h2 class="section-title">1. Who Is the Controller?</h2>
+        <div class="section-content">
+          <div class="contact-box">
+            <strong>Tomann & Alberts Enterprises</strong>
+            <p>Hemelsley 123, 6136 HK Sittard, Netherlands</p>
+            <p>KvK 96084294</p>
+            <p>Email: <a href="mailto:info@reviveyourhair.eu">info@reviveyourhair.eu</a></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Consent -->
+      <section class="section">
+        <h2 class="section-title">2. How We Obtain Consent</h2>
+        <div class="section-content">
+          <p>On your first visit we display a cookie consent banner powered by CookieYes.</p>
+          <ul>
+            <li><strong>Strictly necessary cookies</strong> load automatically because they are required to deliver the service you expressly request (Art. 6(1)(b) GDPR).</li>
+            <li><strong>Analytics, preference and marketing cookies</strong> are set only after you click "Accept all" or toggle them on in the banner (Art. 6(1)(a) consent).</li>
+            <li>You can withdraw or change consent at any time via the "Cookie Settings" link in the footer. Consent records are kept for 12 months, after which we will re-ask.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Types -->
+      <section class="section">
+        <h2 class="section-title">3. Types of Cookies We Use</h2>
+        <div class="section-content">
+          <ul>
+            <li><strong>Strictly necessary</strong> — Make the Site work: remember basket contents, process payments, secure log-ins. (Contract, Art. 6(1)(b))</li>
+            <li><strong>Preference</strong> — Remember language, cookie choices, Elementor layout cache. (Legitimate interest, Art. 6(1)(f))</li>
+            <li><strong>Analytics & performance</strong> — Count visits, see which pages are popular, fix errors. (Consent, Art. 6(1)(a))</li>
+            <li><strong>Marketing</strong> — Send you relevant offers in newsletters or remarketing ads. (Consent, Art. 6(1)(a))</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Cookie Table -->
+      <section class="section">
+        <h2 class="section-title">4. Detailed Cookie Table</h2>
+        <div class="section-content">
+          <p>Below is the full list of cookies that may be set on your device. Lifespans start from the moment the cookie is placed.</p>
+          
+          <div class="cookie-table-wrapper">
+            <table class="cookie-table">
+              <thead>
+                <tr>
+                  <th>Cookie Name</th>
+                  <th>Provider</th>
+                  <th>Purpose</th>
+                  <th>Duration</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="cookie-name">woocommerce_cart_hash</span></td>
+                  <td>ReviveYourHair</td>
+                  <td>Remembers basket contents</td>
+                  <td>Session</td>
+                  <td><span class="cookie-type essential">Essential</span></td>
+                </tr>
+                <tr>
+                  <td><span class="cookie-name">woocommerce_items_in_cart</span></td>
+                  <td>ReviveYourHair</td>
+                  <td>Counts basket items</td>
+                  <td>Session</td>
+                  <td><span class="cookie-type essential">Essential</span></td>
+                </tr>
+                <tr>
+                  <td><span class="cookie-name">wp_woocommerce_session_*</span></td>
+                  <td>ReviveYourHair</td>
+                  <td>Stores unique session ID</td>
+                  <td>2 days</td>
+                  <td><span class="cookie-type essential">Essential</span></td>
+                </tr>
+                <tr>
+                  <td><span class="cookie-name">elementor</span></td>
+                  <td>ReviveYourHair</td>
+                  <td>Saves page builder settings</td>
+                  <td>12 months</td>
+                  <td><span class="cookie-type preference">Preference</span></td>
+                </tr>
+                <tr>
+                  <td><span class="cookie-name">cookieyes-consent</span></td>
+                  <td>ReviveYourHair</td>
+                  <td>Stores your cookie preferences</td>
+                  <td>12 months</td>
+                  <td><span class="cookie-type preference">Preference</span></td>
+                </tr>
+                <tr>
+                  <td><span class="cookie-name">_ga</span></td>
+                  <td>Google Analytics</td>
+                  <td>Generates anonymous visitor statistics</td>
+                  <td>14 months</td>
+                  <td><span class="cookie-type analytics">Analytics</span></td>
+                </tr>
+                <tr>
+                  <td><span class="cookie-name">_ga_*</span></td>
+                  <td>Google Analytics</td>
+                  <td>Maintains session state</td>
+                  <td>14 months</td>
+                  <td><span class="cookie-type analytics">Analytics</span></td>
+                </tr>
+                <tr>
+                  <td><span class="cookie-name">_gid</span></td>
+                  <td>Google Analytics</td>
+                  <td>Counts page views</td>
+                  <td>24 hours</td>
+                  <td><span class="cookie-type analytics">Analytics</span></td>
+                </tr>
+                <tr>
+                  <td><span class="cookie-name">_gat</span></td>
+                  <td>Google Analytics</td>
+                  <td>Throttles request rate</td>
+                  <td>1 minute</td>
+                  <td><span class="cookie-type analytics">Analytics</span></td>
+                </tr>
+                <tr>
+                  <td><span class="cookie-name">_gac_*</span></td>
+                  <td>Google Analytics</td>
+                  <td>Stores campaign info</td>
+                  <td>90 days</td>
+                  <td><span class="cookie-type marketing">Marketing</span></td>
+                </tr>
+                <tr>
+                  <td><span class="cookie-name">mailerlite:webform:shown</span></td>
+                  <td>MailerLite</td>
+                  <td>Hides newsletter pop-up once viewed</td>
+                  <td>12 months</td>
+                  <td><span class="cookie-type marketing">Marketing</span></td>
+                </tr>
+                <tr>
+                  <td><span class="cookie-name">paypal-cookie-name</span></td>
+                  <td>PayPal</td>
+                  <td>Fraud prevention & checkout integration</td>
+                  <td>Up to 3 years</td>
+                  <td><span class="cookie-type essential">Essential</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="highlight-box">
+            <strong>Note:</strong>
+            <p>Providers may update their cookie names. The live banner always reflects the current list of cookies.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Data Transfers -->
+      <section class="section">
+        <h2 class="section-title">5. Third-Country Data Transfers</h2>
+        <div class="section-content">
+          <p>Some providers (e.g. Google, PayPal, MailerLite) are based in the United States. Data associated with their cookies may therefore be transferred outside the EEA. We rely on the EU-US Data Privacy Framework or Standard Contractual Clauses to safeguard such transfers (GDPR Arts. 44-49).</p>
+          <p>Google Analytics is configured with IP anonymization enabled so that your full IP address is never stored.</p>
+        </div>
+      </section>
+
+      <!-- Cookie Management -->
+      <section class="section">
+        <h2 class="section-title">6. How to Manage Cookies</h2>
+        <div class="section-content">
+          <ul>
+            <li><strong>Banner controls:</strong> Click "Cookie Settings" in the footer to revisit our banner at any time.</li>
+            <li><strong>Browser settings:</strong> Most browsers let you block or delete cookies site-by-site. See <a href="https://www.aboutcookies.org" target="_blank" rel="noopener">aboutcookies.org</a> for guides.</li>
+            <li><strong>GA opt-out add-on:</strong> Google offers a browser plug-in at <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">tools.google.com/dlpage/gaoptout</a>.</li>
+          </ul>
+          <div class="highlight-box">
+            <strong>Important:</strong>
+            <p>Blocking strictly necessary cookies may make parts of the Site unusable (e.g. checkout).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Changes -->
+      <section class="section">
+        <h2 class="section-title">7. Changes to This Cookie Policy</h2>
+        <div class="section-content">
+          <p>We may update this Policy to reflect changes in cookies or legal requirements. Significant changes will trigger the banner again and we will timestamp the new version. An archive of previous versions is available at <a href="/legal/cookie-archive">reviveyourhair.eu/legal/cookie-archive</a>.</p>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="section">
+        <h2 class="section-title">8. Contact Us</h2>
+        <div class="section-content">
+          <p>Questions about cookies?</p>
+          <div class="contact-box">
+            <strong>Email:</strong>
+            <p><a href="mailto:info@reviveyourhair.eu">info@reviveyourhair.eu</a></p>
+            <strong style="margin-top: 16px;">Post:</strong>
+            <p>Tomann & Alberts Enterprises — Cookie Enquiries</p>
+            <p>Hemelsley 123, 6136 HK Sittard, Netherlands</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer Component -->
+    <div id="footer-root"></div>
+
+  </div>
+
+  <script src="../../scripts/main.js"></script>
+</body>
+</html>

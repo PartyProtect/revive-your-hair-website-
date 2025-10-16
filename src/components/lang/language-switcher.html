@@ -1,0 +1,181 @@
+<!-- Language Switcher Component -->
+<div class="language-switcher">
+  <button class="lang-toggle" id="langToggle" aria-label="Change language">
+    <span class="current-flag" id="currentFlag">🇬🇧</span>
+    <span class="current-lang" id="currentLang">EN</span>
+    <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none">
+      <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+  
+  <div class="lang-dropdown" id="langDropdown">
+    <button class="lang-option" data-lang="en">
+      <span class="flag">🇬🇧</span>
+      <span class="lang-name">English</span>
+    </button>
+    <button class="lang-option" data-lang="nl">
+      <span class="flag">🇳🇱</span>
+      <span class="lang-name">Nederlands</span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .language-switcher {
+    position: relative;
+    display: inline-block;
+  }
+
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: white;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .lang-toggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .current-flag {
+    font-size: 1.2em;
+    line-height: 1;
+  }
+
+  .current-lang {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .chevron {
+    transition: transform 0.2s;
+  }
+
+  .lang-toggle.active .chevron {
+    transform: rotate(180deg);
+  }
+
+  .lang-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 160px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s;
+    z-index: 1000;
+  }
+
+  .lang-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .lang-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: white;
+    border: none;
+    color: var(--charcoal);
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-align: left;
+  }
+
+  .lang-option:hover {
+    background: var(--gray-50);
+  }
+
+  .lang-option .flag {
+    font-size: 1.3em;
+    line-height: 1;
+  }
+
+  .lang-option .lang-name {
+    font-weight: 500;
+  }
+
+  .lang-option.active {
+    background: var(--forest-green);
+    color: white;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .lang-toggle {
+      padding: 6px 10px;
+      font-size: 0.85em;
+    }
+
+    .current-lang {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Language switcher functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.getElementById('langToggle');
+    const dropdown = document.getElementById('langDropdown');
+    const currentFlag = document.getElementById('currentFlag');
+    const currentLang = document.getElementById('currentLang');
+    const langOptions = document.querySelectorAll('.lang-option');
+
+    // Get current language
+    const currentLanguage = i18n.getCurrentLang();
+    
+    // Update UI
+    const langConfig = i18n.languages[currentLanguage];
+    currentFlag.textContent = langConfig.flag;
+    currentLang.textContent = langConfig.code.toUpperCase();
+
+    // Mark active language
+    langOptions.forEach(option => {
+      if (option.dataset.lang === currentLanguage) {
+        option.classList.add('active');
+      }
+    });
+
+    // Toggle dropdown
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggle.classList.toggle('active');
+      dropdown.classList.toggle('active');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', () => {
+      toggle.classList.remove('active');
+      dropdown.classList.remove('active');
+    });
+
+    // Language selection
+    langOptions.forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const targetLang = option.dataset.lang;
+        i18n.switchLanguage(targetLang);
+      });
+    });
+  });
+</script>

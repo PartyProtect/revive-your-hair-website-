@@ -1,0 +1,51 @@
+/my-website-project
+│
+├── /assets                  # Static assets
+│   ├── /images             # Image files
+│   ├── /fonts              # Custom fonts
+│   ├── /videos             # Video files
+│   └── /icons              # Icon files
+│
+├── /css                    # Stylesheets
+│   ├── /components         # Component-specific styles
+│   ├── /layouts            # Layout-specific styles
+│   ├── /pages              # Page-specific styles
+│   └── main.css            # Main stylesheet
+│
+├── /js                     # JavaScript files
+│   ├── /components         # Component-specific scripts
+│   ├── /pages              # Page-specific scripts
+│   └── main.js             # Main JavaScript file
+│
+├── /partials               # Reusable HTML components
+│   ├── header.html         # Header component
+│   ├── footer.html         # Footer component
+│   └── navigation.html     # Navigation component
+│
+├── /pages                  # HTML files for different pages
+│   ├── index.html          # Home page
+│   ├── about.html          # About page
+│   ├── contact.html        # Contact page
+│   └── services.html       # Services page
+│
+├── /data                   # Data files (JSON, XML, etc.)
+│   ├── data.json           # Example data file
+│   └── config.json         # Configuration file
+│
+├── /tests                  # Test files
+│   ├── unit                # Unit tests
+│   └── integration         # Integration tests
+│
+├── /build                  # Build output (for production)
+│   ├── css                 # Minified CSS files
+│   ├── js                  # Minified JS files
+│   └── index.html          # Minified HTML files
+│
+├── /docs                   # Documentation
+│   ├── setup.md            # Setup instructions
+│   └── api.md              # API documentation
+│
+├── .gitignore              # Git ignore file
+├── README.md               # Project overview
+├── package.json            # Node.js package file (if using Node.js)
+└── webpack.config.js       # Webpack configuration (if using Webpack)

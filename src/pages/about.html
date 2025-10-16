@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Evidence-Based Hair Loss Information | Revive Your Hair</title>
+  <meta name="description" content="Learn about Revive Your Hair's mission to provide evidence-based, clinically-proven hair loss treatment information backed by scientific research.">
+  
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#047857">
+  <meta name="msapplication-TileColor" content="#047857">
+  
+  <!-- Security -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  
+  <!-- SEO -->
+  <link rel="canonical" href="https://www.reviveyourhair.eu/about.html">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="About Us - Evidence-Based Hair Loss Information">
+  <meta property="og:description" content="Learn about our mission to provide evidence-based hair loss treatment information backed by scientific research.">
+  <meta property="og:url" content="https://www.reviveyourhair.eu/about.html">
+  <meta property="og:site_name" content="Revive Your Hair">
+  
+  <!-- Schema.org AboutPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Revive Your Hair",
+    "description": "Learn about our evidence-based approach to hair loss information"
+  }
+  </script>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../styles/color-palette.css">
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/components.css">
+  
+  <!-- i18n -->
+  <script src="../scripts/i18n.js"></script>
+  
+  <!-- Scripts -->
+  <script src="../scripts/component-loader.js"></script>
+  
+  <!-- Analytics -->
+  <script src="../scripts/analytics.js" defer></script>
+
+  <style>
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      color: white;
+      padding: 100px 40px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.1), transparent);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: 3em;
+      font-weight: 300;
+      line-height: 1.3;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title strong {
+      font-weight: 700;
+      color: var(--warm-gold);
+    }
+
+    .hero-subtitle {
+      font-size: 1.4em;
+      opacity: 0.9;
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    /* Content Sections */
+    .content-section {
+      padding: 80px 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .content-section.gray {
+      background: var(--gray-50);
+    }
+
+    .section-title {
+      font-size: 2.2em;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 32px;
+      line-height: 1.3;
+    }
+
+    .content-text {
+      font-size: 1.15em;
+      color: var(--gray-dark);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .content-text strong {
+      color: var(--charcoal);
+      font-weight: 600;
+    }
+
+    /* Process List */
+    .process-list {
+      margin: 32px 0;
+    }
+
+    .process-item {
+      background: white;
+      border-left: 4px solid var(--forest-green);
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: all 0.3s ease;
+    }
+
+    .process-item:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .process-title {
+      font-size: 1.3em;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+    }
+
+    .process-description {
+      font-size: 1.05em;
+      color: var(--gray-dark);
+      line-height: 1.7;
+    }
+
+    /* Callout Box */
+    .callout {
+      background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+      border-left: 4px solid var(--warm-gold);
+      padding: 32px;
+      border-radius: 8px;
+      margin: 40px 0;
+    }
+
+    .callout-title {
+      font-size: 1.4em;
+      font-weight: 700;
+      color: var(--warm-gold-dark);
+      margin-bottom: 16px;
+    }
+
+    .callout-text {
+      font-size: 1.1em;
+      color: var(--charcoal);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: var(--gray-50);
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .cta-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-size: 2em;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+
+    .cta-text {
+      font-size: 1.15em;
+      color: var(--gray-dark);
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--forest-green), var(--forest-green-light));
+      color: white;
+      padding: 16px 40px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1em;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      margin: 0 12px 12px 0;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(4, 120, 87, 0.3);
+    }
+
+    .cta-button.secondary {
+      background: white;
+      color: var(--forest-green);
+      border: 2px solid var(--forest-green);
+    }
+
+    .cta-button.secondary:hover {
+      background: var(--gray-50);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 20px 40px;
+      }
+
+      .hero-title {
+        font-size: 2em;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1em;
+      }
+
+      .content-section {
+        padding: 60px 20px;
+      }
+
+      .section-title {
+        font-size: 1.8em;
+      }
+
+      .cta-button {
+        display: block;
+        margin: 0 0 12px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div id="header-root"></div>
+
+  <!-- Main Content -->
+  <main>
+    <div class="page-wrapper">
+      
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            We started this because finding <strong>honest information</strong> about hair loss shouldn't be this hard.
+          </h1>
+        </div>
+      </section>
+
+      <!-- The Problem -->
+      <section class="content-section">
+        <h2 class="section-title">The Problem We Saw</h2>
+        
+        <p class="content-text">
+          Spend 20 minutes googling hair loss treatments and you'll find:
+        </p>
+
+        <div class="process-list">
+          <div class="process-item">
+            <div class="process-title">Reddit threads with conflicting anecdotes</div>
+            <div class="process-description">"Finasteride ruined my life" next to "Finasteride saved my life" with zero context about the actual data.</div>
+          </div>
+
+          <div class="process-item">
+            <div class="process-title">YouTube videos selling miracle solutions</div>
+            <div class="process-description">Supplements, laser caps, essential oils—all promising results with zero clinical backing.</div>
+          </div>
+
+          <div class="process-item">
+            <div class="process-title">Medical sites that sound like textbooks</div>
+            <div class="process-description">"Androgenetic alopecia presents with progressive miniaturization..." Cool, but what do I actually <em>do</em>?</div>
+          </div>
+        </div>
+
+        <p class="content-text">
+          <strong>The information exists.</strong> There are decades of clinical studies on what works for hair loss. But it's buried in medical journals behind paywalls, written in technical language, and scattered across hundreds of papers.
+        </p>
+
+        <p class="content-text">
+          So people either pay thousands for treatments they don't understand, or they do nothing because they can't figure out what's real.
+        </p>
+      </section>
+
+      <!-- What We Do -->
+      <section class="content-section gray">
+        <h2 class="section-title">What We Actually Do</h2>
+        
+        <p class="content-text">
+          Well, we read the studies and convert them into something you can understand without a PhD. And we've read a ton of studies because hair loss is a topic that deserves to be thoroughly researched.
+        </p>
+
+        <p class="content-text">
+          You can read our process below.
+        </p>
+      </section>
+
+      <!-- How We Work -->
+      <section class="content-section">
+        <h2 class="section-title">How We Work</h2>
+        
+        <div class="process-list">
+          <div class="process-item">
+            <div class="process-title">We start with peer-reviewed research</div>
+            <div class="process-description">PubMed, medical journals, clinical trials. If it's not published and peer-reviewed, we don't cite it.</div>
+          </div>
+
+          <div class="process-item">
+            <div class="process-title">We look at sample sizes and methodology</div>
+            <div class="process-description">A study with 12 people isn't the same as one with 1,200. We note the difference.</div>
+          </div>
+
+          <div class="process-item">
+            <div class="process-title">We translate medical language into plain English</div>
+            <div class="process-description">"Androgenetic alopecia" becomes "pattern hair loss." "Follicular miniaturization" becomes "your hair is shrinking."</div>
+          </div>
+
+          <div class="process-item">
+            <div class="process-title">We explain the mechanisms, not just the treatments</div>
+            <div class="process-description">Understanding <em>why</em> something works helps you make better decisions about your situation.</div>
+          </div>
+
+          <div class="process-item">
+            <div class="process-title">We're honest about limitations</div>
+            <div class="process-description">Side effects happen. Not everything works for everyone. Some questions don't have good answers yet. We tell you.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- What We're Not -->
+      <section class="content-section gray">
+        <h2 class="section-title">What We're Not</h2>
+        
+        <p class="content-text">
+          We're not doctors. If you want medical advice, talk to a dermatologist. What we provide is research synthesis—taking what the clinical literature says and making it accessible.
+        </p>
+
+        <p class="content-text">
+          We're not here to sell you supplements or miracle formulas. The treatments that work have decades of research behind them. They're also mostly generic and available anywhere.
+        </p>
+
+        <div class="callout">
+          <div class="callout-title">Our Standard</div>
+          <p class="callout-text">
+            If we wouldn't recommend it to someone we care about, we don't put it on this site. That's it. That's the filter.
+          </p>
+        </div>
+      </section>
+
+      <!-- Why This Matters -->
+      <section class="content-section">
+        <h2 class="section-title">Why This Matters</h2>
+        
+        <p class="content-text">
+          Hair loss is personal. It affects how you see yourself. And the industry knows that, which is why it's full of overpriced treatments and false hope.
+        </p>
+
+        <p class="content-text">
+          So we built this. A place where you can figure out what actually works, understand why it works, and make informed decisions without wading through medical jargon or marketing speak.
+        </p>
+
+        <p class="content-text">
+          That's what we do. Read the studies, explain the mechanisms, show you the data.
+        </p>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta-section">
+        <div class="cta-content">
+          <h2 class="cta-title">Ready to Start?</h2>
+          <p class="cta-text">
+            Check out our guides or take the quiz to get a personalized treatment plan based on your situation.
+          </p>
+          <a href="/src/pages/blog/index.html" class="cta-button">Check Out Our Guides</a>
+          <a href="/src/pages/quiz.html" class="cta-button secondary">Take the Quiz</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-root"></div>
+
+  <!-- Scripts -->
+  <script src="../scripts/main.js"></script>
+</body>
+</html>

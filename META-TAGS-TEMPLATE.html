@@ -1,0 +1,160 @@
+<!-- 
+  ===========================================
+  STANDARD META TAGS TEMPLATE
+  ===========================================
+  Copy these into the <head> section of each page
+  Adjust paths based on page depth (../ or ../../)
+-->
+
+<!-- Basic Meta Tags -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Theme Color (Mobile Browser Bar) -->
+<meta name="theme-color" content="#047857">
+<meta name="msapplication-TileColor" content="#047857">
+
+<!-- Security Meta Tags -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="X-XSS-Protection" content="1; mode=block">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<!-- Performance Optimization -->
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+
+<!-- Favicon (adjust path based on page location) -->
+<!-- For pages in /src/pages/ -->
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+
+<!-- For pages in /src/pages/blog/ or /src/pages/legal/ -->
+<!-- <link rel="icon" type="image/svg+xml" href="../../favicon.svg"> -->
+<!-- <link rel="alternate icon" href="../../favicon.ico"> -->
+
+<!-- Apple Touch Icon (for iOS home screen) -->
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+
+<!-- For pages in subdirectories use: -->
+<!-- <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png"> -->
+
+<!-- Manifest (for PWA support - optional) -->
+<link rel="manifest" href="/site.webmanifest">
+
+<!-- 
+  ===========================================
+  PAGE-SPECIFIC META TAGS
+  ===========================================
+  Add these with unique content for each page
+-->
+
+<!-- Title (Unique per page, 50-60 characters ideal) -->
+<title>Page Title - Revive Your Hair</title>
+
+<!-- Description (Unique per page, 150-160 characters ideal) -->
+<meta name="description" content="Your page description here">
+
+<!-- Keywords (Optional, less important for modern SEO) -->
+<meta name="keywords" content="hair loss, finasteride, minoxidil">
+
+<!-- Canonical URL (Prevents duplicate content issues) -->
+<link rel="canonical" href="https://www.reviveyourhair.com/page.html">
+
+<!-- Language -->
+<link rel="alternate" hreflang="en" href="https://www.reviveyourhair.com/page.html">
+<link rel="alternate" hreflang="nl" href="https://www.reviveyourhair.com/nl/page.html">
+<link rel="alternate" hreflang="x-default" href="https://www.reviveyourhair.com/page.html">
+
+<!-- 
+  ===========================================
+  OPEN GRAPH (Facebook, LinkedIn)
+  ===========================================
+-->
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Page Title">
+<meta property="og:description" content="Page description for social sharing">
+<meta property="og:url" content="https://www.reviveyourhair.com/page.html">
+<meta property="og:site_name" content="Revive Your Hair">
+<meta property="og:image" content="https://www.reviveyourhair.com/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+
+<!-- 
+  ===========================================
+  SCHEMA.org STRUCTURED DATA
+  ===========================================
+  Choose appropriate schema based on page type
+-->
+
+<!-- Organization Schema (Homepage) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Revive Your Hair",
+  "url": "https://www.reviveyourhair.com",
+  "description": "Evidence-based hair loss treatment information",
+  "foundingDate": "2025"
+}
+</script>
+
+<!-- WebPage Schema (General pages) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Page Name",
+  "description": "Page description",
+  "url": "https://www.reviveyourhair.com/page.html"
+}
+</script>
+
+<!-- Article Schema (Blog posts) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Article Title",
+  "description": "Article description",
+  "author": {
+    "@type": "Organization",
+    "name": "Revive Your Hair"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Revive Your Hair"
+  },
+  "datePublished": "2025-10-15",
+  "dateModified": "2025-10-15"
+}
+</script>
+
+<!-- 
+  ===========================================
+  STYLESHEETS & SCRIPTS
+  ===========================================
+  Standard order for all pages
+-->
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="../styles/color-palette.css">
+<link rel="stylesheet" href="../styles/main.css">
+<link rel="stylesheet" href="../styles/components.css">
+
+<!-- For subdirectory pages use: -->
+<!-- <link rel="stylesheet" href="../../styles/color-palette.css"> -->
+
+<!-- i18n (Language Support) -->
+<script src="../scripts/i18n.js"></script>
+
+<!-- Component Loader (loads header/footer) -->
+<script src="../scripts/component-loader.js"></script>
+
+<!-- Analytics -->
+<script src="../scripts/analytics.js" defer></script>
+
+<!-- Main JS -->
+<script src="../scripts/main.js" defer></script>

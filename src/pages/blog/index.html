@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Expert guides on hair loss treatment, finasteride, minoxidil, and evidence-based solutions for male pattern baldness.">
+  <meta name="keywords" content="hair loss blog, finasteride guide, minoxidil guide, male pattern baldness, hair loss treatment">
+  <title>Blog - Evidence-Based Hair Loss Guides | Revive Your Hair</title>
+  
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#047857">
+  
+  <!-- Security -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  
+  <!-- SEO -->
+  <link rel="canonical" href="https://www.reviveyourhair.eu/blog/">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hair Loss Treatment Blog | Revive Your Hair">
+  <meta property="og:description" content="Evidence-based guides on treating male pattern baldness with finasteride, minoxidil, and proven therapies.">
+  <meta property="og:url" content="https://www.reviveyourhair.eu/blog/">
+  <meta property="og:site_name" content="Revive Your Hair">
+  
+  <!-- Schema.org CollectionPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Hair Loss Treatment Blog",
+    "description": "Evidence-based guides on hair loss treatments, including finasteride, minoxidil, and other proven solutions",
+    "url": "https://www.reviveyourhair.eu/blog/",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Revive Your Hair"
+    }
+  }
+  </script>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../styles/color-palette.css">
+  <link rel="stylesheet" href="../../styles/main.css">
+  <link rel="stylesheet" href="../../styles/components.css">
+  <link rel="stylesheet" href="../../styles/utilities.css">
+  
+  <!-- i18n -->
+  <script src="../../scripts/i18n.js"></script>
+  
+  <!-- Scripts -->
+  <script src="../../scripts/component-loader.js"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .page-wrapper {
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      color: white;
+      padding: 80px 40px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.1), transparent);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: 3em;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+      color: var(--warm-gold);
+    }
+
+    .hero-subtitle {
+      font-size: 1.3em;
+      opacity: 0.9;
+      font-weight: 400;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Blog Grid */
+    .blog-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .blog-grid {
+      display: grid;
+      gap: 48px;
+      margin-bottom: 60px;
+    }
+
+    /* Brutal Card Styles */
+    .blog-card {
+      background: white;
+      color: black;
+      padding: 48px;
+      border: 4px solid black;
+      position: relative;
+      transition: all 0.3s ease;
+      box-shadow: 12px 12px 0 #047857;
+    }
+
+    .blog-card:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 16px 16px 0 #047857;
+    }
+
+    /* Header with Number + Meta */
+    .brutal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 32px;
+      gap: 40px;
+    }
+
+    .brutal-number {
+      font-size: 8em;
+      font-weight: 900;
+      line-height: 0.9;
+      color: #047857;
+      font-family: Arial Black, sans-serif;
+    }
+
+    .brutal-meta {
+      text-align: right;
+      padding-top: 12px;
+    }
+
+    .brutal-category {
+      font-size: 0.85em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      color: #047857;
+    }
+
+    .brutal-date {
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    /* Title */
+    .blog-card h2 {
+      font-size: 2.5em;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      color: black;
+    }
+
+    /* Intro Box (Green explanation) */
+    .brutal-intro {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 32px;
+      max-width: 900px;
+      background: #d1fae5;
+      padding: 20px;
+      border-left: 6px solid #047857;
+    }
+
+    /* Footer */
+    .blog-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 3px solid black;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .brutal-tags {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brutal-tag {
+      background: black;
+      color: white;
+      padding: 8px 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.8em;
+      letter-spacing: 1px;
+    }
+
+    .read-more-btn {
+      background: #047857;
+      color: white;
+      padding: 16px 32px;
+      text-decoration: none;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: 3px solid black;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+
+    .read-more-btn:hover {
+      background: #065f46;
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0 black;
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      background: linear-gradient(135deg, var(--forest-green-dark) 0%, var(--forest-green) 100%);
+      color: white;
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    .newsletter-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .newsletter-content h3 {
+      font-size: 2em;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: white;
+    }
+
+    .newsletter-content p {
+      font-size: 1.1em;
+      opacity: 0.95;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 14px 18px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      font-size: 1em;
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    .newsletter-form input::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .newsletter-form button {
+      background: white;
+      color: var(--forest-green);
+      padding: 14px 28px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .newsletter-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 20px 40px;
+      }
+
+      .hero-title {
+        font-size: 2em;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1em;
+      }
+
+      .blog-section {
+        padding: 60px 20px;
+      }
+
+      .blog-card {
+        padding: 32px 24px;
+        box-shadow: 8px 8px 0 #047857;
+      }
+
+      .blog-card:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 10px 10px 0 #047857;
+      }
+
+      .brutal-header {
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 24px;
+      }
+
+      .brutal-number {
+        font-size: 5em;
+      }
+
+      .brutal-meta {
+        text-align: left;
+        padding-top: 0;
+      }
+
+      .blog-card h2 {
+        font-size: 1.8em;
+      }
+
+      .brutal-intro {
+        font-size: 1em;
+      }
+
+      .blog-card-footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .read-more-btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .newsletter-form button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    
+    <!-- Header -->
+    <div id="header-root"></div>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">Evidence-Based Guides</h1>
+        <p class="hero-subtitle">
+          We read the studies so you don't have to.
+        </p>
+      </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="blog-section">
+      <div class="blog-grid" id="blogGrid">
+        <!-- Blog posts will be dynamically loaded here -->
+        <div class="loading-message" style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--gray-medium);">
+          <p style="font-size: 1.2em;">Loading blog posts...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter CTA -->
+    <section class="newsletter-section">
+      <div class="newsletter-content">
+        <h3>Stay Updated on New Guides</h3>
+        <p>We're constantly researching new treatments and updating existing guides. Get notified when we publish something new.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-root"></div>
+  </div>
+
+  <script src="../../scripts/main.js"></script>
+  <script src="../../scripts/blog-posts.js"></script>
+  <script>
+    // Handle newsletter form submission
+    document.addEventListener('DOMContentLoaded', function() {
+      const newsletterForm = document.querySelector('.newsletter-form');
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const email = this.querySelector('input[type="email"]').value;
+          console.log('Email submitted:', email);
+          
+          // In production, send to your backend/email service
+          alert('Thanks! We\'ll notify you when new guides are published.');
+          this.reset();
+        });
+      }
+    });
+
+    // Render blog posts dynamically from fetched metadata
+    async function renderBlogPosts() {
+      const blogGrid = document.getElementById('blogGrid');
+      
+      try {
+        const posts = await loadAllPosts();
+        
+        if (posts.length === 0) {
+          blogGrid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+              <p style="font-size: 1.2em; color: var(--gray-medium);">No blog posts yet. Check back soon!</p>
+            </div>
+          `;
+          return;
+        }
+        
+        // Clear loading message
+        blogGrid.innerHTML = '';
+        
+        // Render each blog post
+        posts.forEach((post, index) => {
+          const article = document.createElement('article');
+          article.className = 'blog-card';
+          
+          // Format the card number (01, 02, 03, etc.)
+          const cardNumber = String(index + 1).padStart(2, '0');
+          
+          // Build intro section if available (green explanation box)
+          const introHTML = post.intro ? `
+            <div class="brutal-intro">
+              ${post.intro}
+            </div>
+          ` : '';
+          
+          // Format date nicely
+          const formattedDate = `Last updated: ${formatDate(post.date)}`;
+          
+          article.innerHTML = `
+            <div class="brutal-header">
+              <div class="brutal-number">${cardNumber}</div>
+              <div class="brutal-meta">
+                <div class="brutal-category">${post.category}</div>
+                <div class="brutal-date">${formattedDate}</div>
+              </div>
+            </div>
+            <h2>${post.title}</h2>
+            ${introHTML}
+            <div class="blog-card-footer">
+              <div class="brutal-tags">
+                <span class="brutal-tag">${post.readTime}</span>
+                <span class="brutal-tag">Evidence-Based</span>
+              </div>
+              <a href="${post.slug}.html" class="read-more-btn">Read Guide →</a>
+            </div>
+          `;
+          
+          blogGrid.appendChild(article);
+        });
+      } catch (error) {
+        console.error('Error rendering blog posts:', error);
+        blogGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+            <p style="font-size: 1.2em; color: var(--gray-medium);">Error loading blog posts. Please refresh the page.</p>
+          </div>
+        `;
+      }
+    }
+    
+    // Render posts when page loads
+    document.addEventListener('DOMContentLoaded', renderBlogPosts);
+  </script>
+  <script src="../../scripts/analytics.js"></script>
+</body>
+</html>

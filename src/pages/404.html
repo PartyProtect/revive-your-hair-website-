@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Page Not Found - Revive Your Hair</title>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../styles/color-palette.css">
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/components.css">
+  
+  <!-- Scripts -->
+  <script src="../scripts/component-loader.js"></script>
+
+  <style>
+    .error-container {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .error-content {
+      max-width: 600px;
+    }
+
+    .error-code {
+      font-size: 8em;
+      font-weight: 700;
+      color: var(--warm-gold);
+      line-height: 1;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 0 var(--forest-green);
+    }
+
+    .error-title {
+      font-size: 2.5em;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 16px;
+    }
+
+    .error-message {
+      font-size: 1.2em;
+      color: var(--gray-dark);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .error-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-size: 1em;
+    }
+
+    .btn-primary {
+      background: var(--forest-green);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--forest-green-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(4, 120, 87, 0.3);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--charcoal);
+      border: 2px solid var(--gray-200);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--forest-green);
+      color: var(--forest-green);
+    }
+
+    .helpful-links {
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .helpful-links h3 {
+      font-size: 1.2em;
+      color: var(--charcoal);
+      margin-bottom: 20px;
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .helpful-link {
+      padding: 12px 16px;
+      background: var(--gray-50);
+      border-radius: 6px;
+      color: var(--forest-green);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .helpful-link:hover {
+      background: var(--forest-green);
+      color: white;
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 768px) {
+      .error-code {
+        font-size: 5em;
+      }
+
+      .error-title {
+        font-size: 2em;
+      }
+
+      .error-message {
+        font-size: 1.1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div id="header-root"></div>
+
+  <!-- Main Content -->
+  <main class="error-container">
+    <div class="error-content">
+      <div class="error-code">404</div>
+      <h1 class="error-title">Page Not Found</h1>
+      <p class="error-message">
+        Oops! The page you're looking for doesn't exist. It might have been moved, deleted, or the URL might be incorrect.
+      </p>
+
+      <div class="error-actions">
+        <a href="/src/pages/index.html" class="btn btn-primary">Go to Homepage</a>
+        <a href="javascript:history.back()" class="btn btn-secondary">Go Back</a>
+      </div>
+
+      <div class="helpful-links">
+        <h3>Looking for something specific?</h3>
+        <div class="links-grid">
+          <a href="/src/pages/blog/index.html" class="helpful-link">Blog</a>
+          <a href="/src/pages/store.html" class="helpful-link">Store</a>
+          <a href="/src/pages/about.html" class="helpful-link">About Us</a>
+          <a href="/src/pages/contact.html" class="helpful-link">Contact</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-root"></div>
+
+  <!-- Scripts -->
+  <script src="../scripts/main.js"></script>
+</body>
+</html>

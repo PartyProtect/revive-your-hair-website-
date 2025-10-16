@@ -1,0 +1,46 @@
+/my-website-project
+│
+├── /assets                  # General assets
+│   ├── /images              # Images (JPEG, PNG, SVG, etc.)
+│   ├── /fonts               # Custom fonts
+│   └── /videos              # Video files
+│
+├── /css                     # Stylesheets
+│   ├── /vendor              # Third-party CSS libraries
+│   ├── main.css             # Main stylesheet
+│   └── responsive.css       # Responsive styles
+│
+├── /js                      # JavaScript files
+│   ├── /vendor              # Third-party JS libraries
+│   ├── main.js              # Main JavaScript file
+│   └── app.js               # Application-specific scripts
+│
+├── /html                    # HTML files
+│   ├── index.html           # Main landing page
+│   ├── about.html           # About page
+│   ├── contact.html         # Contact page
+│   └── /partials            # Reusable HTML components
+│       ├── header.html      # Header component
+│       ├── footer.html      # Footer component
+│       └── nav.html         # Navigation component
+│
+├── /data                    # Data files (JSON, XML, etc.)
+│   └── data.json            # Example data file
+│
+├── /tests                   # Test files
+│   ├── unit-tests           # Unit tests
+│   └── integration-tests     # Integration tests
+│
+├── /docs                    # Documentation
+│   ├── README.md            # Project overview
+│   └── API.md               # API documentation (if applicable)
+│
+├── /build                   # Build output (for production)
+│   ├── css                  # Minified CSS files
+│   ├── js                   # Minified JS files
+│   └── images               # Optimized images
+│
+├── .gitignore               # Git ignore file
+├── package.json             # Node.js package file (if using Node)
+├── webpack.config.js        # Webpack configuration (if using Webpack)
+└── README.md                # Project overview and setup instructions
