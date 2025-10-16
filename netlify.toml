@@ -1,0 +1,27 @@
+[build]
+  # No build command needed for static HTML site
+  command = "echo 'No build required'"
+  
+  # Publish directory - where your HTML files are
+  publish = "src/pages"
+
+[[redirects]]
+  # Redirect root to index.html
+  from = "/"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  # Handle 404 errors
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+[[headers]]
+  # Apply security headers to all pages
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
