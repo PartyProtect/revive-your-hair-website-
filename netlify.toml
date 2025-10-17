@@ -35,36 +35,43 @@
   from = "/blog"
   to = "/pages/blog/index.html"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/blog/:slug.html"
   to = "/pages/blog/:slug.html"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/blog/:slug"
   to = "/pages/blog/:slug.html"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/blog/:slug/"
   to = "/pages/blog/:slug.html"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/legal/:slug.html"
   to = "/pages/legal/:slug.html"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/legal/:slug"
   to = "/pages/legal/:slug.html"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/legal/:slug/"
   to = "/pages/legal/:slug.html"
   status = 301
+  force = true
 
 # Admin dashboard (password protected)
 [[redirects]]
