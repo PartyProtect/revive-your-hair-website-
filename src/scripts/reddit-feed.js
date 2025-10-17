@@ -82,19 +82,47 @@ class RedditFeed {
   }
 
   renderPosts(posts) {
-    // Filter for posts that are likely before/after or progress posts
+    // Filter for REAL progress posts only (exclude satire, memes, transplants, shaving posts)
     const relevantPosts = posts.filter(post => {
       const title = post.title.toLowerCase();
-      const hasImages = post.post_hint === 'image' || post.url?.includes('imgur') || post.url?.includes('i.redd.it');
+      const flair = post.link_flair_text?.toLowerCase() || '';
+      
+      // EXCLUDE satire/meme posts
+      if (flair.includes('satire') || flair.includes('meme')) {
+        console.log('[Reddit Feed] Filtered out satire:', post.title);
+        return false;
+      }
+      
+      // EXCLUDE hair transplant posts
+      if (title.includes('transplant') || title.includes('ht ') || title.includes('fue') || title.includes('donor')) {
+        console.log('[Reddit Feed] Filtered out transplant:', post.title);
+        return false;
+      }
+      
+      // EXCLUDE posts about shaving/giving up
+      if (title.includes('shaved') || title.includes('shave it') || title.includes('buzz') || 
+          title.includes('gave up') || title.includes('giving up')) {
+        console.log('[Reddit Feed] Filtered out shaving post:', post.title);
+        return false;
+      }
+      
+      // ONLY INCLUDE progress posts with images
+      const hasImages = post.post_hint === 'image' || post.url?.includes('imgur') || post.url?.includes('i.redd.it') || post.is_gallery;
       const isProgress = title.includes('month') || title.includes('year') || 
                         title.includes('progress') || title.includes('result') ||
                         title.includes('before') || title.includes('after') ||
-                        title.includes('update') || title.includes('transformation');
-      return hasImages && isProgress;
+                        title.includes('update') || title.includes('transformation') ||
+                        title.includes('treatment');
+      
+      const isRelevant = hasImages && isProgress;
+      if (isRelevant) {
+        console.log('[Reddit Feed] Included progress post:', post.title);
+      }
+      return isRelevant;
     });
 
-    // If we don't have enough relevant posts, include all posts
-    const postsToShow = relevantPosts.length >= 10 ? relevantPosts : posts;
+    // If we don't have enough relevant posts, show what we have
+    const postsToShow = relevantPosts.length >= 5 ? relevantPosts.slice(0, 15) : relevantPosts;
 
     this.container.innerHTML = `
       <div class="reddit-feed">
