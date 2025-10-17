@@ -8,10 +8,6 @@
 /legal/*.html      /pages/legal/:splat           200
 /legal/*           /pages/legal/:splat.html      200
 
-# Redirect old URLs to clean /blog/ and /legal/ versions
-/pages/blog/*      /blog/:splat                  301
-/pages/legal/*     /legal/:splat                 301
-
 # Ensure homepage works
 /index.html        /pages/index.html             200
 
