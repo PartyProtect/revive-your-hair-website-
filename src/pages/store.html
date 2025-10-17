@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Recommended hair loss treatment products - finasteride, minoxidil, dermarollers, and ketoconazole shampoo. Quality products at the best prices.">
-  <meta name="keywords" content="buy finasteride, buy minoxidil, dermaroller, hair loss products, ketoconazole shampoo">
-  <title>Store - Recommended Hair Loss Products | Revive Your Hair</title>
+  <meta name="description" content="Our hair loss treatment store is coming soon. We're carefully curating the highest quality products from trusted suppliers.">
+  <meta name="keywords" content="hair loss products, finasteride store, minoxidil store, dermaroller">
+  <title>Store Coming Soon - Revive Your Hair</title>
   
   <!-- Theme Color -->
   <meta name="theme-color" content="#047857">
@@ -23,335 +23,369 @@
   
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Hair Loss Treatment Products - Finasteride, Minoxidil & More">
-  <meta property="og:description" content="Recommended hair loss treatment products at the best prices. Finasteride, minoxidil, dermarollers, and ketoconazole shampoo.">
+  <meta property="og:title" content="Store Coming Soon - Revive Your Hair">
+  <meta property="og:description" content="We're building a curated store of evidence-based hair loss products. Coming soon.">
   <meta property="og:url" content="https://www.reviveyourhair.eu/store.html">
   <meta property="og:site_name" content="Revive Your Hair">
-  
-  <!-- Schema.org ItemList for Products -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Hair Loss Treatment Products",
-    "description": "Recommended hair loss treatment products",
-    "itemListElement": [
-      {
-        "@type": "Product",
-        "name": "Finasteride 1mg",
-        "description": "FDA-approved hair loss treatment that blocks DHT"
-      },
-      {
-        "@type": "Product",
-        "name": "Minoxidil 5%",
-        "description": "Topical solution that stimulates hair growth"
-      },
-      {
-        "@type": "Product",
-        "name": "Dermaroller",
-        "description": "Microneedling device for scalp stimulation"
-      },
-      {
-        "@type": "Product",
-        "name": "Ketoconazole Shampoo",
-        "description": "Anti-DHT shampoo for scalp health"
-      }
-    ]
-  }
-  </script>
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="../styles/color-palette.css">
   <link rel="stylesheet" href="../styles/main.css">
   <link rel="stylesheet" href="../styles/components.css">
-  <link rel="stylesheet" href="../styles/utilities.css">
   
-  <!-- i18n -->
-  <script src="../scripts/i18n.js"></script>
-  
-  <!-- Scripts -->
+  <!-- Component Loader -->
   <script src="../scripts/component-loader.js"></script>
   
   <style>
-    /* Store Page Styles */
-    .store-hero {
-      background: var(--gradient-primary);
-      color: white;
-      padding: 60px 20px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.7;
+      color: #1f2937;
+      background: #ffffff;
+    }
+
+    /* Main Content */
+    .main-content {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 40px;
+      background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+    }
+
+    .content-wrapper {
+      max-width: 800px;
       text-align: center;
     }
-    
-    .store-hero h1 {
-      font-size: 2.5em;
+
+    .status-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      color: #ffffff;
+      padding: 10px 24px;
+      border-radius: 20px;
+      font-size: 0.9em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+
+    .main-title {
+      font-size: 3em;
+      font-weight: 300;
+      color: #1f2937;
+      margin-bottom: 24px;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    .main-title strong {
+      font-weight: 700;
+      color: #047857;
+    }
+
+    .subtitle {
+      font-size: 1.3em;
+      color: #6b7280;
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+
+    .info-box {
+      background: #ffffff;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 48px;
+      text-align: left;
+    }
+
+    .info-box h3 {
+      font-size: 1.5em;
+      color: #047857;
+      margin-bottom: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .info-box p {
+      color: #4b5563;
+      line-height: 1.8;
       margin-bottom: 16px;
     }
-    
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 32px;
-      padding: 48px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
+
+    .info-box p:last-child {
+      margin-bottom: 0;
     }
-    
-    .product-card {
-      background: var(--white);
+
+    .icon {
+      font-size: 1.2em;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 32px 0;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px;
+      background: #f9fafb;
+      border-radius: 8px;
+      border-left: 3px solid #047857;
+    }
+
+    .check-icon {
+      color: #047857;
+      font-size: 1.3em;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .checklist-text {
+      color: #4b5563;
+      font-size: 0.95em;
+    }
+
+    .warning-box {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border-left: 4px solid #f59e0b;
+      padding: 24px;
+      border-radius: 8px;
+      margin-bottom: 48px;
+    }
+
+    .warning-box h4 {
+      color: #92400e;
+      font-size: 1.2em;
+      margin-bottom: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .warning-box p {
+      color: #78350f;
+      line-height: 1.7;
+    }
+
+    .trusted-sources {
+      margin-top: 48px;
+    }
+
+    .trusted-sources h3 {
+      font-size: 1.8em;
+      color: #1f2937;
+      margin-bottom: 32px;
+      font-weight: 300;
+    }
+
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .source-card {
+      background: #ffffff;
+      border: 2px solid #e5e7eb;
       border-radius: 12px;
       padding: 24px;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+      transition: all 0.3s;
     }
-    
-    .product-card:hover {
+
+    .source-card:hover {
+      border-color: #047857;
       transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     }
-    
-    .product-icon {
-      font-size: 3em;
-      text-align: center;
-      margin-bottom: 16px;
-    }
-    
-    .product-title {
-      font-size: 1.4em;
-      font-weight: 700;
+
+    .source-icon {
+      font-size: 2.5em;
       margin-bottom: 12px;
-      color: var(--charcoal);
     }
-    
-    .product-description {
-      color: var(--charcoal-light);
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-    
-    .product-price {
-      font-size: 1.5em;
-      font-weight: 700;
-      color: var(--forest-green);
-      margin-bottom: 16px;
-    }
-    
-    .buy-button {
-      display: block;
-      width: 100%;
-      background: var(--gradient-gold);
-      color: white;
-      padding: 14px;
-      text-align: center;
-      border-radius: 8px;
-      text-decoration: none;
+
+    .source-name {
       font-weight: 600;
-      transition: opacity 0.3s ease, transform 0.2s ease;
+      color: #1f2937;
+      margin-bottom: 8px;
+      font-size: 1.1em;
     }
-    
-    .buy-button:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
+
+    .source-description {
+      font-size: 0.9em;
+      color: #6b7280;
     }
-    
-    .affiliate-notice {
-      background: var(--gold-tint);
-      border-left: 4px solid var(--warm-gold);
-      padding: 20px;
-      margin: 32px 20px;
-      max-width: 1200px;
-      margin-left: auto;
-      margin-right: auto;
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 48px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 16px 32px;
       border-radius: 8px;
+      font-weight: 700;
+      font-size: 1em;
+      text-decoration: none;
+      transition: all 0.2s;
     }
-    
-    .category-section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
+
+    .cta-button.primary {
+      background: linear-gradient(135deg, #047857, #059669);
+      color: #ffffff;
     }
-    
-    .category-title {
-      font-size: 2em;
-      margin: 32px 0 24px 0;
-      color: var(--charcoal);
+
+    .cta-button.primary:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(4, 120, 87, 0.3);
+    }
+
+    .cta-button.secondary {
+      background: #ffffff;
+      color: #047857;
+      border: 2px solid #047857;
+    }
+
+    .cta-button.secondary:hover {
+      background: #047857;
+      color: #ffffff;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .main-content {
+        padding: 60px 20px;
+      }
+
+      .main-title {
+        font-size: 2em;
+      }
+
+      .subtitle {
+        font-size: 1.1em;
+      }
+
+      .info-box {
+        padding: 24px;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+
+      .cta-button {
+        width: 100%;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
-  
-  <!-- Header -->
+  <!-- Header Component Placeholder -->
   <div id="header-root"></div>
 
-  <!-- Hero Section -->
-  <section class="store-hero">
-    <h1>Recommended Products</h1>
-    <p>Evidence-based hair loss treatments at the best prices</p>
-  </section>
-
-  <!-- Affiliate Disclosure Notice -->
-  <div class="affiliate-notice">
-    <strong>⚠️ Affiliate Disclosure:</strong> Some links on this page are affiliate links. 
-    If you purchase through these links, we may earn a commission at no extra cost to you. 
-    We only recommend products we genuinely believe in based on clinical evidence. 
-    <a href="../legal/affiliate-disclosure.html" style="text-decoration: underline;">Read full disclosure</a>
-  </div>
-
-  <!-- The Big 3 Protocol Products -->
-  <div class="category-section">
-    <h2 class="category-title">The Big 3 Protocol</h2>
-    <div class="product-grid">
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="content-wrapper">
+      <div class="status-badge">🚧 Coming Soon</div>
       
-      <!-- Finasteride -->
-      <div class="product-card">
-        <div class="product-icon">💊</div>
-        <h3 class="product-title">Generic Finasteride 1mg</h3>
-        <p class="product-description">
-          FDA-approved for male pattern baldness. Blocks DHT, stops hair loss in 90% of men, 
-          regrows hair in 66%. Daily oral tablet.
-        </p>
-        <div class="product-price">$15-36/month</div>
-        <a href="#" class="buy-button">View Options →</a>
-      </div>
-
-      <!-- Minoxidil -->
-      <div class="product-card">
-        <div class="product-icon">🧴</div>
-        <h3 class="product-title">Minoxidil 5% Solution</h3>
-        <p class="product-description">
-          FDA-approved topical treatment. Stimulates hair growth in 60-66% of men. 
-          Apply twice daily to scalp. Available in liquid or foam.
-        </p>
-        <div class="product-price">$15-25/month</div>
-        <a href="#" class="buy-button">View Options →</a>
-      </div>
-
-      <!-- Ketoconazole Shampoo -->
-      <div class="product-card">
-        <div class="product-icon">🧴</div>
-        <h3 class="product-title">Ketoconazole 2% Shampoo</h3>
-        <p class="product-description">
-          Anti-fungal shampoo with anti-androgenic properties. Use 2-4x per week. 
-          Complements finasteride and minoxidil.
-        </p>
-        <div class="product-price">$10-15/month</div>
-        <a href="#" class="buy-button">View Options →</a>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Microneedling Equipment -->
-  <div class="category-section">
-    <h2 class="category-title">Microneedling Equipment</h2>
-    <div class="product-grid">
+      <h1 class="main-title">
+        Our Store Is <strong>Under Construction</strong>
+      </h1>
       
-      <!-- Dermaroller -->
-      <div class="product-card">
-        <div class="product-icon">🔄</div>
-        <h3 class="product-title">Dermaroller 1.5mm</h3>
-        <p class="product-description">
-          540 titanium needles, 1.5mm depth (most studied for hair loss). 
-          Use weekly with minoxidil for 4x enhancement effect.
-        </p>
-        <div class="product-price">$20-40</div>
-        <a href="#" class="buy-button">View Options →</a>
+      <p class="subtitle">
+        We're carefully curating the highest quality hair loss products and building partnerships with trusted suppliers.
+      </p>
+
+      <div class="info-box">
+        <h3><span class="icon">📦</span> What We're Doing</h3>
+        <p>We're currently sourcing premium, evidence-based hair loss products to ensure you get exactly what clinical research recommends.</p>
+        
+        <div class="checklist">
+          <div class="checklist-item">
+            <span class="check-icon">✓</span>
+            <span class="checklist-text">Vetting suppliers for authenticity</span>
+          </div>
+          <div class="checklist-item">
+            <span class="check-icon">✓</span>
+            <span class="checklist-text">Negotiating competitive pricing</span>
+          </div>
+          <div class="checklist-item">
+            <span class="check-icon">✓</span>
+            <span class="checklist-text">Building inventory systems</span>
+          </div>
+          <div class="checklist-item">
+            <span class="check-icon">✓</span>
+            <span class="checklist-text">Testing product quality</span>
+          </div>
+        </div>
       </div>
 
-      <!-- Dermapen (Advanced) -->
-      <div class="product-card">
-        <div class="product-icon">✏️</div>
-        <h3 class="product-title">Dermapen (Electric)</h3>
-        <p class="product-description">
-          Professional-grade electric microneedling pen. Adjustable depth (0.25-2.5mm), 
-          more consistent results than manual rollers.
-        </p>
-        <div class="product-price">$90-200</div>
-        <a href="#" class="buy-button">View Options →</a>
+      <div class="warning-box">
+        <h4>⚠️ In The Meantime: Buy From Trusted Sources</h4>
+        <p>Until our store launches, please ensure you're purchasing from reputable pharmacies, licensed dermatology clinics, or verified online retailers. Your safety and treatment efficacy depend on product authenticity.</p>
       </div>
 
+      <div class="trusted-sources">
+        <h3>Where To Shop Safely Now</h3>
+        <div class="sources-grid">
+          <div class="source-card">
+            <div class="source-icon">🏥</div>
+            <div class="source-name">Local Pharmacies</div>
+            <div class="source-description">Licensed brick-and-mortar stores</div>
+          </div>
+          <div class="source-card">
+            <div class="source-icon">👨‍⚕️</div>
+            <div class="source-name">Dermatologists</div>
+            <div class="source-description">Direct from medical clinics</div>
+          </div>
+          <div class="source-card">
+            <div class="source-icon">✅</div>
+            <div class="source-name">Verified Retailers</div>
+            <div class="source-description">Certified online pharmacies</div>
+          </div>
+          <div class="source-card">
+            <div class="source-icon">🔬</div>
+            <div class="source-name">Brand Websites</div>
+            <div class="source-description">Official manufacturer sites</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-buttons">
+        <a href="/pages/blog/hair-loss-guide.html" class="cta-button primary">Read Our Treatment Guide</a>
+        <a href="/pages/index.html" class="cta-button secondary">Back to Home</a>
+      </div>
     </div>
-  </div>
+  </main>
 
-  <!-- Telemedicine Services -->
-  <div class="category-section">
-    <h2 class="category-title">Online Consultation Services</h2>
-    <div class="product-grid">
-      
-      <div class="product-card">
-        <div class="product-icon">💻</div>
-        <h3 class="product-title">Hims</h3>
-        <p class="product-description">
-          Online consultation + prescription + medication delivery. 
-          Finasteride, minoxidil, combination kits available.
-        </p>
-        <div class="product-price">$20-50/month</div>
-        <a href="#" class="buy-button">Visit Hims →</a>
-      </div>
-
-      <div class="product-card">
-        <div class="product-icon">💻</div>
-        <h3 class="product-title">Keeps</h3>
-        <p class="product-description">
-          Telemedicine platform for hair loss. Online doctor consultation, 
-          personalized treatment plans, home delivery.
-        </p>
-        <div class="product-price">$25-60/month</div>
-        <a href="#" class="buy-button">Visit Keeps →</a>
-      </div>
-
-      <div class="product-card">
-        <div class="product-icon">💻</div>
-        <h3 class="product-title">Manual</h3>
-        <p class="product-description">
-          European telemedicine service. EU-based doctors, 
-          ships across Europe. Finasteride, minoxidil, topical finasteride.
-        </p>
-        <div class="product-price">€25-55/month</div>
-        <a href="#" class="buy-button">Visit Manual →</a>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Buying Guide -->
-  <div class="category-section" style="background: #f8f9fa; padding: 40px 20px; margin-top: 48px;">
-    <h2 style="text-align: center; margin-bottom: 32px;">Buying Guide</h2>
-    <div style="max-width: 800px; margin: 0 auto;">
-      
-      <h3>🎯 Start Here (The Big 3):</h3>
-      <ol style="line-height: 1.8; margin-bottom: 24px;">
-        <li><strong>Finasteride 1mg:</strong> Most effective single treatment. Generic is fine, save money vs brand name Propecia.</li>
-        <li><strong>Minoxidil 5%:</strong> Foam or liquid (foam less greasy). Kirkland brand is same as Rogaine but cheaper.</li>
-        <li><strong>Ketoconazole 2% shampoo:</strong> Nizoral or generic. Use 2-4x weekly.</li>
-      </ol>
-
-      <h3>📈 Add Microneedling for 4x Results:</h3>
-      <ul style="line-height: 1.8; margin-bottom: 24px;">
-        <li><strong>Budget option:</strong> Dermaroller 1.5mm ($20-40) - Works well, requires replacement every 3-6 months</li>
-        <li><strong>Premium option:</strong> Dermapen ($90-200) - More consistent, easier to use, lasts longer</li>
-      </ul>
-
-      <h3>💰 Cost Comparison:</h3>
-      <ul style="line-height: 1.8; margin-bottom: 24px;">
-        <li><strong>Local pharmacy (with GoodRx):</strong> Usually cheapest for finasteride/minoxidil</li>
-        <li><strong>Telemedicine services:</strong> More convenient, includes consultation, slightly more expensive</li>
-        <li><strong>International pharmacies:</strong> Cheapest but requires prescription, longer shipping</li>
-      </ul>
-
-      <h3>⚠️ Important Notes:</h3>
-      <ul style="line-height: 1.8;">
-        <li>Always consult a doctor before starting finasteride</li>
-        <li>Generic medications are just as effective as brand names</li>
-        <li>Watch out for overpriced "proprietary blends" with no evidence</li>
-        <li>Consistency matters more than brand - pick what you'll stick with</li>
-      </ul>
-
-    </div>
-  </div>
-
-  <!-- Footer -->
+  <!-- Footer Component Placeholder -->
   <div id="footer-root"></div>
 
+  <!-- Global Scripts -->
   <script src="../scripts/main.js"></script>
-  <script src="../scripts/analytics.js"></script>
 </body>
 </html>
