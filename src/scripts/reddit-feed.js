@@ -131,8 +131,8 @@ class RedditFeed {
       return isProgress;
     });
 
-    // Show all relevant posts (should be 8-10 good ones)
-    const postsToShow = relevantPosts.slice(0, 15);
+    // Show ALL quality progress posts (no artificial limit)
+    const postsToShow = relevantPosts;
 
     this.container.innerHTML = `
       <div class="reddit-feed">
