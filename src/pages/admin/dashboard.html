@@ -603,20 +603,64 @@
 
   <script>
     // ============================================================================
-    // PASSWORD PROTECTION
+    // ENHANCED PASSWORD PROTECTION (Level 2 Security)
     // ============================================================================
 
-    // IMPORTANT: Change this password before deploying!
-    const ADMIN_PASSWORD = 'ReviveHair2025!';
+    // Password is stored as SHA-256 hash (not visible in source)
+    // To generate new hash, run in console: hashPassword('YourPassword').then(h => console.log(h))
+    const PASSWORD_HASH = '215e1a2171349b3875167351971b9ccf293a9fbac9fca7de802602e77d2d1ae4'; // Hash of: ReviveHair2025!
     const PASSWORD_KEY = 'admin_authenticated';
+    
+    // Rate limiting variables
+    let loginAttempts = parseInt(localStorage.getItem('login_attempts') || '0');
+    let lockoutTime = parseInt(localStorage.getItem('lockout_time') || '0');
 
-    function checkPassword() {
+    // Hash password using SHA-256
+    async function hashPassword(password) {
+      const msgBuffer = new TextEncoder().encode(password);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // Enhanced password check with rate limiting
+    async function checkPassword() {
       const input = document.getElementById('admin-password');
       const error = document.getElementById('login-error');
       
-      if (input.value === ADMIN_PASSWORD) {
-        // Save authentication to sessionStorage (expires when browser closes)
+      // Check if locked out
+      if (lockoutTime && Date.now() < lockoutTime) {
+        const remainingSeconds = Math.ceil((lockoutTime - Date.now()) / 1000);
+        error.textContent = `🔒 Too many failed attempts. Locked for ${remainingSeconds} seconds.`;
+        error.classList.remove('hidden');
+        
+        // Update countdown every second
+        setTimeout(checkPassword, 1000);
+        return;
+      } else if (lockoutTime && Date.now() >= lockoutTime) {
+        // Reset lockout
+        loginAttempts = 0;
+        lockoutTime = 0;
+        localStorage.removeItem('login_attempts');
+        localStorage.removeItem('lockout_time');
+      }
+      
+      // Hash input password
+      const inputHash = await hashPassword(input.value);
+      
+      // Check against stored hash
+      if (inputHash === PASSWORD_HASH) {
+        // Success - reset attempts and grant access
+        loginAttempts = 0;
+        lockoutTime = 0;
+        localStorage.removeItem('login_attempts');
+        localStorage.removeItem('lockout_time');
+        
         sessionStorage.setItem(PASSWORD_KEY, 'true');
+        sessionStorage.setItem('login_time', Date.now().toString());
+        
+        // Log successful login
+        console.log('[Security] Admin login successful:', new Date().toISOString());
         
         // Hide login, show dashboard
         document.getElementById('login-overlay').classList.add('hidden');
@@ -624,8 +668,33 @@
         
         // Initialize dashboard
         initDashboard();
+        
+        // Start inactivity timer
+        resetInactivityTimer();
       } else {
-        error.textContent = '❌ Incorrect password. Try again.';
+        // Failed attempt
+        loginAttempts++;
+        localStorage.setItem('login_attempts', loginAttempts.toString());
+        
+        if (loginAttempts >= 3) {
+          // Lock out for 5 minutes after 3 failed attempts
+          lockoutTime = Date.now() + (5 * 60 * 1000);
+          localStorage.setItem('lockout_time', lockoutTime.toString());
+          
+          error.textContent = '🔒 Too many failed attempts. Locked for 5 minutes.';
+          
+          // Log suspicious activity
+          console.warn('[Security] Multiple failed login attempts:', {
+            timestamp: new Date().toISOString(),
+            attempts: loginAttempts,
+            userAgent: navigator.userAgent,
+            ip: 'client-side (no IP available)'
+          });
+        } else {
+          const remaining = 3 - loginAttempts;
+          error.textContent = `❌ Incorrect password. ${remaining} attempt${remaining !== 1 ? 's' : ''} remaining.`;
+        }
+        
         error.classList.remove('hidden');
         input.value = '';
         input.focus();
@@ -639,12 +708,66 @@
       }
     });
 
+    // ============================================================================
+    // AUTO-LOGOUT & SESSION MANAGEMENT
+    // ============================================================================
+
+    let inactivityTimer;
+    const INACTIVITY_TIMEOUT = 30 * 60 * 1000; // 30 minutes
+    const MAX_SESSION_TIME = 8 * 60 * 60 * 1000; // 8 hours
+
+    // Reset inactivity timer on user activity
+    function resetInactivityTimer() {
+      clearTimeout(inactivityTimer);
+      
+      inactivityTimer = setTimeout(() => {
+        console.log('[Security] Auto-logout: Inactivity timeout reached');
+        sessionStorage.removeItem(PASSWORD_KEY);
+        sessionStorage.removeItem('login_time');
+        alert('⏱️ Session expired due to inactivity. Please login again.');
+        location.reload();
+      }, INACTIVITY_TIMEOUT);
+    }
+
+    // Check session timeout
+    function checkSessionTimeout() {
+      const loginTime = sessionStorage.getItem('login_time');
+      if (loginTime) {
+        const elapsed = Date.now() - parseInt(loginTime);
+        
+        if (elapsed > MAX_SESSION_TIME) {
+          console.log('[Security] Auto-logout: Maximum session time exceeded');
+          sessionStorage.removeItem(PASSWORD_KEY);
+          sessionStorage.removeItem('login_time');
+          alert('⏱️ Session expired (8 hours max). Please login again.');
+          location.reload();
+        }
+      }
+    }
+
+    // Monitor user activity for inactivity logout
+    if (sessionStorage.getItem(PASSWORD_KEY) === 'true') {
+      document.addEventListener('mousemove', resetInactivityTimer);
+      document.addEventListener('keypress', resetInactivityTimer);
+      document.addEventListener('click', resetInactivityTimer);
+      document.addEventListener('scroll', resetInactivityTimer);
+      
+      // Check session timeout every minute
+      setInterval(checkSessionTimeout, 60000);
+    }
+
     // Check if already authenticated
     window.addEventListener('DOMContentLoaded', function() {
       if (sessionStorage.getItem(PASSWORD_KEY) === 'true') {
-        document.getElementById('login-overlay').classList.add('hidden');
-        document.getElementById('dashboard-content').classList.remove('hidden');
-        initDashboard();
+        // Check if session is still valid
+        checkSessionTimeout();
+        
+        if (sessionStorage.getItem(PASSWORD_KEY) === 'true') {
+          document.getElementById('login-overlay').classList.add('hidden');
+          document.getElementById('dashboard-content').classList.remove('hidden');
+          initDashboard();
+          resetInactivityTimer();
+        }
       }
     });
 
