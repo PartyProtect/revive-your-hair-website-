@@ -41,6 +41,12 @@
   to = "/pages/blog/:splat"
   status = 200
 
+# Admin dashboard (password protected)
+[[redirects]]
+  from = "/admin"
+  to = "/pages/admin/dashboard.html"
+  status = 200
+
 # Allow direct access to pages folder URLs
 [[redirects]]
   from = "/pages/*"

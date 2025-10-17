@@ -12,8 +12,11 @@ Sitemap: https://www.reviveyourhair.eu/sitemap.xml
 User-agent: *
 Disallow: /legal/
 
+# Block admin dashboard from search engines (PRIVATE)
+User-agent: *
+Disallow: /admin/
+
 # Block any future admin/private areas
-# Disallow: /admin/
 # Disallow: /wp-admin/
 
 # Block duplicate content if any
