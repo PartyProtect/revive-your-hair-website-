@@ -269,23 +269,15 @@ function injectSEOContent() {
   const htmlPath = path.join(__dirname, 'src', 'pages', 'blog', 'hair-loss-guide.html');
   let html = fs.readFileSync(htmlPath, 'utf8');
   
-  // Replace existing reddit feed content (everything from opening tag to closing </div>)
-  const regex = /<div id="reddit-tressless-feed"[^>]*>[\s\S]*?<\/div>\s*<\/div>/;
-  
-  if (regex.test(html)) {
-    html = html.replace(regex, redditHTML.trim() + '\n</div>');
+  // Simple replacement strategy: look for the exact empty div
+  const oldContent = '<div id="reddit-tressless-feed"></div>';
+  if (html.includes(oldContent)) {
+    html = html.replace(oldContent, redditHTML.trim());
     fs.writeFileSync(htmlPath, html, 'utf8');
-    console.log('   ✅ Updated hair-loss-guide.html with optimized alt texts');
+    console.log('   ✅ Updated hair-loss-guide.html with SEO content');
   } else {
-    // Try finding empty div
-    const oldContent = '<div id="reddit-tressless-feed"></div>';
-    if (html.includes(oldContent)) {
-      html = html.replace(oldContent, redditHTML);
-      fs.writeFileSync(htmlPath, html, 'utf8');
-      console.log('   ✅ Updated hair-loss-guide.html with SEO content');
-    } else {
-      console.log('   ⚠️  Could not find reddit container in hair-loss-guide.html');
-    }
+    console.log('   ⚠️  Could not find reddit container in hair-loss-guide.html');
+    console.log('   Looking for:', oldContent);
   }
   
   console.log('\n✅ SEO content build complete!\n');
