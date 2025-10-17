@@ -783,36 +783,96 @@
       setInterval(loadAnalyticsData, 30000);
     }
 
-    function loadAnalyticsData() {
-      // Simulate data loading (replace with actual Google Analytics API)
-      
-      // Check if Google Analytics is loaded
-      if (typeof gtag !== 'undefined') {
-        // Get real-time data from GA4
-        // This requires GA4 Real-Time API setup
+    async function loadAnalyticsData() {
+      try {
+        // Fetch real data from custom tracking API
+        const response = await fetch('/.netlify/functions/tracking?action=stats');
         
-        // For now, show simulated data
-        document.getElementById('total-visitors').textContent = 'Connect GA';
-        document.getElementById('visitors-change').textContent = 'Setup required';
-      } else {
-        // Show demo data
-        document.getElementById('total-visitors').textContent = '2,847';
-        document.getElementById('visitors-change').textContent = '+12% from last week';
+        if (!response.ok) {
+          throw new Error('Failed to fetch analytics data');
+        }
+
+        const stats = await response.json();
         
-        document.getElementById('page-views').textContent = '8,421';
-        document.getElementById('pageviews-change').textContent = '+18% from yesterday';
+        // Calculate totals
+        const totalVisitors = stats.totalVisitors || 0;
+        const todayStats = stats.today || {};
+        const last7Days = stats.last7Days || [];
         
-        document.getElementById('bots-blocked').textContent = '1,243';
-        document.getElementById('bots-percentage').textContent = '32% of total traffic';
+        // Calculate page views today
+        const pageViewsToday = todayStats.pageViews || 0;
         
-        document.getElementById('avg-session').textContent = '3m 42s';
-        document.getElementById('session-change').textContent = '+8% from last week';
+        // Calculate bots blocked
+        const botsBlocked = todayStats.bots || 0;
+        const totalTraffic = pageViewsToday + botsBlocked;
+        const botPercentage = totalTraffic > 0 ? Math.round((botsBlocked / totalTraffic) * 100) : 0;
         
-        document.getElementById('bounce-rate').textContent = '42%';
-        document.getElementById('bounce-change').textContent = '-5% from last week';
+        // Calculate average session duration
+        const recentSessions = stats.last7Days.flatMap(day => day.sessions || []);
+        const avgDuration = recentSessions.length > 0
+          ? recentSessions.reduce((sum, s) => sum + (s.duration || 0), 0) / recentSessions.length
+          : 0;
+        const avgMinutes = Math.floor(avgDuration / 60000);
+        const avgSeconds = Math.floor((avgDuration % 60000) / 1000);
         
-        document.getElementById('form-submissions').textContent = '67';
-        document.getElementById('forms-spam').textContent = 'Spam blocked: 24';
+        // Calculate bounce rate
+        const totalSessions = todayStats.sessions || 0;
+        const totalBounces = todayStats.bounces || 0;
+        const bounceRate = totalSessions > 0 ? Math.round((totalBounces / totalSessions) * 100) : 0;
+        
+        // Calculate changes (compare today vs yesterday)
+        const yesterday = last7Days.length >= 2 ? last7Days[last7Days.length - 2] : null;
+        const visitorsChange = yesterday && yesterday.uniqueVisitors > 0
+          ? Math.round(((todayStats.uniqueVisitors - yesterday.uniqueVisitors) / yesterday.uniqueVisitors) * 100)
+          : 0;
+        const pageViewsChange = yesterday && yesterday.pageViews > 0
+          ? Math.round(((pageViewsToday - yesterday.pageViews) / yesterday.pageViews) * 100)
+          : 0;
+        
+        // Update UI with real data
+        document.getElementById('total-visitors').textContent = totalVisitors.toLocaleString();
+        document.getElementById('visitors-change').textContent = 
+          visitorsChange >= 0 ? `+${visitorsChange}% from yesterday` : `${visitorsChange}% from yesterday`;
+        
+        document.getElementById('page-views').textContent = pageViewsToday.toLocaleString();
+        document.getElementById('pageviews-change').textContent = 
+          pageViewsChange >= 0 ? `+${pageViewsChange}% from yesterday` : `${pageViewsChange}% from yesterday`;
+        
+        document.getElementById('bots-blocked').textContent = botsBlocked.toLocaleString();
+        document.getElementById('bots-percentage').textContent = `${botPercentage}% of total traffic`;
+        
+        document.getElementById('avg-session').textContent = `${avgMinutes}m ${avgSeconds}s`;
+        document.getElementById('session-change').textContent = 'Real-time data';
+        
+        document.getElementById('bounce-rate').textContent = `${bounceRate}%`;
+        document.getElementById('bounce-change').textContent = totalSessions > 0 ? `${totalSessions} sessions today` : 'No data';
+        
+        // Count form submissions from events
+        const formSubmissions = (todayStats.events || []).filter(e => e.name === 'form_submit').length;
+        document.getElementById('form-submissions').textContent = formSubmissions.toString();
+        document.getElementById('forms-spam').textContent = `Bots blocked: ${botsBlocked}`;
+        
+        // Update charts placeholder text
+        const visitorsChart = document.getElementById('visitors-chart');
+        if (visitorsChart) {
+          visitorsChart.innerHTML = `
+            <p style="color: #6b7280;">📊 Visitor Trends (Last 7 Days)</p>
+            <p style="margin-top: 10px; font-size: 14px;">
+              ${last7Days.map(day => 
+                `<span style="display: inline-block; margin: 5px;">${day.date}: ${day.uniqueVisitors || 0} visitors</span>`
+              ).join('<br>')}
+            </p>
+          `;
+        }
+        
+        console.log('[Dashboard] Analytics data loaded:', stats);
+        
+      } catch (error) {
+        console.error('[Dashboard] Error loading analytics:', error);
+        
+        // Show error state
+        document.getElementById('total-visitors').textContent = 'Error';
+        document.getElementById('visitors-change').textContent = 'Failed to load data';
       }
     }
 
@@ -835,23 +895,70 @@
     function loadRecentActivity() {
       const activityList = document.getElementById('activity-list');
       
-      // Sample activity data (replace with real tracking)
-      const activities = [
-        { time: 'Just now', text: 'Admin dashboard accessed' },
-        { time: '2 minutes ago', text: 'New visitor from Netherlands' },
-        { time: '5 minutes ago', text: 'Contact form submission received' },
-        { time: '12 minutes ago', text: 'Bot blocked (AhrefsBot)' },
-        { time: '18 minutes ago', text: 'Quiz completed by user' },
-        { time: '25 minutes ago', text: 'Blog post viewed: Hair Loss Guide' },
-        { time: '32 minutes ago', text: 'Spam submission blocked (honeypot)' },
-      ];
+      // Fetch recent activity from tracking API
+      fetch('/.netlify/functions/tracking?action=stats')
+        .then(res => res.json())
+        .then(stats => {
+          const recentEvents = stats.recentEvents || [];
+          const recentPageViews = stats.recentPageViews || [];
+          
+          // Combine and sort by timestamp
+          const activities = [
+            ...recentEvents.slice(-5).map(e => ({
+              time: getTimeAgo(e.timestamp),
+              text: getEventText(e)
+            })),
+            ...recentPageViews.slice(-3).map(pv => ({
+              time: getTimeAgo(pv.timestamp),
+              text: `Page view: ${pv.page}`
+            }))
+          ].sort((a, b) => b.timestamp - a.timestamp).slice(0, 7);
+          
+          if (activities.length === 0) {
+            activityList.innerHTML = '<p style="color: #6b7280; padding: 20px; text-align: center;">No activity yet. Start browsing your site!</p>';
+            return;
+          }
 
-      activityList.innerHTML = activities.map(activity => `
-        <div class="activity-item">
-          <div class="activity-item-time">${activity.time}</div>
-          <div class="activity-item-text">${activity.text}</div>
-        </div>
-      `).join('');
+          activityList.innerHTML = activities.map(activity => `
+            <div class="activity-item">
+              <span class="activity-time">${activity.time}</span>
+              <span class="activity-text">${activity.text}</span>
+            </div>
+          `).join('');
+        })
+        .catch(error => {
+          console.error('[Dashboard] Error loading activity:', error);
+          activityList.innerHTML = '<p style="color: #ef4444; padding: 20px;">Failed to load activity</p>';
+        });
+    }
+    
+    function getTimeAgo(timestamp) {
+      const diff = Date.now() - new Date(timestamp).getTime();
+      const minutes = Math.floor(diff / 60000);
+      
+      if (minutes < 1) return 'Just now';
+      if (minutes === 1) return '1 minute ago';
+      if (minutes < 60) return `${minutes} minutes ago`;
+      
+      const hours = Math.floor(minutes / 60);
+      if (hours === 1) return '1 hour ago';
+      if (hours < 24) return `${hours} hours ago`;
+      
+      const days = Math.floor(hours / 24);
+      return days === 1 ? '1 day ago' : `${days} days ago`;
+    }
+    
+    function getEventText(event) {
+      switch (event.eventName) {
+        case 'form_submit':
+          return `Form submitted: ${event.eventData?.formId || 'unknown'}`;
+        case 'cta_click':
+          return `CTA clicked: ${event.eventData?.text?.substring(0, 30) || 'button'}`;
+        case 'external_link_click':
+          return `External link clicked`;
+        default:
+          return `Event: ${event.eventName}`;
+      }
     }
 
     function clearAnalytics() {

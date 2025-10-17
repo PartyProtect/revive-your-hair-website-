@@ -142,6 +142,18 @@ if (document.readyState === 'loading') {
 function initializeComponents() {
   const loader = new ComponentLoader();
   loader.loadAllComponents();
+  
+  // Load custom analytics tracking
+  loadTrackingScript();
+}
+
+// Load custom analytics tracking script
+function loadTrackingScript() {
+  const script = document.createElement('script');
+  script.src = '/scripts/tracking.js';
+  script.async = true;
+  script.onerror = () => console.error('[ComponentLoader] Failed to load tracking script');
+  document.body.appendChild(script);
 }
 
 // Export for use in other scripts if needed
