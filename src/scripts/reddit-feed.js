@@ -34,31 +34,25 @@ class RedditFeed {
   }
 
   async fetchTopPosts() {
-    // Use Netlify Function proxy to bypass CORS restrictions
-    const url = `/.netlify/functions/reddit-proxy?subreddit=${this.subreddit}&timeframe=${this.timeframe}&limit=${this.limit}`;
-    console.log('[Reddit Feed] Fetching from proxy:', url);
+    // Load from pre-fetched static JSON file (no API calls, always works!)
+    const url = `/reddit-tressless-top.json`;
+    console.log('[Reddit Feed] Loading from static file:', url);
     
     try {
-      const response = await fetch(url, {
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
+      const response = await fetch(url);
       
       console.log('[Reddit Feed] Response status:', response.status);
-      console.log('[Reddit Feed] Response headers:', [...response.headers.entries()]);
       
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        console.error('[Reddit Feed] Error response:', errorData);
-        throw new Error(errorData.error || `API error: ${response.status} ${response.statusText}`);
+        throw new Error(`Failed to load posts: ${response.status} ${response.statusText}`);
       }
       
       const data = await response.json();
+      console.log('[Reddit Feed] Loaded data from:', data.fetched_at);
       console.log('[Reddit Feed] Parsed JSON data:', data);
       
       if (!data || !data.data || !data.data.children) {
-        throw new Error('Invalid response format from Reddit API');
+        throw new Error('Invalid response format from Reddit data');
       }
       
       return data.data.children.map(child => child.data);
