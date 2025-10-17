@@ -1539,6 +1539,11 @@
         font-size: 1.2em;
       }
 
+      .comparison-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+
       .reddit-post-thumbnail {
         height: 200px;
       }
@@ -2409,7 +2414,7 @@
     
     <h4>Solution vs Foam: Pick Based on Your Hair Type</h4>
     
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 32px 0;">
+    <div class="comparison-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 32px 0;">
       <div style="background: linear-gradient(135deg, #f8f9ff 0%, #f5f7ff 100%); border: 2px solid #e8ebf9; border-radius: 12px; padding: 24px;">
         <h5 style="font-size: 18px; font-weight: 700; color: var(--forest-green); margin: 0 0 16px 0; text-align: center;">💧 Liquid Solution</h5>
         
