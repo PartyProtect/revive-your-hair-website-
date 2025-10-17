@@ -17,27 +17,53 @@ class RedditFeed {
   }
 
   async init() {
+    console.log('[Reddit Feed] Initializing widget...');
     this.showLoading();
     try {
       const posts = await this.fetchTopPosts();
+      console.log('[Reddit Feed] Successfully fetched posts:', posts.length);
       this.renderPosts(posts);
     } catch (error) {
-      console.error('Error loading Reddit posts:', error);
-      this.showError();
+      console.error('[Reddit Feed] Error loading Reddit posts:', error);
+      console.error('[Reddit Feed] Error details:', {
+        message: error.message,
+        stack: error.stack
+      });
+      this.showError(error.message);
     }
   }
 
   async fetchTopPosts() {
     // Reddit's JSON API - no authentication needed for public data
     const url = `https://www.reddit.com/r/${this.subreddit}/top.json?t=${this.timeframe}&limit=${this.limit}`;
+    console.log('[Reddit Feed] Fetching from URL:', url);
     
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Reddit API error: ${response.status}`);
+    try {
+      const response = await fetch(url, {
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      console.log('[Reddit Feed] Response status:', response.status);
+      console.log('[Reddit Feed] Response headers:', [...response.headers.entries()]);
+      
+      if (!response.ok) {
+        throw new Error(`Reddit API error: ${response.status} ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      console.log('[Reddit Feed] Parsed JSON data:', data);
+      
+      if (!data || !data.data || !data.data.children) {
+        throw new Error('Invalid response format from Reddit API');
+      }
+      
+      return data.data.children.map(child => child.data);
+    } catch (fetchError) {
+      console.error('[Reddit Feed] Fetch failed:', fetchError);
+      throw fetchError;
     }
-    
-    const data = await response.json();
-    return data.data.children.map(child => child.data);
   }
 
   showLoading() {
@@ -49,10 +75,11 @@ class RedditFeed {
     `;
   }
 
-  showError() {
+  showError(errorMessage = 'Unknown error') {
     this.container.innerHTML = `
       <div class="reddit-error">
         <p>Unable to load posts at the moment.</p>
+        <p style="font-size: 0.85em; color: #ef4444;">Error: ${this.escapeHtml(errorMessage)}</p>
         <p><a href="https://www.reddit.com/r/${this.subreddit}/top/?t=${this.timeframe}" target="_blank" rel="noopener noreferrer">View on Reddit →</a></p>
       </div>
     `;
@@ -225,12 +252,22 @@ class RedditFeed {
 
 // Auto-initialize if container exists
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('[Reddit Feed] DOMContentLoaded fired');
   const container = document.getElementById('reddit-tressless-feed');
+  console.log('[Reddit Feed] Container element:', container);
+  
   if (container) {
-    new RedditFeed('reddit-tressless-feed', {
-      subreddit: 'tressless',
-      limit: 15,
-      timeframe: 'all'
-    });
+    console.log('[Reddit Feed] Creating RedditFeed instance...');
+    try {
+      new RedditFeed('reddit-tressless-feed', {
+        subreddit: 'tressless',
+        limit: 15,
+        timeframe: 'all'
+      });
+    } catch (error) {
+      console.error('[Reddit Feed] Failed to create RedditFeed instance:', error);
+    }
+  } else {
+    console.warn('[Reddit Feed] Container element not found! Expected element with id="reddit-tressless-feed"');
   }
 });
