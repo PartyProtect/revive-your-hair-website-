@@ -26,9 +26,8 @@ class ComponentLoader {
   detectCurrentPage() {
     const path = window.location.pathname.toLowerCase();
     
-    if (path.includes('index.html') || path.endsWith('/') || path.endsWith('/pages')) {
-      return 'home';
-    } else if (path.includes('/blog')) {
+    // Check blog first (more specific path)
+    if (path.includes('/blog')) {
       return 'blog';
     } else if (path.includes('about')) {
       return 'about';
@@ -38,6 +37,8 @@ class ComponentLoader {
       return 'store';
     } else if (path.includes('resources')) {
       return 'resources';
+    } else if (path.includes('index.html') || path.endsWith('/') || path.endsWith('/pages')) {
+      return 'home';
     }
     
     return null;
