@@ -65,6 +65,67 @@ function pushWithLimit(list, item, limit) {
   }
 }
 
+function incrementCounter(counter, key, amount = 1) {
+  if (!key) {
+    key = 'unknown';
+  }
+  counter[key] = (counter[key] || 0) + amount;
+}
+
+function parseReferrer(referrer = '') {
+  if (!referrer || referrer === 'direct') {
+    return 'Direct';
+  }
+
+  try {
+    const url = new URL(referrer);
+    const host = url.hostname.replace(/^www\./, '');
+    return host;
+  } catch (error) {
+    return referrer.substring(0, 64) || 'Unknown';
+  }
+}
+
+function getDeviceType(userAgent = '') {
+  const ua = userAgent.toLowerCase();
+  if (/mobile|iphone|android|blackberry|phone|opera mini/.test(ua)) {
+    return 'Mobile';
+  }
+  if (/tablet|ipad/.test(ua)) {
+    return 'Tablet';
+  }
+  if (/smart-tv|hbbtv|appletv/.test(ua)) {
+    return 'TV';
+  }
+  return 'Desktop';
+}
+
+function getUtmLabel(utm = {}) {
+  if (!utm || typeof utm !== 'object') {
+    return null;
+  }
+
+  const campaign = utm.campaign || utm.utm_campaign;
+  const source = utm.source || utm.utm_source;
+  const medium = utm.medium || utm.utm_medium;
+
+  if (campaign || source || medium) {
+    const parts = [];
+    if (campaign) {
+      parts.push(campaign);
+    }
+    if (source) {
+      parts.push(`src:${source}`);
+    }
+    if (medium) {
+      parts.push(`med:${medium}`);
+    }
+    return parts.join(' | ');
+  }
+
+  return null;
+}
+
 function ensureDailyStats(data, dateKey) {
   const day = data.dailyStats[dateKey] || {};
 
@@ -75,7 +136,32 @@ function ensureDailyStats(data, dateKey) {
     crawlers: day.crawlers || 0,
     sessions: day.sessions || 0,
     bounces: day.bounces || 0,
-    events: ensureArray(day.events)
+      events: ensureArray(day.events),
+      newVisitors: day.newVisitors || 0,
+      returningVisitors: day.returningVisitors || 0,
+      pageViewsByPath: day.pageViewsByPath || {},
+      referrers: day.referrers || {},
+      devices: day.devices || {},
+      utmCampaigns: day.utmCampaigns || {},
+      languages: day.languages || {},
+      timezones: day.timezones || {},
+      conversions: {
+        forms: day.conversions?.forms || 0,
+        ctaClicks: day.conversions?.ctaClicks || 0
+      },
+      scrollDepth: {
+        total: day.scrollDepth?.total || 0,
+        count: day.scrollDepth?.count || 0,
+        max: day.scrollDepth?.max || 0
+      },
+      loadTimes: {
+        total: day.loadTimes?.total || 0,
+        count: day.loadTimes?.count || 0
+      },
+      sessionDurations: {
+        total: day.sessionDurations?.total || 0,
+        count: day.sessionDurations?.count || 0
+      }
   };
 
   data.dailyStats[dateKey] = normalized;
@@ -83,6 +169,25 @@ function ensureDailyStats(data, dateKey) {
 }
 
 function formatDailyStats(dateKey, day = {}) {
+  const toSortedEntries = (counter = {}, limit = 10) => {
+    return Object.entries(counter || {})
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, limit)
+      .map(([label, value]) => ({ label, value }));
+  };
+
+  const avgScroll = day.scrollDepth?.count
+    ? Math.round(day.scrollDepth.total / day.scrollDepth.count)
+    : 0;
+
+  const avgLoad = day.loadTimes?.count
+    ? Math.round(day.loadTimes.total / day.loadTimes.count)
+    : 0;
+
+  const avgSession = day.sessionDurations?.count
+    ? Math.round(day.sessionDurations.total / day.sessionDurations.count)
+    : 0;
+
   return {
     date: dateKey,
     pageViews: day.pageViews || 0,
@@ -91,7 +196,32 @@ function formatDailyStats(dateKey, day = {}) {
     crawlers: day.crawlers || 0,
     sessions: day.sessions || 0,
     bounces: day.bounces || 0,
-    events: ensureArray(day.events)
+    events: ensureArray(day.events),
+    newVisitors: day.newVisitors || 0,
+    returningVisitors: day.returningVisitors || 0,
+    conversions: {
+      forms: day.conversions?.forms || 0,
+      ctaClicks: day.conversions?.ctaClicks || 0
+    },
+    pageBreakdown: toSortedEntries(day.pageViewsByPath, 8),
+    referrers: toSortedEntries(day.referrers, 8),
+    devices: toSortedEntries(day.devices, 5),
+    utmCampaigns: toSortedEntries(day.utmCampaigns, 8),
+    languages: toSortedEntries(day.languages, 8),
+    timezones: toSortedEntries(day.timezones, 6),
+    scrollDepth: {
+      average: avgScroll,
+      max: day.scrollDepth?.max || 0,
+      count: day.scrollDepth?.count || 0
+    },
+    loadTimes: {
+      average: avgLoad,
+      count: day.loadTimes?.count || 0
+    },
+    sessionDuration: {
+      average: avgSession,
+      count: day.sessionDurations?.count || 0
+    }
   };
 }
 
@@ -138,6 +268,29 @@ async function saveData(data) {
     if (!Array.isArray(day.events)) {
       day.events = ensureArray(day.events);
     }
+    day.pageViewsByPath = day.pageViewsByPath || {};
+    day.referrers = day.referrers || {};
+    day.devices = day.devices || {};
+    day.utmCampaigns = day.utmCampaigns || {};
+    day.languages = day.languages || {};
+    day.timezones = day.timezones || {};
+    day.conversions = {
+      forms: day.conversions?.forms || 0,
+      ctaClicks: day.conversions?.ctaClicks || 0
+    };
+    day.scrollDepth = {
+      total: day.scrollDepth?.total || 0,
+      count: day.scrollDepth?.count || 0,
+      max: day.scrollDepth?.max || 0
+    };
+    day.loadTimes = {
+      total: day.loadTimes?.total || 0,
+      count: day.loadTimes?.count || 0
+    };
+    day.sessionDurations = {
+      total: day.sessionDurations?.total || 0,
+      count: day.sessionDurations?.count || 0
+    };
   });
 
   await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2));
@@ -244,8 +397,8 @@ exports.handler = async (event, context) => {
 
     // POST: Log tracking event
     if (event.httpMethod === 'POST') {
-      const body = JSON.parse(event.body || '{}');
-      const { type, page, referrer, duration, sessionId } = body;
+  const body = JSON.parse(event.body || '{}');
+  const { type, page, referrer, duration, sessionId, utm, language, timezone } = body;
       const timestamp = new Date().toISOString();
 
       if (agentType === 'crawler') {
@@ -301,15 +454,51 @@ exports.handler = async (event, context) => {
           data.visitors[visitorId] = {
             firstSeen: timestamp,
             lastSeen: timestamp,
-            pageViews: 0
+            pageViews: 0,
+            sessions: 0
           };
         }
-        data.visitors[visitorId].lastSeen = timestamp;
-        data.visitors[visitorId].pageViews++;
-        
+        const visitorRecord = data.visitors[visitorId];
+        const wasFirstVisit = visitorRecord.pageViews === 0;
+        visitorRecord.lastSeen = timestamp;
+        visitorRecord.pageViews++;
+
         const uniqueSet = new Set(ensureArray(todayStats.uniqueVisitors));
+        const alreadyCountedToday = uniqueSet.has(visitorId);
         uniqueSet.add(visitorId);
         todayStats.uniqueVisitors = Array.from(uniqueSet);
+
+        if (!alreadyCountedToday) {
+          if (wasFirstVisit) {
+            todayStats.newVisitors++;
+          } else {
+            todayStats.returningVisitors++;
+          }
+        }
+
+        const pageKey = page || 'unknown';
+        incrementCounter(todayStats.pageViewsByPath, pageKey);
+
+        const refLabel = parseReferrer(referrer);
+        incrementCounter(todayStats.referrers, refLabel);
+
+        const deviceType = getDeviceType(userAgent);
+        incrementCounter(todayStats.devices, deviceType);
+
+        const utmLabel = getUtmLabel(utm);
+        if (utmLabel) {
+          incrementCounter(todayStats.utmCampaigns, utmLabel);
+        }
+
+        const languageKey = typeof language === 'string' && language.length > 0
+          ? language.slice(0, 8).toLowerCase()
+          : 'unknown';
+        incrementCounter(todayStats.languages, languageKey);
+
+        const timezoneKey = typeof timezone === 'string' && timezone.length > 0
+          ? timezone.slice(0, 32)
+          : 'Unknown';
+        incrementCounter(todayStats.timezones, timezoneKey);
       }
 
       // Track session end
@@ -323,6 +512,19 @@ exports.handler = async (event, context) => {
         }, MAX_LOG_LENGTHS.sessions);
 
         todayStats.sessions++;
+
+        if (!data.visitors[visitorId]) {
+          data.visitors[visitorId] = {
+            firstSeen: timestamp,
+            lastSeen: timestamp,
+            pageViews: 0,
+            sessions: 0
+          };
+        }
+
+  data.visitors[visitorId].sessions = (data.visitors[visitorId].sessions || 0) + 1;
+  todayStats.sessionDurations.total += duration || 0;
+  todayStats.sessionDurations.count += 1;
         
         // Count as bounce if only 1 page and < 30 seconds
         if (body.pages === 1 && duration < 30000) {
@@ -343,6 +545,31 @@ exports.handler = async (event, context) => {
           name: body.eventName,
           timestamp
         }, MAX_LOG_LENGTHS.events);
+
+        if (body.eventName === 'form_submit') {
+          todayStats.conversions.forms += 1;
+        }
+
+        if (body.eventName === 'cta_click') {
+          todayStats.conversions.ctaClicks += 1;
+        }
+
+        if (body.eventName === 'scroll_depth') {
+          const percent = Number(body.eventData?.percent) || 0;
+          todayStats.scrollDepth.total += percent;
+          todayStats.scrollDepth.count += 1;
+          if (percent > todayStats.scrollDepth.max) {
+            todayStats.scrollDepth.max = percent;
+          }
+        }
+
+        if (body.eventName === 'page_load') {
+          const loadTime = Number(body.eventData?.fullLoad) || 0;
+          if (loadTime > 0) {
+            todayStats.loadTimes.total += loadTime;
+            todayStats.loadTimes.count += 1;
+          }
+        }
       }
 
       // Save data
