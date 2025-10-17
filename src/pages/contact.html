@@ -276,6 +276,12 @@
           
           <form id="contactForm" action="/contact" method="POST">
             
+            <!-- Honeypot field - hidden from users, catches bots -->
+            <div class="honeypot-field" style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+              <label for="website">Website (leave blank)</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
             <div class="form-group">
               <label class="form-label" for="name">
                 Your Name<span class="required">*</span>
@@ -357,15 +363,31 @@
   <script src="../scripts/main.js"></script>
 
   <script>
-    // Basic form validation and submission handling
+    // Form validation and submission with bot protection
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
+      
+      // SECURITY: Honeypot check - if filled, it's a bot
+      const honeypot = document.getElementById('website');
+      if (honeypot && honeypot.value.trim() !== '') {
+        console.warn('[Security] Bot detected via honeypot');
+        // Silently fail for bots (don't alert them)
+        return false;
+      }
       
       // Get form data
       const formData = new FormData(this);
       const data = Object.fromEntries(formData);
       
+      // Remove honeypot from data
+      delete data.website;
+      
       console.log('Form submitted:', data);
+      
+      // Track form submission in analytics
+      if (window.Analytics && window.Analytics.trackFormSubmission) {
+        window.Analytics.trackFormSubmission('contact_form');
+      }
       
       // In production, you'd send this to your backend
       // For now, just show a success message

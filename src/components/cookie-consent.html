@@ -163,13 +163,21 @@
 
     // Save consent choice
     function saveConsent(accepted) {
-      localStorage.setItem(COOKIE_CONSENT_KEY, accepted ? 'accepted' : 'rejected');
+      const consentData = {
+        acceptedAll: accepted,
+        rejectedNonEssential: !accepted,
+        timestamp: new Date().toISOString()
+      };
+      
+      localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(consentData));
       hideBanner();
       
-      // If accepted, you can initialize analytics here
-      if (accepted) {
-        // Initialize Google Analytics, etc.
-        console.log('Analytics enabled');
+      // Initialize analytics if user accepted (integrates with analytics.js)
+      if (accepted && window.Analytics && window.Analytics.setAnalyticsConsent) {
+        window.Analytics.setAnalyticsConsent(true);
+        console.log('[Cookie Consent] Analytics enabled');
+      } else if (!accepted) {
+        console.log('[Cookie Consent] Analytics disabled by user');
       }
     }
 

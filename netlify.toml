@@ -57,6 +57,8 @@
   # Apply security headers to all pages
   for = "/*"
   [headers.values]
+    # SECURITY: Force HTTPS for all future visits (HSTS)
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     # Prevent clickjacking attacks - DENY is more secure than SAMEORIGIN
     X-Frame-Options = "DENY"
     # Prevent MIME type sniffing
@@ -66,6 +68,10 @@
     # Control referrer information sent to other sites
     Referrer-Policy = "strict-origin-when-cross-origin"
     # Restrict browser features (geolocation, microphone, camera)
-    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()"
-    # Allow Reddit API requests for feed widget
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: http:; connect-src 'self' https://www.reddit.com https://old.reddit.com; font-src 'self'"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), autoplay=()"
+    # Content Security Policy - Allow Reddit images and Google Analytics
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: http:; connect-src 'self' https://www.reddit.com https://old.reddit.com https://www.google-analytics.com https://analytics.google.com; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    # Prevent browser from sending document info to external sites
+    Cross-Origin-Embedder-Policy = "require-corp"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-origin"

@@ -19,6 +19,36 @@ const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // Replace with your actual GA4 Measur
 const ENABLE_DEBUG = false; // Set to true for development debugging
 
 // ============================================================================
+// BOT DETECTION
+// ============================================================================
+
+/**
+ * Detect if the current visitor is a bot/crawler
+ * Filters out automated traffic from analytics
+ */
+function isBotTraffic() {
+  const userAgent = navigator.userAgent.toLowerCase();
+  
+  // Common bot patterns
+  const botPatterns = [
+    /bot/i, /crawl/i, /spider/i, /slurp/i, /mediapartners/i,
+    /headless/i, /phantom/i, /selenium/i, /webdriver/i,
+    /ahref/i, /semrush/i, /mj12/i, /dotbot/i, /bingpreview/i,
+    /screaming\s?frog/i, /lighthouse/i, /gtmetrix/i
+  ];
+  
+  // Check user agent against bot patterns
+  const isBot = botPatterns.some(pattern => pattern.test(userAgent));
+  
+  // Additional checks for headless browsers
+  const hasWebDriver = navigator.webdriver === true;
+  const hasPhantom = window.callPhantom || window._phantom;
+  const hasNightmare = window.__nightmare;
+  
+  return isBot || hasWebDriver || hasPhantom || hasNightmare;
+}
+
+// ============================================================================
 // GOOGLE ANALYTICS 4 INITIALIZATION
 // ============================================================================
 
@@ -27,12 +57,21 @@ const ENABLE_DEBUG = false; // Set to true for development debugging
  * Loads the gtag.js script and configures tracking
  */
 function initializeGoogleAnalytics() {
+  // SECURITY: Block bot traffic from analytics
+  if (isBotTraffic()) {
+    if (ENABLE_DEBUG) {
+      console.log('[Analytics] Bot traffic detected, skipping tracking');
+    }
+    return;
+  }
+
   // Check if user has consented to analytics (for GDPR compliance)
-  // You can integrate this with a cookie consent banner
   const analyticsConsent = checkAnalyticsConsent();
   
   if (!analyticsConsent) {
-    console.log('[Analytics] User has not consented to tracking');
+    if (ENABLE_DEBUG) {
+      console.log('[Analytics] User has not consented to tracking');
+    }
     return;
   }
 
@@ -67,16 +106,36 @@ function initializeGoogleAnalytics() {
 /**
  * Check if user has consented to analytics tracking
  * Returns true if consent is granted, false otherwise
- * 
- * TODO: Integrate with actual cookie consent banner
+ * Integrates with cookie-consent component
  */
 function checkAnalyticsConsent() {
-  // Check localStorage for consent preference
-  const consent = localStorage.getItem('analytics_consent');
+  // Check cookie consent (from cookie-consent.html component)
+  const cookieConsent = localStorage.getItem('cookie-consent');
   
-  // Default to true for now (change to false for strict GDPR)
-  // In production, integrate with a proper consent management platform
-  return consent !== 'false';
+  if (!cookieConsent) {
+    // No consent decision yet - wait for user choice
+    return false;
+  }
+  
+  try {
+    const consent = JSON.parse(cookieConsent);
+    
+    // If user accepted all cookies, analytics is allowed
+    if (consent.acceptedAll) {
+      return true;
+    }
+    
+    // If user rejected, no analytics
+    if (consent.rejectedNonEssential) {
+      return false;
+    }
+  } catch (e) {
+    console.error('[Analytics] Error parsing cookie consent:', e);
+    return false;
+  }
+  
+  // Default: no tracking without explicit consent
+  return false;
 }
 
 /**
@@ -84,9 +143,15 @@ function checkAnalyticsConsent() {
  * Call this from your cookie consent banner
  */
 function setAnalyticsConsent(granted) {
-  localStorage.setItem('analytics_consent', granted ? 'true' : 'false');
+  const consentData = {
+    acceptedAll: granted,
+    rejectedNonEssential: !granted,
+    timestamp: new Date().toISOString()
+  };
   
-  if (granted) {
+  localStorage.setItem('cookie-consent', JSON.stringify(consentData));
+  
+  if (granted && !isBotTraffic()) {
     initializeGoogleAnalytics();
   }
 }
