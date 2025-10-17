@@ -82,47 +82,57 @@ class RedditFeed {
   }
 
   renderPosts(posts) {
-    // Filter for REAL progress posts only (exclude satire, memes, transplants, shaving posts)
+    // Filter for REAL progress posts only (exclude satire, memes, transplants)
     const relevantPosts = posts.filter(post => {
       const title = post.title.toLowerCase();
       const flair = post.link_flair_text?.toLowerCase() || '';
       
-      // EXCLUDE satire/meme posts
+      // EXCLUDE satire/meme posts by flair
       if (flair.includes('satire') || flair.includes('meme')) {
         console.log('[Reddit Feed] Filtered out satire:', post.title);
         return false;
       }
       
       // EXCLUDE hair transplant posts
-      if (title.includes('transplant') || title.includes('ht ') || title.includes('fue') || title.includes('donor')) {
+      if (title.includes('transplant') || title.includes(' ht ') || title.includes('fue') || 
+          title.includes('donor area') || title.includes('overharvest')) {
         console.log('[Reddit Feed] Filtered out transplant:', post.title);
         return false;
       }
       
-      // EXCLUDE posts about shaving/giving up
-      if (title.includes('shaved') || title.includes('shave it') || title.includes('buzz') || 
-          title.includes('gave up') || title.includes('giving up')) {
-        console.log('[Reddit Feed] Filtered out shaving post:', post.title);
+      // EXCLUDE obvious meme titles (even without satire flair)
+      if (title.includes('homeless') || title.includes('crackhead') || 
+          title.includes('hide your wives') || title.includes('leave me alone at work')) {
+        console.log('[Reddit Feed] Filtered out meme title:', post.title);
         return false;
       }
       
-      // ONLY INCLUDE progress posts with images
-      const hasImages = post.post_hint === 'image' || post.url?.includes('imgur') || post.url?.includes('i.redd.it') || post.is_gallery;
+      // EXCLUDE non-image posts (text only, videos)
+      const hasImages = post.post_hint === 'image' || post.url?.includes('imgur') || 
+                        post.url?.includes('i.redd.it') || post.is_gallery || 
+                        post.url?.includes('/gallery/');
+      if (!hasImages) {
+        console.log('[Reddit Feed] Filtered out non-image post:', post.title);
+        return false;
+      }
+      
+      // INCLUDE posts with progress keywords OR strong result indicators
       const isProgress = title.includes('month') || title.includes('year') || 
                         title.includes('progress') || title.includes('result') ||
                         title.includes('before') || title.includes('after') ||
                         title.includes('update') || title.includes('transformation') ||
-                        title.includes('treatment');
+                        title.includes('treatment') || title.includes('fin') ||
+                        title.includes('minoxidil') || title.includes('regrowth') ||
+                        title.includes('got all my hair back') || title.includes('decision of my life');
       
-      const isRelevant = hasImages && isProgress;
-      if (isRelevant) {
+      if (isProgress) {
         console.log('[Reddit Feed] Included progress post:', post.title);
       }
-      return isRelevant;
+      return isProgress;
     });
 
-    // If we don't have enough relevant posts, show what we have
-    const postsToShow = relevantPosts.length >= 5 ? relevantPosts.slice(0, 15) : relevantPosts;
+    // Show all relevant posts (should be 8-10 good ones)
+    const postsToShow = relevantPosts.slice(0, 15);
 
     this.container.innerHTML = `
       <div class="reddit-feed">

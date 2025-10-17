@@ -5,7 +5,8 @@
   "main": "src/pages/index.html",
   "scripts": {
     "start": "python -m http.server 8000",
-    "dev": "python -m http.server 8000"
+    "dev": "python -m http.server 8000",
+    "update-reddit": "node fetch-reddit-posts-axios.js"
   },
   "keywords": [
     "hair-loss",
@@ -13,5 +14,8 @@
     "wellness"
   ],
   "author": "Revive Your Hair",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
 }
