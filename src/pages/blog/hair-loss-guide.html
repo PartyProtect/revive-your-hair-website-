@@ -1332,6 +1332,213 @@
       line-height: 1.7;
       font-size: 1.05em;
     }
+
+    /* Reddit Feed Styles */
+    .reddit-feed {
+      background: #ffffff;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 40px 0;
+    }
+
+    .reddit-header {
+      background: linear-gradient(135deg, #FF4500, #FF5722);
+      color: white;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .reddit-logo {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+
+    .reddit-logo svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .reddit-header h4 {
+      margin: 0 0 4px 0;
+      font-size: 1.4em;
+      font-weight: 700;
+    }
+
+    .reddit-header p {
+      margin: 0;
+      opacity: 0.9;
+      font-size: 0.95em;
+    }
+
+    .reddit-posts {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1px;
+      background: #e5e7eb;
+    }
+
+    .reddit-post {
+      background: white;
+      transition: background 0.2s;
+    }
+
+    .reddit-post:hover {
+      background: #f9fafb;
+    }
+
+    .reddit-post-link {
+      display: flex;
+      gap: 16px;
+      padding: 16px;
+      text-decoration: none;
+      color: inherit;
+      height: 100%;
+    }
+
+    .reddit-post-thumbnail {
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f3f4f6;
+    }
+
+    .reddit-post-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .reddit-post-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .reddit-post-title {
+      margin: 0 0 8px 0;
+      font-size: 0.95em;
+      font-weight: 600;
+      color: #1f2937;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .reddit-post-link:hover .reddit-post-title {
+      color: #FF4500;
+    }
+
+    .reddit-post-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .reddit-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.85em;
+      color: #6b7280;
+    }
+
+    .reddit-meta-item svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .reddit-footer {
+      padding: 20px;
+      text-align: center;
+      background: #f9fafb;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .reddit-view-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: #FF4500;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .reddit-view-more:hover {
+      background: #FF5722;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 69, 0, 0.3);
+    }
+
+    .reddit-loading,
+    .reddit-error {
+      padding: 60px 20px;
+      text-align: center;
+      color: #6b7280;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 16px;
+      border: 4px solid #e5e7eb;
+      border-top-color: #FF4500;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .reddit-error a {
+      color: #FF4500;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .reddit-error a:hover {
+      text-decoration: underline;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .reddit-posts {
+        grid-template-columns: 1fr;
+      }
+
+      .reddit-header {
+        padding: 16px;
+      }
+
+      .reddit-logo {
+        width: 40px;
+        height: 40px;
+      }
+
+      .reddit-header h4 {
+        font-size: 1.2em;
+      }
+
+      .reddit-post-link {
+        padding: 12px;
+      }
+
+      .reddit-post-thumbnail {
+        width: 60px;
+        height: 60px;
+      }
+    }
   </style>
   <script src="../../scripts/component-loader.js"></script>
 </head>
@@ -2644,6 +2851,9 @@
     <h3 id="real-results">Real Results from Real People</h3>
     
     <p>The studies are one thing. But head over to r/tressless and you'll see transformations from people with zero financial incentive to post them. Some are genuinely impressive—guys going from significant recession to solid coverage.</p>
+    
+    <!-- Reddit Feed Widget -->
+    <div id="reddit-tressless-feed"></div>
     
     <p><strong>But here's what matters:</strong> we don't know how effective treatment will be for <em>you</em> until you consistently perform it.</p>
     
@@ -4676,5 +4886,6 @@
   
   <!-- Global Scripts -->
   <script src="../../scripts/main.js"></script>
+  <script src="../../scripts/reddit-feed.js"></script>
 </body>
 </html>
