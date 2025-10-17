@@ -18,6 +18,15 @@ class RedditFeed {
 
   async init() {
     console.log('[Reddit Feed] Initializing widget...');
+    
+    // Check if content is already pre-rendered for SEO
+    if (this.container.dataset.seoRendered === 'true') {
+      console.log('[Reddit Feed] ✅ SEO content detected - enhancing existing content');
+      this.enhancePrerenderedContent();
+      return;
+    }
+    
+    // Otherwise, load content dynamically
     this.showLoading();
     try {
       const posts = await this.fetchTopPosts();
@@ -31,6 +40,20 @@ class RedditFeed {
       });
       this.showError(error.message);
     }
+  }
+
+  enhancePrerenderedContent() {
+    // Content is already rendered for SEO
+    // Add any interactive enhancements here if needed
+    console.log('[Reddit Feed] Pre-rendered content is ready');
+    
+    // Optional: Add analytics tracking, interactive features, etc.
+    const posts = this.container.querySelectorAll('.reddit-post-link');
+    posts.forEach(link => {
+      link.addEventListener('click', () => {
+        console.log('[Reddit Feed] Post clicked:', link.querySelector('.reddit-post-title').textContent);
+      });
+    });
   }
 
   async fetchTopPosts() {

@@ -1,6 +1,6 @@
 [build]
-  # No build command needed for static HTML site
-  command = "echo 'No build required'"
+  # Build SEO-friendly pre-rendered content before deployment
+  command = "node build-seo-content.js"
   
   # Publish the entire src directory
   publish = "src"

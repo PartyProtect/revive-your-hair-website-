@@ -6,7 +6,9 @@
   "scripts": {
     "start": "python -m http.server 8000",
     "dev": "python -m http.server 8000",
-    "update-reddit": "node fetch-reddit-posts-axios.js"
+    "update-reddit": "node fetch-reddit-posts-axios.js",
+    "build:seo": "node build-seo-content.js",
+    "prebuild": "npm run build:seo"
   },
   "keywords": [
     "hair-loss",
