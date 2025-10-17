@@ -1,15 +1,15 @@
-# Clean URL Structure - Serve from /pages/ subdirectory with .html targets
+# Clean URL Structure - paths relative to publish directory (src/)
 
-/blog              /pages/blog/index.html        200
-/blog/             /pages/blog/index.html        200
-/blog/*.html       /pages/blog/:splat            200
-/blog/*            /pages/blog/:splat.html       200
+/blog              pages/blog/index.html        200
+/blog/             pages/blog/index.html        200
+/blog/*.html       pages/blog/:splat            200
+/blog/*            pages/blog/:splat.html       200
 
-/legal/*.html      /pages/legal/:splat           200
-/legal/*           /pages/legal/:splat.html      200
+/legal/*.html      pages/legal/:splat           200
+/legal/*           pages/legal/:splat.html      200
 
 # Ensure homepage works
-/index.html        /pages/index.html             200
+/index.html        pages/index.html             200
 
 # 404 page
-/*                 /pages/404.html               404
+/*                 pages/404.html               404
