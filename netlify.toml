@@ -37,9 +37,19 @@
   status = 200
 
 [[redirects]]
-  from = "/blog/*"
-  to = "/pages/blog/:splat"
+  from = "/blog/:slug.html"
+  to = "/pages/blog/:slug.html"
   status = 200
+
+[[redirects]]
+  from = "/blog/:slug"
+  to = "/pages/blog/:slug.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/:slug/"
+  to = "/pages/blog/:slug.html"
+  status = 301
 
 # Admin dashboard (password protected)
 [[redirects]]
