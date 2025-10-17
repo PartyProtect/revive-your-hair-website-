@@ -34,9 +34,9 @@ class RedditFeed {
   }
 
   async fetchTopPosts() {
-    // Reddit's JSON API - no authentication needed for public data
-    const url = `https://www.reddit.com/r/${this.subreddit}/top.json?t=${this.timeframe}&limit=${this.limit}`;
-    console.log('[Reddit Feed] Fetching from URL:', url);
+    // Use Netlify Function proxy to bypass CORS restrictions
+    const url = `/.netlify/functions/reddit-proxy?subreddit=${this.subreddit}&timeframe=${this.timeframe}&limit=${this.limit}`;
+    console.log('[Reddit Feed] Fetching from proxy:', url);
     
     try {
       const response = await fetch(url, {
@@ -49,7 +49,9 @@ class RedditFeed {
       console.log('[Reddit Feed] Response headers:', [...response.headers.entries()]);
       
       if (!response.ok) {
-        throw new Error(`Reddit API error: ${response.status} ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        console.error('[Reddit Feed] Error response:', errorData);
+        throw new Error(errorData.error || `API error: ${response.status} ${response.statusText}`);
       }
       
       const data = await response.json();
