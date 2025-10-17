@@ -145,6 +145,10 @@
       color: #ef4444;
     }
 
+    .stat-card-change.neutral {
+      color: #6b7280;
+    }
+
     /* Charts Section */
     .charts-section {
       display: grid;
@@ -479,6 +483,17 @@
 
         <div class="stat-card">
           <div class="stat-card-header">
+            <span class="stat-card-title">Helpful Crawlers</span>
+            <span class="stat-card-icon">🧭</span>
+          </div>
+          <div class="stat-card-value" id="crawler-count">-</div>
+          <div class="stat-card-change neutral">
+            <span id="crawler-note">Tracking friendly bots</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
             <span class="stat-card-title">Avg. Session</span>
             <span class="stat-card-icon">⏱️</span>
           </div>
@@ -798,17 +813,19 @@
         const totalVisitors = stats.totalVisitors || 0;
         const todayStats = stats.today || {};
         const last7Days = stats.last7Days || [];
+        const recentSessions = stats.recentSessions || [];
         
         // Calculate page views today
         const pageViewsToday = todayStats.pageViews || 0;
         
         // Calculate bots blocked
         const botsBlocked = todayStats.bots || 0;
-        const totalTraffic = pageViewsToday + botsBlocked;
-        const botPercentage = totalTraffic > 0 ? Math.round((botsBlocked / totalTraffic) * 100) : 0;
+        const crawlersToday = todayStats.crawlers || 0;
+        const totalHits = pageViewsToday + botsBlocked + crawlersToday;
+        const botPercentage = totalHits > 0 ? Math.round((botsBlocked / totalHits) * 100) : 0;
+        const crawlerPercentage = totalHits > 0 ? Math.round((crawlersToday / totalHits) * 100) : 0;
         
         // Calculate average session duration
-        const recentSessions = stats.last7Days.flatMap(day => day.sessions || []);
         const avgDuration = recentSessions.length > 0
           ? recentSessions.reduce((sum, s) => sum + (s.duration || 0), 0) / recentSessions.length
           : 0;
@@ -840,6 +857,11 @@
         
         document.getElementById('bots-blocked').textContent = botsBlocked.toLocaleString();
         document.getElementById('bots-percentage').textContent = `${botPercentage}% of total traffic`;
+
+        document.getElementById('crawler-count').textContent = crawlersToday.toLocaleString();
+        document.getElementById('crawler-note').textContent = crawlersToday > 0
+          ? `${crawlerPercentage}% of hits today`
+          : 'No crawlers yet';
         
         document.getElementById('avg-session').textContent = `${avgMinutes}m ${avgSeconds}s`;
         document.getElementById('session-change').textContent = 'Real-time data';
@@ -850,7 +872,7 @@
         // Count form submissions from events
         const formSubmissions = (todayStats.events || []).filter(e => e.name === 'form_submit').length;
         document.getElementById('form-submissions').textContent = formSubmissions.toString();
-        document.getElementById('forms-spam').textContent = `Bots blocked: ${botsBlocked}`;
+  document.getElementById('forms-spam').textContent = `Bad bots blocked today: ${botsBlocked}`;
         
         // Update charts placeholder text
         const visitorsChart = document.getElementById('visitors-chart');
@@ -901,19 +923,43 @@
         .then(stats => {
           const recentEvents = stats.recentEvents || [];
           const recentPageViews = stats.recentPageViews || [];
-          
-          // Combine and sort by timestamp
-          const activities = [
-            ...recentEvents.slice(-5).map(e => ({
-              time: getTimeAgo(e.timestamp),
-              text: getEventText(e)
-            })),
-            ...recentPageViews.slice(-3).map(pv => ({
-              time: getTimeAgo(pv.timestamp),
-              text: `Page view: ${pv.page}`
-            }))
-          ].sort((a, b) => b.timestamp - a.timestamp).slice(0, 7);
-          
+          const recentCrawlers = stats.recentCrawlers || [];
+          const recentBots = stats.recentBotHits || [];
+
+          const activityItems = [];
+
+          recentEvents.slice(-10).forEach(event => {
+            activityItems.push({
+              timestamp: event.timestamp,
+              label: getEventText(event)
+            });
+          });
+
+          recentPageViews.slice(-10).forEach(view => {
+            activityItems.push({
+              timestamp: view.timestamp,
+              label: `Page view: ${view.page}`
+            });
+          });
+
+          recentCrawlers.slice(-10).forEach(crawler => {
+            activityItems.push({
+              timestamp: crawler.timestamp,
+              label: `Friendly crawler scanned: ${getCrawlerLabel(crawler.userAgent)}`
+            });
+          });
+
+          recentBots.slice(-10).forEach(bot => {
+            activityItems.push({
+              timestamp: bot.timestamp,
+              label: `Bad bot blocked: ${getCrawlerLabel(bot.userAgent)}`
+            });
+          });
+
+          const activities = activityItems
+            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+            .slice(0, 7);
+
           if (activities.length === 0) {
             activityList.innerHTML = '<p style="color: #6b7280; padding: 20px; text-align: center;">No activity yet. Start browsing your site!</p>';
             return;
@@ -921,8 +967,8 @@
 
           activityList.innerHTML = activities.map(activity => `
             <div class="activity-item">
-              <span class="activity-time">${activity.time}</span>
-              <span class="activity-text">${activity.text}</span>
+              <span class="activity-time">${getTimeAgo(activity.timestamp)}</span>
+              <span class="activity-text">${activity.label}</span>
             </div>
           `).join('');
         })
@@ -949,16 +995,45 @@
     }
     
     function getEventText(event) {
-      switch (event.eventName) {
+      const name = event.eventName || event.name || 'event';
+      const data = event.eventData || {};
+
+      switch (name) {
         case 'form_submit':
-          return `Form submitted: ${event.eventData?.formId || 'unknown'}`;
+          return `Form submitted: ${data.formId || 'unknown'}`;
         case 'cta_click':
-          return `CTA clicked: ${event.eventData?.text?.substring(0, 30) || 'button'}`;
+          return `CTA clicked: ${data.text?.substring(0, 30) || 'button'}`;
         case 'external_link_click':
-          return `External link clicked`;
+          return 'External link clicked';
+        case 'heartbeat':
+          return 'Visitor still active';
         default:
-          return `Event: ${event.eventName}`;
+          return `Event: ${name}`;
       }
+    }
+
+    function getCrawlerLabel(userAgent = '') {
+      if (!userAgent) return 'Unknown user agent';
+      const friendlyNames = [
+        { pattern: /googlebot/i, label: 'Googlebot' },
+        { pattern: /bingbot/i, label: 'Bingbot' },
+        { pattern: /duckduckbot/i, label: 'DuckDuckGo Bot' },
+        { pattern: /baiduspider/i, label: 'Baidu Spider' },
+        { pattern: /yandexbot/i, label: 'Yandex Bot' },
+        { pattern: /facebookexternalhit/i, label: 'Facebook Crawler' },
+        { pattern: /linkedinbot/i, label: 'LinkedIn Bot' },
+        { pattern: /twitterbot/i, label: 'Twitter Bot' },
+        { pattern: /slackbot/i, label: 'Slack Bot' },
+        { pattern: /discordbot/i, label: 'Discord Bot' }
+      ];
+
+      const friendly = friendlyNames.find(entry => entry.pattern.test(userAgent));
+      if (friendly) {
+        return friendly.label;
+      }
+
+      const match = userAgent.match(/^([^(;]+?)(?:\/|\s|$)/i);
+      return match ? match[0].trim() : userAgent.substring(0, 32);
     }
 
     function clearAnalytics() {
