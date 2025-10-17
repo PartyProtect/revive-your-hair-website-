@@ -104,7 +104,8 @@ class ComponentLoader {
     const components = [
       { name: 'header', target: 'header-root' },
       { name: 'footer', target: 'footer-root' },
-      { name: 'lang/language-switcher', target: 'language-switcher-root' }
+      { name: 'lang/language-switcher', target: 'language-switcher-root' },
+      { name: 'cookie-consent', target: 'cookie-consent-root' }
     ];
 
     const loadPromises = components.map(component => {
