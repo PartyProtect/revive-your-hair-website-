@@ -1,0 +1,17 @@
+# Clean URL Structure - Serve from /pages/ subdirectory
+# These are rewrite rules (200) - user sees /blog/, content served from /pages/blog/
+
+/blog/*           /pages/blog/:splat           200
+/legal/*          /pages/legal/:splat          200
+
+# Redirect old URLs to new clean URLs (301 permanent redirect)
+# If anyone visits /pages/blog/ directly, redirect them to /blog/
+
+/pages/blog/*     /blog/:splat                 301
+/pages/legal/*    /legal/:splat                301
+
+# Ensure homepage works
+/index.html       /pages/index.html            200
+
+# 404 page
+/*                /pages/404.html              404

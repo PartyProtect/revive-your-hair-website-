@@ -57,9 +57,15 @@
   # Apply security headers to all pages
   for = "/*"
   [headers.values]
-    X-Frame-Options = "SAMEORIGIN"
+    # Prevent clickjacking attacks - DENY is more secure than SAMEORIGIN
+    X-Frame-Options = "DENY"
+    # Prevent MIME type sniffing
     X-Content-Type-Options = "nosniff"
+    # Enable XSS filter built into browsers
     X-XSS-Protection = "1; mode=block"
+    # Control referrer information sent to other sites
     Referrer-Policy = "strict-origin-when-cross-origin"
+    # Restrict browser features (geolocation, microphone, camera)
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()"
     # Allow Reddit API requests for feed widget
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: http:; connect-src 'self' https://www.reddit.com https://old.reddit.com; font-src 'self'"

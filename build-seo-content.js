@@ -103,6 +103,7 @@ function generatePostHTML(post) {
   const score = formatScore(post.score);
   const comments = formatNumber(post.num_comments);
   const title = escapeHtml(post.title);
+  const seoAltText = generateSEOAltText(post.title);
   
   return `    <article class="reddit-post" itemscope itemtype="https://schema.org/SocialMediaPosting">
       <a href="https://reddit.com${post.permalink}" 
@@ -113,7 +114,7 @@ function generatePostHTML(post) {
         ${thumbnail ? `
         <div class="reddit-post-thumbnail">
           <img src="${thumbnail}" 
-               alt="${title}" 
+               alt="${seoAltText}" 
                loading="lazy"
                itemprop="image">
         </div>
@@ -145,6 +146,46 @@ function generatePostHTML(post) {
         </div>
       </a>
     </article>`;
+}
+
+function generateSEOAltText(title) {
+  // Generate SEO-optimized alt text for Google Images
+  const lower = title.toLowerCase();
+  
+  // Extract treatment info
+  const treatments = [];
+  if (lower.includes('fin') || lower.includes('finasteride')) treatments.push('finasteride');
+  if (lower.includes('min') || lower.includes('minoxidil')) treatments.push('minoxidil');
+  if (lower.includes('dut') || lower.includes('dutasteride')) treatments.push('dutasteride');
+  if (lower.includes('derma') || lower.includes('microneedle')) treatments.push('microneedling');
+  if (lower.includes('keto')) treatments.push('ketoconazole');
+  
+  // Extract timeframe
+  let timeframe = '';
+  const yearMatch = title.match(/(\d+)\s*years?/i);
+  const monthMatch = title.match(/(\d+)\s*months?/i);
+  if (yearMatch) timeframe = `${yearMatch[1]} year`;
+  else if (monthMatch) timeframe = `${monthMatch[1]} month`;
+  
+  // Build SEO-friendly alt text
+  let altText = 'Hair loss transformation';
+  
+  if (treatments.length > 0) {
+    altText += `: ${treatments.join(' and ')}`;
+  }
+  
+  if (timeframe) {
+    altText += ` ${timeframe}`;
+  }
+  
+  altText += ' results before and after';
+  
+  // Add treatment protocol if available
+  if (treatments.length > 0) {
+    altText += ` - ${treatments.join(', ')} treatment`;
+  }
+  
+  return altText;
 }
 
 function getThumbnail(post) {
@@ -228,16 +269,23 @@ function injectSEOContent() {
   const htmlPath = path.join(__dirname, 'src', 'pages', 'blog', 'hair-loss-guide.html');
   let html = fs.readFileSync(htmlPath, 'utf8');
   
-  // Replace the empty div with pre-rendered content
-  const oldContent = '<div id="reddit-tressless-feed"></div>';
-  const newContent = redditHTML;
+  // Replace existing reddit feed content (everything from opening tag to closing </div>)
+  const regex = /<div id="reddit-tressless-feed"[^>]*>[\s\S]*?<\/div>\s*<\/div>/;
   
-  if (html.includes(oldContent)) {
-    html = html.replace(oldContent, newContent);
+  if (regex.test(html)) {
+    html = html.replace(regex, redditHTML.trim() + '\n</div>');
     fs.writeFileSync(htmlPath, html, 'utf8');
-    console.log('   ✅ Updated hair-loss-guide.html with SEO content');
+    console.log('   ✅ Updated hair-loss-guide.html with optimized alt texts');
   } else {
-    console.log('   ⚠️  Could not find reddit container in hair-loss-guide.html');
+    // Try finding empty div
+    const oldContent = '<div id="reddit-tressless-feed"></div>';
+    if (html.includes(oldContent)) {
+      html = html.replace(oldContent, redditHTML);
+      fs.writeFileSync(htmlPath, html, 'utf8');
+      console.log('   ✅ Updated hair-loss-guide.html with SEO content');
+    } else {
+      console.log('   ⚠️  Could not find reddit container in hair-loss-guide.html');
+    }
   }
   
   console.log('\n✅ SEO content build complete!\n');
