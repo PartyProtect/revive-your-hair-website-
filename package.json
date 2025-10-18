@@ -2,7 +2,7 @@
   "name": "revive-your-hair-website",
   "version": "1.0.0",
   "description": "Evidence-based hair loss treatment information website",
-  "main": "src/pages/index.html",
+  "main": "src/index.html",
   "scripts": {
     "start": "python -m http.server 8000",
     "dev": "python -m http.server 8000",
