@@ -1,0 +1,126 @@
+[build]
+  # Build SEO-friendly pre-rendered content before deployment
+  command = "node build-seo-content.js"
+  
+  # Publish the entire src directory
+  publish = "src"
+
+# Serve pages with clean URLs (files are directly in src/ root - no /pages/ folder)
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/quiz"
+  to = "/quiz.html"
+  status = 200
+
+[[redirects]]
+  from = "/store"
+  to = "/store.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog"
+  to = "/blog/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/blog/:slug.html"
+  to = "/blog/:slug.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/blog/:slug"
+  to = "/blog/:slug.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/blog/:slug/"
+  to = "/blog/:slug.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/legal/:slug.html"
+  to = "/legal/:slug.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/legal/:slug"
+  to = "/legal/:slug.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/legal/:slug/"
+  to = "/legal/:slug.html"
+  status = 301
+  force = true
+
+# Admin dashboard (password protected)
+[[redirects]]
+  from = "/admin"
+  to = "/admin/dashboard.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/:splat"
+  status = 200
+  force = true
+
+# Handle 404 errors - this must be last
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+[[headers]]
+  # Apply security headers to all HTML pages (but not sitemap/robots)
+  for = "/*.html"
+  [headers.values]
+    # SECURITY: Force HTTPS for all future visits (HSTS)
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    # Prevent clickjacking attacks - DENY is more secure than SAMEORIGIN
+    X-Frame-Options = "DENY"
+    # Prevent MIME type sniffing
+    X-Content-Type-Options = "nosniff"
+    # Enable XSS filter built into browsers
+    X-XSS-Protection = "1; mode=block"
+    # Control referrer information sent to other sites
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Restrict browser features (geolocation, microphone, camera)
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), autoplay=()"
+    # Content Security Policy - Tightened (removed 'unsafe-inline' from script-src, whitelisted Reddit images)
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.reddit.com https://old.reddit.com https://i.redd.it https://external-preview.redd.it https://www.googletagmanager.com; connect-src 'self' https://www.reddit.com https://old.reddit.com https://www.google-analytics.com https://analytics.google.com; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+
+[[headers]]
+  # Sitemap - proper XML content type for search engines
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+    Cache-Control = "public, max-age=300"
+
+[[headers]]
+  # Robots.txt - proper text content type
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=300"
