@@ -1,6 +1,7 @@
 [build]
   # Build SEO-friendly pre-rendered content before deployment
-  command = "node build-seo-content.js"
+  # Then validate sitemap headers are correct
+  command = "node build-seo-content.js && node check-sitemap.js"
   
   # Publish the entire src directory
   publish = "src"
