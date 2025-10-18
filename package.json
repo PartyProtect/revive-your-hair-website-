@@ -20,8 +20,5 @@
   "dependencies": {
     "@netlify/blobs": "^10.1.0",
     "axios": "^1.6.0"
-  },
-  "devDependencies": {
-    "@netlify/plugin-sitemap": "^0.8.1"
   }
 }

@@ -12,23 +12,6 @@
   # Disable secrets scanning (values in docs are examples only)
   SECRETS_SCAN_ENABLED = "false"
 
-# Auto-generate sitemap (replaces manual sitemap.xml)
-[[plugins]]
-  package = "@netlify/plugin-sitemap"
-  
-  [plugins.inputs]
-    buildDir = "src"
-    exclude = [
-      "/admin/**",
-      "/404.html"
-    ]
-    # Site URL
-    baseUrl = "https://www.reviveyourhair.eu"
-    # Pretty URLs (no .html extension)
-    pretty = true
-    # Include trailing slash for consistency
-    trailingSlash = false
-
 # Serve pages with clean URLs (files are directly in src/ root - no /pages/ folder)
 [[redirects]]
   from = "/"
