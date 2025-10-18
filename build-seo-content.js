@@ -103,30 +103,50 @@ function generatePostHTML(post) {
   const score = formatScore(post.score);
   const comments = formatNumber(post.num_comments);
   const title = escapeHtml(post.title);
+  const author = post.author || 'unknown';
+  const datePublished = new Date(post.created_utc * 1000).toISOString();
   
   return `    <article class="reddit-post" itemscope itemtype="https://schema.org/SocialMediaPosting">
+      <!-- Structured data for Google Search Console -->
+      <meta itemprop="headline" content="${title}">
+      <meta itemprop="datePublished" content="${datePublished}">
+      <link itemprop="url" href="https://reddit.com${post.permalink}">
+      ${thumbnail ? `<link itemprop="image" href="${thumbnail}">` : ''}
+      
+      <!-- Author as Person object (required by GSC) -->
+      <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="u/${escapeHtml(author)}">
+        <link itemprop="url" href="https://reddit.com/user/${escapeHtml(author)}">
+      </span>
+      
+      <!-- Interaction statistics -->
+      <span itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter">
+        <meta itemprop="interactionType" content="https://schema.org/LikeAction">
+        <meta itemprop="userInteractionCount" content="${post.score}">
+      </span>
+      <span itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter">
+        <meta itemprop="interactionType" content="https://schema.org/CommentAction">
+        <meta itemprop="userInteractionCount" content="${post.num_comments}">
+      </span>
+      
       <a href="https://reddit.com${post.permalink}" 
          target="_blank" 
          rel="noopener noreferrer"
-         class="reddit-post-link"
-         itemprop="url">
+         class="reddit-post-link">
         ${thumbnail ? `
         <div class="reddit-post-thumbnail">
           <img src="${thumbnail}" 
                alt="${title}" 
-               loading="lazy"
-               itemprop="image">
+               loading="lazy">
         </div>
         ` : ''}
         <div class="reddit-post-content">
-          <h5 class="reddit-post-title" itemprop="headline">${title}</h5>
+          <h5 class="reddit-post-title">${title}</h5>
           <div class="reddit-post-meta">
-            <span class="reddit-meta-item" itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter">
+            <span class="reddit-meta-item">
               <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
               </svg>
-              <meta itemprop="interactionType" content="https://schema.org/LikeAction">
-              <meta itemprop="userInteractionCount" content="${post.score}">
               ${score}
             </span>
             <span class="reddit-meta-item">
@@ -139,7 +159,13 @@ function generatePostHTML(post) {
               <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
               </svg>
-              <time itemprop="datePublished" datetime="${new Date(post.created_utc * 1000).toISOString()}">${timeAgo}</time>
+              <time datetime="${datePublished}">${timeAgo}</time>
+            </span>
+            <span class="reddit-meta-item">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+              </svg>
+              u/${escapeHtml(author)}
             </span>
           </div>
         </div>
