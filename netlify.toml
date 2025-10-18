@@ -5,86 +5,60 @@
   # Publish the entire src directory
   publish = "src"
 
-# Serve pages with clean URLs (files now in src root - no pages folder)
+# Serve pages with clean URLs
 [[redirects]]
   from = "/"
-  to = "/index.html"
+  to = "/pages/index.html"
   status = 200
 
 [[redirects]]
   from = "/about"
-  to = "/about.html"
+  to = "/pages/about.html"
   status = 200
 
 [[redirects]]
   from = "/contact"
-  to = "/contact.html"
+  to = "/pages/contact.html"
   status = 200
 
 [[redirects]]
   from = "/quiz"
-  to = "/quiz.html"
+  to = "/pages/quiz.html"
   status = 200
 
 [[redirects]]
   from = "/store"
-  to = "/store.html"
+  to = "/pages/store.html"
   status = 200
 
 [[redirects]]
   from = "/blog"
-  to = "/blog/index.html"
+  to = "/pages/blog/index.html"
   status = 200
-  force = true
 
 [[redirects]]
-  from = "/blog/:slug.html"
-  to = "/blog/:slug.html"
+  from = "/blog/*"
+  to = "/pages/blog/:splat"
   status = 200
-  force = true
-
-[[redirects]]
-  from = "/blog/:slug"
-  to = "/blog/:slug.html"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/blog/:slug/"
-  to = "/blog/:slug.html"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/legal/:slug.html"
-  to = "/legal/:slug.html"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/legal/:slug"
-  to = "/legal/:slug.html"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/legal/:slug/"
-  to = "/legal/:slug.html"
-  status = 301
-  force = true
 
 # Admin dashboard (password protected)
 [[redirects]]
   from = "/admin"
-  to = "/admin/dashboard.html"
+  to = "/pages/admin/dashboard.html"
   status = 200
   force = true
 
 [[redirects]]
   from = "/admin/*"
-  to = "/admin/:splat"
+  to = "/pages/admin/:splat"
   status = 200
   force = true
+
+# Allow direct access to pages folder URLs
+[[redirects]]
+  from = "/pages/*"
+  to = "/pages/:splat"
+  status = 200
 
 # Sitemap - must be before catch-all 404
 [[redirects]]
@@ -101,7 +75,7 @@
 # Handle 404 errors - this must be last
 [[redirects]]
   from = "/*"
-  to = "/404.html"
+  to = "/pages/404.html"
   status = 404
 
 [[headers]]

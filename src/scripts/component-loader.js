@@ -37,7 +37,7 @@ class ComponentLoader {
       return 'store';
     } else if (path.includes('resources')) {
       return 'resources';
-    } else if (path.includes('index.html') || path.endsWith('/')) {
+    } else if (path.includes('index.html') || path.endsWith('/') || path.endsWith('/pages')) {
       return 'home';
     }
     
@@ -142,18 +142,6 @@ if (document.readyState === 'loading') {
 function initializeComponents() {
   const loader = new ComponentLoader();
   loader.loadAllComponents();
-  
-  // Load custom analytics tracking
-  loadTrackingScript();
-}
-
-// Load custom analytics tracking script
-function loadTrackingScript() {
-  const script = document.createElement('script');
-  script.src = '/scripts/tracking.js';
-  script.async = true;
-  script.onerror = () => console.error('[ComponentLoader] Failed to load tracking script');
-  document.body.appendChild(script);
 }
 
 // Export for use in other scripts if needed
