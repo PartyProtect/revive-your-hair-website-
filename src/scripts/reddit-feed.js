@@ -209,8 +209,11 @@ class RedditFeed {
           <div class="reddit-post-content">
             <h5 class="reddit-post-title" itemprop="headline">${this.escapeHtml(post.title)}</h5>
             
-            <!-- Author metadata (hidden but for SEO) -->
-            <meta itemprop="author" content="u/${this.escapeHtml(author)}">
+            <!-- Author as nested Person schema (required by Google Search Console) -->
+            <span itemprop="author" itemscope itemtype="https://schema.org/Person" style="display:none;">
+              <meta itemprop="name" content="u/${this.escapeHtml(author)}">
+              <link itemprop="url" href="https://reddit.com/user/${this.escapeHtml(author)}">
+            </span>
             
             <div class="reddit-post-meta">
               <span class="reddit-meta-item" itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter">
