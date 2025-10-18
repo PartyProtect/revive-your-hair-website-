@@ -1,5 +1,5 @@
-// Custom Analytics Tracking API - SECURED VERSION
-// Stores visitor data with authentication for stats retrieval
+// Custom Analytics Tracking API
+// Stores visitor data in simple JSON format
 
 const fs = require('fs').promises;
 const path = require('path');
@@ -7,9 +7,6 @@ const crypto = require('crypto');
 
 // Path to store tracking data
 const DATA_FILE = path.join('/tmp', 'tracking-data.json');
-
-// API key for stats access (set in Netlify environment variables)
-const STATS_API_KEY = process.env.ANALYTICS_API_KEY || 'change-me-in-production';
 
 // Friendly search engine bots we want to allow and track separately
 const FRIENDLY_CRAWLERS = [
@@ -363,24 +360,11 @@ exports.handler = async (event, context) => {
     const userAgent = event.headers['user-agent'] || '';
     const agentType = classifyAgent(userAgent);
 
-    // GET: Retrieve analytics data (REQUIRES AUTHENTICATION)
+    // GET: Retrieve analytics data
     if (event.httpMethod === 'GET') {
       const action = event.queryStringParameters?.action;
-      const apiKey = event.headers['x-api-key'] || event.queryStringParameters?.apiKey;
 
-      // SECURITY: Require API key for stats access
       if (action === 'stats') {
-        if (!apiKey || apiKey !== STATS_API_KEY) {
-          return {
-            statusCode: 401,
-            headers,
-            body: JSON.stringify({ 
-              error: 'Unauthorized',
-              message: 'Valid API key required to access analytics data'
-            })
-          };
-        }
-
         // Calculate statistics for dashboard
         const last7Days = Object.keys(data.dailyStats)
           .sort()
@@ -411,10 +395,10 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // POST: Log tracking event (NO AUTH REQUIRED - public endpoint)
+    // POST: Log tracking event
     if (event.httpMethod === 'POST') {
-      const body = JSON.parse(event.body || '{}');
-      const { type, page, referrer, duration, sessionId, utm, language, timezone } = body;
+  const body = JSON.parse(event.body || '{}');
+  const { type, page, referrer, duration, sessionId, utm, language, timezone } = body;
       const timestamp = new Date().toISOString();
 
       if (agentType === 'crawler') {

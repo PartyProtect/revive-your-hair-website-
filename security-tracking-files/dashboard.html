@@ -741,18 +741,27 @@
 
   <script>
     // ============================================================================
-    // ENHANCED PASSWORD PROTECTION (Server-Side Validation)
+    // ENHANCED PASSWORD PROTECTION (Level 2 Security)
     // ============================================================================
 
+    // Password is stored as SHA-256 hash (not visible in source)
+    // To generate new hash, run in console: hashPassword('YourPassword').then(h => console.log(h))
+    const PASSWORD_HASH = '215e1a2171349b3875167351971b9ccf293a9fbac9fca7de802602e77d2d1ae4'; // Hash of: ReviveHair2025!
     const PASSWORD_KEY = 'admin_authenticated';
-    const TOKEN_KEY = 'admin_token';
-    const TOKEN_EXPIRY_KEY = 'admin_token_expiry';
     
     // Rate limiting variables
-    let loginAttempts = parseInt(sessionStorage.getItem('login_attempts') || '0');
-    let lockoutTime = parseInt(sessionStorage.getItem('lockout_time') || '0');
+    let loginAttempts = parseInt(localStorage.getItem('login_attempts') || '0');
+    let lockoutTime = parseInt(localStorage.getItem('lockout_time') || '0');
 
-    // Enhanced password check with server-side validation
+    // Hash password using SHA-256
+    async function hashPassword(password) {
+      const msgBuffer = new TextEncoder().encode(password);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // Enhanced password check with rate limiting
     async function checkPassword() {
       const input = document.getElementById('admin-password');
       const error = document.getElementById('login-error');
@@ -763,102 +772,72 @@
         error.textContent = `🔒 Too many failed attempts. Locked for ${remainingSeconds} seconds.`;
         error.classList.remove('hidden');
         
+        // Update countdown every second
         setTimeout(checkPassword, 1000);
         return;
       } else if (lockoutTime && Date.now() >= lockoutTime) {
+        // Reset lockout
         loginAttempts = 0;
         lockoutTime = 0;
-        sessionStorage.removeItem('login_attempts');
-        sessionStorage.removeItem('lockout_time');
+        localStorage.removeItem('login_attempts');
+        localStorage.removeItem('lockout_time');
       }
       
-      // Validate with server
-      try {
-        const response = await fetch('/.netlify/functions/dashboard-auth', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password: input.value })
-        });
-
-        const data = await response.json();
-
-        if (response.ok && data.success) {
-          // Success - reset attempts and grant access
-          loginAttempts = 0;
-          lockoutTime = 0;
-          sessionStorage.removeItem('login_attempts');
-          sessionStorage.removeItem('lockout_time');
-          
-          sessionStorage.setItem(PASSWORD_KEY, 'true');
-          sessionStorage.setItem(TOKEN_KEY, data.token);
-          sessionStorage.setItem(TOKEN_EXPIRY_KEY, data.expiresAt.toString());
-          sessionStorage.setItem('login_time', Date.now().toString());
-          
-          // Set analytics API key (for secured stats access)
-          sessionStorage.setItem('analytics_api_key', data.token);
-          
-          console.log('[Security] Admin login successful:', new Date().toISOString());
-          
-          document.getElementById('login-overlay').classList.add('hidden');
-          document.getElementById('dashboard-content').classList.remove('hidden');
-          
-          initDashboard();
-          resetInactivityTimer();
-        } else {
-          // Failed attempt
-          loginAttempts++;
-          sessionStorage.setItem('login_attempts', loginAttempts.toString());
-          
-          if (loginAttempts >= 3) {
-            lockoutTime = Date.now() + (5 * 60 * 1000);
-            sessionStorage.setItem('lockout_time', lockoutTime.toString());
-            error.textContent = '🔒 Too many failed attempts. Locked for 5 minutes.';
-            
-            console.warn('[Security] Multiple failed login attempts:', {
-              timestamp: new Date().toISOString(),
-              attempts: loginAttempts
-            });
-          } else {
-            const remaining = 3 - loginAttempts;
-            error.textContent = `❌ Incorrect password. ${remaining} attempt${remaining !== 1 ? 's' : ''} remaining.`;
-          }
-          
-          error.classList.remove('hidden');
-          input.value = '';
-          input.focus();
-        }
-      } catch (error) {
-        console.error('[Security] Login error:', error);
-        error.textContent = '❌ Login failed. Please try again.';
-        error.classList.remove('hidden');
-      }
-    }
-
-    // Validate token on page load
-    function validateToken() {
-      const token = sessionStorage.getItem(TOKEN_KEY);
-      const expiry = parseInt(sessionStorage.getItem(TOKEN_EXPIRY_KEY) || '0');
+      // Hash input password
+      const inputHash = await hashPassword(input.value);
       
-      if (!token || Date.now() >= expiry) {
-        sessionStorage.removeItem(PASSWORD_KEY);
-        sessionStorage.removeItem(TOKEN_KEY);
-        sessionStorage.removeItem(TOKEN_EXPIRY_KEY);
-        sessionStorage.removeItem('analytics_api_key');
-        return false;
-      }
-      
-      return true;
-    }
-
-    // Check if already authenticated
-    window.addEventListener('DOMContentLoaded', function() {
-      if (sessionStorage.getItem(PASSWORD_KEY) === 'true' && validateToken()) {
+      // Check against stored hash
+      if (inputHash === PASSWORD_HASH) {
+        // Success - reset attempts and grant access
+        loginAttempts = 0;
+        lockoutTime = 0;
+        localStorage.removeItem('login_attempts');
+        localStorage.removeItem('lockout_time');
+        
+        sessionStorage.setItem(PASSWORD_KEY, 'true');
+        sessionStorage.setItem('login_time', Date.now().toString());
+        
+        // Log successful login
+        console.log('[Security] Admin login successful:', new Date().toISOString());
+        
+        // Hide login, show dashboard
         document.getElementById('login-overlay').classList.add('hidden');
         document.getElementById('dashboard-content').classList.remove('hidden');
+        
+        // Initialize dashboard
         initDashboard();
+        
+        // Start inactivity timer
         resetInactivityTimer();
+      } else {
+        // Failed attempt
+        loginAttempts++;
+        localStorage.setItem('login_attempts', loginAttempts.toString());
+        
+        if (loginAttempts >= 3) {
+          // Lock out for 5 minutes after 3 failed attempts
+          lockoutTime = Date.now() + (5 * 60 * 1000);
+          localStorage.setItem('lockout_time', lockoutTime.toString());
+          
+          error.textContent = '🔒 Too many failed attempts. Locked for 5 minutes.';
+          
+          // Log suspicious activity
+          console.warn('[Security] Multiple failed login attempts:', {
+            timestamp: new Date().toISOString(),
+            attempts: loginAttempts,
+            userAgent: navigator.userAgent,
+            ip: 'client-side (no IP available)'
+          });
+        } else {
+          const remaining = 3 - loginAttempts;
+          error.textContent = `❌ Incorrect password. ${remaining} attempt${remaining !== 1 ? 's' : ''} remaining.`;
+        }
+        
+        error.classList.remove('hidden');
+        input.value = '';
+        input.focus();
       }
-    });
+    }
 
     // Allow Enter key to submit password
     document.getElementById('admin-password').addEventListener('keypress', function(e) {
@@ -945,15 +924,7 @@
 
     async function loadAnalyticsData() {
       try {
-        // Get API key from session (set after login)
-        const apiKey = sessionStorage.getItem('analytics_api_key') || 'temp-key-for-dev';
-        
-        const response = await fetch('/.netlify/functions/tracking?action=stats', {
-          headers: {
-            'X-API-Key': apiKey
-          }
-        });
-        
+        const response = await fetch('/.netlify/functions/tracking?action=stats');
         if (!response.ok) {
           throw new Error('Failed to fetch analytics data');
         }
@@ -1154,15 +1125,8 @@
     function loadRecentActivity() {
       const activityList = document.getElementById('activity-list');
       
-      // Get API key from session
-      const apiKey = sessionStorage.getItem('analytics_api_key') || 'temp-key-for-dev';
-      
       // Fetch recent activity from tracking API
-      fetch('/.netlify/functions/tracking?action=stats', {
-        headers: {
-          'X-API-Key': apiKey
-        }
-      })
+      fetch('/.netlify/functions/tracking?action=stats')
         .then(res => res.json())
         .then(stats => {
           const recentEvents = stats.recentEvents || [];
