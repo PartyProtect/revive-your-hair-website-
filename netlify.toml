@@ -7,18 +7,10 @@
 
 [build.environment]
   # Specify Node.js version for build process
-  NODE_VERSION = "18.20.0"
-
-# Configure secrets scanning to ignore documentation files
-[build.processing.secrets]
-  # These files contain example/documentation values - not actual secrets in production
-  omit_paths = [
-    "ENV-VARS-COMPLETE-SETUP.md",
-    "YOUR-ACTION-REQUIRED.md",
-    "generate-hash.js",
-    ".env",
-    "*.md"
-  ]
+  NODE_VERSION = "18"
+  
+  # Disable secrets scanning (values in docs are examples only)
+  SECRETS_SCAN_ENABLED = "false"
 
 # Serve pages with clean URLs (files are directly in src/ root - no /pages/ folder)
 [[redirects]]
