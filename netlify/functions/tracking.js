@@ -608,6 +608,13 @@ exports.handler = async (event, context) => {
           today: formatDailyStats(today, data.dailyStats[today]),
           last7Days: last7Days.map(date => formatDailyStats(date, data.dailyStats[date])),
           totalVisitors: Object.keys(data.visitors).length,
+          
+          // Function usage tracking for cost monitoring
+          functionUsage: {
+            redditProxy: data.functionUsage?.redditProxy || 0,
+            lastReset: data.functionUsage?.lastReset || new Date().toISOString()
+          },
+          
           recentPageViews: data.pageViews.slice(-100),
           recentEvents: data.events.slice(-50),
           recentSessions: data.sessions.slice(-100),
