@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+  
+  <!-- 
+    Sitemap for Revive Your Hair
+    Last Updated: October 18, 2025
+    
+    Priority Guide:
+    1.0 = Homepage
+    0.9-0.95 = Key landing pages, pillar content
+    0.7-0.8 = Important pages
+    0.5-0.6 = Secondary pages
+    0.3-0.4 = Low priority (legal, etc)
+  -->
+  
+  <!-- Homepage - Top Priority -->
+  <url>
+    <loc>https://www.reviveyourhair.eu/</loc>
+    <lastmod>2025-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Blog Index - High Priority (Content Hub) -->
+  <url>
+    <loc>https://www.reviveyourhair.eu/blog/</loc>
+    <lastmod>2025-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Blog Posts - Highest Priority (Pillar Content) -->
+  <url>
+    <loc>https://www.reviveyourhair.eu/blog/hair-loss-guide</loc>
+    <lastmod>2025-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  
+  <!-- About Page - Brand Trust -->
+  <url>
+    <loc>https://www.reviveyourhair.eu/about</loc>
+    <lastmod>2025-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Contact Page - Conversion Point -->
+  <url>
+    <loc>https://www.reviveyourhair.eu/contact</loc>
+    <lastmod>2025-10-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Quiz - Lead Generation Tool -->
+  <url>
+    <loc>https://www.reviveyourhair.eu/quiz</loc>
+    <lastmod>2025-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Store - E-commerce -->
+  <url>
+    <loc>https://www.reviveyourhair.eu/store</loc>
+    <lastmod>2025-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  
+  <!-- Legal Pages - Required but Low SEO Priority -->
+  <url>
+    <loc>https://www.reviveyourhair.eu/legal/privacy-policy</loc>
+    <lastmod>2025-10-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.reviveyourhair.eu/legal/cookie-policy</loc>
+    <lastmod>2025-10-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.reviveyourhair.eu/legal/terms-of-service</loc>
+    <lastmod>2025-10-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.reviveyourhair.eu/legal/disclaimer</loc>
+    <lastmod>2025-10-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.reviveyourhair.eu/legal/affiliate-disclosure</loc>
+    <lastmod>2025-10-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>
