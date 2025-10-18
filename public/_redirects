@@ -1,15 +1,16 @@
 # Clean URL Structure - paths relative to publish directory (src/)
+# Files moved from src/pages/* to src/* (no pages folder anymore)
 
-/blog              pages/blog/index.html        200
-/blog/             pages/blog/index.html        200
-/blog/*.html       pages/blog/:splat            200
-/blog/*            pages/blog/:splat.html       200
+/blog              blog/index.html        200
+/blog/             blog/index.html        200
+/blog/*.html       blog/:splat            200
+/blog/*            blog/:splat.html       200
 
-/legal/*.html      pages/legal/:splat           200
-/legal/*           pages/legal/:splat.html      200
+/legal/*.html      legal/:splat           200
+/legal/*           legal/:splat.html      200
 
 # Ensure homepage works
-/index.html        pages/index.html             200
+/index.html        index.html             200
 
 # 404 page
-/*                 pages/404.html               404
+/*                 404.html               404
