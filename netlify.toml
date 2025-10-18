@@ -8,100 +8,100 @@
 # Serve pages with clean URLs (files now in src root - no pages folder)
 [[redirects]]
   from = "/"
-  to = "index.html"
+  to = "/index.html"
   status = 200
 
 [[redirects]]
   from = "/about"
-  to = "about.html"
+  to = "/about.html"
   status = 200
 
 [[redirects]]
   from = "/contact"
-  to = "contact.html"
+  to = "/contact.html"
   status = 200
 
 [[redirects]]
   from = "/quiz"
-  to = "quiz.html"
+  to = "/quiz.html"
   status = 200
 
 [[redirects]]
   from = "/store"
-  to = "store.html"
+  to = "/store.html"
   status = 200
 
 [[redirects]]
   from = "/blog"
-  to = "blog/index.html"
+  to = "/blog/index.html"
   status = 200
   force = true
 
 [[redirects]]
   from = "/blog/:slug.html"
-  to = "blog/:slug.html"
+  to = "/blog/:slug.html"
   status = 200
   force = true
 
 [[redirects]]
   from = "/blog/:slug"
-  to = "blog/:slug.html"
+  to = "/blog/:slug.html"
   status = 200
   force = true
 
 [[redirects]]
   from = "/blog/:slug/"
-  to = "blog/:slug.html"
+  to = "/blog/:slug.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/legal/:slug.html"
-  to = "legal/:slug.html"
+  to = "/legal/:slug.html"
   status = 200
   force = true
 
 [[redirects]]
   from = "/legal/:slug"
-  to = "legal/:slug.html"
+  to = "/legal/:slug.html"
   status = 200
   force = true
 
 [[redirects]]
   from = "/legal/:slug/"
-  to = "legal/:slug.html"
+  to = "/legal/:slug.html"
   status = 301
   force = true
 
 # Admin dashboard (password protected)
 [[redirects]]
   from = "/admin"
-  to = "admin/dashboard.html"
+  to = "/admin/dashboard.html"
   status = 200
   force = true
 
 [[redirects]]
   from = "/admin/*"
-  to = "admin/:splat"
+  to = "/admin/:splat"
   status = 200
   force = true
 
 # Sitemap - must be before catch-all 404
 [[redirects]]
   from = "/sitemap.xml"
-  to = "sitemap.xml"
+  to = "/sitemap.xml"
   status = 200
 
 # Robots.txt - must be before catch-all 404
 [[redirects]]
   from = "/robots.txt"
-  to = "robots.txt"
+  to = "/robots.txt"
   status = 200
 
 # Handle 404 errors - this must be last
 [[redirects]]
   from = "/*"
-  to = "404.html"
+  to = "/404.html"
   status = 404
 
 [[headers]]
