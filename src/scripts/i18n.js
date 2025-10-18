@@ -71,11 +71,11 @@ const i18n = {
     let newPath = window.location.pathname;
     
     if (currentLang === 'en' && targetLang === 'nl') {
-      // English to Dutch: add /nl/ before /pages/
-      newPath = newPath.replace('/src/pages/', '/src/pages/nl/');
+      // English to Dutch: add /nl/ to path
+      newPath = newPath.replace('/src/', '/src/nl/');
     } else if (currentLang === 'nl' && targetLang === 'en') {
       // Dutch to English: remove /nl/
-      newPath = newPath.replace('/pages/nl/', '/pages/');
+      newPath = newPath.replace('/nl/', '/');
     }
 
     // Navigate to new URL
@@ -89,10 +89,10 @@ const i18n = {
 
     if (lang === 'en') {
       // Remove /nl/ from path
-      return path.replace('/pages/nl/', '/pages/');
+      return path.replace('/nl/', '/');
     } else if (lang === 'nl') {
       // Add /nl/ to path
-      return path.replace('/pages/', '/pages/nl/');
+      return path.replace('/', '/nl/');
     }
 
     return path;

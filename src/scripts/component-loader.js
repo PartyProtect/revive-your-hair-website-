@@ -37,7 +37,7 @@ class ComponentLoader {
       return 'store';
     } else if (path.includes('resources')) {
       return 'resources';
-    } else if (path.includes('index.html') || path.endsWith('/') || path.endsWith('/pages')) {
+    } else if (path.includes('index.html') || path.endsWith('/')) {
       return 'home';
     }
     
