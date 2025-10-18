@@ -1,20 +1,18 @@
 # Robots.txt for Revive Your Hair
-# Updated: October 15, 2025
-
-# Allow all major search engines
-User-agent: *
-Allow: /
+# Updated: October 18, 2025
 
 # Sitemap location (critical for SEO)
 Sitemap: https://www.reviveyourhair.eu/sitemap.xml
 
-# Block legal pages from search results (no SEO value, but keep accessible)
+# Default rules for all search engines
 User-agent: *
-Disallow: /legal/
+Allow: /
 
 # Block admin dashboard from search engines (PRIVATE)
-User-agent: *
 Disallow: /admin/
+
+# Block legal pages from search results (no SEO value, but keep accessible)
+Disallow: /legal/
 
 # Block any future admin/private areas
 # Disallow: /wp-admin/
