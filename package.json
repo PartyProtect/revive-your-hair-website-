@@ -18,6 +18,7 @@
   "author": "Revive Your Hair",
   "license": "MIT",
   "dependencies": {
+    "@netlify/blobs": "^10.1.0",
     "axios": "^1.6.0"
   }
 }

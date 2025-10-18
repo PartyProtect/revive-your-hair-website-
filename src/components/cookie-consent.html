@@ -2,8 +2,20 @@
 <div id="cookie-consent-banner" class="cookie-banner" style="display: none;">
   <div class="cookie-banner-content">
     <div class="cookie-banner-text">
-      <p><strong>🍪 We use cookies</strong></p>
-      <p>We use cookies to improve your experience, analyze site traffic, and personalize content. By clicking "Accept All", you consent to our use of cookies. See our <a href="/legal/cookie-policy" style="color: #FF4500; text-decoration: underline;">Cookie Policy</a> and <a href="/legal/privacy-policy" style="color: #FF4500; text-decoration: underline;">Privacy Policy</a> for more information.</p>
+      <p><strong>🍪 We use cookies and analytics</strong></p>
+      <p>We collect the following data to improve your experience:</p>
+      <ul style="font-size: 0.85em; margin: 8px 0 8px 20px; line-height: 1.5;">
+        <li>Page views and session duration</li>
+        <li>Device type, screen resolution, browser language, timezone</li>
+        <li>Scroll depth and click interactions on CTAs</li>
+        <li>Referral sources and UTM campaign data</li>
+        <li>Form submissions (anonymized)</li>
+      </ul>
+      <p style="font-size: 0.85em; margin-top: 8px;">
+        Your IP address is anonymized via one-way hashing. Data is retained for 90 days maximum and never sold to third parties. 
+        See our <a href="/legal/cookie-policy" style="color: #FF4500; text-decoration: underline;">Cookie Policy</a> and 
+        <a href="/legal/privacy-policy" style="color: #FF4500; text-decoration: underline;">Privacy Policy</a> for details.
+      </p>
     </div>
     <div class="cookie-banner-buttons">
       <button id="cookie-accept-all" class="cookie-btn cookie-btn-primary">Accept All</button>
@@ -24,6 +36,8 @@
     box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.1);
     z-index: 10000;
     animation: slideUp 0.4s ease-out;
+    max-height: 90vh;
+    overflow-y: auto;
   }
 
   @keyframes slideUp {
@@ -54,7 +68,7 @@
     padding: 24px;
     display: flex;
     gap: 24px;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
   }
 
@@ -74,10 +88,17 @@
     margin-bottom: 8px;
   }
 
+  .cookie-banner-text ul {
+    color: #4b5563;
+  }
+
   .cookie-banner-buttons {
     display: flex;
     gap: 12px;
     flex-shrink: 0;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 200px;
   }
 
   .cookie-btn {
@@ -120,7 +141,6 @@
 
     .cookie-banner-buttons {
       width: 100%;
-      flex-direction: column;
     }
 
     .cookie-btn {
@@ -134,26 +154,22 @@
 </style>
 
 <script>
-  // Cookie Consent Logic
   (function() {
     const COOKIE_CONSENT_KEY = 'cookie-consent';
     const banner = document.getElementById('cookie-consent-banner');
     const acceptBtn = document.getElementById('cookie-accept-all');
     const rejectBtn = document.getElementById('cookie-reject');
 
-    // Check if user has already made a choice
     function hasConsent() {
       return localStorage.getItem(COOKIE_CONSENT_KEY) !== null;
     }
 
-    // Show banner if no consent yet
     function showBanner() {
       if (!hasConsent()) {
         banner.style.display = 'block';
       }
     }
 
-    // Hide banner
     function hideBanner() {
       banner.style.animation = 'slideDown 0.3s ease-in';
       setTimeout(() => {
@@ -161,32 +177,44 @@
       }, 300);
     }
 
-    // Save consent choice
     function saveConsent(accepted) {
       const consentData = {
         acceptedAll: accepted,
         rejectedNonEssential: !accepted,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        dataTypes: accepted ? [
+          'pageViews',
+          'sessionDuration',
+          'deviceType',
+          'screenResolution',
+          'language',
+          'timezone',
+          'scrollDepth',
+          'clickTracking',
+          'referralSource',
+          'utmParameters',
+          'formSubmissions'
+        ] : []
       };
       
       localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(consentData));
       hideBanner();
       
-      // Initialize analytics if user accepted (integrates with analytics.js)
       if (accepted && window.Analytics && window.Analytics.setAnalyticsConsent) {
         window.Analytics.setAnalyticsConsent(true);
         console.log('[Cookie Consent] Analytics enabled');
       } else if (!accepted) {
         console.log('[Cookie Consent] Analytics disabled by user');
       }
+      
+      // Trigger custom event for tracking systems
+      window.dispatchEvent(new CustomEvent('consentUpdated', { detail: consentData }));
     }
 
-    // Event listeners
     if (acceptBtn && rejectBtn) {
       acceptBtn.addEventListener('click', () => saveConsent(true));
       rejectBtn.addEventListener('click', () => saveConsent(false));
 
-      // Show banner on page load if needed
       setTimeout(showBanner, 500);
     }
   })();

@@ -1,12 +1,8 @@
 // Custom Analytics Tracking API - SECURED VERSION
 // Stores visitor data with authentication for stats retrieval
 
-const fs = require('fs').promises;
-const path = require('path');
+const { getStore } = require('@netlify/blobs');
 const crypto = require('crypto');
-
-// Path to store tracking data
-const DATA_FILE = path.join('/tmp', 'tracking-data.json');
 
 // API key for stats access (set in Netlify environment variables)
 const STATS_API_KEY = process.env.ANALYTICS_API_KEY || 'change-me-in-production';
@@ -231,34 +227,37 @@ function formatDailyStats(dateKey, day = {}) {
 // Initialize data structure
 async function initData() {
   try {
-    await fs.access(DATA_FILE);
-    const content = await fs.readFile(DATA_FILE, 'utf-8');
-    const parsed = JSON.parse(content);
+    const store = getStore('analytics');
+    const data = await store.get('tracking-data', { type: 'json' });
+    
+    if (data) {
+      data.pageViews = ensureArray(data.pageViews);
+      data.sessions = ensureArray(data.sessions);
+      data.events = ensureArray(data.events);
+      data.crawlerLogs = ensureArray(data.crawlerLogs);
+      data.botHits = ensureArray(data.botHits);
+      data.visitors = data.visitors || {};
+      data.dailyStats = data.dailyStats || {};
 
-    parsed.pageViews = ensureArray(parsed.pageViews);
-    parsed.sessions = ensureArray(parsed.sessions);
-    parsed.events = ensureArray(parsed.events);
-    parsed.crawlerLogs = ensureArray(parsed.crawlerLogs);
-    parsed.botHits = ensureArray(parsed.botHits);
-    parsed.visitors = parsed.visitors || {};
-    parsed.dailyStats = parsed.dailyStats || {};
+      Object.keys(data.dailyStats).forEach(dateKey => {
+        ensureDailyStats(data, dateKey);
+      });
 
-    Object.keys(parsed.dailyStats).forEach(dateKey => {
-      ensureDailyStats(parsed, dateKey);
-    });
-
-    return parsed;
-  } catch {
-    return {
-      pageViews: [],
-      sessions: [],
-      events: [],
-      crawlerLogs: [],
-      botHits: [],
-      visitors: {},
-      dailyStats: {}
-    };
+      return data;
+    }
+  } catch (error) {
+    console.log('[Analytics] Initializing new data store');
   }
+  
+  return {
+    pageViews: [],
+    sessions: [],
+    events: [],
+    crawlerLogs: [],
+    botHits: [],
+    visitors: {},
+    dailyStats: {}
+  };
 }
 
 // Save data
@@ -296,7 +295,9 @@ async function saveData(data) {
     };
   });
 
-  await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2));
+  const store = getStore('analytics');
+  await store.set('tracking-data', JSON.stringify(data));
+  console.log('[Analytics] Data saved to Netlify Blobs');
 }
 
 // Hash IP for privacy (GDPR-compliant)

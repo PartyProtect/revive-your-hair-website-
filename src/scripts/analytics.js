@@ -22,30 +22,46 @@ const ENABLE_DEBUG = false; // Set to true for development debugging
 // BOT DETECTION
 // ============================================================================
 
+// BOT DETECTION STRATEGY:
+// - Google Analytics: Block ALL bots (friendly + malicious)
+// - Custom Analytics: Track friendly crawlers separately, block malicious
+// - Result: Clean GA metrics + SEO visibility data in custom analytics
+
 /**
  * Detect if the current visitor is a bot/crawler
- * Filters out automated traffic from analytics
+ * Filters out ALL automated traffic from analytics (aligned with backend)
  */
 function isBotTraffic() {
   const userAgent = navigator.userAgent.toLowerCase();
   
-  // Common bot patterns
-  const botPatterns = [
+  // Friendly crawlers (Google, Bing, etc.) - STILL BLOCKED from GA
+  const friendlyCrawlers = [
+    /googlebot/i, /bingbot/i, /duckduckbot/i, /baiduspider/i, /yandexbot/i,
+    /sogou/i, /slurp/i, /facebookexternalhit/i, /linkedinbot/i, 
+    /twitterbot/i, /slackbot/i, /discordbot/i
+  ];
+  
+  // Malicious bots and scrapers
+  const maliciousBots = [
     /bot/i, /crawl/i, /spider/i, /slurp/i, /mediapartners/i,
     /headless/i, /phantom/i, /selenium/i, /webdriver/i,
     /ahref/i, /semrush/i, /mj12/i, /dotbot/i, /bingpreview/i,
-    /screaming\s?frog/i, /lighthouse/i, /gtmetrix/i
+    /screaming\s?frog/i, /lighthouse/i, /gtmetrix/i,
+    /python-requests/i, /python-urllib/i, /scrapy/i, /httpclient/i,
+    /okhttp/i, /curl\//i, /wget/i, /libwww/i
   ];
   
-  // Check user agent against bot patterns
-  const isBot = botPatterns.some(pattern => pattern.test(userAgent));
+  // Check against all bot patterns
+  const isFriendlyCrawler = friendlyCrawlers.some(pattern => pattern.test(userAgent));
+  const isMaliciousBot = maliciousBots.some(pattern => pattern.test(userAgent));
   
   // Additional checks for headless browsers
   const hasWebDriver = navigator.webdriver === true;
   const hasPhantom = window.callPhantom || window._phantom;
   const hasNightmare = window.__nightmare;
   
-  return isBot || hasWebDriver || hasPhantom || hasNightmare;
+  // Block ALL bots from Google Analytics (but backend tracks friendly crawlers separately)
+  return isFriendlyCrawler || isMaliciousBot || hasWebDriver || hasPhantom || hasNightmare;
 }
 
 // ============================================================================
