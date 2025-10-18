@@ -4,6 +4,26 @@
   
   # Publish the entire src directory
   publish = "src"
+  
+  # Environment variables (set in Netlify dashboard)
+  environment = [
+    "PASSWORD_SALT",
+    "SESSION_SECRET",
+    "ADMIN_PASSWORD_HASH",
+    "ANALYTICS_API_KEY",
+    "IP_HASH_SALT"
+  ]
+
+# Configure secrets scanning to ignore documentation files
+[build.processing.secrets]
+  # These files contain example/documentation values - not actual secrets in production
+  omit_paths = [
+    "ENV-VARS-COMPLETE-SETUP.md",
+    "YOUR-ACTION-REQUIRED.md",
+    "generate-hash.js",
+    ".env",
+    "*.md"
+  ]
 
 # Serve pages with clean URLs (files are directly in src/ root - no /pages/ folder)
 [[redirects]]
