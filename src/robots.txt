@@ -11,8 +11,8 @@ Allow: /
 # Block admin dashboard from search engines (PRIVATE)
 Disallow: /admin/
 
-# Block legal pages from search results (no SEO value, but keep accessible)
-Disallow: /legal/
+# Legal pages now indexed (included in sitemap.xml with low priority)
+# Privacy policy, terms, etc. are available to search engines
 
 # Block any future admin/private areas
 # Disallow: /wp-admin/
