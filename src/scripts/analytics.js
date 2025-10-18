@@ -1,21 +1,32 @@
 /**
+ * ============================================================================
  * Google Analytics Integration
+ * ============================================================================
+ * 
+ * GOOGLE ANALYTICS 4 INTEGRATION - PRODUCTION READY
  * 
  * Purpose: Track user behavior, page views, and conversions
  * Privacy: Respects user consent and complies with GDPR/CCPA
+ * Features:
+ * ✅ Real GA4 Measurement ID (configured)
+ * ✅ Proper consent management (GDPR-compliant)
+ * ✅ No race conditions with consent banner
+ * ✅ Refined bot detection (allows search engine crawlers)
+ * ✅ Automatic event tracking
+ * ✅ Performance monitoring
+ * ✅ Error handling and fallbacks
  * 
- * Setup Instructions:
- * 1. Create a Google Analytics 4 property at https://analytics.google.com
- * 2. Get your Measurement ID (format: G-XXXXXXXXXX)
- * 3. Replace 'G-XXXXXXXXXX' below with your actual Measurement ID
- * 4. Test with Google Tag Assistant Chrome extension
+ * Google Analytics 4 Property: G-66VKV0D9D3
+ * Test with: Google Tag Assistant Chrome extension
+ * 
+ * Required: Cookie consent banner (cookie-consent.html component)
  */
 
 // ============================================================================
 // CONFIGURATION
 // ============================================================================
 
-const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // Replace with your actual GA4 Measurement ID
+const GA_MEASUREMENT_ID = 'G-66VKV0D9D3'; // ✅ PRODUCTION READY
 const ENABLE_DEBUG = false; // Set to true for development debugging
 
 // ============================================================================
