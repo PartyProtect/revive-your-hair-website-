@@ -224,8 +224,8 @@ function escapeHtml(text) {
 function injectSEOContent() {
   const redditHTML = generateRedditFeedHTML();
   
-  // Update hair-loss-guide.html
-  const htmlPath = path.join(__dirname, 'src', 'pages', 'blog', 'hair-loss-guide.html');
+  // Update hair-loss-guide.html (files now directly in src/blog/)
+  const htmlPath = path.join(__dirname, 'src', 'blog', 'hair-loss-guide.html');
   let html = fs.readFileSync(htmlPath, 'utf8');
   
   // Replace the empty div with pre-rendered content
