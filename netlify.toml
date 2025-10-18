@@ -4,15 +4,10 @@
   
   # Publish the entire src directory
   publish = "src"
-  
-  # Environment variables (set in Netlify dashboard)
-  environment = [
-    "PASSWORD_SALT",
-    "SESSION_SECRET",
-    "ADMIN_PASSWORD_HASH",
-    "ANALYTICS_API_KEY",
-    "IP_HASH_SALT"
-  ]
+
+[build.environment]
+  # Specify Node.js version for build process
+  NODE_VERSION = "18.20.0"
 
 # Configure secrets scanning to ignore documentation files
 [build.processing.secrets]
