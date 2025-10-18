@@ -196,50 +196,60 @@ class RedditFeed {
     
     return `
       <article class="reddit-post" itemscope itemtype="https://schema.org/SocialMediaPosting">
+        <!-- Structured data for Google Search Console -->
+        <meta itemprop="headline" content="${this.escapeHtml(post.title)}">
+        <meta itemprop="datePublished" content="${datePublished}">
+        <link itemprop="url" href="https://reddit.com${post.permalink}">
+        ${thumbnail ? `<link itemprop="image" href="${thumbnail}">` : ''}
+        
+        <!-- Author as Person object (required by GSC) -->
+        <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+          <meta itemprop="name" content="u/${this.escapeHtml(author)}">
+          <link itemprop="url" href="https://reddit.com/user/${this.escapeHtml(author)}">
+        </span>
+        
+        <!-- Interaction statistics -->
+        <span itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter">
+          <meta itemprop="interactionType" content="https://schema.org/LikeAction">
+          <meta itemprop="userInteractionCount" content="${post.score}">
+        </span>
+        <span itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter">
+          <meta itemprop="interactionType" content="https://schema.org/CommentAction">
+          <meta itemprop="userInteractionCount" content="${post.num_comments}">
+        </span>
+        
         <a href="https://reddit.com${post.permalink}" 
            target="_blank" 
            rel="noopener noreferrer"
-           class="reddit-post-link"
-           itemprop="url">
+           class="reddit-post-link">
           ${thumbnail ? `
             <div class="reddit-post-thumbnail">
-              <img src="${thumbnail}" alt="${this.escapeHtml(post.title)}" loading="lazy" itemprop="image">
+              <img src="${thumbnail}" alt="${this.escapeHtml(post.title)}" loading="lazy">
             </div>
           ` : ''}
           <div class="reddit-post-content">
-            <h5 class="reddit-post-title" itemprop="headline">${this.escapeHtml(post.title)}</h5>
-            
-            <!-- Author as nested Person schema (required by Google Search Console) -->
-            <span itemprop="author" itemscope itemtype="https://schema.org/Person" style="display:none;">
-              <meta itemprop="name" content="u/${this.escapeHtml(author)}">
-              <link itemprop="url" href="https://reddit.com/user/${this.escapeHtml(author)}">
-            </span>
-            
+            <h5 class="reddit-post-title">${this.escapeHtml(post.title)}</h5>
             <div class="reddit-post-meta">
-              <span class="reddit-meta-item" itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter">
-                <meta itemprop="interactionType" content="https://schema.org/LikeAction">
-                <meta itemprop="userInteractionCount" content="${post.score}">
-                <svg viewBox="0 0 20 20" fill="currentColor">
+              <span class="reddit-meta-item">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
                 </svg>
                 ${score}
               </span>
-              <span class="reddit-meta-item" itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter">
-                <meta itemprop="interactionType" content="https://schema.org/CommentAction">
-                <meta itemprop="userInteractionCount" content="${post.num_comments}">
-                <svg viewBox="0 0 20 20" fill="currentColor">
+              <span class="reddit-meta-item">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd" />
                 </svg>
                 ${comments}
               </span>
               <span class="reddit-meta-item">
-                <svg viewBox="0 0 20 20" fill="currentColor">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
                 </svg>
-                <time itemprop="datePublished" datetime="${datePublished}">${timeAgo}</time>
+                <time datetime="${datePublished}">${timeAgo}</time>
               </span>
               <span class="reddit-meta-item">
-                <svg viewBox="0 0 20 20" fill="currentColor">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
                 </svg>
                 u/${this.escapeHtml(author)}
