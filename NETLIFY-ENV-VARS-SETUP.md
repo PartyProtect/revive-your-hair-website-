@@ -33,27 +33,55 @@ You need to add these environment variables in the Netlify dashboard to complete
 **Purpose:** Protects analytics data from unauthorized access
 
 - **Key:** `ANALYTICS_API_KEY`
-- **Value:** Generate a strong random key (see options below)
+- **Value:** Generate a strong random key (64 hex characters)
 
-**Option 1 - Auto-generate (Recommended):**
-Run this in PowerShell to generate a secure random key:
-```powershell
--join ((48..57) + (65..90) + (97..122) | Get-Random -Count 32 | ForEach-Object {[char]$_})
+**Generate:**
+```bash
+# Node.js (recommended)
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+
+# PowerShell
+-join ((1..64) | ForEach-Object {'{0:x}' -f (Get-Random -Max 16)})
 ```
 
-**Option 2 - Manual:**
-Create a random 32-character string using letters and numbers, like:
-```
-A9k2Lm5Nx7Pq3Rs8Tv6Wx4Yz1Bc0De2Fh
-```
+**Example output:** `a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456`
 
 **Scopes:** All (production, deploy previews, branch deploys)
 
 **Notes:**
-- Without this key, the analytics endpoint returns 401 Unauthorized
+- Without this key, the analytics stats endpoint returns 401 Unauthorized
 - The dashboard automatically receives this key after successful login
 - Public tracking (visitor pageviews, etc.) still works without authentication
 - Only the **stats retrieval** endpoint requires the API key
+- Must be at least 32 characters (64 hex = 32 bytes)
+
+---
+
+### 3. IP_HASH_SALT (NEW - CRITICAL FOR GDPR)
+**Purpose:** Salt for hashing visitor IP addresses (GDPR privacy compliance)
+
+- **Key:** `IP_HASH_SALT`
+- **Value:** Generate a strong random salt (64 hex characters)
+
+**Generate:**
+```bash
+# Node.js (recommended)
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+
+# PowerShell
+-join ((1..64) | ForEach-Object {'{0:x}' -f (Get-Random -Max 16)})
+```
+
+**Example output:** `9f8e7d6c5b4a3210fedcba0987654321abcdef1234567890fedcba0987654321`
+
+**Scopes:** All (production, deploy previews, branch deploys)
+
+**⚠️ CRITICAL NOTES:**
+- **DO NOT change this after setting it** - changing it will break visitor tracking continuity
+- This replaces the hardcoded salt `'salt-key-2025'` that was exposed in source code
+- Without this, tracking.js will refuse to start (environment validation fails)
+- Must be at least 32 characters (64 hex = 32 bytes)
+- GDPR requirement: IPs must be anonymized, not stored in plaintext
 
 ---
 
