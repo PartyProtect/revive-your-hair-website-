@@ -50,7 +50,14 @@ function getCategoryEmoji(category) {
 // Fetch metadata from a blog post HTML file
 async function fetchPostMetadata(slug) {
   try {
-    const response = await fetch(`${slug}.html`);
+    // Use absolute path from site root
+    const response = await fetch(`/blog/${slug}.html`);
+    
+    if (!response.ok) {
+      console.error(`Failed to fetch ${slug}: ${response.status} ${response.statusText}`);
+      return null;
+    }
+    
     const html = await response.text();
     
     // Parse HTML to extract meta tags and content
