@@ -43,56 +43,49 @@
   from = "/blog"
   to = "/blog/index.html"
   status = 200
-  force = true
 
-[[redirects]]
-  from = "/blog/:slug.html"
-  to = "/blog/:slug.html"
-  status = 200
-  force = true
+# Remove unnecessary circular redirects - files already exist
+# [[redirects]]
+#   from = "/blog/:slug.html"
+#   to = "/blog/:slug.html"
+#   status = 200
 
 [[redirects]]
   from = "/blog/:slug"
   to = "/blog/:slug.html"
   status = 200
-  force = true
 
 [[redirects]]
   from = "/blog/:slug/"
   to = "/blog/:slug.html"
   status = 301
-  force = true
 
-[[redirects]]
-  from = "/legal/:slug.html"
-  to = "/legal/:slug.html"
-  status = 200
-  force = true
+# Remove unnecessary circular redirects - files already exist
+# [[redirects]]
+#   from = "/legal/:slug.html"
+#   to = "/legal/:slug.html"
+#   status = 200
 
 [[redirects]]
   from = "/legal/:slug"
   to = "/legal/:slug.html"
   status = 200
-  force = true
 
 [[redirects]]
   from = "/legal/:slug/"
   to = "/legal/:slug.html"
   status = 301
-  force = true
 
 # Admin dashboard (password protected)
 [[redirects]]
   from = "/admin"
   to = "/admin/dashboard.html"
   status = 200
-  force = true
 
 [[redirects]]
   from = "/admin/*"
   to = "/admin/:splat"
   status = 200
-  force = true
 
 # Handle 404 errors - this must be last
 [[redirects]]
