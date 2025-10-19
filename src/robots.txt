@@ -5,7 +5,7 @@
 # ============================================
 # SITEMAP LOCATION (Must be absolute URL)
 # ============================================
-Sitemap: https://www.reviveyourhair.eu/sitemap.xml
+Sitemap: https://reviveyourhair.eu/sitemap.xml
 
 # ============================================
 # DEFAULT RULES FOR ALL SEARCH ENGINES
