@@ -1,37 +1,42 @@
-# Robots.txt for Revive Your Hair
-# Updated: October 18, 2025
+# robots.txt for www.reviveyourhair.eu
+# Optimized for Google Search Console compliance
+# Last Updated: October 19, 2025
 
-# Sitemap location (critical for SEO)
+# ============================================
+# SITEMAP LOCATION (Must be absolute URL)
+# ============================================
 Sitemap: https://www.reviveyourhair.eu/sitemap.xml
 
-# Default rules for all search engines
+# ============================================
+# DEFAULT RULES FOR ALL SEARCH ENGINES
+# ============================================
 User-agent: *
 Allow: /
-
-# Block admin dashboard from search engines (PRIVATE)
 Disallow: /admin/
 
-# Legal pages now indexed (included in sitemap.xml with low priority)
-# Privacy policy, terms, etc. are available to search engines
-
-# Block any future admin/private areas
-# Disallow: /wp-admin/
-
-# Block duplicate content if any
-# Disallow: /*?*  (blocks URL parameters)
-
-# Specific bot instructions
-# Google
+# ============================================
+# GOOGLE-SPECIFIC RULES
+# ============================================
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 0
+Disallow: /admin/
 
-# Bing
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+# ============================================
+# OTHER MAJOR SEARCH ENGINES
+# ============================================
 User-agent: Bingbot
 Allow: /
-Crawl-delay: 0
+Disallow: /admin/
 
-# Block bad bots (prevent scraping)
+# ============================================
+# BLOCK AGGRESSIVE CRAWLERS (SEO Tools)
+# ============================================
 User-agent: AhrefsBot
 Disallow: /
 
@@ -42,4 +47,7 @@ User-agent: MJ12bot
 Disallow: /
 
 User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
 Disallow: /
