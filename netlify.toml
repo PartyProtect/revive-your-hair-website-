@@ -76,6 +76,52 @@
   to = "/legal/:slug.html"
   status = 301
 
+# Dutch (nl) language pages
+[[redirects]]
+  from = "/nl/about"
+  to = "/nl/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/nl/contact"
+  to = "/nl/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/nl/quiz"
+  to = "/nl/quiz.html"
+  status = 200
+
+[[redirects]]
+  from = "/nl/store"
+  to = "/nl/store.html"
+  status = 200
+
+[[redirects]]
+  from = "/nl/blog"
+  to = "/nl/blog/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/nl/blog/:slug"
+  to = "/nl/blog/:slug.html"
+  status = 200
+
+[[redirects]]
+  from = "/nl/blog/:slug/"
+  to = "/nl/blog/:slug.html"
+  status = 301
+
+[[redirects]]
+  from = "/nl/legal/:slug"
+  to = "/nl/legal/:slug.html"
+  status = 200
+
+[[redirects]]
+  from = "/nl/legal/:slug/"
+  to = "/nl/legal/:slug.html"
+  status = 301
+
 # Handle 404 errors - this must be last
 [[redirects]]
   from = "/*"
