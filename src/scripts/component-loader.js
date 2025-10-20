@@ -101,13 +101,13 @@ class ComponentLoader {
    * Load all components that exist on the page
    */
   async loadAllComponents() {
-    const components = [
+    // Load header and footer first
+    const mainComponents = [
       { name: 'header', target: 'header-root' },
-      { name: 'footer', target: 'footer-root' },
-      { name: 'lang/language-switcher', target: 'language-switcher-root' }
+      { name: 'footer', target: 'footer-root' }
     ];
 
-    const loadPromises = components.map(component => {
+    const mainLoadPromises = mainComponents.map(component => {
       // Only load if target exists
       if (document.getElementById(component.target)) {
         return this.loadComponent(component.name, component.target);
@@ -116,7 +116,23 @@ class ComponentLoader {
     });
 
     try {
-      await Promise.all(loadPromises);
+      // Wait for header and footer to load first
+      await Promise.all(mainLoadPromises);
+      
+      // Now load nested components (like language switcher inside header)
+      const nestedComponents = [
+        { name: 'lang/language-switcher', target: 'language-switcher-root' }
+      ];
+      
+      const nestedLoadPromises = nestedComponents.map(component => {
+        // Only load if target exists (now that header is loaded)
+        if (document.getElementById(component.target)) {
+          return this.loadComponent(component.name, component.target);
+        }
+        return Promise.resolve(false);
+      });
+      
+      await Promise.all(nestedLoadPromises);
       
       // Dispatch custom event when all components are loaded
       window.dispatchEvent(new CustomEvent('componentsLoaded'));
