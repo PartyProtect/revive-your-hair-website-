@@ -76,23 +76,17 @@
   to = "/legal/:slug.html"
   status = 301
 
-# Dutch (nl) language pages - Clean URLs (no .html extension)
-[[redirects]]
-  from = "/nl/over-ons.html"
-  to = "/nl/over-ons"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/nl/over-ons"
-  to = "/nl/over-ons.html"
-  status = 200
-
+# Dutch (nl) language pages
 # Redirect old /nl/about to new Dutch URL
 [[redirects]]
   from = "/nl/about"
   to = "/nl/over-ons"
   status = 301
+
+[[redirects]]
+  from = "/nl/over-ons"
+  to = "/nl/over-ons.html"
+  status = 200
 
 [[redirects]]
   from = "/nl/contact.html"
