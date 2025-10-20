@@ -52,6 +52,18 @@ const i18n = {
     localStorage.setItem('preferredLanguage', lang);
   },
 
+  // URL mappings for pages with different names in different languages
+  urlMappings: {
+    'en-to-nl': {
+      '/about': '/nl/over-ons',
+      '/': '/nl/'
+    },
+    'nl-to-en': {
+      '/nl/over-ons': '/about',
+      '/nl/': '/'
+    }
+  },
+
   // Switch to a different language
   switchLanguage(targetLang) {
     if (!this.languages[targetLang]) {
@@ -70,12 +82,25 @@ const i18n = {
     // Build new URL
     let newPath = window.location.pathname;
     
+    // Check for specific URL mappings first
     if (currentLang === 'en' && targetLang === 'nl') {
-      // English to Dutch: add /nl/ to path
-      newPath = newPath.replace('/src/', '/src/nl/');
+      // Check if there's a specific mapping
+      const mapping = this.urlMappings['en-to-nl'][newPath];
+      if (mapping) {
+        newPath = mapping;
+      } else {
+        // Default: add /nl/ to path
+        newPath = '/nl' + newPath;
+      }
     } else if (currentLang === 'nl' && targetLang === 'en') {
-      // Dutch to English: remove /nl/
-      newPath = newPath.replace('/nl/', '/');
+      // Check if there's a specific mapping
+      const mapping = this.urlMappings['nl-to-en'][newPath];
+      if (mapping) {
+        newPath = mapping;
+      } else {
+        // Default: remove /nl/ from path
+        newPath = newPath.replace('/nl/', '/').replace('/nl', '/');
+      }
     }
 
     // Navigate to new URL
