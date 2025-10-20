@@ -1,32 +1,27 @@
 // Simple i18n (internationalization) configuration
 // This file manages language detection and switching
+// NOTE: Currently being restructured for multi-language template system
 
 const i18n = {
   // Default language
   defaultLang: 'en',
   
-  // Supported languages
+  // Supported languages (will be expanded with template system)
   languages: {
     en: {
       code: 'en',
       name: 'English',
       flag: '🇬🇧',
       dir: '' // Root directory for English
-    },
-    nl: {
-      code: 'nl',
-      name: 'Nederlands',
-      flag: '🇳🇱',
-      dir: 'nl/' // Dutch pages directory
     }
+    // Additional languages will be added via template system
   },
 
   // Get current language from URL
   getCurrentLang() {
     const path = window.location.pathname;
-    if (path.includes('/nl/')) {
-      return 'nl';
-    }
+    // Future: Detect language from URL path (e.g., /nl/, /de/, /fr/)
+    // For now, default to English
     return 'en';
   },
 
@@ -52,19 +47,8 @@ const i18n = {
     localStorage.setItem('preferredLanguage', lang);
   },
 
-  // URL mappings for pages with different names in different languages
-  urlMappings: {
-    'en-to-nl': {
-      '/about': '/nl/over-ons',
-      '/': '/nl/'
-    },
-    'nl-to-en': {
-      '/nl/over-ons': '/about',
-      '/nl/': '/'
-    }
-  },
-
   // Switch to a different language
+  // TODO: Implement once template system is in place
   switchLanguage(targetLang) {
     if (!this.languages[targetLang]) {
       console.error('Language not supported:', targetLang);
@@ -78,33 +62,9 @@ const i18n = {
 
     // Save preference
     this.setPreferredLang(targetLang);
-
-    // Build new URL
-    let newPath = window.location.pathname;
     
-    // Check for specific URL mappings first
-    if (currentLang === 'en' && targetLang === 'nl') {
-      // Check if there's a specific mapping
-      const mapping = this.urlMappings['en-to-nl'][newPath];
-      if (mapping) {
-        newPath = mapping;
-      } else {
-        // Default: add /nl/ to path
-        newPath = '/nl' + newPath;
-      }
-    } else if (currentLang === 'nl' && targetLang === 'en') {
-      // Check if there's a specific mapping
-      const mapping = this.urlMappings['nl-to-en'][newPath];
-      if (mapping) {
-        newPath = mapping;
-      } else {
-        // Default: remove /nl/ from path
-        newPath = newPath.replace('/nl/', '/').replace('/nl', '/');
-      }
-    }
-
-    // Navigate to new URL
-    window.location.href = newPath;
+    // TODO: Implement URL switching logic when template system is ready
+    console.log('Language switching will be implemented with template system');
   },
 
   // Get alternate language URL for SEO
