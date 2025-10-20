@@ -76,8 +76,12 @@
   to = "/legal/:slug.html"
   status = 301
 
+<<<<<<< HEAD
+# Dutch (nl) language pages
+=======
 # Dutch (nl) language pages
 # Redirect old /nl/about to new Dutch URL
+>>>>>>> 90d636fe82600da8074b493ff36bf9ff1da42445
 [[redirects]]
   from = "/nl/about"
   to = "/nl/over-ons"
