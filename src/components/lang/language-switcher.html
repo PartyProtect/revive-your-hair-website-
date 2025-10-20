@@ -13,10 +13,10 @@
       <span class="flag">🇬🇧</span>
       <span class="lang-name">English</span>
     </button>
-    <button class="lang-option" data-lang="nl">
-      <span class="flag">🇳🇱</span>
-      <span class="lang-name">Nederlands</span>
-    </button>
+    <!-- Other languages coming soon with template system -->
+    <div class="lang-coming-soon">
+      <span class="lang-name">More languages coming soon...</span>
+    </div>
   </div>
 </div>
 
@@ -117,6 +117,15 @@
   .lang-option.active {
     background: var(--forest-green);
     color: white;
+  }
+
+  .lang-coming-soon {
+    padding: 12px 16px;
+    color: var(--gray-dark);
+    font-size: 0.85em;
+    font-style: italic;
+    text-align: center;
+    border-top: 1px solid var(--gray-100);
   }
 
   /* Mobile */

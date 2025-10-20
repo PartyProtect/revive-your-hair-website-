@@ -68,41 +68,30 @@ const i18n = {
   },
 
   // Get alternate language URL for SEO
+  // TODO: Implement when template system is ready
   getAlternateUrl(lang) {
-    const currentLang = this.getCurrentLang();
-    let path = window.location.pathname;
-
-    if (lang === 'en') {
-      // Remove /nl/ from path
-      return path.replace('/nl/', '/');
-    } else if (lang === 'nl') {
-      // Add /nl/ to path
-      return path.replace('/', '/nl/');
-    }
-
-    return path;
+    // For now, only English is supported
+    return window.location.pathname;
   }
 };
 
 // Auto-inject hreflang tags for SEO
+// TODO: Re-enable when multiple languages are implemented
 function injectHreflangTags() {
+  // Temporarily disabled - will be handled by template system
+  // Only add English hreflang for now
   const head = document.head;
-  const currentUrl = window.location.origin + window.location.pathname;
+  const link = document.createElement('link');
+  link.rel = 'alternate';
+  link.hreflang = 'en';
+  link.href = window.location.origin + window.location.pathname;
+  head.appendChild(link);
 
-  // Add hreflang for each language
-  Object.keys(i18n.languages).forEach(lang => {
-    const link = document.createElement('link');
-    link.rel = 'alternate';
-    link.hreflang = lang;
-    link.href = window.location.origin + i18n.getAlternateUrl(lang);
-    head.appendChild(link);
-  });
-
-  // Add x-default for international users
+  // Add x-default
   const xDefault = document.createElement('link');
   xDefault.rel = 'alternate';
   xDefault.hreflang = 'x-default';
-  xDefault.href = window.location.origin + i18n.getAlternateUrl('en');
+  xDefault.href = window.location.origin + window.location.pathname;
   head.appendChild(xDefault);
 }
 
