@@ -76,11 +76,29 @@
   to = "/legal/:slug.html"
   status = 301
 
-# Dutch (nl) language pages
+# Dutch (nl) language pages - Clean URLs (no .html extension)
+[[redirects]]
+  from = "/nl/over-ons.html"
+  to = "/nl/over-ons"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/nl/over-ons"
+  to = "/nl/over-ons.html"
+  status = 200
+
+# Redirect old /nl/about to new Dutch URL
 [[redirects]]
   from = "/nl/about"
-  to = "/nl/about.html"
-  status = 200
+  to = "/nl/over-ons"
+  status = 301
+
+[[redirects]]
+  from = "/nl/contact.html"
+  to = "/nl/contact"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/nl/contact"
@@ -88,9 +106,21 @@
   status = 200
 
 [[redirects]]
+  from = "/nl/quiz.html"
+  to = "/nl/quiz"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/nl/quiz"
   to = "/nl/quiz.html"
   status = 200
+
+[[redirects]]
+  from = "/nl/store.html"
+  to = "/nl/store"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/nl/store"
@@ -103,14 +133,26 @@
   status = 200
 
 [[redirects]]
+  from = "/nl/blog/:slug.html"
+  to = "/nl/blog/:slug"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/nl/blog/:slug"
   to = "/nl/blog/:slug.html"
   status = 200
 
 [[redirects]]
   from = "/nl/blog/:slug/"
-  to = "/nl/blog/:slug.html"
+  to = "/nl/blog/:slug"
   status = 301
+
+[[redirects]]
+  from = "/nl/legal/:slug.html"
+  to = "/nl/legal/:slug"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/nl/legal/:slug"
@@ -119,7 +161,7 @@
 
 [[redirects]]
   from = "/nl/legal/:slug/"
-  to = "/nl/legal/:slug.html"
+  to = "/nl/legal/:slug"
   status = 301
 
 # Handle 404 errors - this must be last
