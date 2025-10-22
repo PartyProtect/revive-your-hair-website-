@@ -12,16 +12,30 @@ const path = require('path');
 const config = {
   templatesDir: './src/templates',
   i18nDir: './src/i18n',
-  outputDir: './src',
+  outputDir: './dist',
   languages: ['en', 'nl'], // Add more: 'de', 'fr', 'es', etc.
   
   // Map template names to localized URLs
   urlMappings: {
+    'index': {
+      en: '',  // Root path for English
+      nl: ''   // Root path for Dutch
+    },
     'about': {
       en: 'about',
-      nl: 'over-ons',
-      de: 'uber-uns',     // Future
-      fr: 'a-propos'      // Future
+      nl: 'over-ons'
+    },
+    'contact': {
+      en: 'contact',
+      nl: 'contact'
+    },
+    'store': {
+      en: 'store',
+      nl: 'winkel'
+    },
+    'quiz': {
+      en: 'quiz',
+      nl: 'quiz'
     }
   }
 };
@@ -100,10 +114,16 @@ function buildPage(templateName, lang) {
   html = replaceMetadata(html, lang, templateName, translations);
   
   // Determine output path
-  const urlSlug = config.urlMappings[templateName]?.[lang] || templateName;
-  const outputPath = lang === 'en' 
-    ? path.join(config.outputDir, `${urlSlug}.html`)
-    : path.join(config.outputDir, lang, `${urlSlug}.html`);
+  const urlSlug = config.urlMappings[templateName]?.[lang];
+  let outputPath;
+  
+  if (urlSlug === '') {
+    // Root page (index)
+    outputPath = path.join(config.outputDir, lang, 'index.html');
+  } else {
+    // Other pages
+    outputPath = path.join(config.outputDir, lang, urlSlug, 'index.html');
+  }
   
   // Create directory if needed
   const outputDir = path.dirname(outputPath);
@@ -134,7 +154,65 @@ function buildAll() {
     });
   });
   
+  // Copy assets
+  console.log('\nCopying assets...');
+  const assetFolders = ['scripts', 'styles', 'components', 'images', 'fonts'];
+  
+  assetFolders.forEach(folder => {
+    const srcPath = path.join('./src', folder);
+    const destPath = path.join(config.outputDir, folder);
+    
+    if (fs.existsSync(srcPath)) {
+      copyDirectory(srcPath, destPath);
+      console.log(`✓ Copied ${folder}/`);
+    }
+  });
+  
+  // Copy legal folder
+  console.log('\nCopying legal pages...');
+  const legalSrc = './src/legal';
+  const legalDest = path.join(config.outputDir, 'legal');
+  
+  if (fs.existsSync(legalSrc)) {
+    copyDirectory(legalSrc, legalDest);
+    console.log(`✓ Copied legal/`);
+  }
+  
+  // Copy blog folder to each language
+  console.log('\nCopying blog...');
+  config.languages.forEach(lang => {
+    const blogSrc = './src/blog';
+    const blogDest = path.join(config.outputDir, lang, 'blog');
+    
+    if (fs.existsSync(blogSrc)) {
+      copyDirectory(blogSrc, blogDest);
+      console.log(`✓ Copied blog/ to ${lang}/blog/`);
+    }
+  });
+  
   console.log('\n✅ Build complete!');
+}
+
+/**
+ * Recursively copy directory
+ */
+function copyDirectory(src, dest) {
+  if (!fs.existsSync(dest)) {
+    fs.mkdirSync(dest, { recursive: true });
+  }
+  
+  const entries = fs.readdirSync(src, { withFileTypes: true });
+  
+  for (const entry of entries) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+    
+    if (entry.isDirectory()) {
+      copyDirectory(srcPath, destPath);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
+  }
 }
 
 // Run build

@@ -15,8 +15,8 @@
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
   
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   
   <!-- SEO -->
   <link rel="canonical" href="https://www.reviveyourhair.eu/blog/">
@@ -44,16 +44,14 @@
   </script>
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="../../styles/color-palette.css">
-  <link rel="stylesheet" href="../../styles/main.css">
-  <link rel="stylesheet" href="../../styles/components.css">
-  <link rel="stylesheet" href="../../styles/utilities.css">
+  <link rel="stylesheet" href="/styles/color-palette.css">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/components.css">
+  <link rel="stylesheet" href="/styles/utilities.css">
   
   <!-- i18n -->
-  <script src="../../scripts/i18n.js"></script>
-  
   <!-- Scripts -->
-  <script src="../../scripts/component-loader.js"></script>
+  <script src="/scripts/component-loader.js"></script>
   
   <style>
     * {
@@ -424,8 +422,8 @@
     <div id="footer-root"></div>
   </div>
 
-  <script src="../../scripts/main.js"></script>
-  <script src="../../scripts/blog-posts.js"></script>
+  <script src="/scripts/main.js"></script>
+  <script src="/scripts/blog-posts.js"></script>
   <script>
     // Handle newsletter form submission
     document.addEventListener('DOMContentLoaded', function() {
@@ -495,7 +493,7 @@
                 <span class="brutal-tag">${post.readTime}</span>
                 <span class="brutal-tag">Evidence-Based</span>
               </div>
-              <a href="/blog/${post.slug}" class="read-more-btn">Read Guide →</a>
+              <a href="${post.slug}.html" class="read-more-btn">Read Guide →</a>
             </div>
           `;
           

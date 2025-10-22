@@ -1,6 +1,6 @@
-<!-- Language Switcher Component -->
+<!-- Language Switcher with Dropdown -->
 <div class="language-switcher">
-  <button class="lang-toggle" id="langToggle" aria-label="Change language">
+  <button class="lang-toggle" onclick="this.parentElement.classList.toggle('open')">
     <span class="current-flag" id="currentFlag">🇬🇧</span>
     <span class="current-lang" id="currentLang">EN</span>
     <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -8,22 +8,75 @@
     </svg>
   </button>
   
-  <div class="lang-dropdown" id="langDropdown">
-    <button class="lang-option" data-lang="en">
+  <div class="lang-dropdown">
+    <a href="#" class="lang-option" data-lang="en" id="lang-en">
       <span class="flag">🇬🇧</span>
       <span class="lang-name">English</span>
-    </button>
-    <!-- Other languages coming soon with template system -->
-    <div class="lang-coming-soon">
-      <span class="lang-name">More languages coming soon...</span>
-    </div>
+    </a>
+    <a href="#" class="lang-option" data-lang="nl" id="lang-nl">
+      <span class="flag">🇳🇱</span>
+      <span class="lang-name">Nederlands</span>
+    </a>
   </div>
 </div>
+
+<script>
+// Update language switcher links based on current page
+(function() {
+  const path = window.location.pathname;
+  const currentFlag = document.getElementById('currentFlag');
+  const currentLang = document.getElementById('currentLang');
+  
+  // Page mappings
+  const pageMap = {
+    'about': { en: '/en/about/', nl: '/nl/over-ons/' },
+    'over-ons': { en: '/en/about/', nl: '/nl/over-ons/' },
+    'contact': { en: '/en/contact/', nl: '/nl/contact/' },
+    'store': { en: '/en/store/', nl: '/nl/winkel/' },
+    'winkel': { en: '/en/store/', nl: '/nl/winkel/' },
+    'quiz': { en: '/en/quiz/', nl: '/nl/quiz/' },
+    'blog': { en: '/en/blog/', nl: '/nl/blog/' },
+    '': { en: '/en/', nl: '/nl/' }  // Home page
+  };
+  
+  // Detect current page
+  let pageName = '';
+  for (const key in pageMap) {
+    if (path.includes('/' + key + '/') || (key === '' && (path === '/en/' || path === '/nl/'))) {
+      pageName = key;
+      break;
+    }
+  }
+  
+  // Detect current language
+  const isNL = path.startsWith('/nl');
+  
+  // Update current flag display
+  if (isNL) {
+    currentFlag.textContent = '🇳🇱';
+    currentLang.textContent = 'NL';
+  }
+  
+  // Set language switcher links
+  const enLink = document.getElementById('lang-en');
+  const nlLink = document.getElementById('lang-nl');
+  
+  if (pageMap[pageName]) {
+    enLink.href = pageMap[pageName].en;
+    nlLink.href = pageMap[pageName].nl;
+  } else {
+    // Fallback to home
+    enLink.href = '/en/';
+    nlLink.href = '/nl/';
+  }
+})();
+</script>
 
 <style>
   .language-switcher {
     position: relative;
     display: inline-block;
+    z-index: 100;
   }
 
   .lang-toggle {
@@ -39,6 +92,8 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
+    position: relative;
+    z-index: 101;
   }
 
   .lang-toggle:hover {
@@ -142,7 +197,7 @@
 </style>
 
 <script>
-  // Language switcher functionality
+  // Language switcher functionality for multilingual site
   document.addEventListener('DOMContentLoaded', function() {
     const toggle = document.getElementById('langToggle');
     const dropdown = document.getElementById('langDropdown');
@@ -150,13 +205,18 @@
     const currentLang = document.getElementById('currentLang');
     const langOptions = document.querySelectorAll('.lang-option');
 
-    // Get current language
-    const currentLanguage = i18n.getCurrentLang();
+    // Detect current language from URL path
+    const path = window.location.pathname;
+    let currentLanguage = 'en'; // default
     
-    // Update UI
-    const langConfig = i18n.languages[currentLanguage];
-    currentFlag.textContent = langConfig.flag;
-    currentLang.textContent = langConfig.code.toUpperCase();
+    if (path.startsWith('/nl/')) {
+      currentLanguage = 'nl';
+      currentFlag.textContent = '🇳🇱';
+      currentLang.textContent = 'NL';
+    } else {
+      currentFlag.textContent = '🇬🇧';
+      currentLang.textContent = 'EN';
+    }
 
     // Mark active language
     langOptions.forEach(option => {
@@ -176,15 +236,6 @@
     document.addEventListener('click', () => {
       toggle.classList.remove('active');
       dropdown.classList.remove('active');
-    });
-
-    // Language selection
-    langOptions.forEach(option => {
-      option.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const targetLang = option.dataset.lang;
-        i18n.switchLanguage(targetLang);
-      });
     });
   });
 </script>

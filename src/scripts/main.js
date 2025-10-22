@@ -242,3 +242,16 @@ if (document.readyState === 'loading') {
 } else {
   initializeQuizPopup();
 }
+
+
+// ============================================
+// LANGUAGE SWITCHER DROPDOWN
+// ============================================
+
+// Close language switcher when clicking outside
+document.addEventListener('click', function(event) {
+  const langSwitcher = document.querySelector('.language-switcher');
+  if (langSwitcher && !langSwitcher.contains(event.target)) {
+    langSwitcher.classList.remove('open');
+  }
+});

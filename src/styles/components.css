@@ -186,6 +186,121 @@
 
 
 /* ============================================
+   LANGUAGE SWITCHER COMPONENT
+   ============================================ */
+
+.language-switcher {
+  position: relative;
+  margin-right: 16px;
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 1px solid var(--gray-300);
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9em;
+  color: var(--charcoal);
+  font-family: inherit;
+}
+
+.lang-toggle:hover {
+  border-color: var(--forest-green);
+  background: var(--gray-50);
+}
+
+.language-switcher.open .lang-toggle {
+  border-color: var(--forest-green);
+  box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.1);
+}
+
+.current-flag {
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+.current-lang {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.chevron {
+  transition: transform 0.2s ease;
+  color: var(--gray-600);
+}
+
+.language-switcher.open .chevron {
+  transform: rotate(180deg);
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: white;
+  border: 1px solid var(--gray-300);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.language-switcher.open .lang-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: var(--charcoal);
+  transition: background 0.2s ease;
+  font-size: 0.95em;
+}
+
+.lang-option:hover {
+  background: var(--gray-100);
+}
+
+.lang-option .flag {
+  font-size: 1.3em;
+  line-height: 1;
+}
+
+.lang-option .lang-name {
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .language-switcher {
+    margin-right: 8px;
+  }
+  
+  .lang-toggle {
+    padding: 6px 10px;
+  }
+  
+  .current-lang {
+    display: none;
+  }
+}
+
+
+/* ============================================
    FOOTER STYLES
    ============================================ */
 
