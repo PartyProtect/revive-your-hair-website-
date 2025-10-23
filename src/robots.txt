@@ -1,11 +1,11 @@
-# robots.txt for www.reviveyourhair.eu
+# robots.txt for revive-your-hair.com
 # Optimized for Google Search Console compliance
-# Last Updated: October 19, 2025
+# Last Updated: January 2025
 
 # ============================================
 # SITEMAP LOCATION (Must be absolute URL)
 # ============================================
-Sitemap: https://reviveyourhair.eu/sitemap.xml
+Sitemap: https://revive-your-hair.com/sitemap.xml
 
 # ============================================
 # DEFAULT RULES FOR ALL SEARCH ENGINES

@@ -14,10 +14,13 @@ class ComponentLoader {
    * Get the correct path to components based on current page depth
    */
   getComponentsPath() {
-    // Since we publish 'src' folder on Netlify, components are at root /components/
-    // But if accessed directly in src folder locally, need different path
-    // Try to detect environment and use appropriate path
-    return '/components/';
+    // Detect current language from URL path
+    const path = window.location.pathname;
+    const isNL = path.startsWith('/nl');
+    
+    // English components at root level: /components/
+    // Dutch components at: /nl/components/
+    return isNL ? '/nl/components/' : '/components/';
   }
 
   /**
@@ -29,15 +32,17 @@ class ComponentLoader {
     // Check blog first (more specific path)
     if (path.includes('/blog')) {
       return 'blog';
-    } else if (path.includes('about')) {
+    } else if (path.includes('about') || path.includes('over-ons')) {
       return 'about';
     } else if (path.includes('contact')) {
       return 'contact';
-    } else if (path.includes('store')) {
+    } else if (path.includes('store') || path.includes('winkel')) {
       return 'store';
+    } else if (path.includes('quiz')) {
+      return 'quiz';
     } else if (path.includes('resources')) {
       return 'resources';
-    } else if (path.includes('index.html') || path.endsWith('/') || path.endsWith('/pages')) {
+    } else if (path === '/' || path === '/nl' || path === '/nl/' || path.includes('index.html')) {
       return 'home';
     }
     
@@ -136,6 +141,20 @@ class ComponentLoader {
       
       // Dispatch custom event when all components are loaded
       window.dispatchEvent(new CustomEvent('componentsLoaded'));
+      console.log('✅ All components loaded, dispatched componentsLoaded event');
+      
+      // Initialize language switcher after components are loaded
+      setTimeout(() => {
+        const langScript = document.querySelector('.language-switcher + script');
+        if (langScript) {
+          try {
+            eval(langScript.textContent);
+            console.log('✅ Language switcher initialized');
+          } catch (e) {
+            console.error('Error initializing language switcher:', e);
+          }
+        }
+      }, 100);
       
     } catch (error) {
       console.error('Error loading components:', error);

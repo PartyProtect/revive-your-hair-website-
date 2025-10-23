@@ -1505,11 +1505,11 @@
     <section class="hero">
       <div class="hero-content">
         <h1 class="hero-text">
-          Why is finding information on<br>
-          <span class="hero-highlight">hair loss</span> so difficult?
+          {{t.hero.title}}<br>
+          <span class="hero-highlight">{{t.hero.titleHighlight}}</span> {{t.hero.titleEnd}}
         </h1>
         <p class="hero-subtitle">
-          We've read the studies, so you don't have to.
+          {{t.hero.subtitle}}
         </p>
       </div>
     </section>
@@ -1517,7 +1517,7 @@
     <section class="section white">
       <div class="container">
         <div class="dropout-visual">
-          <p class="dropout-intro">Here's what the research actually shows:</p>
+          <p class="dropout-intro">{{t.homepage.timelineIntro}}</p>
           
           <div class="timeline-wrapper">
             <div class="timeline-line">
@@ -1527,34 +1527,33 @@
             <div class="timeline-marker start">
               <div class="marker-dot"></div>
               <div class="marker-label">
-                <strong>Start</strong>
-                Treatment begins
+                <strong>{{t.homepage.timelineStart}}</strong>
+                {{t.homepage.timelineStartDesc}}
               </div>
             </div>
             
             <div class="timeline-marker dropout">
               <div class="marker-dot critical"></div>
               <div class="marker-label">
-                <strong>Month 3-6</strong>
-                Most people quit here
+                <strong>{{t.homepage.timelineDropout}}</strong>
+                {{t.homepage.timelineDropoutDesc}}
               </div>
             </div>
             
             <div class="timeline-marker end">
               <div class="marker-dot"></div>
               <div class="marker-label">
-                <strong>6 months+</strong>
-                When results appear
+                <strong>{{t.homepage.timelineEnd}}</strong>
+                {{t.homepage.timelineEndDesc}}
               </div>
             </div>
           </div>
 
           <div class="dropout-stat">
-            <div class="dropout-number">86%</div>
-            <p class="dropout-text">quit before seeing results</p>
+            <div class="dropout-number">{{t.homepage.dropoutNumber}}</div>
+            <p class="dropout-text">{{t.homepage.dropoutText}}</p>
             <p class="dropout-explanation">
-              The problem isn't the treatments. The treatments work.<br><br>
-              The problem is using monotherapy instead of combining treatments.
+              {{{t.homepage.dropoutExplanation}}}
             </p>
           </div>
         </div>
@@ -1564,47 +1563,47 @@
     <section class="section dark reveal-section">
       <div class="container">
         <p class="reveal-text">
-          Single treatments plateau around 40-60% effectiveness.<br>
-          Not because they don't work.<br>
-          <strong>Because hair loss has four simultaneous mechanisms.</strong>
+          {{t.homepage.revealLine1}}<br>
+          {{t.homepage.revealLine2}}<br>
+          <strong>{{t.homepage.revealLine3}}</strong>
         </p>
       </div>
     </section>
 
     <section class="section light">
       <div class="container">
-        <p class="science-intro">Blocking one? You've solved 1 of 4.</p>
+        <p class="science-intro">{{t.homepage.scienceIntro}}</p>
         
         <div class="mechanisms-visual">
           <div class="mechanism-grid">
             <div class="mechanism-item">
               <div class="mechanism-number">1</div>
-              <h3 class="mechanism-title">DHT Sensitivity</h3>
-              <p class="mechanism-stat">Genetic hormone response</p>
+              <h3 class="mechanism-title">{{t.homepage.mechanism1Title}}</h3>
+              <p class="mechanism-stat">{{t.homepage.mechanism1Stat}}</p>
             </div>
 
             <div class="mechanism-item">
               <div class="mechanism-number">2</div>
-              <h3 class="mechanism-title">Poor Blood Flow</h3>
-              <p class="mechanism-stat">2.6x lower circulation</p>
+              <h3 class="mechanism-title">{{t.homepage.mechanism2Title}}</h3>
+              <p class="mechanism-stat">{{t.homepage.mechanism2Stat}}</p>
             </div>
 
             <div class="mechanism-item">
               <div class="mechanism-number">3</div>
-              <h3 class="mechanism-title">Scar Tissue</h3>
-              <p class="mechanism-stat">4x more fibrosis</p>
+              <h3 class="mechanism-title">{{t.homepage.mechanism3Title}}</h3>
+              <p class="mechanism-stat">{{t.homepage.mechanism3Stat}}</p>
             </div>
 
             <div class="mechanism-item">
               <div class="mechanism-number">4</div>
-              <h3 class="mechanism-title">Inflammation</h3>
-              <p class="mechanism-stat">Chronic follicle stress</p>
+              <h3 class="mechanism-title">{{t.homepage.mechanism4Title}}</h3>
+              <p class="mechanism-stat">{{t.homepage.mechanism4Stat}}</p>
             </div>
           </div>
 
           <p class="mechanism-conclusion">
-            When researchers combined treatments targeting multiple mechanisms?<br>
-            <strong>The results were dramatically different.</strong>
+            {{{t.homepage.mechanismConclusion}}}
+            <strong>{{t.homepage.mechanismConclusionBold}}</strong>
           </p>
         </div>
       </div>
@@ -1613,13 +1612,12 @@
     <section class="section dark">
       <div class="breakthrough-wrapper">
         <p class="breakthrough-intro">
-          Combination therapy doesn't just work better.<br>
-          It works dramatically better. And faster.
+          {{{t.homepage.breakthroughIntro}}}
         </p>
 
         <div class="comparison-visual">
           <div class="comparison-side">
-            <div class="comparison-label">Single Treatment</div>
+            <div class="comparison-label">{{t.homepage.comparisonLabel1}}</div>
             <div class="hair-density-visual">
               <div class="hair-dot"></div><div class="hair-dot"></div><div class="hair-dot"></div><div class="hair-dot"></div>
               <div class="hair-dot"></div><div class="hair-dot"></div><div class="hair-dot"></div><div class="hair-dot"></div>
@@ -1628,12 +1626,12 @@
               <div class="hair-dot"></div><div class="hair-dot"></div><div class="hair-dot"></div><div class="hair-dot"></div>
               <div class="hair-dot"></div><div class="hair-dot"></div>
             </div>
-            <div class="comparison-number">22</div>
-            <div class="comparison-sublabel">new hairs per cm²</div>
+            <div class="comparison-number">{{t.homepage.comparisonNumber1}}</div>
+            <div class="comparison-sublabel">{{t.homepage.comparisonSublabel1}}</div>
           </div>
 
           <div class="comparison-side">
-            <div class="comparison-label">Combination</div>
+            <div class="comparison-label">{{t.homepage.comparisonLabel2}}</div>
             <div class="hair-density-visual">
               <div class="hair-dot"></div><div class="hair-dot"></div><div class="hair-dot"></div><div class="hair-dot"></div><div class="hair-dot"></div>
               <div class="hair-dot"></div><div class="hair-dot"></div><div class="hair-dot"></div><div class="hair-dot"></div><div class="hair-dot"></div>
@@ -1655,14 +1653,13 @@
               <div class="hair-dot"></div><div class="hair-dot"></div><div class="hair-dot"></div><div class="hair-dot"></div><div class="hair-dot"></div>
               <div class="hair-dot"></div>
             </div>
-            <div class="comparison-number">91</div>
-            <div class="comparison-sublabel">new hairs per cm²</div>
+            <div class="comparison-number">{{t.homepage.comparisonNumber2}}</div>
+            <div class="comparison-sublabel">{{t.homepage.comparisonSublabel2}}</div>
           </div>
         </div>
 
         <p class="breakthrough-conclusion">
-          <strong>In the landmark study combining minoxidil with microneedling: 4x better hair density. 3x faster results.</strong><br>
-          Fast enough that people actually stick with it.
+          <strong>{{t.homepage.breakthroughConclusion}}</strong>{{{t.homepage.breakthroughConclusionEnd}}}
         </p>
       </div>
     </section>
@@ -1670,8 +1667,8 @@
     <section class="section light">
       <div class="container">
         <div class="narrative-container">
-          <h2 class="narrative-intro">Four Evidence-Based Approaches</h2>
-          <p class="narrative-tagline">Clinical research has identified four approaches with strong evidence</p>
+          <h2 class="narrative-intro">{{t.homepage.approachesTitle}}</h2>
+          <p class="narrative-tagline">{{t.homepage.approachesTagline}}</p>
 
           <div class="narrative-items">
             <div class="narrative-item">
@@ -1680,10 +1677,10 @@
               </div>
               <div class="narrative-content">
                 <div class="narrative-header">
-                  <h3 class="narrative-title">Minoxidil</h3>
-                  <span class="narrative-tag">OTC</span>
+                  <h3 class="narrative-title">{{t.homepage.approach1Title}}</h3>
+                  <span class="narrative-tag">{{t.homepage.approach1Tag}}</span>
                 </div>
-                <p class="narrative-description">Topical solution applied twice daily to the scalp</p>
+                <p class="narrative-description">{{t.homepage.approach1Desc}}</p>
               </div>
             </div>
 
@@ -1693,9 +1690,9 @@
               </div>
               <div class="narrative-content">
                 <div class="narrative-header">
-                  <h3 class="narrative-title">Microneedling</h3>
+                  <h3 class="narrative-title">{{t.homepage.approach2Title}}</h3>
                 </div>
-                <p class="narrative-description">Weekly sessions to enhance absorption of topicals</p>
+                <p class="narrative-description">{{t.homepage.approach2Desc}}</p>
               </div>
             </div>
 
@@ -1705,9 +1702,9 @@
               </div>
               <div class="narrative-content">
                 <div class="narrative-header">
-                  <h3 class="narrative-title">Ketoconazole Shampoo</h3>
+                  <h3 class="narrative-title">{{t.homepage.approach3Title}}</h3>
                 </div>
-                <p class="narrative-description">Medicated shampoo used 2-3 times per week</p>
+                <p class="narrative-description">{{t.homepage.approach3Desc}}</p>
               </div>
             </div>
 
@@ -1717,21 +1714,20 @@
               </div>
               <div class="narrative-content">
                 <div class="narrative-header">
-                  <h3 class="narrative-title">Prescription DHT Inhibitors</h3>
-                  <span class="narrative-tag narrative-tag-rx">Rx Only</span>
+                  <h3 class="narrative-title">{{t.homepage.approach4Title}}</h3>
+                  <span class="narrative-tag narrative-tag-rx">{{t.homepage.approach4Tag}}</span>
                 </div>
-                <p class="narrative-description">Available through your doctor for systemic DHT management</p>
+                <p class="narrative-description">{{t.homepage.approach4Desc}}</p>
               </div>
             </div>
           </div>
 
           <p class="mechanism-conclusion">
-            Each targets a different mechanism.<br>
-            <strong>Together, clinical studies show they work exponentially better.</strong>
+            {{{t.homepage.approachesConclusion}}}
           </p>
 
           <div class="disclaimer-box">
-            <strong>ℹ️ Educational Information:</strong> This information is for educational purposes. Prescription medications require consultation with a licensed healthcare provider. Always consult a doctor before starting any treatment.
+            <strong>{{t.homepage.disclaimerTitle}}</strong> {{t.homepage.disclaimerText}}
           </div>
         </div>
       </div>
@@ -1739,46 +1735,46 @@
 
     <section class="section white">
       <div class="container">
-        <h2 class="faq-title">Questions You Might Have</h2>
+        <h2 class="faq-title">{{t.homepage.faqTitle}}</h2>
         
         <div class="faq-container">
           <div class="faq-item">
             <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
-              <span>What if I can't afford all these treatments?</span>
+              <span>{{t.homepage.faq1Question}}</span>
               <span class="faq-icon">+</span>
             </button>
             <div class="faq-answer">
-              <p>The basic protocol costs as little as €30 per month, which consists of minoxidil and microneedling using a dermaroller (a cheaper device which needs regular replacement). Our most expensive protocol sets you back €50 per month. These prices exclude one-time starting costs. We offer budget-conscious options in our quiz that still target multiple mechanisms. You don't need to do everything at once—we'll help you prioritize based on what matters most for your situation.</p>
+              <p>{{t.homepage.faq1Answer}}</p>
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
-              <span>How do I know this will work for ME specifically?</span>
+              <span>{{t.homepage.faq2Question}}</span>
               <span class="faq-icon">+</span>
             </button>
             <div class="faq-answer">
-              <p>That's what our personalized quiz is for. Your hair type, loss pattern, budget, and concerns are unique. The quiz creates a protocol tailored to your specific situation. Clinical studies show 82-95% of people see improvement with proper combination therapy—and those numbers are from dual therapy studies. The full protocols we recommend (targeting all four mechanisms simultaneously) could potentially have even higher success rates. We can't predict individual results until you try consistently for 6 months.</p>
+              <p>{{t.homepage.faq2Answer}}</p>
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
-              <span>What if I'm too far gone? My hair loss is pretty advanced.</span>
+              <span>{{t.homepage.faq3Question}}</span>
               <span class="faq-icon">+</span>
             </button>
             <div class="faq-answer">
-              <p>The earlier you start, the better. Current research suggests that areas with no growth for 2-3+ years have lower response rates—but here's what's interesting: communities like r/tressless (where people document their results with no financial incentive) show surprising regrowth even in areas science would consider "dead." The research might be incomplete here. Thinning areas almost always respond well. Completely bald areas are less predictable, but many people see results anyway. The guide helps you assess your specific situation.</p>
+              <p>{{t.homepage.faq3Answer}}</p>
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
-              <span>Do I have to use these treatments forever?</span>
+              <span>{{t.homepage.faq4Question}}</span>
               <span class="faq-icon">+</span>
             </button>
             <div class="faq-answer">
-              <p>Yes. Hair loss is a chronic condition. If you stop treatment, you'll lose what you gained within 3-6 months and continue losing hair. Think of it like brushing your teeth—it's ongoing maintenance, not a cure. The good news: once you establish a routine, most people find it becomes second nature.</p>
+              <p>{{t.homepage.faq4Answer}}</p>
             </div>
           </div>
         </div>
@@ -1787,24 +1783,24 @@
 
     <section class="cta-section">
       <div class="container">
-        <p class="cta-intro">Overwhelmed? We've got you covered.</p>
+        <p class="cta-intro">{{t.cta.intro}}</p>
         
         <div class="cta-tabs-wrapper">
           <div class="cta-tabs">
-            <button class="cta-tab active" onclick="switchCtaTab(event, 'action')">I'm Ready to Start</button>
-            <button class="cta-tab" onclick="switchCtaTab(event, 'research')">I Need More Info</button>
+            <button class="cta-tab active" onclick="switchCtaTab(event, 'action')">{{t.cta.tabAction}}</button>
+            <button class="cta-tab" onclick="switchCtaTab(event, 'research')">{{t.cta.tabResearch}}</button>
           </div>
 
           <div class="cta-tab-content active" id="action">
-            <h3>Find Out What Your Options Are</h3>
-            <p>Take our 2-minute quiz and find out what your options are based on your desires and circumstances.</p>
-            <a href="quiz/" class="cta-content-button">Take the Quiz →</a>
+            <h3>{{t.cta.actionTitle}}</h3>
+            <p>{{t.cta.actionDesc}}</p>
+            <a href="/en/quiz/" class="cta-content-button">{{t.cta.actionButton}}</a>
           </div>
 
           <div class="cta-tab-content" id="research">
-            <h3>Complete Evidence Guide</h3>
-            <p>Deep dive into the science: full protocols, side effect breakdowns, clinical study citations, and month-by-month expectations. 18-minute read.</p>
-            <a href="blog/hair-loss-guide.html" class="cta-content-button">Read the Full Guide →</a>
+            <h3>{{t.cta.researchTitle}}</h3>
+            <p>{{t.cta.researchDesc}}</p>
+            <a href="/en/blog/hair-loss-guide.html" class="cta-content-button">{{t.cta.researchButton}}</a>
           </div>
         </div>
       </div>

@@ -89,15 +89,34 @@ window.addEventListener('load', function() {
 // Temporary popup for quiz links while updating
 
 function initializeQuizPopup() {
+  // Detect current language from URL
+  const currentLang = window.location.pathname.startsWith('/nl') ? 'nl' : 'en';
+  
+  // Translation texts
+  const translations = {
+    en: {
+      title: "Sorry! We're updating the quiz right now!",
+      message: "We're making improvements to give you the best experience. Please check back soon!",
+      button: "Got it"
+    },
+    nl: {
+      title: "Sorry! We werken nu aan de quiz!",
+      message: "We brengen verbeteringen aan om je de beste ervaring te geven. Kom snel terug!",
+      button: "Begrepen"
+    }
+  };
+  
+  const t = translations[currentLang];
+  
   // Create modal HTML
   const modalHTML = `
     <div id="quiz-maintenance-modal" class="maintenance-modal" style="display: none;">
       <div class="maintenance-modal-overlay"></div>
       <div class="maintenance-modal-content">
         <div class="maintenance-modal-icon">🔧</div>
-        <h3>Sorry! We're updating the quiz right now!</h3>
-        <p>We're making improvements to give you the best experience. Please check back soon!</p>
-        <button id="close-maintenance-modal" class="maintenance-modal-btn">Got it</button>
+        <h3>${t.title}</h3>
+        <p>${t.message}</p>
+        <button id="close-maintenance-modal" class="maintenance-modal-btn">${t.button}</button>
       </div>
     </div>
   `;

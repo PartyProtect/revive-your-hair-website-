@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Expert guides on hair loss treatment, finasteride, minoxidil, and evidence-based solutions for male pattern baldness.">
+  <meta name="description" content="{{t.blog.metaDescription}}">
   <meta name="keywords" content="hair loss blog, finasteride guide, minoxidil guide, male pattern baldness, hair loss treatment">
-  <title>Blog - Evidence-Based Hair Loss Guides | Revive Your Hair</title>
+  <title>{{t.blog.pageTitle}}</title>
   
   <!-- Theme Color -->
   <meta name="theme-color" content="#047857">
@@ -23,8 +23,8 @@
   
   <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Hair Loss Treatment Blog | Revive Your Hair">
-  <meta property="og:description" content="Evidence-based guides on treating male pattern baldness with finasteride, minoxidil, and proven therapies.">
+  <meta property="og:title" content="{{t.blog.pageTitle}}">
+  <meta property="og:description" content="{{t.blog.metaDescription}}">
   <meta property="og:url" content="https://www.reviveyourhair.eu/blog/">
   <meta property="og:site_name" content="Revive Your Hair">
   
@@ -389,9 +389,9 @@
     <!-- Hero -->
     <section class="hero">
       <div class="hero-content">
-        <h1 class="hero-title">Evidence-Based Guides</h1>
+        <h1 class="hero-title">{{t.blog.heroTitle}}</h1>
         <p class="hero-subtitle">
-          We read the studies so you don't have to.
+          {{t.blog.heroSubtitle}}
         </p>
       </div>
     </section>
@@ -401,7 +401,7 @@
       <div class="blog-grid" id="blogGrid">
         <!-- Blog posts will be dynamically loaded here -->
         <div class="loading-message" style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--gray-medium);">
-          <p style="font-size: 1.2em;">Loading blog posts...</p>
+          <p style="font-size: 1.2em;">{{t.blog.loadingMessage}}</p>
         </div>
       </div>
     </section>
@@ -409,11 +409,11 @@
     <!-- Newsletter CTA -->
     <section class="newsletter-section">
       <div class="newsletter-content">
-        <h3>Stay Updated on New Guides</h3>
-        <p>We're constantly researching new treatments and updating existing guides. Get notified when we publish something new.</p>
+        <h3>{{t.blog.newsletterTitle}}</h3>
+        <p>{{t.blog.newsletterText}}</p>
         <form class="newsletter-form">
-          <input type="email" placeholder="Your email address" required>
-          <button type="submit">Subscribe</button>
+          <input type="email" placeholder="{{t.blog.emailPlaceholder}}" required>
+          <button type="submit">{{t.blog.subscribeButton}}</button>
         </form>
       </div>
     </section>
@@ -425,6 +425,16 @@
   <script src="/scripts/main.js"></script>
   <script src="/scripts/blog-posts.js"></script>
   <script>
+    // Translation data
+    const t = {
+      noPosts: "{{t.blog.noPosts}}",
+      errorLoading: "{{t.blog.errorLoading}}",
+      lastUpdated: "{{t.blog.lastUpdated}}",
+      evidenceBased: "{{t.blog.evidenceBased}}",
+      readGuideButton: "{{t.blog.readGuideButton}}",
+      subscribeSuccess: "{{t.blog.subscribeSuccess}}"
+    };
+
     // Handle newsletter form submission
     document.addEventListener('DOMContentLoaded', function() {
       const newsletterForm = document.querySelector('.newsletter-form');
@@ -435,7 +445,7 @@
           console.log('Email submitted:', email);
           
           // In production, send to your backend/email service
-          alert('Thanks! We\'ll notify you when new guides are published.');
+          alert(t.subscribeSuccess);
           this.reset();
         });
       }
@@ -451,7 +461,7 @@
         if (posts.length === 0) {
           blogGrid.innerHTML = `
             <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
-              <p style="font-size: 1.2em; color: var(--gray-medium);">No blog posts yet. Check back soon!</p>
+              <p style="font-size: 1.2em; color: var(--gray-medium);">${t.noPosts}</p>
             </div>
           `;
           return;
@@ -476,7 +486,7 @@
           ` : '';
           
           // Format date nicely
-          const formattedDate = `Last updated: ${formatDate(post.date)}`;
+          const formattedDate = `${t.lastUpdated} ${formatDate(post.date)}`;
           
           article.innerHTML = `
             <div class="brutal-header">
@@ -491,9 +501,9 @@
             <div class="blog-card-footer">
               <div class="brutal-tags">
                 <span class="brutal-tag">${post.readTime}</span>
-                <span class="brutal-tag">Evidence-Based</span>
+                <span class="brutal-tag">${t.evidenceBased}</span>
               </div>
-              <a href="${post.slug}.html" class="read-more-btn">Read Guide →</a>
+              <a href="${post.slug}.html" class="read-more-btn">${t.readGuideButton}</a>
             </div>
           `;
           
@@ -503,7 +513,7 @@
         console.error('Error rendering blog posts:', error);
         blogGrid.innerHTML = `
           <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
-            <p style="font-size: 1.2em; color: var(--gray-medium);">Error loading blog posts. Please refresh the page.</p>
+            <p style="font-size: 1.2em; color: var(--gray-medium);">${t.errorLoading}</p>
           </div>
         `;
       }

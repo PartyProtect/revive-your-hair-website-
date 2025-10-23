@@ -8,43 +8,43 @@
       
       <!-- About Section -->
       <div class="footer-about">
-        <a href="../" class="footer-logo">Revive Your Hair</a>
+        <a href="/en/" class="footer-logo" id="footerLogo">Revive Your Hair</a>
         <p class="footer-description">
-          Evidence-based solutions for hair loss. We combine clinical research with proven treatments to help you stop hair loss and restore growth.
+          {{t.footer.description}}
         </p>
       </div>
 
       <!-- Quick Links -->
       <div class="footer-column">
-        <h4>Quick Links</h4>
+        <h4>{{t.footer.quickLinks}}</h4>
         <ul class="footer-links">
-          <li><a href="../">Home</a></li>
-          <li><a href="../blog/">Blog</a></li>
-          <li><a href="../about/">About</a></li>
-          <li><a href="../contact/">Contact</a></li>
-          <li><a href="../store/">Store</a></li>
+          <li><a href="/en/" id="footerHome">{{t.nav.home}}</a></li>
+          <li><a href="/en/blog/" id="footerBlog">{{t.nav.blog}}</a></li>
+          <li><a href="/en/about/" id="footerAbout">{{t.nav.about}}</a></li>
+          <li><a href="/en/contact/" id="footerContact">{{t.nav.contact}}</a></li>
+          <li><a href="/en/store/" id="footerStore">{{t.nav.store}}</a></li>
         </ul>
       </div>
 
       <!-- Resources -->
       <div class="footer-column">
-        <h4>Resources</h4>
+        <h4>{{t.footer.resources}}</h4>
         <ul class="footer-links">
-          <li><a href="../blog/hair-loss-guide.html">Hair Loss Guide</a></li>
-          <li><a href="../quiz/">Treatment Quiz</a></li>
-          <li><a href="../store/">Recommended Products</a></li>
+          <li><a href="/en/blog/hair-loss-guide.html" id="footerGuide">{{t.footer.hairLossGuide}}</a></li>
+          <li><a href="/en/quiz/" id="footerQuiz">{{t.footer.treatmentQuiz}}</a></li>
+          <li><a href="/en/store/" id="footerProducts">{{t.footer.recommendedProducts}}</a></li>
         </ul>
       </div>
 
       <!-- Legal -->
       <div class="footer-column">
-        <h4>Legal</h4>
+        <h4>{{t.footer.legal}}</h4>
         <ul class="footer-links">
-          <li><a href="/legal/privacy-policy.html">Privacy Policy</a></li>
-          <li><a href="/legal/terms-of-service.html">Terms of Service</a></li>
-          <li><a href="/legal/disclaimer.html">Medical Disclaimer</a></li>
-          <li><a href="/legal/cookie-policy.html">Cookie Policy</a></li>
-          <li><a href="/legal/affiliate-disclosure.html">Affiliate Disclosure</a></li>
+          <li><a href="/en/legal/privacy-policy.html">{{t.footer.privacyPolicy}}</a></li>
+          <li><a href="/en/legal/terms-of-service.html">{{t.footer.termsOfService}}</a></li>
+          <li><a href="/en/legal/disclaimer.html">{{t.footer.medicalDisclaimer}}</a></li>
+          <li><a href="/en/legal/cookie-policy.html">{{t.footer.cookiePolicy}}</a></li>
+          <li><a href="/en/legal/affiliate-disclosure.html">{{t.footer.affiliateDisclosure}}</a></li>
         </ul>
       </div>
 
@@ -53,17 +53,17 @@
     <!-- Footer Bottom -->
     <div class="footer-bottom">
       <div class="footer-tagline">
-        We read the clinical studies so you don't have to
+        {{t.footer.tagline}}
       </div>
       
       <div class="footer-copyright">
-        © 2025 Revive Your Hair. All rights reserved.
+        {{t.footer.copyright}}
       </div>
     </div>
 
     <!-- Medical Disclaimer -->
     <div class="footer-disclaimer">
-      <strong>Medical Disclaimer:</strong> This website provides information for educational purposes only and is not intended as medical advice. The content should not be used as a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider before starting any treatment or making changes to your health regimen.
+      <strong>{{t.footer.disclaimerLabel}}</strong> {{t.footer.disclaimerText}}
     </div>
 
   </div>

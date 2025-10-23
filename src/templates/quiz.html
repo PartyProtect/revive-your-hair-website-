@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hair Loss Treatment Quiz - Find Your Personalized Plan | Revive Your Hair</title>
-  <meta name="description" content="Take our evidence-based hair loss quiz to get personalized treatment recommendations. Answer a few questions to find the right solution for you.">
+  <title>{{t.quiz.pageTitle}}</title>
+  <meta name="description" content="{{t.quiz.metaDescription}}">
   
   <!-- Theme Color -->
   <meta name="theme-color" content="#047857">
@@ -22,8 +22,8 @@
   
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Hair Loss Quiz - Find Your Treatment Plan">
-  <meta property="og:description" content="Answer a few questions to get personalized hair loss treatment recommendations based on scientific evidence.">
+  <meta property="og:title" content="{{t.quiz.pageTitle}}">
+  <meta property="og:description" content="{{t.quiz.metaDescription}}">
   <meta property="og:url" content="https://www.reviveyourhair.eu/quiz.html">
   <meta property="og:site_name" content="Revive Your Hair">
   
@@ -58,10 +58,46 @@
 
   <!-- Main Content -->
   <main>
-    <!-- Your quiz content will go here -->
-    <section style="max-width: 1200px; margin: 60px auto; padding: 40px;">
-      <h1 style="color: #1f2937; margin-bottom: 16px;">Hair Loss Quiz</h1>
-      <p style="color: #6b7280; line-height: 1.7;">Your quiz content will go here.</p>
+    <section class="hero-section">
+      <div class="container">
+        <h1 class="hero-title">{{t.quiz.heroTitle}}</h1>
+        <p class="hero-subtitle">{{t.quiz.heroSubtitle}}</p>
+      </div>
+    </section>
+
+    <section class="section white">
+      <div class="container" style="max-width: 800px; text-align: center;">
+        <h2 style="color: #1f2937; margin-bottom: 24px; font-size: 2rem;">{{t.quiz.comingSoonTitle}}</h2>
+        <p style="color: #6b7280; margin-bottom: 32px; font-size: 1.125rem;">{{t.quiz.comingSoonText}}</p>
+        
+        <div style="max-width: 600px; margin: 0 auto 40px; text-align: left;">
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 12px 0; display: flex; align-items: center; color: #374151;">
+              <span style="color: #059669; margin-right: 12px; font-size: 1.5rem;">✓</span>
+              <span>{{t.quiz.feature1}}</span>
+            </li>
+            <li style="padding: 12px 0; display: flex; align-items: center; color: #374151;">
+              <span style="color: #059669; margin-right: 12px; font-size: 1.5rem;">✓</span>
+              <span>{{t.quiz.feature2}}</span>
+            </li>
+            <li style="padding: 12px 0; display: flex; align-items: center; color: #374151;">
+              <span style="color: #059669; margin-right: 12px; font-size: 1.5rem;">✓</span>
+              <span>{{t.quiz.feature3}}</span>
+            </li>
+            <li style="padding: 12px 0; display: flex; align-items: center; color: #374151;">
+              <span style="color: #059669; margin-right: 12px; font-size: 1.5rem;">✓</span>
+              <span>{{t.quiz.feature4}}</span>
+            </li>
+          </ul>
+        </div>
+
+        <p style="color: #6b7280; margin-bottom: 32px;">{{t.quiz.notifyText}}</p>
+
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+          <a href="/en/blog/hair-loss-guide.html" class="cta-button primary">{{t.quiz.guideButton}}</a>
+          <a href="/en/contact/" class="cta-button secondary">{{t.quiz.contactButton}}</a>
+        </div>
+      </div>
     </section>
   </main>
 

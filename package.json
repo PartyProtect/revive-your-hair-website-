@@ -20,5 +20,8 @@
   "dependencies": {
     "@netlify/blobs": "^10.1.0",
     "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "serve": "^14.2.5"
   }
 }

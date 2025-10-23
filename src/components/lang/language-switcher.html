@@ -1,6 +1,6 @@
 <!-- Language Switcher with Dropdown -->
 <div class="language-switcher">
-  <button class="lang-toggle" onclick="this.parentElement.classList.toggle('open')">
+  <button class="lang-toggle" id="langToggle">
     <span class="current-flag" id="currentFlag">🇬🇧</span>
     <span class="current-lang" id="currentLang">EN</span>
     <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -8,12 +8,12 @@
     </svg>
   </button>
   
-  <div class="lang-dropdown">
-    <a href="#" class="lang-option" data-lang="en" id="lang-en">
+  <div class="lang-dropdown" id="langDropdown">
+    <a href="/" class="lang-option" id="lang-en">
       <span class="flag">🇬🇧</span>
       <span class="lang-name">English</span>
     </a>
-    <a href="#" class="lang-option" data-lang="nl" id="lang-nl">
+    <a href="/nl/" class="lang-option" id="lang-nl">
       <span class="flag">🇳🇱</span>
       <span class="lang-name">Nederlands</span>
     </a>
@@ -21,55 +21,99 @@
 </div>
 
 <script>
-// Update language switcher links based on current page
-(function() {
-  const path = window.location.pathname;
+// Initialize language switcher after component loads
+(function initLanguageSwitcher() {
+  const toggle = document.getElementById('langToggle');
+  const dropdown = document.getElementById('langDropdown');
   const currentFlag = document.getElementById('currentFlag');
   const currentLang = document.getElementById('currentLang');
+  const enLink = document.getElementById('lang-en');
+  const nlLink = document.getElementById('lang-nl');
   
-  // Page mappings - using absolute paths for language switching
-  const pageMap = {
-    'about': { en: '/en/about/', nl: '/nl/over-ons/' },
-    'over-ons': { en: '/en/about/', nl: '/nl/over-ons/' },
-    'contact': { en: '/en/contact/', nl: '/nl/contact/' },
-    'store': { en: '/en/store/', nl: '/nl/winkel/' },
-    'winkel': { en: '/en/store/', nl: '/nl/winkel/' },
-    'quiz': { en: '/en/quiz/', nl: '/nl/quiz/' },
-    'blog': { en: '/en/blog/', nl: '/nl/blog/' },
-    '': { en: '/en/', nl: '/nl/' }  // Home page
-  };
-  
-  // Detect current page
-  let pageName = '';
-  for (const key in pageMap) {
-    if (path.includes('/' + key + '/') || (key === '' && (path === '/en/' || path === '/nl/'))) {
-      pageName = key;
-      break;
-    }
+  // If elements don't exist yet, wait for them
+  if (!toggle || !dropdown || !currentFlag || !currentLang || !enLink || !nlLink) {
+    console.log('Language switcher elements not ready, waiting...');
+    return;
   }
+  
+  const path = window.location.pathname;
   
   // Detect current language
   const isNL = path.startsWith('/nl');
   
-  // Update current flag display
+  // Update display based on current language
   if (isNL) {
     currentFlag.textContent = '🇳🇱';
     currentLang.textContent = 'NL';
-  }
-  
-  // Set language switcher links
-  const enLink = document.getElementById('lang-en');
-  const nlLink = document.getElementById('lang-nl');
-  
-  if (pageMap[pageName]) {
-    enLink.href = pageMap[pageName].en;
-    nlLink.href = pageMap[pageName].nl;
   } else {
-    // Fallback to home
-    enLink.href = '/en/';
-    nlLink.href = '/nl/';
+    currentFlag.textContent = '🇬🇧';
+    currentLang.textContent = 'EN';
   }
+  
+  // Smart URL mapping - automatically convert between languages
+  let enPath, nlPath;
+  
+  if (isNL) {
+    // Currently on Dutch - convert to English (remove /nl and convert slugs)
+    nlPath = path;
+    enPath = path
+      .replace(/^\/nl/, '') // Remove /nl prefix
+      .replace(/\/over-ons/, '/about')
+      .replace(/\/winkel/, '/store')
+      .replace(/\/contact/, '/contact')
+      .replace(/\/quiz/, '/quiz')
+      .replace(/\/blog/, '/blog')
+      || '/'; // If empty after removing /nl, it's the homepage
+  } else {
+    // Currently on English - convert to Dutch (add /nl and convert slugs)
+    enPath = path;
+    if (path === '/' || path === '') {
+      nlPath = '/nl/';
+    } else {
+      nlPath = '/nl' + path
+        .replace(/\/about/, '/over-ons')
+        .replace(/\/store/, '/winkel')
+        .replace(/\/contact/, '/contact')
+        .replace(/\/quiz/, '/quiz')
+        .replace(/\/blog/, '/blog');
+    }
+  }
+  
+  // Set proper hrefs for language options
+  enLink.href = enPath;
+  nlLink.href = nlPath;
+  
+  // Toggle dropdown on button click
+  toggle.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    toggle.classList.toggle('active');
+    dropdown.classList.toggle('active');
+  });
+  
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
+      toggle.classList.remove('active');
+      dropdown.classList.remove('active');
+    }
+  });
+  
+  console.log('Language switcher initialized successfully', {
+    currentLang: isNL ? 'nl' : 'en',
+    enPath,
+    nlPath
+  });
 })();
+
+// Also listen for componentsLoaded event in case this script runs before component loads
+window.addEventListener('componentsLoaded', function() {
+  console.log('Components loaded event received, initializing language switcher...');
+  const script = document.querySelector('.language-switcher + script');
+  if (script) {
+    eval(script.textContent);
+  }
+});
 </script>
 
 <style>
@@ -154,6 +198,7 @@
     cursor: pointer;
     transition: background 0.2s;
     text-align: left;
+    text-decoration: none;
   }
 
   .lang-option:hover {
@@ -169,20 +214,6 @@
     font-weight: 500;
   }
 
-  .lang-option.active {
-    background: var(--forest-green);
-    color: white;
-  }
-
-  .lang-coming-soon {
-    padding: 12px 16px;
-    color: var(--gray-dark);
-    font-size: 0.85em;
-    font-style: italic;
-    text-align: center;
-    border-top: 1px solid var(--gray-100);
-  }
-
   /* Mobile */
   @media (max-width: 768px) {
     .lang-toggle {
@@ -195,47 +226,3 @@
     }
   }
 </style>
-
-<script>
-  // Language switcher functionality for multilingual site
-  document.addEventListener('DOMContentLoaded', function() {
-    const toggle = document.getElementById('langToggle');
-    const dropdown = document.getElementById('langDropdown');
-    const currentFlag = document.getElementById('currentFlag');
-    const currentLang = document.getElementById('currentLang');
-    const langOptions = document.querySelectorAll('.lang-option');
-
-    // Detect current language from URL path
-    const path = window.location.pathname;
-    let currentLanguage = 'en'; // default
-    
-    if (path.startsWith('/nl/')) {
-      currentLanguage = 'nl';
-      currentFlag.textContent = '🇳🇱';
-      currentLang.textContent = 'NL';
-    } else {
-      currentFlag.textContent = '🇬🇧';
-      currentLang.textContent = 'EN';
-    }
-
-    // Mark active language
-    langOptions.forEach(option => {
-      if (option.dataset.lang === currentLanguage) {
-        option.classList.add('active');
-      }
-    });
-
-    // Toggle dropdown
-    toggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggle.classList.toggle('active');
-      dropdown.classList.toggle('active');
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', () => {
-      toggle.classList.remove('active');
-      dropdown.classList.remove('active');
-    });
-  });
-</script>

@@ -1,10 +1,9 @@
 [build]
-  # Build SEO-friendly pre-rendered content before deployment
-  # Then validate sitemap headers are correct
-  command = "node build-seo-content.js && node check-sitemap.js"
+  # Build multilingual site structure to dist/ folder
+  command = "node build-i18n.js"
   
-  # Publish the entire src directory
-  publish = "src"
+  # Publish the dist directory (multilingual output)
+  publish = "dist"
 
 [build.environment]
   # Specify Node.js version for build process
@@ -13,68 +12,73 @@
   # Disable secrets scanning (values in docs are examples only)
   SECRETS_SCAN_ENABLED = "false"
 
-# Serve pages with clean URLs (files are directly in src/ root - no /pages/ folder)
+# Multilingual clean URLs with language prefix
+[[redirects]]
+  from = "/en"
+  to = "/en/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/nl"
+  to = "/nl/index.html"
+  status = 200
+
 [[redirects]]
   from = "/"
-  to = "/index.html"
+  to = "/en/"
+  status = 302
+
+# English routes
+[[redirects]]
+  from = "/en/about"
+  to = "/en/about/index.html"
   status = 200
 
 [[redirects]]
-  from = "/about"
-  to = "/about.html"
+  from = "/en/contact"
+  to = "/en/contact/index.html"
   status = 200
 
 [[redirects]]
-  from = "/contact"
-  to = "/contact.html"
+  from = "/en/quiz"
+  to = "/en/quiz/index.html"
   status = 200
 
 [[redirects]]
-  from = "/quiz"
-  to = "/quiz.html"
+  from = "/en/store"
+  to = "/en/store/index.html"
   status = 200
 
 [[redirects]]
-  from = "/store"
-  to = "/store.html"
+  from = "/en/blog"
+  to = "/en/blog/index.html"
+  status = 200
+
+# Dutch routes
+[[redirects]]
+  from = "/nl/over-ons"
+  to = "/nl/over-ons/index.html"
   status = 200
 
 [[redirects]]
-  from = "/blog"
-  to = "/blog/index.html"
-  status = 200
-
-# Remove unnecessary circular redirects - files already exist
-# [[redirects]]
-#   from = "/blog/:slug.html"
-#   to = "/blog/:slug.html"
-#   status = 200
-
-[[redirects]]
-  from = "/blog/:slug"
-  to = "/blog/:slug.html"
+  from = "/nl/contact"
+  to = "/nl/contact/index.html"
   status = 200
 
 [[redirects]]
-  from = "/blog/:slug/"
-  to = "/blog/:slug.html"
-  status = 301
-
-# Remove unnecessary circular redirects - files already exist
-# [[redirects]]
-#   from = "/legal/:slug.html"
-#   to = "/legal/:slug.html"
-#   status = 200
-
-[[redirects]]
-  from = "/legal/:slug"
-  to = "/legal/:slug.html"
+  from = "/nl/quiz"
+  to = "/nl/quiz/index.html"
   status = 200
 
 [[redirects]]
-  from = "/legal/:slug/"
-  to = "/legal/:slug.html"
-  status = 301
+  from = "/nl/winkel"
+  to = "/nl/winkel/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/nl/blog"
+  to = "/nl/blog/index.html"
+  status = 200
 
 # Handle 404 errors - this must be last
 [[redirects]]

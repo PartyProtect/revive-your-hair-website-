@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us - Revive Your Hair</title>
-  <meta name="description" content="Get in touch with Revive Your Hair. We're here to help with your hair loss questions.">
+  <title>{{t.contact.pageTitle}}</title>
+  <meta name="description" content="{{t.contact.metaDescription}}">
   
   <!-- Theme Color -->
   <meta name="theme-color" content="#047857">
@@ -254,32 +254,32 @@
         
         <!-- Hero -->
         <div class="hero-section">
-          <h1 class="page-title">Get in Touch</h1>
-          <p class="page-subtitle">Questions about treatments? Want to work together? We're here.</p>
+          <h1 class="page-title">{{t.contact.heroTitle}}</h1>
+          <p class="page-subtitle">{{t.contact.heroSubtitle}}</p>
         </div>
 
         <!-- Intro -->
         <div class="intro-text">
-          <p>Hair loss is deeply personal. The internet is full of conflicting advice, and people trying to sell you stuff that doesn't work.</p>
-          <p><strong>We're not those people.</strong></p>
-          <p>Got a question about a treatment? Confused about side effects? Need help understanding your options? Reach out.</p>
+          <p>{{t.contact.introPara1}}</p>
+          <p><strong>{{t.contact.introPara2}}</strong></p>
+          <p>{{t.contact.introPara3}}</p>
         </div>
 
         <!-- Form -->
         <div class="form-section">
-          <h2 class="form-title">Send Us a Message</h2>
+          <h2 class="form-title">{{t.contact.formTitle}}</h2>
           
           <form id="contactForm" action="/contact" method="POST">
             
             <!-- Honeypot field - hidden from users, catches bots -->
             <div class="honeypot-field" style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
-              <label for="website">Website (leave blank)</label>
+              <label for="website">{{t.contact.honeypotLabel}}</label>
               <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
             </div>
 
             <div class="form-group">
               <label class="form-label" for="name">
-                Your Name<span class="required">*</span>
+                {{t.contact.labelName}}<span class="required">{{t.contact.required}}</span>
               </label>
               <input 
                 type="text" 
@@ -287,13 +287,13 @@
                 name="name" 
                 class="form-input" 
                 required 
-                placeholder="John Smith"
+                placeholder="{{t.contact.placeholderName}}"
               >
             </div>
 
             <div class="form-group">
               <label class="form-label" for="email">
-                Email Address<span class="required">*</span>
+                {{t.contact.labelEmail}}<span class="required">{{t.contact.required}}</span>
               </label>
               <input 
                 type="email" 
@@ -301,49 +301,49 @@
                 name="email" 
                 class="form-input" 
                 required 
-                placeholder="john@example.com"
+                placeholder="{{t.contact.placeholderEmail}}"
               >
             </div>
 
             <div class="form-group">
               <label class="form-label" for="subject">
-                What's this about?<span class="required">*</span>
+                {{t.contact.labelSubject}}<span class="required">{{t.contact.required}}</span>
               </label>
               <select id="subject" name="subject" class="form-select" required>
-                <option value="">Select a topic...</option>
-                <option value="treatment">Treatment Question</option>
-                <option value="side-effects">Side Effects / Safety</option>
-                <option value="combination">Combination Therapy Advice</option>
-                <option value="order">Order / Product Question</option>
-                <option value="business">Business Inquiry</option>
-                <option value="partnership">Partnership / Collaboration</option>
-                <option value="technical">Technical Support</option>
-                <option value="other">Something Else</option>
+                <option value="">{{t.contact.subjectDefault}}</option>
+                <option value="treatment">{{t.contact.subjectTreatment}}</option>
+                <option value="side-effects">{{t.contact.subjectSideEffects}}</option>
+                <option value="combination">{{t.contact.subjectCombination}}</option>
+                <option value="order">{{t.contact.subjectOrder}}</option>
+                <option value="business">{{t.contact.subjectBusiness}}</option>
+                <option value="partnership">{{t.contact.subjectPartnership}}</option>
+                <option value="technical">{{t.contact.subjectTechnical}}</option>
+                <option value="other">{{t.contact.subjectOther}}</option>
               </select>
             </div>
 
             <div class="form-group">
               <label class="form-label" for="message">
-                Your Message<span class="required">*</span>
+                {{t.contact.labelMessage}}<span class="required">{{t.contact.required}}</span>
               </label>
               <textarea 
                 id="message" 
                 name="message" 
                 class="form-textarea" 
                 required 
-                placeholder="What's on your mind? Be as detailed as you need to be."
+                placeholder="{{t.contact.placeholderMessage}}"
               ></textarea>
-              <p class="form-hint">For treatment questions: Include your age, how long you've been losing hair, and what you've tried so far if you want specific advice.</p>
+              <p class="form-hint">{{t.contact.hintMessage}}</p>
             </div>
 
             <button type="submit" class="submit-button">
-              Send Message →
+              {{t.contact.submitButton}}
             </button>
 
           </form>
 
           <div class="response-time">
-            <p><strong>We typically respond within 24-48 hours.</strong> If it's urgent, mention that in your message.</p>
+            <p><strong>{{t.contact.responseTime}}</strong>{{t.contact.responseTimeUrgent}}</p>
           </div>
         </div>
 
@@ -386,7 +386,7 @@
       
       // In production, you'd send this to your backend
       // For now, just show a success message
-      alert('Thanks for reaching out! We\'ll get back to you within 24-48 hours.');
+      alert('{{t.contact.successMessage}}');
       
       // Reset form
       this.reset();
