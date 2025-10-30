@@ -58,13 +58,13 @@ function replaceTranslations(html, translations) {
   // First replace triple braces (HTML content) 
   html = html.replace(/\{\{\{t\.([a-zA-Z0-9_.]+)\}\}\}/g, (match, key) => {
     const value = key.split('.').reduce((obj, k) => obj?.[k], translations);
-    return value || match; // Return original if translation not found
+    return value !== undefined ? value : match; // Return original if translation not found
   });
   
   // Then replace double braces (escaped content)
   html = html.replace(/\{\{t\.([a-zA-Z0-9_.]+)\}\}/g, (match, key) => {
     const value = key.split('.').reduce((obj, k) => obj?.[k], translations);
-    return value || match; // Return original if translation not found
+    return value !== undefined ? value : match; // Return original if translation not found
   });
   
   return html;
@@ -378,10 +378,39 @@ function buildAll() {
       const legalFiles = fs.readdirSync(legalSrc);
       
       for (const file of legalFiles) {
-        const srcPath = path.join(legalSrc, file);
-        const destPath = path.join(legalDest, file);
+        // Skip language-specific files for other languages
+        if (file.endsWith('-nl.html') && lang !== 'nl') continue;
+        if (file.endsWith('-en.html') && lang !== 'en') continue;
         
-        if (file.endsWith('.html')) {
+        // For Dutch, use language-specific versions if they exist
+        let srcFile = file;
+        let destFile = file;
+        if (lang === 'nl') {
+          if (file === 'disclaimer.html' && fs.existsSync(path.join(legalSrc, 'disclaimer-nl.html'))) {
+            srcFile = 'disclaimer-nl.html';
+            destFile = 'disclaimer.html'; // Still output as disclaimer.html
+          }
+          if (file === 'affiliate-disclosure.html' && fs.existsSync(path.join(legalSrc, 'affiliate-disclosure-nl.html'))) {
+            srcFile = 'affiliate-disclosure-nl.html';
+            destFile = 'affiliate-disclosure.html'; // Still output as affiliate-disclosure.html
+          }
+          if (file === 'privacy-policy.html' && fs.existsSync(path.join(legalSrc, 'privacy-policy-nl.html'))) {
+            srcFile = 'privacy-policy-nl.html';
+            destFile = 'privacy-policy.html'; // Still output as privacy-policy.html
+          }
+          if (file === 'terms-of-service.html' && fs.existsSync(path.join(legalSrc, 'terms-of-service-nl.html'))) {
+            srcFile = 'terms-of-service-nl.html';
+            destFile = 'terms-of-service.html'; // Still output as terms-of-service.html
+          }
+        }
+        
+        // Skip -nl/-en suffix files from being copied as-is
+        if (file.endsWith('-nl.html') || file.endsWith('-en.html')) continue;
+        
+        const srcPath = path.join(legalSrc, srcFile);
+        const destPath = path.join(legalDest, destFile);
+        
+        if (srcFile.endsWith('.html')) {
           let html = fs.readFileSync(srcPath, 'utf8');
           
           // Replace language attribute

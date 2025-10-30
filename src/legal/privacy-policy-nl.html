@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Privacybeleid - Revive Your Hair</title>
+  
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#047857">
+  
+  <!-- Security -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  
+  <link rel="stylesheet" href="../../styles/color-palette.css">
+  <link rel="stylesheet" href="../../styles/main.css">
+  <link rel="stylesheet" href="../../styles/components.css">
+  
+  <!-- i18n -->
+  <script src="../../scripts/i18n.js"></script>
+  
+  <!-- Scripts -->
+  <script src="../../scripts/component-loader.js"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .page-wrapper {
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .policy-header {
+      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      color: white;
+      padding: 60px 40px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .policy-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.1), transparent);
+      pointer-events: none;
+    }
+
+    .policy-header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .policy-title {
+      font-size: 2.5em;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--warm-gold);
+    }
+
+    .policy-effective {
+      font-size: 1em;
+      opacity: 0.9;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Content */
+    .policy-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      background: white;
+      margin-top: -20px;
+      position: relative;
+      z-index: 10;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .policy-intro {
+      background: var(--gray-50);
+      padding: 32px;
+      border-radius: 8px;
+      margin-bottom: 48px;
+      border-left: 4px solid var(--forest-green);
+    }
+
+    .policy-intro p {
+      font-size: 1.15em;
+      color: var(--gray-dark);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .policy-intro p:last-child {
+      margin-bottom: 0;
+    }
+
+    .key-points {
+      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+      border-left: 4px solid var(--forest-green);
+      padding: 32px;
+      border-radius: 8px;
+      margin-bottom: 48px;
+    }
+
+    .key-points h3 {
+      font-size: 1.3em;
+      color: var(--forest-green-dark);
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .key-points ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .key-points li {
+      font-size: 1.05em;
+      color: var(--charcoal);
+      line-height: 1.8;
+      margin-bottom: 12px;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .key-points li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--forest-green);
+      font-weight: 700;
+      font-size: 1.2em;
+    }
+
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section-title {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--gray-200);
+    }
+
+    .section-content p {
+      font-size: 1.05em;
+      color: var(--gray-dark);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .section-content ul {
+      margin: 16px 0;
+      padding-left: 24px;
+    }
+
+    .section-content li {
+      font-size: 1.05em;
+      color: var(--gray-dark);
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+
+    .contact-box {
+      background: var(--gray-50);
+      padding: 32px;
+      border-radius: 8px;
+      margin-top: 24px;
+    }
+
+    .contact-box strong {
+      color: var(--charcoal);
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.1em;
+    }
+
+    .contact-box p {
+      margin: 4px 0;
+      color: var(--gray-dark);
+    }
+
+    /* Data table */
+    .data-table {
+      background: var(--gray-50);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 24px 0;
+      border-left: 4px solid var(--forest-green);
+    }
+
+    .data-category {
+      margin-bottom: 20px;
+    }
+
+    .data-category:last-child {
+      margin-bottom: 0;
+    }
+
+    .data-category strong {
+      color: var(--charcoal);
+      font-size: 1.05em;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .data-category p {
+      color: var(--gray-dark);
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    /* Retention table */
+    .retention-list {
+      background: var(--gray-50);
+      padding: 24px;
+      border-radius: 8px;
+      margin: 24px 0;
+      border-left: 4px solid var(--warm-gold);
+    }
+
+    .retention-item {
+      padding: 16px;
+      background: white;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      transition: all 0.2s;
+    }
+
+    .retention-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .retention-item:hover {
+      transform: translateX(4px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .retention-item strong {
+      color: var(--charcoal);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .retention-item span {
+      color: var(--gray-medium);
+      font-size: 0.95em;
+    }
+
+    /* Partners list */
+    .partners-list {
+      display: grid;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .partner-item {
+      background: var(--gray-50);
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid var(--forest-green);
+      transition: all 0.2s;
+    }
+
+    .partner-item:hover {
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .partner-item strong {
+      color: var(--charcoal);
+      font-size: 1.1em;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .partner-item span {
+      color: var(--gray-medium);
+      font-size: 0.95em;
+    }
+
+    /* Security list */
+    .security-list {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border-left: 4px solid #3b82f6;
+      padding: 24px;
+      border-radius: 8px;
+      margin: 24px 0;
+    }
+
+    .security-list ul {
+      margin: 0;
+      padding-left: 24px;
+    }
+
+    .security-list li {
+      color: var(--charcoal);
+      margin-bottom: 10px;
+    }
+
+    /* Rights grid */
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .right-item {
+      background: var(--gray-50);
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid var(--forest-green);
+      transition: all 0.2s;
+    }
+
+    .right-item:hover {
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+
+    .right-item strong {
+      color: var(--charcoal);
+      font-size: 1.05em;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .right-item p {
+      color: var(--gray-medium);
+      font-size: 0.95em;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Highlight boxes */
+    .highlight-box {
+      background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+      border-left: 4px solid var(--warm-gold);
+      padding: 24px;
+      border-radius: 8px;
+      margin: 24px 0;
+    }
+
+    .highlight-box strong {
+      color: var(--warm-gold-dark);
+      display: block;
+      margin-bottom: 12px;
+      font-size: 1.1em;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      color: var(--charcoal);
+    }
+
+    /* Links */
+    a {
+      color: var(--forest-green);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: var(--forest-green-dark);
+      text-decoration: underline;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .policy-header {
+        padding: 40px 20px 30px;
+      }
+
+      .policy-title {
+        font-size: 2em;
+      }
+
+      .policy-content {
+        padding: 40px 20px;
+        margin-top: 0;
+        border-radius: 0;
+      }
+
+      .section-title {
+        font-size: 1.5em;
+      }
+
+      .rights-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    
+    <!-- Header Component -->
+    <div id="header-root"></div>
+
+    <!-- Header -->
+    <header class="policy-header">
+      <div class="policy-header-content">
+        <h1 class="policy-title">Privacybeleid</h1>
+        <p class="policy-effective">Ingangsdatum: 1 november 2025</p>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="policy-content">
+      
+      <!-- Intro -->
+      <div class="policy-intro">
+        <p>Dit privacybeleid beschrijft hoe Tomann & Alberts Enterprises (handelend onder de naam ReviveYourHair) jouw persoonsgegevens verzamelt, gebruikt en beschermt wanneer je reviveyourhair.eu bezoekt of onze producten koopt.</p>
+      </div>
+
+      <!-- Key Points -->
+      <div class="key-points">
+        <h3>Kernpunten in één minuut:</h3>
+        <ul>
+          <li>We verzamelen alleen de gegevens die we nodig hebben om onze webshop te runnen, je bestelling te verzenden en—als je akkoord gaat—je haarverzorgingstips en aanbiedingen te sturen.</li>
+          <li>We verkopen nooit jouw gegevens.</li>
+          <li>Je kunt ons altijd vragen om je gegevens in te zien, te corrigeren of te verwijderen.</li>
+        </ul>
+      </div>
+
+      <!-- Controller -->
+      <section class="section">
+        <h2 class="section-title">1. Wie Is Verantwoordelijk voor Jouw Gegevens?</h2>
+        <div class="section-content">
+          <p>Verwerkingsverantwoordelijke (AVG Art. 13 §1 a):</p>
+          <div class="contact-box">
+            <strong>Tomann & Alberts Enterprises</strong>
+            <p>Hemelsley 123, 6136 HK Sittard, Nederland</p>
+            <p>KvK 96084294 — BTW NL867462668B01</p>
+            <p>Tel. <a href="tel:+31646390476">+31 6 46390476</a></p>
+            <p>E-mail: <a href="mailto:info@reviveyourhair.eu">info@reviveyourhair.eu</a></p>
+            <p>Privacycontact: Saf Alberts</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Data Collection -->
+      <section class="section">
+        <h2 class="section-title">2. Welke Persoonsgegevens We Verzamelen</h2>
+        <div class="section-content">
+          <p>We verzamelen en verwerken de volgende categorieën gegevens:</p>
+          
+          <div class="data-table">
+            <div class="data-category">
+              <strong>Identiteit & Contact</strong>
+              <p>Volledige naam, postadres, e-mail, telefoonnummer</p>
+            </div>
+            <div class="data-category">
+              <strong>Transactie</strong>
+              <p>Bestelnummer, producten, betalingsstatus, trackingnummer bezorging</p>
+            </div>
+            <div class="data-category">
+              <strong>Betaling</strong>
+              <p>Laatste vier cijfers van kaart / PayPal transactie-ID, iDEAL bank-ID</p>
+            </div>
+            <div class="data-category">
+              <strong>Technisch</strong>
+              <p>IP-adres, apparaattype, browser, OS, referrer-URL, cookie-ID</p>
+            </div>
+            <div class="data-category">
+              <strong>Gebruik</strong>
+              <p>Bezochte pagina's, tijd op pagina, kliks, zoektermen (via analytics cookies)</p>
+            </div>
+            <div class="data-category">
+              <strong>Marketingvoorkeuren</strong>
+              <p>Nieuwsbrief opt-in, open- en klikpercentages</p>
+            </div>
+            <div class="data-category">
+              <strong>Ondersteuning & Reviews</strong>
+              <p>Berichten, productbeoordelingen, sterrenwaarderingen</p>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <strong>⚠️ Belangrijk:</strong>
+            <p>We vragen niet om gevoelige gegevens zoals gezondheid of etniciteit en verwerken deze niet bewust. Als je dergelijke gegevens deelt in een ondersteuningsbericht, verwijderen we deze nadat je verzoek is afgehandeld.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Legal Bases -->
+      <section class="section">
+        <h2 class="section-title">3. Waarom We Jouw Gegevens Verwerken & Rechtsgronden</h2>
+        <div class="section-content">
+          <div class="retention-list">
+            <div class="retention-item">
+              <strong>Bestellingen verwerken & verzenden</strong>
+              <span>Rechtsgrond: Overeenkomst (Art. 6(1)(b)) — Bewaartermijn: 7 jaar (Nederlandse belastingwet)</span>
+            </div>
+            <div class="retention-item">
+              <strong>Klantenservice</strong>
+              <span>Rechtsgrond: Gerechtvaardigd belang (Art. 6(1)(f)) — Bewaartermijn: 3 jaar na laatste contact</span>
+            </div>
+            <div class="retention-item">
+              <strong>Websitebeveiliging & fraudepreventie</strong>
+              <span>Rechtsgrond: Gerechtvaardigd belang (Art. 6(1)(f)) — Bewaartermijn: Logs 30 dagen, beveiligingslogs 13 maanden</span>
+            </div>
+            <div class="retention-item">
+              <strong>Analytics & UX-optimalisatie</strong>
+              <span>Rechtsgrond: Toestemming via cookie banner (Art. 6(1)(a)) — Bewaartermijn: 14 maanden</span>
+            </div>
+            <div class="retention-item">
+              <strong>Marketing e-mails & aanbiedingen</strong>
+              <span>Rechtsgrond: Toestemming of soft opt-in (Telecommunicatiewet §11(7)) — Bewaartermijn: Tot uitschrijving of 24 maanden inactiviteit</span>
+            </div>
+            <div class="retention-item">
+              <strong>Wettelijke boekhouding</strong>
+              <span>Rechtsgrond: Wettelijke verplichting (Art. 6(1)(c)) — Bewaartermijn: 7 jaar</span>
+            </div>
+          </div>
+          <p>Je kunt je toestemming op elk moment intrekken zonder dat dit gevolgen heeft voor eerdere verwerking.</p>
+        </div>
+      </section>
+
+      <!-- Cookies -->
+      <section class="section">
+        <h2 class="section-title">4. Cookies & Vergelijkbare Technologieën</h2>
+        <div class="section-content">
+          <p>We gebruiken cookies om onze winkel te laten werken en je ervaring te verbeteren.</p>
+          <ul>
+            <li><strong>Strikt noodzakelijk</strong> — Winkelwagentje onthouden, betalingen verwerken (Overeenkomst)</li>
+            <li><strong>Analytics</strong> — Websitegebruik begrijpen (_ga) (Toestemming)</li>
+            <li><strong>Voorkeuren</strong> — Taal en cookie-instellingen onthouden (Gerechtvaardigd belang)</li>
+            <li><strong>Marketing</strong> — Relevante aanbiedingen sturen (Toestemming)</li>
+          </ul>
+          <p>Je kunt je toestemming op elk moment wijzigen of intrekken via de link "Cookie-instellingen" in de footer. Een volledige cookietabel is beschikbaar in ons <a href="cookie-policy.html">Cookiebeleid</a>.</p>
+        </div>
+      </section>
+
+      <!-- Data Sharing -->
+      <section class="section">
+        <h2 class="section-title">5. Met Wie We Jouw Gegevens Delen</h2>
+        <div class="section-content">
+          <p>We delen gegevens alleen met vertrouwde partners die ons helpen bij het runnen van ons bedrijf. Elke partner treedt op als verwerker (volgens onze instructies) of als onafhankelijke verwerkingsverantwoordelijke.</p>
+          
+          <div class="partners-list">
+            <div class="partner-item">
+              <strong>SiteGround Spain S.L.</strong>
+              <span>Hosting — EU-datacenter (EER)</span>
+            </div>
+            <div class="partner-item">
+              <strong>WooCommerce</strong>
+              <span>E-commerceplatform — EU</span>
+            </div>
+            <div class="partner-item">
+              <strong>Mollie B.V.</strong>
+              <span>iDEAL- en creditcardbetalingen — EU</span>
+            </div>
+            <div class="partner-item">
+              <strong>PayPal (Europe) S.à r.l.</strong>
+              <span>Betalingsverwerking — EU/VS (Data Privacy Framework)</span>
+            </div>
+            <div class="partner-item">
+              <strong>PostNL B.V.</strong>
+              <span>Bezorging — EU</span>
+            </div>
+            <div class="partner-item">
+              <strong>Google Ireland Ltd. (GA4)</strong>
+              <span>Analytics (IP-anonimisering, standaardcontractbepalingen)</span>
+            </div>
+            <div class="partner-item">
+              <strong>MailerLite UAB</strong>
+              <span>Nieuwsbrieven en e-mails — EU</span>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <strong>✅ We Verkopen Nooit Jouw Gegevens</strong>
+            <p>We verkopen of verhuren jouw gegevens nooit aan externe adverteerders.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- International Transfers -->
+      <section class="section">
+        <h2 class="section-title">6. Internationale Gegevensoverdracht</h2>
+        <div class="section-content">
+          <p>Als gegevens buiten de Europese Economische Ruimte worden overgedragen, vertrouwen we op waarborgen zoals een adequaatheidsbesluit (bijv. EU-VS Data Privacy Framework), standaardcontractbepalingen, of je expliciete toestemming.</p>
+        </div>
+      </section>
+
+      <!-- Retention -->
+      <section class="section">
+        <h2 class="section-title">7. Hoe Lang We Jouw Gegevens Bewaren</h2>
+        <div class="section-content">
+          <p>We volgen de bewaartermijnen in Sectie 3. Na afloop wissen of anonimiseren we gegevens, tenzij wettelijke verplichtingen langere opslag vereisen.</p>
+        </div>
+      </section>
+
+      <!-- Security -->
+      <section class="section">
+        <h2 class="section-title">8. Hoe We Jouw Gegevens Beveiligen</h2>
+        <div class="section-content">
+          <p>We passen passende technische en organisatorische maatregelen toe, waaronder:</p>
+          <div class="security-list">
+            <ul>
+              <li>TLS 1.3-versleuteling</li>
+              <li>Tweefactorauthenticatie voor beheerdersaccounts</li>
+              <li>Dagelijkse versleutelde off-site back-ups (14 dagen bewaring)</li>
+              <li>Principe van minimale toegang (least privilege)</li>
+              <li>Beveiligingspatches binnen 72 uur</li>
+              <li>Continue monitoring & Web Application Firewall (WAF)</li>
+            </ul>
+          </div>
+          <p>Bij een datalek melden we dit binnen 72 uur aan getroffen personen en de Autoriteit Persoonsgegevens.</p>
+        </div>
+      </section>
+
+      <!-- Rights -->
+      <section class="section">
+        <h2 class="section-title">9. Jouw Rechten</h2>
+        <div class="section-content">
+          <p>Je hebt het recht om:</p>
+          
+          <div class="rights-grid">
+            <div class="right-item">
+              <strong>Inzage</strong>
+              <p>Je persoonsgegevens die we bewaren in te zien</p>
+            </div>
+            <div class="right-item">
+              <strong>Correctie</strong>
+              <p>Onjuiste gegevens te laten corrigeren</p>
+            </div>
+            <div class="right-item">
+              <strong>Verwijdering</strong>
+              <p>Te vragen om je gegevens te verwijderen ('recht op vergetelheid')</p>
+            </div>
+            <div class="right-item">
+              <strong>Beperking</strong>
+              <p>Te beperken hoe we je gegevens verwerken</p>
+            </div>
+            <div class="right-item">
+              <strong>Dataportabiliteit</strong>
+              <p>Je gegevens in een overdraagbaar formaat te ontvangen</p>
+            </div>
+            <div class="right-item">
+              <strong>Bezwaar</strong>
+              <p>Bezwaar te maken tegen verwerking op basis van gerechtvaardigd belang of directmarketing</p>
+            </div>
+            <div class="right-item">
+              <strong>Toestemming Intrekken</strong>
+              <p>Toestemming op elk moment in te trekken</p>
+            </div>
+          </div>
+
+          <p>Om je rechten uit te oefenen, stuur een e-mail naar <a href="mailto:privacy@reviveyourhair.eu">privacy@reviveyourhair.eu</a> of schrijf naar ons bovenstaande adres. We kunnen om identiteitsbewijs vragen.</p>
+          
+          <p>Je kunt ook een klacht indienen bij de <a href="https://autoriteitpersoonsgegevens.nl" target="_blank" rel="noopener">Autoriteit Persoonsgegevens</a> of je lokale toezichthouder.</p>
+        </div>
+      </section>
+
+      <!-- Children -->
+      <section class="section">
+        <h2 class="section-title">10. Kinderen</h2>
+        <div class="section-content">
+          <p>Onze website is niet gericht op kinderen onder de 16 jaar. We verzamelen niet bewust persoonsgegevens van minderjarigen. Als je denkt dat we gegevens van een kind hebben, neem dan contact met ons op en we verwijderen deze onmiddellijk.</p>
+        </div>
+      </section>
+
+      <!-- Automated Decisions -->
+      <section class="section">
+        <h2 class="section-title">11. Geautomatiseerde Besluitvorming & Profilering</h2>
+        <div class="section-content">
+          <p>We gebruiken geen persoonsgegevens voor geautomatiseerde beslissingen die juridische of significante gevolgen hebben.</p>
+        </div>
+      </section>
+
+      <!-- Changes -->
+      <section class="section">
+        <h2 class="section-title">12. Wijzigingen in Dit Beleid</h2>
+        <div class="section-content">
+          <p>We kunnen dit privacybeleid van tijd tot tijd bijwerken. Belangrijke wijzigingen kondigen we 30 dagen van tevoren aan via e-mail (als we je adres hebben) en een melding op de website. Eerdere versies blijven beschikbaar op <a href="/nl/juridisch/privacy-archief">reviveyourhair.eu/nl/juridisch/privacy-archief</a>.</p>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="section">
+        <h2 class="section-title">13. Contact</h2>
+        <div class="section-content">
+          <p>Vragen, verzoeken of klachten?</p>
+          <div class="contact-box">
+            <strong>E-mail:</strong>
+            <p><a href="mailto:info@reviveyourhair.eu">info@reviveyourhair.eu</a></p>
+            <strong style="margin-top: 16px;">Telefoon:</strong>
+            <p><a href="tel:+31646390476">+31 6 46390476</a></p>
+            <strong style="margin-top: 16px;">Post:</strong>
+            <p>Tomann & Alberts Enterprises — Privacy</p>
+            <p>Hemelsley 123, 6136 HK Sittard, Nederland</p>
+          </div>
+          <p style="margin-top: 24px; font-style: italic; color: var(--gray-medium);">Bedankt voor het vertrouwen in ReviveYourHair met jouw gegevens.</p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer Component -->
+    <div id="footer-root"></div>
+
+  </div>
+
+  <script src="../../scripts/main.js"></script>
+</body>
+</html>
