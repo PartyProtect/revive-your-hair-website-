@@ -419,6 +419,7 @@ function buildAll() {
       for (const file of legalFiles) {
         // Skip language-specific files for other languages
         if (file.endsWith('-nl.html') && lang !== 'nl') continue;
+        if (file.endsWith('-de.html') && lang !== 'de') continue;
         if (file.endsWith('-en.html') && lang !== 'en') continue;
         
         // For Dutch, use language-specific versions if they exist
@@ -443,8 +444,32 @@ function buildAll() {
           }
         }
         
-        // Skip -nl/-en suffix files from being copied as-is
-        if (file.endsWith('-nl.html') || file.endsWith('-en.html')) continue;
+        // For German, use language-specific versions if they exist
+        if (lang === 'de') {
+          if (file === 'disclaimer.html' && fs.existsSync(path.join(legalSrc, 'disclaimer-de.html'))) {
+            srcFile = 'disclaimer-de.html';
+            destFile = 'disclaimer.html'; // Still output as disclaimer.html
+          }
+          if (file === 'affiliate-disclosure.html' && fs.existsSync(path.join(legalSrc, 'affiliate-disclosure-de.html'))) {
+            srcFile = 'affiliate-disclosure-de.html';
+            destFile = 'affiliate-disclosure.html'; // Still output as affiliate-disclosure.html
+          }
+          if (file === 'privacy-policy.html' && fs.existsSync(path.join(legalSrc, 'privacy-policy-de.html'))) {
+            srcFile = 'privacy-policy-de.html';
+            destFile = 'privacy-policy.html'; // Still output as privacy-policy.html
+          }
+          if (file === 'terms-of-service.html' && fs.existsSync(path.join(legalSrc, 'terms-of-service-de.html'))) {
+            srcFile = 'terms-of-service-de.html';
+            destFile = 'terms-of-service.html'; // Still output as terms-of-service.html
+          }
+          if (file === 'cookie-policy.html' && fs.existsSync(path.join(legalSrc, 'cookie-policy-de.html'))) {
+            srcFile = 'cookie-policy-de.html';
+            destFile = 'cookie-policy.html'; // Still output as cookie-policy.html
+          }
+        }
+        
+        // Skip -nl/-de/-en suffix files from being copied as-is
+        if (file.endsWith('-nl.html') || file.endsWith('-de.html') || file.endsWith('-en.html')) continue;
         
         const srcPath = path.join(legalSrc, srcFile);
         const destPath = path.join(legalDest, destFile);
@@ -479,6 +504,21 @@ function buildAll() {
             html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/nl/blog/hair-loss-guide.html"');
             
             // Update asset paths (go up one level since we're in /nl/legal/)
+            html = html.replace(/href="\.\.\/\.\.\//g, 'href="../../');
+            html = html.replace(/src="\.\.\/\.\.\//g, 'src="../../');
+          } else if (lang === 'de') {
+            // German: Convert /en/ to /de/ paths
+            html = html.replace(/href="\/en\/legal\//g, 'href="/de/legal/');
+            html = html.replace(/href="\/legal\//g, 'href="/de/legal/');
+            html = html.replace(/href="\/en\/blog\/"/g, 'href="/de/blog/"');
+            html = html.replace(/href="\/en\/contact\/"/g, 'href="/de/kontakt/"');
+            html = html.replace(/href="\/en\/about\/"/g, 'href="/de/uber-uns/"');
+            html = html.replace(/href="\/en\/store\/"/g, 'href="/de/shop/"');
+            html = html.replace(/href="\/en\/quiz\/"/g, 'href="/de/quiz/"');
+            html = html.replace(/href="\/en\/"/g, 'href="/de/"');
+            html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/de/blog/hair-loss-guide.html"');
+            
+            // Update asset paths (go up one level since we're in /de/legal/)
             html = html.replace(/href="\.\.\/\.\.\//g, 'href="../../');
             html = html.replace(/src="\.\.\/\.\.\//g, 'src="../../');
           }
