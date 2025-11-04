@@ -17,10 +17,16 @@ class ComponentLoader {
     // Detect current language from URL path
     const path = window.location.pathname;
     const isNL = path.startsWith('/nl');
+    const isDE = path.startsWith('/de');
+    
+    console.log(`[ComponentLoader] Detecting path: "${path}" | isNL: ${isNL} | isDE: ${isDE}`);
     
     // English components at root level: /components/
     // Dutch components at: /nl/components/
-    return isNL ? '/nl/components/' : '/components/';
+    // German components at: /de/components/
+    if (isNL) return '/nl/components/';
+    if (isDE) return '/de/components/';
+    return '/components/';
   }
 
   /**
@@ -32,17 +38,17 @@ class ComponentLoader {
     // Check blog first (more specific path)
     if (path.includes('/blog')) {
       return 'blog';
-    } else if (path.includes('about') || path.includes('over-ons')) {
+    } else if (path.includes('about') || path.includes('over-ons') || path.includes('uber-uns')) {
       return 'about';
-    } else if (path.includes('contact')) {
+    } else if (path.includes('contact') || path.includes('kontakt')) {
       return 'contact';
-    } else if (path.includes('store') || path.includes('winkel')) {
+    } else if (path.includes('store') || path.includes('winkel') || path.includes('shop')) {
       return 'store';
     } else if (path.includes('quiz')) {
       return 'quiz';
     } else if (path.includes('resources')) {
       return 'resources';
-    } else if (path === '/' || path === '/nl' || path === '/nl/' || path.includes('index.html')) {
+    } else if (path === '/' || path === '/nl' || path === '/nl/' || path === '/de' || path === '/de/' || path.includes('index.html')) {
       return 'home';
     }
     
@@ -70,9 +76,12 @@ class ComponentLoader {
         targetElement.innerHTML = html;
         console.log(`Successfully loaded ${componentName}`); // Debug log
         
-        // If it's the header, set active nav state
+        // If it's the header, set active nav state after DOM is ready
         if (componentName === 'header') {
-          this.setActiveNavLink();
+          // Use requestAnimationFrame to ensure DOM is fully parsed
+          requestAnimationFrame(() => {
+            this.setActiveNavLink();
+          });
         }
         
         return true;
@@ -91,13 +100,19 @@ class ComponentLoader {
    * Set the active class on the current page's nav link
    */
   setActiveNavLink() {
-    if (!this.currentPage) return;
+    if (!this.currentPage) {
+      console.warn('setActiveNavLink: No current page detected');
+      return;
+    }
     
     const navLinks = document.querySelectorAll('.nav-link');
+    console.log(`setActiveNavLink: Found ${navLinks.length} nav links, current page: ${this.currentPage}`);
+    
     navLinks.forEach(link => {
       const pageAttr = link.getAttribute('data-page');
       if (pageAttr === this.currentPage) {
         link.classList.add('active');
+        console.log(`✓ Set active class on nav link: ${pageAttr}`);
       }
     });
   }

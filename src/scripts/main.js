@@ -90,7 +90,13 @@ window.addEventListener('load', function() {
 
 function initializeQuizPopup() {
   // Detect current language from URL
-  const currentLang = window.location.pathname.startsWith('/nl') ? 'nl' : 'en';
+  const path = window.location.pathname;
+  let currentLang = 'en';
+  if (path.startsWith('/de')) {
+    currentLang = 'de';
+  } else if (path.startsWith('/nl')) {
+    currentLang = 'nl';
+  }
   
   // Translation texts
   const translations = {
@@ -103,6 +109,11 @@ function initializeQuizPopup() {
       title: "Sorry! We werken nu aan de quiz!",
       message: "We brengen verbeteringen aan om je de beste ervaring te geven. Kom snel terug!",
       button: "Begrepen"
+    },
+    de: {
+      title: "Entschuldigung! Wir aktualisieren gerade das Quiz!",
+      message: "Wir nehmen Verbesserungen vor, um Ihnen das beste Erlebnis zu bieten. Schauen Sie bald wieder vorbei!",
+      button: "Verstanden"
     }
   };
   

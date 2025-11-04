@@ -17,6 +17,10 @@
       <span class="flag">🇳🇱</span>
       <span class="lang-name">Nederlands</span>
     </a>
+    <a href="/de/" class="lang-option" id="lang-de">
+      <span class="flag">🇩🇪</span>
+      <span class="lang-name">Deutsch</span>
+    </a>
   </div>
 </div>
 
@@ -29,9 +33,10 @@
   const currentLang = document.getElementById('currentLang');
   const enLink = document.getElementById('lang-en');
   const nlLink = document.getElementById('lang-nl');
+  const deLink = document.getElementById('lang-de');
   
   // If elements don't exist yet, wait for them
-  if (!toggle || !dropdown || !currentFlag || !currentLang || !enLink || !nlLink) {
+  if (!toggle || !dropdown || !currentFlag || !currentLang || !enLink || !nlLink || !deLink) {
     console.log('Language switcher elements not ready, waiting...');
     return;
   }
@@ -40,21 +45,25 @@
   
   // Detect current language
   const isNL = path.startsWith('/nl');
+  const isDE = path.startsWith('/de');
   
   // Update display based on current language
   if (isNL) {
-    currentFlag.textContent = '🇳🇱';
+    currentFlag.textContent = '\u{1F1F3}\u{1F1F1}'; // 🇳🇱 Dutch flag
     currentLang.textContent = 'NL';
+  } else if (isDE) {
+    currentFlag.textContent = '\u{1F1E9}\u{1F1EA}'; // 🇩🇪 German flag
+    currentLang.textContent = 'DE';
   } else {
-    currentFlag.textContent = '🇬🇧';
+    currentFlag.textContent = '\u{1F1EC}\u{1F1E7}'; // 🇬🇧 British flag
     currentLang.textContent = 'EN';
   }
   
   // Smart URL mapping - automatically convert between languages
-  let enPath, nlPath;
+  let enPath, nlPath, dePath;
   
   if (isNL) {
-    // Currently on Dutch - convert to English (remove /nl and convert slugs)
+    // Currently on Dutch - convert to English and German
     nlPath = path;
     enPath = path
       .replace(/^\/nl/, '') // Remove /nl prefix
@@ -64,16 +73,54 @@
       .replace(/\/quiz/, '/quiz')
       .replace(/\/blog/, '/blog')
       || '/'; // If empty after removing /nl, it's the homepage
+    
+    dePath = '/de' + enPath
+      .replace(/\/about/, '/uber-uns')
+      .replace(/\/store/, '/shop')
+      .replace(/\/contact/, '/kontakt')
+      .replace(/\/quiz/, '/quiz')
+      .replace(/\/blog/, '/blog');
+    if (enPath === '/') dePath = '/de/';
+  } else if (isDE) {
+    // Currently on German - convert to English and Dutch
+    dePath = path;
+    enPath = path
+      .replace(/^\/de/, '') // Remove /de prefix
+      .replace(/\/uber-uns/, '/about')
+      .replace(/\/shop/, '/store')
+      .replace(/\/kontakt/, '/contact')
+      .replace(/\/quiz/, '/quiz')
+      .replace(/\/blog/, '/blog')
+      || '/'; // If empty after removing /de, it's the homepage
+    
+    if (enPath === '/' || enPath === '') {
+      nlPath = '/nl/';
+    } else {
+      nlPath = '/nl' + enPath
+        .replace(/\/about/, '/over-ons')
+        .replace(/\/store/, '/winkel')
+        .replace(/\/contact/, '/contact')
+        .replace(/\/quiz/, '/quiz')
+        .replace(/\/blog/, '/blog');
+    }
   } else {
-    // Currently on English - convert to Dutch (add /nl and convert slugs)
+    // Currently on English - convert to Dutch and German
     enPath = path;
     if (path === '/' || path === '') {
       nlPath = '/nl/';
+      dePath = '/de/';
     } else {
       nlPath = '/nl' + path
         .replace(/\/about/, '/over-ons')
         .replace(/\/store/, '/winkel')
         .replace(/\/contact/, '/contact')
+        .replace(/\/quiz/, '/quiz')
+        .replace(/\/blog/, '/blog');
+      
+      dePath = '/de' + path
+        .replace(/\/about/, '/uber-uns')
+        .replace(/\/store/, '/shop')
+        .replace(/\/contact/, '/kontakt')
         .replace(/\/quiz/, '/quiz')
         .replace(/\/blog/, '/blog');
     }
@@ -82,6 +129,7 @@
   // Set proper hrefs for language options
   enLink.href = enPath;
   nlLink.href = nlPath;
+  deLink.href = dePath;
   
   // Toggle dropdown on button click
   toggle.addEventListener('click', function(e) {

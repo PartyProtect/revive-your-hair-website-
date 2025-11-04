@@ -13,30 +13,35 @@ const config = {
   templatesDir: './src/templates',
   i18nDir: './src/i18n',
   outputDir: './dist',
-  languages: ['en', 'nl'], // Add more: 'de', 'fr', 'es', etc.
+  languages: ['en', 'nl', 'de'], // English, Dutch, German
   defaultLanguage: 'en',
   
   // Map template names to localized URLs
   urlMappings: {
     'index': {
       en: '',  // Root path for English (no /en/)
-      nl: ''   // Root path for Dutch (/nl/)
+      nl: '',  // Root path for Dutch (/nl/)
+      de: ''   // Root path for German (/de/)
     },
     'about': {
       en: 'about',      // /about/
-      nl: 'over-ons'    // /nl/over-ons/
+      nl: 'over-ons',   // /nl/over-ons/
+      de: 'uber-uns'    // /de/uber-uns/
     },
     'contact': {
       en: 'contact',    // /contact/
-      nl: 'contact'     // /nl/contact/
+      nl: 'contact',    // /nl/contact/
+      de: 'kontakt'     // /de/kontakt/
     },
     'store': {
       en: 'store',      // /store/
-      nl: 'winkel'      // /nl/winkel/
+      nl: 'winkel',     // /nl/winkel/
+      de: 'shop'        // /de/shop/
     },
     'quiz': {
       en: 'quiz',       // /quiz/
-      nl: 'quiz'        // /nl/quiz/
+      nl: 'quiz',       // /nl/quiz/
+      de: 'quiz'        // /de/quiz/
     }
   }
 };
@@ -141,8 +146,17 @@ function replaceMetadata(html, lang, pageName, translations) {
   );
   
   // Add Open Graph locale tags
-  const ogLocale = lang === 'nl' ? 'nl_NL' : 'en_US';
-  const alternateLocale = lang === 'nl' ? 'en_US' : 'nl_NL';
+  const localeMap = {
+    'en': 'en_US',
+    'nl': 'nl_NL',
+    'de': 'de_DE'
+  };
+  const ogLocale = localeMap[lang] || 'en_US';
+  
+  // Get alternate locales (all languages except current)
+  const alternateLocales = config.languages
+    .filter(l => l !== lang)
+    .map(l => localeMap[l]);
   
   // Add or update og:locale
   if (html.includes('og:locale')) {
@@ -157,11 +171,15 @@ function replaceMetadata(html, lang, pageName, translations) {
     );
   }
   
-  // Add og:locale:alternate
+  // Add og:locale:alternate tags for all other languages
+  const alternateLocaleTags = alternateLocales
+    .map(locale => `<meta property="og:locale:alternate" content="${locale}">`)
+    .join('\n  ');
+  
   if (!html.includes('og:locale:alternate')) {
     html = html.replace(
       /(<meta property="og:locale"[^>]*>)/,
-      `$1\n  <meta property="og:locale:alternate" content="${alternateLocale}">`
+      `$1\n  ${alternateLocaleTags}`
     );
   }
   
@@ -187,6 +205,7 @@ function buildPage(templateName, lang) {
   // Replace language-specific paths in content
   // For English (default): /en/ → /
   // For Dutch: /en/ → /nl/
+  // For German: /en/ → /de/
   if (lang === config.defaultLanguage) {
     // English: Remove /en/ prefix, use root paths
     html = html.replace(/href="\/en\/"/g, 'href="/"');
@@ -207,6 +226,16 @@ function buildPage(templateName, lang) {
     html = html.replace(/href="\/en\/quiz\/"/g, 'href="/nl/quiz/"');
     html = html.replace(/href="\/en\/legal\//g, 'href="/nl/legal/');
     html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/nl/blog/hair-loss-guide.html"');
+  } else if (lang === 'de') {
+    // German: Replace /en/ with /de/
+    html = html.replace(/href="\/en\/"/g, 'href="/de/"');
+    html = html.replace(/href="\/en\/blog\/"/g, 'href="/de/blog/"');
+    html = html.replace(/href="\/en\/about\/"/g, 'href="/de/uber-uns/"');
+    html = html.replace(/href="\/en\/contact\/"/g, 'href="/de/kontakt/"');
+    html = html.replace(/href="\/en\/store\/"/g, 'href="/de/shop/"');
+    html = html.replace(/href="\/en\/quiz\/"/g, 'href="/de/quiz/"');
+    html = html.replace(/href="\/en\/legal\//g, 'href="/de/legal/');
+    html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/de/blog/hair-loss-guide.html"');
   }
   
   // Replace metadata
@@ -308,6 +337,16 @@ function processComponents(lang) {
           html = html.replace(/href="\/en\/quiz\/"/g, 'href="/nl/quiz/"');
           html = html.replace(/href="\/en\/legal\//g, 'href="/nl/legal/');
           html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/nl/blog/hair-loss-guide.html"');
+        } else if (lang === 'de') {
+          // German: Replace /en/ with /de/ and adjust page paths
+          html = html.replace(/href="\/en\/"/g, 'href="/de/"');
+          html = html.replace(/href="\/en\/blog\/"/g, 'href="/de/blog/"');
+          html = html.replace(/href="\/en\/about\/"/g, 'href="/de/uber-uns/"');
+          html = html.replace(/href="\/en\/contact\/"/g, 'href="/de/kontakt/"');
+          html = html.replace(/href="\/en\/store\/"/g, 'href="/de/shop/"');
+          html = html.replace(/href="\/en\/quiz\/"/g, 'href="/de/quiz/"');
+          html = html.replace(/href="\/en\/legal\//g, 'href="/de/legal/');
+          html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/de/blog/hair-loss-guide.html"');
         }
         
         fs.writeFileSync(destPath, html, 'utf8');
