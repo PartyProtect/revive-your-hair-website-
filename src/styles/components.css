@@ -2,13 +2,26 @@
    GLOBAL HEADER COMPONENT
    ============================================ */
 
-/* Header Container */
-.header {
-  background: var(--white);
+/* Header Root Container - Make sure sticky works */
+#header-root {
   position: sticky;
   top: 0;
   z-index: 1000;
+}
+
+/* Header Container */
+.header {
+  background: var(--white);
   box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease-in-out;
+}
+
+.header.scrolled {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.header.scrolled .header-content {
+  padding: 12px 40px;
 }
 
 /* Accent Bar (Green to Orange Gradient) */
@@ -26,6 +39,7 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--gray-200);
+  transition: padding 0.3s ease-in-out;
 }
 
 /* Logo */

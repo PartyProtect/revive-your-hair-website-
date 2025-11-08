@@ -84,6 +84,35 @@ window.addEventListener('load', function() {
 });
 
 // ============================================
+// STICKY HEADER SCROLL EFFECT
+// ============================================
+
+function initializeStickyHeader() {
+  const header = document.querySelector('.header');
+  let lastScrollTop = 0;
+  let scrollThreshold = 50; // Pixels to scroll before adding "scrolled" class
+
+  if (!header) return;
+
+  window.addEventListener('scroll', function() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Add/remove "scrolled" class based on scroll position
+    if (scrollTop > scrollThreshold) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+    
+    lastScrollTop = scrollTop;
+  }, { passive: true }); // passive: true for better scroll performance
+}
+
+// Initialize sticky header on DOM load
+document.addEventListener('DOMContentLoaded', initializeStickyHeader);
+window.addEventListener('load', initializeStickyHeader);
+
+// ============================================
 // QUIZ MAINTENANCE POPUP
 // ============================================
 // Temporary popup for quiz links while updating
