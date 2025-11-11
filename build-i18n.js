@@ -600,6 +600,151 @@ function buildAll() {
 
   
   console.log('\n✅ Build complete!');
+  
+  // Generate sitemap.xml with proper exclusions
+  console.log('\nGenerating sitemap.xml...');
+  generateSitemap();
+  
+  // Copy Google Search Console verification file to root
+  const googleVerificationSrc = './src/googlecff853c0df795311.html';
+  const googleVerificationDest = path.join(config.outputDir, 'googlecff853c0df795311.html');
+  
+  if (fs.existsSync(googleVerificationSrc)) {
+    fs.copyFileSync(googleVerificationSrc, googleVerificationDest);
+    console.log('✓ Copied Google Search Console verification file');
+  }
+  
+  // Generate robots.txt to prevent indexing of components
+  generateRobotsTxt();
+}
+
+/**
+ * Generate sitemap.xml with proper multilingual structure
+ * Excludes components, verification files, and sets proper priorities
+ */
+function generateSitemap() {
+  const domain = 'https://reviveyourhair.eu';
+  
+  // Define pages with their translations and metadata
+  const pages = [
+    {
+      en: '/',
+      nl: '/nl/',
+      de: '/de/',
+      priority: '1.0',
+      changefreq: 'weekly'
+    },
+    {
+      en: '/about/',
+      nl: '/nl/over-ons/',
+      de: '/de/uber-uns/',
+      priority: '0.8',
+      changefreq: 'monthly'
+    },
+    {
+      en: '/store/',
+      nl: '/nl/winkel/',
+      de: '/de/shop/',
+      priority: '0.9',
+      changefreq: 'weekly'
+    },
+    {
+      en: '/contact/',
+      nl: '/nl/contact/',
+      de: '/de/kontakt/',
+      priority: '0.7',
+      changefreq: 'monthly'
+    },
+    {
+      en: '/quiz/',
+      nl: '/nl/quiz/',
+      de: '/de/quiz/',
+      priority: '0.8',
+      changefreq: 'weekly'
+    },
+    {
+      en: '/blog/',
+      nl: '/nl/blog/',
+      de: '/de/blog/',
+      priority: '0.9',
+      changefreq: 'weekly'
+    },
+    {
+      en: '/blog/hair-loss-guide.html',
+      nl: '/nl/blog/hair-loss-guide.html',
+      de: '/de/blog/hair-loss-guide.html',
+      priority: '0.9',
+      changefreq: 'monthly'
+    }
+  ];
+
+  // Add legal pages
+  const legalPages = ['privacy-policy.html', 'terms-of-service.html', 'cookie-policy.html', 'disclaimer.html', 'affiliate-disclosure.html'];
+  legalPages.forEach(page => {
+    pages.push({
+      en: `/legal/${page}`,
+      nl: `/nl/legal/${page}`,
+      de: `/de/legal/${page}`,
+      priority: '0.3',
+      changefreq: 'yearly'
+    });
+  });
+
+  // Generate XML
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n';
+  xml += '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n';
+
+  pages.forEach(page => {
+    // Add entry for each language
+    ['en', 'nl', 'de'].forEach(lang => {
+      xml += '  <url>\n';
+      xml += `    <loc>${domain}${page[lang]}</loc>\n`;
+      
+      // Add hreflang links for all languages
+      xml += `    <xhtml:link rel="alternate" hreflang="en" href="${domain}${page.en}"/>\n`;
+      xml += `    <xhtml:link rel="alternate" hreflang="nl" href="${domain}${page.nl}"/>\n`;
+      xml += `    <xhtml:link rel="alternate" hreflang="de" href="${domain}${page.de}"/>\n`;
+      xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${domain}${page.en}"/>\n`;
+      
+      xml += `    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n`;
+      xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
+      xml += `    <priority>${page.priority}</priority>\n`;
+      xml += '  </url>\n';
+    });
+  });
+
+  xml += '</urlset>';
+
+  // Write sitemap to dist
+  const sitemapPath = path.join(config.outputDir, 'sitemap.xml');
+  fs.writeFileSync(sitemapPath, xml, 'utf8');
+  console.log(`✓ Generated sitemap.xml with ${pages.length * 3} URLs`);
+}
+
+/**
+ * Generate robots.txt to prevent indexing of components
+ */
+function generateRobotsTxt() {
+  const robotsTxt = `# Robots.txt for reviveyourhair.eu
+User-agent: *
+Allow: /
+
+# Prevent indexing of components (loaded dynamically)
+Disallow: /components/
+Disallow: /nl/components/
+Disallow: /de/components/
+
+# Prevent indexing of verification files
+Disallow: /googlecff853c0df795311.html
+
+# Sitemap location
+Sitemap: https://reviveyourhair.eu/sitemap.xml
+`;
+
+  const robotsPath = path.join(config.outputDir, 'robots.txt');
+  fs.writeFileSync(robotsPath, robotsTxt, 'utf8');
+  console.log('✓ Generated robots.txt with component exclusions');
 }
 
 /**
