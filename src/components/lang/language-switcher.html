@@ -135,15 +135,15 @@
   toggle.addEventListener('click', function(e) {
     e.preventDefault();
     e.stopPropagation();
-    toggle.classList.toggle('active');
-    dropdown.classList.toggle('active');
+    const switcher = toggle.closest('.language-switcher');
+    switcher.classList.toggle('open');
   });
   
   // Close dropdown when clicking outside
   document.addEventListener('click', function(e) {
+    const switcher = toggle.closest('.language-switcher');
     if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
-      toggle.classList.remove('active');
-      dropdown.classList.remove('active');
+      switcher.classList.remove('open');
     }
   });
   
@@ -165,112 +165,6 @@ window.addEventListener('componentsLoaded', function() {
 </script>
 
 <style>
-  .language-switcher {
-    position: relative;
-    display: inline-block;
-    z-index: 100;
-  }
-
-  .lang-toggle {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 12px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
-    color: white;
-    font-size: 0.9em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
-    z-index: 101;
-  }
-
-  .lang-toggle:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-
-  .current-flag {
-    font-size: 1.2em;
-    line-height: 1;
-  }
-
-  .current-lang {
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .chevron {
-    transition: transform 0.2s;
-  }
-
-  .lang-toggle.active .chevron {
-    transform: rotate(180deg);
-  }
-
-  .lang-dropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    min-width: 160px;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.2s;
-    z-index: 1000;
-  }
-
-  .lang-dropdown.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  .lang-option {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    background: white;
-    border: none;
-    color: var(--charcoal);
-    font-size: 0.95em;
-    cursor: pointer;
-    transition: background 0.2s;
-    text-align: left;
-    text-decoration: none;
-  }
-
-  .lang-option:hover {
-    background: var(--gray-50);
-  }
-
-  .lang-option .flag {
-    font-size: 1.3em;
-    line-height: 1;
-  }
-
-  .lang-option .lang-name {
-    font-weight: 500;
-  }
-
-  /* Mobile */
-  @media (max-width: 768px) {
-    .lang-toggle {
-      padding: 6px 10px;
-      font-size: 0.85em;
-    }
-
-    .current-lang {
-      display: none;
-    }
-  }
+  /* Component-specific inline styles removed - using external CSS from components.css */
+  /* This ensures consistent rendering across all browsers */
 </style>

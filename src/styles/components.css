@@ -206,6 +206,8 @@
 .language-switcher {
   position: relative;
   margin-right: 16px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .lang-toggle {
@@ -236,6 +238,10 @@
 .current-flag {
   font-size: 1.2em;
   line-height: 1;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+  display: inline-block;
+  min-width: 1.2em;
+  text-align: center;
 }
 
 .current-lang {
@@ -293,6 +299,10 @@
 .lang-option .flag {
   font-size: 1.3em;
   line-height: 1;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+  display: inline-block;
+  min-width: 1.3em;
+  text-align: center;
 }
 
 .lang-option .lang-name {
