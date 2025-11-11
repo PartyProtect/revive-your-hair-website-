@@ -601,10 +601,6 @@ function buildAll() {
   
   console.log('\n✅ Build complete!');
   
-  // Generate sitemap.xml with proper exclusions
-  console.log('\nGenerating sitemap.xml...');
-  generateSitemap();
-  
   // Copy Google Search Console verification file to root
   const googleVerificationSrc = './src/googlecff853c0df795311.html';
   const googleVerificationDest = path.join(config.outputDir, 'googlecff853c0df795311.html');
@@ -614,8 +610,11 @@ function buildAll() {
     console.log('✓ Copied Google Search Console verification file');
   }
   
-  // Generate robots.txt to prevent indexing of components
+  // Generate sitemap, robots.txt, and _headers file
+  console.log('\nGenerating sitemap.xml...');
+  generateSitemap();
   generateRobotsTxt();
+  generateHeadersFile();
 }
 
 /**
@@ -745,6 +744,24 @@ Sitemap: https://reviveyourhair.eu/sitemap.xml
   const robotsPath = path.join(config.outputDir, 'robots.txt');
   fs.writeFileSync(robotsPath, robotsTxt, 'utf8');
   console.log('✓ Generated robots.txt with component exclusions');
+}
+
+/**
+ * Generate _headers file for Netlify to ensure proper content types
+ */
+function generateHeadersFile() {
+  const headersContent = `/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=300
+
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=300
+`;
+
+  const headersPath = path.join(config.outputDir, '_headers');
+  fs.writeFileSync(headersPath, headersContent, 'utf8');
+  console.log('✓ Generated _headers file for proper content types');
 }
 
 /**

@@ -12,6 +12,13 @@
   # Disable secrets scanning (values in docs are examples only)
   SECRETS_SCAN_ENABLED = "false"
 
+# Disable Netlify's automatic sitemap generation
+[[plugins]]
+  package = "@netlify/plugin-sitemap"
+  
+  [plugins.inputs]
+    disable = true
+
 # Multilingual clean URLs with language prefix
 [[redirects]]
   from = "/en"
