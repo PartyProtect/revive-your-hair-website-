@@ -600,6 +600,15 @@ function buildAll() {
 
   
   console.log('\n✅ Build complete!');
+  
+  // Copy Google Search Console verification file to root
+  const googleVerificationSrc = './src/googlecff853c0df795311.html';
+  const googleVerificationDest = path.join(config.outputDir, 'googlecff853c0df795311.html');
+  
+  if (fs.existsSync(googleVerificationSrc)) {
+    fs.copyFileSync(googleVerificationSrc, googleVerificationDest);
+    console.log('✓ Copied Google Search Console verification file');
+  }
 }
 
 /**
