@@ -623,7 +623,7 @@ function buildAll() {
  * Excludes components, verification files, and sets proper priorities
  */
 function generateSitemap() {
-  const domain = 'https://reviveyourhair.eu';
+  const domain = 'https://www.reviveyourhair.eu';
   
   // Define pages with their translations and metadata
   const pages = [
@@ -739,7 +739,7 @@ Disallow: /de/components/
 Disallow: /googlecff853c0df795311.html
 
 # Sitemap location
-Sitemap: https://reviveyourhair.eu/sitemap.xml
+Sitemap: https://www.reviveyourhair.eu/sitemap.xml
 `;
 
   const robotsPath = path.join(config.outputDir, 'robots.txt');
