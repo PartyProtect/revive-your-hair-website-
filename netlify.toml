@@ -12,13 +12,6 @@
   # Disable secrets scanning (values in docs are examples only)
   SECRETS_SCAN_ENABLED = "false"
 
-# Disable Netlify's automatic sitemap generation
-[[plugins]]
-  package = "@netlify/plugin-sitemap"
-  
-  [plugins.inputs]
-    disable = true
-
 # Multilingual clean URLs with language prefix
 [[redirects]]
   from = "/en"
@@ -86,6 +79,19 @@
   from = "/nl/blog"
   to = "/nl/blog/index.html"
   status = 200
+
+# Ensure sitemap.xml and robots.txt are served directly (not caught by 404 handler)
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/robots.txt"
+  to = "/robots.txt"
+  status = 200
+  force = true
 
 # Handle 404 errors - this must be last
 [[redirects]]
