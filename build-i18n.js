@@ -752,7 +752,9 @@ Sitemap: https://reviveyourhair.eu/sitemap.xml
 function generateHeadersFile() {
   const headersContent = `/sitemap.xml
   Content-Type: application/xml; charset=utf-8
-  Cache-Control: public, max-age=300
+  X-Content-Type-Options: nosniff
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Encoding: identity
 
 /robots.txt
   Content-Type: text/plain; charset=utf-8
