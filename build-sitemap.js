@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const domain = 'https://revive-your-hair.com';
+const domain = 'https://reviveyour.hair';
 
 // Define all pages with their language-specific slugs
 const pages = [
@@ -123,7 +123,7 @@ function generateSitemap() {
 
 // Write sitemap to dist folder
 const sitemap = generateSitemap();
-const outputPath = path.join(__dirname, 'dist', 'sitemap.xml');
+const outputPath = path.join(__dirname, 'dist', 'sitemap_index.xml');
 
 // Ensure dist folder exists
 if (!fs.existsSync(path.join(__dirname, 'dist'))) {

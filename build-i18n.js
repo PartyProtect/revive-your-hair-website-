@@ -601,10 +601,6 @@ function buildAll() {
   
   console.log('\n✅ Build complete!');
   
-  // Generate sitemap.xml with proper exclusions
-  console.log('\nGenerating sitemap.xml...');
-  generateSitemap();
-  
   // Copy Google Search Console verification file to root
   const googleVerificationSrc = './src/googlecff853c0df795311.html';
   const googleVerificationDest = path.join(config.outputDir, 'googlecff853c0df795311.html');
@@ -614,16 +610,19 @@ function buildAll() {
     console.log('✓ Copied Google Search Console verification file');
   }
   
-  // Generate robots.txt to prevent indexing of components
+  // Generate sitemap, robots.txt, and _headers file
+  console.log('\nGenerating sitemap_index.xml...');
+  generateSitemap();
   generateRobotsTxt();
+  generateHeadersFile();
 }
 
 /**
- * Generate sitemap.xml with proper multilingual structure
+ * Generate sitemap_index.xml with proper multilingual structure
  * Excludes components, verification files, and sets proper priorities
  */
 function generateSitemap() {
-  const domain = 'https://reviveyourhair.eu';
+  const domain = 'https://reviveyour.hair';
   
   // Define pages with their translations and metadata
   const pages = [
@@ -717,16 +716,16 @@ function generateSitemap() {
   xml += '</urlset>';
 
   // Write sitemap to dist
-  const sitemapPath = path.join(config.outputDir, 'sitemap.xml');
+  const sitemapPath = path.join(config.outputDir, 'sitemap_index.xml');
   fs.writeFileSync(sitemapPath, xml, 'utf8');
-  console.log(`✓ Generated sitemap.xml with ${pages.length * 3} URLs`);
+  console.log(`✓ Generated sitemap_index.xml with ${pages.length * 3} URLs`);
 }
 
 /**
  * Generate robots.txt to prevent indexing of components
  */
 function generateRobotsTxt() {
-  const robotsTxt = `# Robots.txt for reviveyourhair.eu
+  const robotsTxt = `# Robots.txt for reviveyour.hair
 User-agent: *
 Allow: /
 
@@ -739,12 +738,32 @@ Disallow: /de/components/
 Disallow: /googlecff853c0df795311.html
 
 # Sitemap location
-Sitemap: https://reviveyourhair.eu/sitemap.xml
+Sitemap: https://reviveyour.hair/sitemap_index.xml
 `;
 
   const robotsPath = path.join(config.outputDir, 'robots.txt');
   fs.writeFileSync(robotsPath, robotsTxt, 'utf8');
   console.log('✓ Generated robots.txt with component exclusions');
+}
+
+/**
+ * Generate _headers file for Netlify to ensure proper content types
+ */
+function generateHeadersFile() {
+  const headersContent = `/sitemap_index.xml
+  Content-Type: application/xml; charset=utf-8
+  X-Content-Type-Options: nosniff
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Encoding: identity
+
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=300
+`;
+
+  const headersPath = path.join(config.outputDir, '_headers');
+  fs.writeFileSync(headersPath, headersContent, 'utf8');
+  console.log('✓ Generated _headers file for proper content types');
 }
 
 /**
