@@ -80,12 +80,18 @@
   to = "/nl/blog/index.html"
   status = 200
 
-# Ensure sitemap.xml and robots.txt are served directly (not caught by 404 handler)
+# Ensure sitemap_index.xml and robots.txt are served directly (not caught by 404 handler)
 [[redirects]]
-  from = "/sitemap.xml"
-  to = "/sitemap.xml"
+  from = "/sitemap_index.xml"
+  to = "/sitemap_index.xml"
   status = 200
   force = true
+
+# Legacy redirect for old sitemap.xml (redirect to new name)
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap_index.xml"
+  status = 301
 
 [[redirects]]
   from = "/robots.txt"
@@ -120,7 +126,7 @@
 
 [[headers]]
   # Sitemap - proper XML content type for search engines
-  for = "/sitemap.xml"
+  for = "/sitemap_index.xml"
   [headers.values]
     Content-Type = "application/xml; charset=utf-8"
     Cache-Control = "public, max-age=300"

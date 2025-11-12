@@ -611,14 +611,14 @@ function buildAll() {
   }
   
   // Generate sitemap, robots.txt, and _headers file
-  console.log('\nGenerating sitemap.xml...');
+  console.log('\nGenerating sitemap_index.xml...');
   generateSitemap();
   generateRobotsTxt();
   generateHeadersFile();
 }
 
 /**
- * Generate sitemap.xml with proper multilingual structure
+ * Generate sitemap_index.xml with proper multilingual structure
  * Excludes components, verification files, and sets proper priorities
  */
 function generateSitemap() {
@@ -716,9 +716,9 @@ function generateSitemap() {
   xml += '</urlset>';
 
   // Write sitemap to dist
-  const sitemapPath = path.join(config.outputDir, 'sitemap.xml');
+  const sitemapPath = path.join(config.outputDir, 'sitemap_index.xml');
   fs.writeFileSync(sitemapPath, xml, 'utf8');
-  console.log(`✓ Generated sitemap.xml with ${pages.length * 3} URLs`);
+  console.log(`✓ Generated sitemap_index.xml with ${pages.length * 3} URLs`);
 }
 
 /**
@@ -738,7 +738,7 @@ Disallow: /de/components/
 Disallow: /googlecff853c0df795311.html
 
 # Sitemap location
-Sitemap: https://reviveyourhair.eu/sitemap.xml
+Sitemap: https://reviveyourhair.eu/sitemap_index.xml
 `;
 
   const robotsPath = path.join(config.outputDir, 'robots.txt');
@@ -750,7 +750,7 @@ Sitemap: https://reviveyourhair.eu/sitemap.xml
  * Generate _headers file for Netlify to ensure proper content types
  */
 function generateHeadersFile() {
-  const headersContent = `/sitemap.xml
+  const headersContent = `/sitemap_index.xml
   Content-Type: application/xml; charset=utf-8
   X-Content-Type-Options: nosniff
   Cache-Control: public, max-age=0, must-revalidate

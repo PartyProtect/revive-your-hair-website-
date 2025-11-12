@@ -1,10 +1,8 @@
 const https = require('https');
 
-const sitemapUrl = process.env.DEPLOY_PRIME_URL 
-  ? `${process.env.DEPLOY_PRIME_URL}/sitemap.xml`
-  : 'https://www.reviveyourhair.eu/sitemap.xml';
-
-console.log('🔍 Checking sitemap headers at:', sitemapUrl);
+const sitemapUrl = process.env.DEPLOY_PRIME_URL
+  ? `${process.env.DEPLOY_PRIME_URL}/sitemap_index.xml`
+  : 'https://www.reviveyourhair.eu/sitemap_index.xml';console.log('🔍 Checking sitemap headers at:', sitemapUrl);
 
 https.get(sitemapUrl, (res) => {
   const contentType = res.headers['content-type'];

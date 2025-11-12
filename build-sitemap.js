@@ -123,7 +123,7 @@ function generateSitemap() {
 
 // Write sitemap to dist folder
 const sitemap = generateSitemap();
-const outputPath = path.join(__dirname, 'dist', 'sitemap.xml');
+const outputPath = path.join(__dirname, 'dist', 'sitemap_index.xml');
 
 // Ensure dist folder exists
 if (!fs.existsSync(path.join(__dirname, 'dist'))) {

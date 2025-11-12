@@ -27,9 +27,9 @@ const path = require('path');
 
 // Configuration
 const DOMAIN = 'www.reviveyourhair.eu';
-const SITEMAP_URL = `https://${DOMAIN}/sitemap.xml`;
+const SITEMAP_URL = `https://${DOMAIN}/sitemap_index.xml`;
 const ROBOTS_URL = `https://${DOMAIN}/robots.txt`;
-const LOCAL_SITEMAP = path.join(__dirname, 'src', 'sitemap.xml');
+const LOCAL_SITEMAP = path.join(__dirname, 'src', 'sitemap_index.xml');
 
 // Colors for terminal output
 const colors = {
