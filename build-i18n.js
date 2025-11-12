@@ -622,7 +622,7 @@ function buildAll() {
  * Excludes components, verification files, and sets proper priorities
  */
 function generateSitemap() {
-  const domain = 'https://reviveyourhair.eu';
+  const domain = 'https://reviveyour.hair';
   
   // Define pages with their translations and metadata
   const pages = [
@@ -725,7 +725,7 @@ function generateSitemap() {
  * Generate robots.txt to prevent indexing of components
  */
 function generateRobotsTxt() {
-  const robotsTxt = `# Robots.txt for reviveyourhair.eu
+  const robotsTxt = `# Robots.txt for reviveyour.hair
 User-agent: *
 Allow: /
 
@@ -738,7 +738,7 @@ Disallow: /de/components/
 Disallow: /googlecff853c0df795311.html
 
 # Sitemap location
-Sitemap: https://reviveyourhair.eu/sitemap_index.xml
+Sitemap: https://reviveyour.hair/sitemap_index.xml
 `;
 
   const robotsPath = path.join(config.outputDir, 'robots.txt');

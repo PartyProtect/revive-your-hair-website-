@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const domain = 'https://revive-your-hair.com';
+const domain = 'https://reviveyour.hair';
 
 // Define all pages with their language-specific slugs
 const pages = [
