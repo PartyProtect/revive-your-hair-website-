@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="{{t.blog.metaDescription}}">
-  <meta name="keywords" content="hair loss blog, finasteride guide, minoxidil guide, male pattern baldness, hair loss treatment">
-  <title>{{t.blog.pageTitle}}</title>
+  <meta name="description" content="Evidence-based hair loss research and treatment guides. Clear answers backed by science.">
+  <meta name="keywords" content="hair loss blog, finasteride guide, minoxidil guide, male pattern baldness, hair loss treatment, creatine hair loss">
+  <title>Hair Loss Research Hub | Revive Your Hair</title>
   
   <!-- Theme Color -->
   <meta name="theme-color" content="#047857">
@@ -23,8 +23,8 @@
   
   <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="{{t.blog.pageTitle}}">
-  <meta property="og:description" content="{{t.blog.metaDescription}}">
+  <meta property="og:title" content="Hair Loss Research Hub | Revive Your Hair">
+  <meta property="og:description" content="Evidence-based hair loss research and treatment guides. Clear answers backed by science.">
   <meta property="og:url" content="https://www.reviveyourhair.eu/blog/">
   <meta property="og:site_name" content="Revive Your Hair">
   
@@ -33,7 +33,7 @@
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Hair Loss Treatment Blog",
+    "name": "Hair Loss Research Hub",
     "description": "Evidence-based guides on hair loss treatments, including finasteride, minoxidil, and other proven solutions",
     "url": "https://www.reviveyourhair.eu/blog/",
     "publisher": {
@@ -47,10 +47,8 @@
   <link rel="stylesheet" href="/styles/color-palette.css">
   <link rel="stylesheet" href="/styles/main.css">
   <link rel="stylesheet" href="/styles/components.css">
-  <link rel="stylesheet" href="/styles/utilities.css">
   
-  <!-- i18n -->
-  <!-- Scripts -->
+  <!-- Component Loader -->
   <script src="/scripts/component-loader.js"></script>
   
   <style>
@@ -59,223 +57,524 @@
       padding: 0;
       box-sizing: border-box;
     }
-
-    .page-wrapper {
-      min-height: 100vh;
-      padding-bottom: 80px;
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #f7fafc;
+      color: #2d3748;
+      line-height: 1.6;
     }
 
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-      color: white;
-      padding: 80px 40px 60px;
+    /* Hero */
+    .blog-hero {
+      background: linear-gradient(135deg, #064e3b 0%, #047857 50%, #059669 100%);
+      padding: 80px 24px;
       text-align: center;
       position: relative;
       overflow: hidden;
     }
 
-    .hero::before {
+    .blog-hero::before {
       content: '';
       position: absolute;
-      top: 0;
-      right: 0;
-      width: 50%;
-      height: 100%;
-      background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.1), transparent);
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
 
+    .blog-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Floating dots decoration */
+    .hero-decoration {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .dot {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .dot-1 { width: 8px; height: 8px; top: 20%; left: 15%; }
+    .dot-2 { width: 12px; height: 12px; top: 60%; left: 8%; }
+    .dot-3 { width: 6px; height: 6px; top: 30%; right: 20%; }
+    .dot-4 { width: 10px; height: 10px; top: 70%; right: 12%; }
+    .dot-5 { width: 14px; height: 14px; top: 15%; right: 30%; background: rgba(255,255,255,0.06); }
+    .dot-6 { width: 8px; height: 8px; bottom: 25%; left: 25%; }
+
     .hero-content {
-      max-width: 800px;
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
       margin: 0 auto;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .hero-label::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #34d399;
+      border-radius: 50%;
+    }
+
+    .blog-hero h1 {
+      font-size: 2.8em;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .blog-hero p {
+      font-size: 1.2em;
+      color: rgba(255,255,255,0.85);
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    /* Main Content */
+    .main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* Featured Card */
+    .featured-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+      margin-top: -40px;
+      position: relative;
+      z-index: 10;
+      text-decoration: none;
+      color: inherit;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      transition: all 0.3s ease;
+    }
+
+    .featured-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.04);
+      transform: translateY(-4px);
+    }
+
+    .featured-content {
+      padding: 40px;
+    }
+
+    .featured-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 6px 12px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+
+    .featured-badge svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .featured-category {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748b;
+      margin-bottom: 12px;
+    }
+
+    .featured-title {
+      font-size: 1.9em;
+      font-weight: 700;
+      color: #1a202c;
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+
+    .featured-verdict {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border-left: 4px solid #10b981;
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 20px;
+    }
+
+    .featured-verdict-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #059669;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .featured-verdict-label::before {
+      content: '✓';
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      background: #10b981;
+      color: white;
+      border-radius: 50%;
+      font-size: 10px;
+    }
+
+    .featured-verdict-text {
+      font-size: 1.1em;
+      font-weight: 600;
+      color: #065f46;
+      line-height: 1.5;
+    }
+
+    .featured-meta {
+      display: flex;
+      gap: 20px;
+      font-size: 14px;
+      color: #64748b;
+    }
+
+    .featured-meta span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .featured-meta svg {
+      width: 16px;
+      height: 16px;
+      opacity: 0.6;
+    }
+
+    /* Featured Visual */
+    .featured-visual {
+      background: linear-gradient(135deg, #f0fdf4 0%, #d1fae5 100%);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-visual::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 50%);
+    }
+
+    .mini-evidence-scale {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       position: relative;
       z-index: 2;
     }
 
-    .hero-title {
-      font-size: 3em;
+    .mini-scale-header {
+      font-size: 10px;
       font-weight: 700;
-      line-height: 1.3;
-      margin-bottom: 20px;
-      letter-spacing: -0.02em;
-      color: var(--warm-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #059669;
+      margin-bottom: 12px;
     }
 
-    .hero-subtitle {
-      font-size: 1.3em;
-      opacity: 0.9;
-      font-weight: 400;
-      line-height: 1.6;
-      max-width: 600px;
-      margin: 0 auto;
+    .mini-scale-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 12px;
     }
 
-    /* Blog Grid */
-    .blog-section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 80px 40px;
+    .mini-scale-item:last-child {
+      border-bottom: none;
     }
 
-    .blog-grid {
+    .mini-check {
+      width: 18px;
+      height: 18px;
+      background: #10b981;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .mini-scale-text {
+      color: #374151;
+      font-weight: 500;
+    }
+
+    .read-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #059669;
+    }
+
+    .read-cta svg {
+      transition: transform 0.2s;
+    }
+
+    .featured-card:hover .read-cta svg {
+      transform: translateX(4px);
+    }
+
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 48px 0 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .section-header h2 {
+      font-size: 1em;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .section-count {
+      background: #f1f5f9;
+      color: #64748b;
+      font-size: 0.8em;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+
+    /* Standard Card Grid */
+    .card-grid {
       display: grid;
-      gap: 48px;
-      margin-bottom: 60px;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
     }
 
-    /* Brutal Card Styles */
+    /* Standard Blog Card */
     .blog-card {
       background: white;
-      color: black;
-      padding: 48px;
-      border: 4px solid black;
-      position: relative;
-      transition: all 0.3s ease;
-      box-shadow: 12px 12px 0 #047857;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      transition: all 0.25s ease;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
     }
 
     .blog-card:hover {
-      transform: translate(-4px, -4px);
-      box-shadow: 16px 16px 0 #047857;
+      border-color: #10b981;
+      box-shadow: 0 4px 16px rgba(16,185,129,0.12);
+      transform: translateY(-3px);
     }
 
-    /* Header with Number + Meta */
-    .brutal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 32px;
-      gap: 40px;
+    .card-content {
+      padding: 24px;
+      flex: 1;
     }
 
-    .brutal-number {
-      font-size: 8em;
-      font-weight: 900;
-      line-height: 0.9;
-      color: #047857;
-      font-family: Arial Black, sans-serif;
+    .card-category {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #059669;
+      margin-bottom: 12px;
     }
 
-    .brutal-meta {
-      text-align: right;
-      padding-top: 12px;
-    }
-
-    .brutal-category {
-      font-size: 0.85em;
+    .card-title {
+      font-size: 1.25em;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 8px;
-      color: #047857;
+      color: #1a202c;
+      line-height: 1.3;
+      margin-bottom: 12px;
     }
 
-    .brutal-date {
+    .card-verdict {
+      background: #f0fdf4;
+      border-left: 3px solid #10b981;
+      padding: 12px 14px;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 12px;
       font-size: 0.9em;
-      color: #666;
+      color: #065f46;
+      font-weight: 500;
     }
 
-    /* Title */
-    .blog-card h2 {
-      font-size: 2.5em;
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: -1px;
-      color: black;
+    .card-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 12px;
+      color: #94a3b8;
     }
 
-    /* Intro Box (Green explanation) */
-    .brutal-intro {
-      font-size: 1.1em;
-      line-height: 1.6;
-      color: #333;
-      margin-bottom: 32px;
-      max-width: 900px;
-      background: #d1fae5;
-      padding: 20px;
-      border-left: 6px solid #047857;
-    }
-
-    /* Footer */
-    .blog-card-footer {
+    .card-footer {
+      padding: 14px 24px;
+      background: #f8fafc;
+      border-top: 1px solid #f1f5f9;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 24px;
-      border-top: 3px solid black;
-      flex-wrap: wrap;
-      gap: 20px;
     }
 
-    .brutal-tags {
+    .card-tags {
       display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
+      gap: 6px;
     }
 
-    .brutal-tag {
-      background: black;
-      color: white;
-      padding: 8px 16px;
-      font-weight: 700;
-      text-transform: uppercase;
-      font-size: 0.8em;
-      letter-spacing: 1px;
+    .tag {
+      background: white;
+      border: 1px solid #e2e8f0;
+      color: #64748b;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 4px;
     }
 
-    .read-more-btn {
-      background: #047857;
-      color: white;
-      padding: 16px 32px;
-      text-decoration: none;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      border: 3px solid black;
-      transition: all 0.2s;
-      display: inline-block;
+    .card-arrow {
+      color: #059669;
+      transition: transform 0.2s;
     }
 
-    .read-more-btn:hover {
-      background: #065f46;
-      transform: translate(-2px, -2px);
-      box-shadow: 4px 4px 0 black;
+    .blog-card:hover .card-arrow {
+      transform: translateX(4px);
     }
 
-    /* Newsletter Section */
-    .newsletter-section {
-      background: linear-gradient(135deg, var(--forest-green-dark) 0%, var(--forest-green) 100%);
-      color: white;
-      padding: 60px 40px;
+    /* Coming Soon Card */
+    .coming-soon-card {
+      background: #f8fafc;
+      border: 2px dashed #e2e8f0;
+      border-radius: 12px;
+      padding: 32px 24px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .coming-soon-card h3 {
+      font-size: 1em;
+      font-weight: 600;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+
+    .coming-soon-card p {
+      font-size: 0.9em;
+      color: #94a3b8;
+    }
+
+    /* Newsletter */
+    .newsletter {
+      background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
+      border-radius: 16px;
+      padding: 48px 40px;
+      text-align: center;
+      margin-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newsletter::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
     }
 
     .newsletter-content {
-      max-width: 600px;
-      margin: 0 auto;
+      position: relative;
+      z-index: 2;
     }
 
-    .newsletter-content h3 {
-      font-size: 2em;
+    .newsletter h3 {
+      font-size: 1.5em;
       font-weight: 700;
-      margin-bottom: 16px;
       color: white;
+      margin-bottom: 8px;
     }
 
-    .newsletter-content p {
-      font-size: 1.1em;
-      opacity: 0.95;
-      margin-bottom: 28px;
-      line-height: 1.6;
+    .newsletter p {
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 24px;
     }
 
     .newsletter-form {
       display: flex;
       gap: 12px;
-      max-width: 500px;
+      max-width: 420px;
       margin: 0 auto;
     }
 
@@ -284,20 +583,26 @@
       padding: 14px 18px;
       border: 2px solid rgba(255,255,255,0.2);
       border-radius: 8px;
-      font-size: 1em;
+      font-size: 15px;
       background: rgba(255,255,255,0.1);
       color: white;
     }
 
     .newsletter-form input::placeholder {
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.5);
+    }
+
+    .newsletter-form input:focus {
+      outline: none;
+      border-color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.15);
     }
 
     .newsletter-form button {
       background: white;
-      color: var(--forest-green);
-      padding: 14px 28px;
+      color: #047857;
       border: none;
+      padding: 14px 28px;
       border-radius: 8px;
       font-weight: 700;
       cursor: pointer;
@@ -306,221 +611,298 @@
 
     .newsletter-form button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* Loading State */
+    .loading-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #64748b;
     }
 
     /* Mobile */
-    @media (max-width: 768px) {
-      .hero {
-        padding: 60px 20px 40px;
+    @media (max-width: 800px) {
+      .featured-card {
+        grid-template-columns: 1fr;
       }
 
-      .hero-title {
-        font-size: 2em;
+      .featured-visual {
+        display: none;
       }
 
-      .hero-subtitle {
-        font-size: 1.1em;
+      .featured-content {
+        padding: 28px;
       }
 
-      .blog-section {
+      .featured-title {
+        font-size: 1.5em;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .blog-hero {
         padding: 60px 20px;
       }
 
-      .blog-card {
+      .blog-hero h1 {
+        font-size: 2em;
+      }
+
+      .blog-hero p {
+        font-size: 1.05em;
+      }
+
+      .main {
+        padding: 0 16px 60px;
+      }
+
+      .featured-content {
+        padding: 24px;
+      }
+
+      .featured-verdict {
+        padding: 16px;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .newsletter {
         padding: 32px 24px;
-        box-shadow: 8px 8px 0 #047857;
-      }
-
-      .blog-card:hover {
-        transform: translate(-2px, -2px);
-        box-shadow: 10px 10px 0 #047857;
-      }
-
-      .brutal-header {
-        flex-direction: column;
-        gap: 20px;
-        margin-bottom: 24px;
-      }
-
-      .brutal-number {
-        font-size: 5em;
-      }
-
-      .brutal-meta {
-        text-align: left;
-        padding-top: 0;
-      }
-
-      .blog-card h2 {
-        font-size: 1.8em;
-      }
-
-      .brutal-intro {
-        font-size: 1em;
-      }
-
-      .blog-card-footer {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .read-more-btn {
-        width: 100%;
-        text-align: center;
       }
 
       .newsletter-form {
         flex-direction: column;
       }
-
-      .newsletter-form button {
-        width: 100%;
-      }
     }
   </style>
 </head>
 <body>
-  <div class="page-wrapper">
-    
-    <!-- Header -->
-    <div id="header-root"></div>
 
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-content">
-        <h1 class="hero-title">{{t.blog.heroTitle}}</h1>
-        <p class="hero-subtitle">
-          {{t.blog.heroSubtitle}}
-        </p>
+  <!-- Header -->
+  <div id="header-root"></div>
+
+  <!-- Hero -->
+  <header class="blog-hero">
+    <div class="hero-decoration">
+      <div class="dot dot-1"></div>
+      <div class="dot dot-2"></div>
+      <div class="dot dot-3"></div>
+      <div class="dot dot-4"></div>
+      <div class="dot dot-5"></div>
+      <div class="dot dot-6"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-label">Evidence-Based Research</div>
+      <h1>Hair Loss Research Hub</h1>
+      <p>Clear answers backed by science. We show you the verdict first — then explain why.</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- Featured Article (dynamically loaded) -->
+    <div id="featured-article">
+      <div class="loading-state">Loading featured article...</div>
+    </div>
+
+    <!-- Other Articles Section -->
+    <div class="section-header">
+      <h2>All Guides</h2>
+      <span class="section-count" id="guides-count">Loading...</span>
+    </div>
+
+    <div class="card-grid" id="articles-grid">
+      <div class="loading-state">Loading articles...</div>
+    </div>
+
+    <!-- Coming Soon Section -->
+    <div class="section-header">
+      <h2>Coming Soon</h2>
+      <span class="section-count">In progress</span>
+    </div>
+
+    <div class="card-grid">
+      <div class="coming-soon-card">
+        <h3>Biotin for hair growth?</h3>
+        <p>Does the evidence support the hype?</p>
       </div>
-    </section>
-
-    <!-- Blog Grid -->
-    <section class="blog-section">
-      <div class="blog-grid" id="blogGrid">
-        <!-- Blog posts will be dynamically loaded here -->
-        <div class="loading-message" style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--gray-medium);">
-          <p style="font-size: 1.2em;">{{t.blog.loadingMessage}}</p>
-        </div>
+      <div class="coming-soon-card">
+        <h3>Saw palmetto vs finasteride</h3>
+        <p>Natural DHT blocker or wishful thinking?</p>
       </div>
-    </section>
+    </div>
 
-    <!-- Newsletter CTA -->
-    <section class="newsletter-section">
+    <!-- Newsletter -->
+    <div class="newsletter">
       <div class="newsletter-content">
-        <h3>{{t.blog.newsletterTitle}}</h3>
-        <p>{{t.blog.newsletterText}}</p>
-        <form class="newsletter-form">
-          <input type="email" placeholder="{{t.blog.emailPlaceholder}}" required>
-          <button type="submit">{{t.blog.subscribeButton}}</button>
+        <h3>Get new research in your inbox</h3>
+        <p>No spam. Just evidence-based updates when we publish something new.</p>
+        <form class="newsletter-form" id="newsletter-form">
+          <input type="email" placeholder="your@email.com" required>
+          <button type="submit">Subscribe</button>
         </form>
       </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <div id="footer-root"></div>
-  </div>
+  </main>
 
+  <!-- Footer -->
+  <div id="footer-root"></div>
+
+  <!-- Scripts -->
   <script src="/scripts/main.js"></script>
   <script src="/scripts/blog-posts.js"></script>
   <script>
-    // Translation data
-    const t = {
-      noPosts: "{{t.blog.noPosts}}",
-      errorLoading: "{{t.blog.errorLoading}}",
-      lastUpdated: "{{t.blog.lastUpdated}}",
-      evidenceBased: "{{t.blog.evidenceBased}}",
-      readGuideButton: "{{t.blog.readGuideButton}}",
-      subscribeSuccess: "{{t.blog.subscribeSuccess}}"
-    };
-
-    // Handle newsletter form submission
-    document.addEventListener('DOMContentLoaded', function() {
-      const newsletterForm = document.querySelector('.newsletter-form');
-      if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          const email = this.querySelector('input[type="email"]').value;
-          console.log('Email submitted:', email);
-          
-          // In production, send to your backend/email service
-          alert(t.subscribeSuccess);
-          this.reset();
-        });
-      }
-    });
-
-    // Render blog posts dynamically from fetched metadata
-    async function renderBlogPosts() {
-      const blogGrid = document.getElementById('blogGrid');
-      
+    // Render the blog posts dynamically
+    async function renderBlogIndex() {
       try {
         const posts = await loadAllPosts();
         
         if (posts.length === 0) {
-          blogGrid.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
-              <p style="font-size: 1.2em; color: var(--gray-medium);">${t.noPosts}</p>
-            </div>
-          `;
+          document.getElementById('featured-article').innerHTML = '<div class="loading-state">No articles found.</div>';
+          document.getElementById('articles-grid').innerHTML = '';
           return;
         }
         
-        // Clear loading message
-        blogGrid.innerHTML = '';
+        // Featured article = newest post
+        const featuredPost = posts[0];
+        renderFeaturedArticle(featuredPost);
         
-        // Render each blog post
-        posts.forEach((post, index) => {
-          const article = document.createElement('article');
-          article.className = 'blog-card';
-          
-          // Format the card number (01, 02, 03, etc.)
-          const cardNumber = String(index + 1).padStart(2, '0');
-          
-          // Build intro section if available (green explanation box)
-          const introHTML = post.intro ? `
-            <div class="brutal-intro">
-              ${post.intro}
-            </div>
-          ` : '';
-          
-          // Format date nicely
-          const formattedDate = `${t.lastUpdated} ${formatDate(post.date)}`;
-          
-          article.innerHTML = `
-            <div class="brutal-header">
-              <div class="brutal-number">${cardNumber}</div>
-              <div class="brutal-meta">
-                <div class="brutal-category">${post.category}</div>
-                <div class="brutal-date">${formattedDate}</div>
-              </div>
-            </div>
-            <h2>${post.title}</h2>
-            ${introHTML}
-            <div class="blog-card-footer">
-              <div class="brutal-tags">
-                <span class="brutal-tag">${post.readTime}</span>
-                <span class="brutal-tag">${t.evidenceBased}</span>
-              </div>
-              <a href="${post.slug}.html" class="read-more-btn">${t.readGuideButton}</a>
-            </div>
-          `;
-          
-          blogGrid.appendChild(article);
-        });
+        // Other articles = rest of posts
+        const otherPosts = posts.slice(1);
+        renderArticleGrid(otherPosts);
+        
+        // Update count
+        document.getElementById('guides-count').textContent = `${otherPosts.length} guide${otherPosts.length !== 1 ? 's' : ''}`;
+        
       } catch (error) {
-        console.error('Error rendering blog posts:', error);
-        blogGrid.innerHTML = `
-          <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
-            <p style="font-size: 1.2em; color: var(--gray-medium);">${t.errorLoading}</p>
-          </div>
-        `;
+        console.error('Error loading blog posts:', error);
+        document.getElementById('featured-article').innerHTML = '<div class="loading-state">Error loading articles.</div>';
       }
     }
     
-    // Render posts when page loads
-    document.addEventListener('DOMContentLoaded', renderBlogPosts);
+    function renderFeaturedArticle(post) {
+      const container = document.getElementById('featured-article');
+      
+      // Truncate intro for the verdict box (first ~150 chars)
+      const verdictText = post.intro 
+        ? (post.intro.length > 180 ? post.intro.substring(0, 180) + '...' : post.intro)
+        : 'Click to read the full analysis.';
+      
+      container.innerHTML = `
+        <a href="${post.slug}.html" class="featured-card">
+          <div class="featured-content">
+            <div class="featured-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+              Latest Research
+            </div>
+            <div class="featured-category">${post.category}</div>
+            <h2 class="featured-title">${post.title}</h2>
+            
+            <div class="featured-verdict">
+              <div class="featured-verdict-label">The Verdict</div>
+              <div class="featured-verdict-text">${verdictText}</div>
+            </div>
+            
+            <div class="featured-meta">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                </svg>
+                ${post.readTime}
+              </span>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+                Evidence-based
+              </span>
+            </div>
+          </div>
+          
+          <div class="featured-visual">
+            <div class="mini-evidence-scale">
+              <div class="mini-scale-header">What you'll learn</div>
+              <div class="mini-scale-item">
+                <span class="mini-check">✓</span>
+                <span class="mini-scale-text">What the research actually shows</span>
+              </div>
+              <div class="mini-scale-item">
+                <span class="mini-check">✓</span>
+                <span class="mini-scale-text">Common myths debunked</span>
+              </div>
+              <div class="mini-scale-item">
+                <span class="mini-check">✓</span>
+                <span class="mini-scale-text">Evidence-based recommendations</span>
+              </div>
+            </div>
+            <div class="read-cta">
+              Read the full analysis
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+        </a>
+      `;
+    }
+    
+    function renderArticleGrid(posts) {
+      const grid = document.getElementById('articles-grid');
+      
+      if (posts.length === 0) {
+        grid.innerHTML = '<div class="coming-soon-card"><h3>More guides coming soon</h3><p>Check back for more evidence-based content.</p></div>';
+        return;
+      }
+      
+      grid.innerHTML = posts.map(post => {
+        // Truncate intro for card
+        const cardIntro = post.intro 
+          ? (post.intro.length > 120 ? post.intro.substring(0, 120) + '...' : post.intro)
+          : '';
+        
+        return `
+          <a href="${post.slug}.html" class="blog-card">
+            <div class="card-content">
+              <div class="card-category">${post.category}</div>
+              <h3 class="card-title">${post.title}</h3>
+              ${cardIntro ? `<div class="card-verdict">${cardIntro}</div>` : ''}
+              <div class="card-meta">
+                <span>${post.readTime}</span>
+                <span>·</span>
+                <span>${formatDate(post.date)}</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="card-tags">
+                <span class="tag">Evidence-based</span>
+              </div>
+              <svg class="card-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </a>
+        `;
+      }).join('');
+    }
+    
+    // Newsletter form handler
+    document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      console.log('Newsletter signup:', email);
+      alert('Thanks for subscribing! We\'ll keep you updated.');
+      this.reset();
+    });
+    
+    // Load posts when DOM is ready
+    document.addEventListener('DOMContentLoaded', renderBlogIndex);
   </script>
 </body>
 </html>
