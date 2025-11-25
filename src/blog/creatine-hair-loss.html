@@ -2601,35 +2601,35 @@
         });
       }
 
-      // General FAQ Logic
-      const faqQuestions = document.querySelectorAll('.faq-question');
-      
-      faqQuestions.forEach(question => {
-        question.addEventListener('click', function() {
-          const item = this.parentElement;
-          const isActive = item.classList.contains('active');
-          const icon = this.querySelector('.faq-icon');
-          
-          // Close others ONLY if it's not the Sources section
-          // This allows Sources to stay open while you browse FAQs
-          if (!item.classList.contains('sources-item')) {
-             document.querySelectorAll('.faq-item:not(.sources-item)').forEach(otherItem => {
-              if (otherItem !== item) {
-                otherItem.classList.remove('active');
-                otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-              }
-            });
-          }
+      // FAQ Accordion Logic - using event delegation for reliability
+      document.addEventListener('click', function(e) {
+        const button = e.target.closest('.faq-question');
+        if (!button) return;
+        
+        const item = button.closest('.faq-item');
+        if (!item) return;
+        
+        const isActive = item.classList.contains('active');
+        
+        // Close others ONLY if it's not the Sources section
+        if (!item.classList.contains('sources-item')) {
+          document.querySelectorAll('.faq-item:not(.sources-item)').forEach(otherItem => {
+            if (otherItem !== item) {
+              otherItem.classList.remove('active');
+              const otherBtn = otherItem.querySelector('.faq-question');
+              if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+            }
+          });
+        }
 
-          // Toggle current
-          if (isActive) {
-            item.classList.remove('active');
-            this.setAttribute('aria-expanded', 'false');
-          } else {
-            item.classList.add('active');
-            this.setAttribute('aria-expanded', 'true');
-          }
-        });
+        // Toggle current
+        if (isActive) {
+          item.classList.remove('active');
+          button.setAttribute('aria-expanded', 'false');
+        } else {
+          item.classList.add('active');
+          button.setAttribute('aria-expanded', 'true');
+        }
       });
     });
   </script>
