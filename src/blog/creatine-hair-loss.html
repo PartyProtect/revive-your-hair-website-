@@ -225,8 +225,18 @@
     .faq-answer {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: max-height 0.4s ease-in-out;
       background-color: #fff;
+    }
+
+    /* Active state - expand the answer */
+    .faq-item.active .faq-answer {
+      max-height: 2000px; /* Regular FAQ items */
+    }
+
+    /* Sources section needs much more height for all 32+ citations */
+    .faq-item.sources-item.active .faq-answer {
+      max-height: 8000px;
     }
 
     .faq-content {
@@ -2597,8 +2607,8 @@
       faqQuestions.forEach(question => {
         question.addEventListener('click', function() {
           const item = this.parentElement;
-          const answer = this.nextElementSibling;
           const isActive = item.classList.contains('active');
+          const icon = this.querySelector('.faq-icon');
           
           // Close others ONLY if it's not the Sources section
           // This allows Sources to stay open while you browse FAQs
@@ -2607,7 +2617,6 @@
               if (otherItem !== item) {
                 otherItem.classList.remove('active');
                 otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-                otherItem.querySelector('.faq-answer').style.maxHeight = null;
               }
             });
           }
@@ -2616,11 +2625,9 @@
           if (isActive) {
             item.classList.remove('active');
             this.setAttribute('aria-expanded', 'false');
-            answer.style.maxHeight = null;
           } else {
             item.classList.add('active');
             this.setAttribute('aria-expanded', 'true');
-            answer.style.maxHeight = answer.scrollHeight + "px";
           }
         });
       });
