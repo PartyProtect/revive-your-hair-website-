@@ -40,6 +40,7 @@
       --forest-green: #047857;
       --forest-green-light: #10b981;
       --gradient-primary: linear-gradient(135deg, #047857 0%, #059669 100%);
+      --page-bg: #f8fafc;
     }
 
     * {
@@ -52,7 +53,7 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       line-height: 1.7;
       color: #2d3748;
-      background-color: #f7fafc;
+      background-color: var(--page-bg);
       padding: 20px;
     }
     
@@ -61,8 +62,8 @@
       margin: 0 auto;
       background: white;
       padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     }
     
     .breadcrumb {
@@ -84,6 +85,7 @@
       line-height: 1.2;
     }
     
+    /* H2 with Left Accent Bar */
     h2 {
       font-size: 2em;
       font-weight: 700;
@@ -91,6 +93,19 @@
       margin-top: 48px;
       margin-bottom: 20px;
       line-height: 1.3;
+      position: relative;
+      padding-left: 20px;
+    }
+    
+    h2::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 4px;
+      bottom: 4px;
+      width: 4px;
+      background: linear-gradient(180deg, #10b981, #047857);
+      border-radius: 2px;
     }
     
     p {
@@ -103,13 +118,26 @@
       color: #1a202c;
     }
 
-    /* REVISED TL;DR Box - Easier to read */
+    /* TL;DR Box with Top Accent Bar */
     .tldr-box {
-      background-color: #f0fdf4; /* Light green background */
-      border-left: 5px solid var(--forest-green);
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border: none;
       padding: 28px 32px;
-      border-radius: 8px;
+      border-radius: 12px;
       margin: 32px 0 40px 0;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+    
+    .tldr-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #10b981, #34d399);
+      border-radius: 12px 12px 0 0;
     }
 
     .tldr-box h3 {
@@ -126,21 +154,61 @@
       margin: 0;
       font-size: 1.05em;
       line-height: 1.6;
-      color: #064e3b; /* Dark green text for contrast */
+      color: #064e3b;
     }
 
-    /* New Component: Key Study Highlight */
+    /* Callout Icon Container */
+    .callout-icon {
+      width: 28px;
+      height: 28px;
+      background: #047857;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+    }
+    
+    /* Circular Icon Style */
+    .icon-circle {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #047857, #10b981);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(4, 120, 87, 0.25);
+    }
+
+    /* Study Highlight Box with Top Accent */
     .study-highlight {
-      background: white;
-      border: 2px solid #e2e8f0;
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: none;
       border-radius: 12px;
       padding: 24px;
       margin: 32px 0;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+    
+    .study-highlight::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+      border-radius: 12px 12px 0 0;
     }
 
     .study-highlight h4 {
       margin: 0 0 12px 0;
-      color: #2d3748;
+      color: #1e40af;
       font-size: 1.1em;
     }
 
@@ -151,7 +219,7 @@
 
     .study-list li {
       margin-bottom: 12px;
-      color: #4a5568;
+      color: #1e3a5f;
     }
 
     /* Q&A Specific Styles */
@@ -167,16 +235,16 @@
 
     .faq-item {
       border: 1px solid #e2e8f0;
-      border-radius: 8px;
+      border-radius: 12px;
       overflow: hidden;
       background: white;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      transition: all 0.2s ease;
     }
 
     .faq-item:hover {
-      border-color: var(--forest-green-light);
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      border-color: #34d399;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
     }
 
     .faq-question {
@@ -196,7 +264,7 @@
     }
 
     .faq-question:hover {
-      background-color: #f7fafc;
+      background-color: #f8fafc;
     }
 
     .faq-title {
@@ -205,11 +273,20 @@
       gap: 12px;
     }
 
+    /* FAQ Icon - Gradient Circle */
     .faq-icon {
-      font-size: 1.5em;
-      color: var(--forest-green);
-      font-weight: 300;
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #10b981, #047857);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
       transition: transform 0.3s ease;
+      flex-shrink: 0;
     }
 
     /* Active state styling */
@@ -218,7 +295,7 @@
     }
 
     .faq-item.active .faq-question {
-      background-color: #f0fdf4;
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
       color: var(--forest-green);
     }
 
@@ -244,7 +321,7 @@
       color: #4a5568;
       line-height: 1.7;
       font-size: 1.05em;
-      border-top: 1px solid #f0f0f0;
+      border-top: 1px solid #e2e8f0;
     }
 
     /* FIX: Better List Styling inside Q&A Answers */
@@ -290,7 +367,7 @@
       top: 0;
       left: 0;
       right: 0;
-      background: var(--gradient-primary);
+      background: linear-gradient(135deg, #0f172a, #1e293b);
       color: white;
       padding: 16px 24px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.2);
@@ -314,15 +391,15 @@
     }
 
     .sticky-cta-button {
-      background: white;
-      color: var(--forest-green);
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
       padding: 12px 28px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 700;
       font-size: 15px;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -338,9 +415,8 @@
     }
 
     .sticky-cta-button:hover {
-      background: #f0fdf4;
       transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      box-shadow: 0 6px 24px rgba(16, 185, 129, 0.4);
     }
 
     .sticky-cta-button:hover::after {
@@ -349,7 +425,7 @@
 
     .sticky-cta-button:active {
       transform: translateY(0);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
     }
 
     .sticky-cta-close {
@@ -520,6 +596,13 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
       padding: 20px;
+      transition: all 0.3s ease;
+    }
+    
+    .stat-card:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(52, 211, 153, 0.3);
+      transform: translateY(-2px);
     }
     
     .stat-card-myth {
@@ -580,31 +663,37 @@
     }
     
     .btn-primary {
-      background: #10b981;
+      background: linear-gradient(135deg, #10b981, #059669);
       color: white;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
     }
     
     .btn-primary:hover {
-      background: #34d399;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(16, 185, 129, 0.4);
     }
     
     .btn-secondary {
       background: rgba(255, 255, 255, 0.1);
       color: white;
       border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
     }
     
     .btn-secondary:hover {
       background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
     }
     
     .btn-amber {
-      background: rgba(245, 158, 11, 0.9);
+      background: linear-gradient(135deg, #f59e0b, #d97706);
       color: white;
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
     }
     
     .btn-amber:hover {
-      background: #fbbf24;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(245, 158, 11, 0.4);
     }
     
     /* Meta Info */
@@ -647,18 +736,30 @@
     }
     
     .quick-answer {
-      background: #f0fdf4;
-      border: 2px solid #bbf7d0;
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border: none;
       border-radius: 16px;
       padding: 24px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
       display: flex;
       align-items: flex-start;
       gap: 16px;
+      position: relative;
+    }
+    
+    .quick-answer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #10b981, #34d399);
+      border-radius: 16px 16px 0 0;
     }
     
     .quick-answer-icon {
-      background: #10b981;
+      background: linear-gradient(135deg, #047857, #10b981);
       color: white;
       border-radius: 50%;
       width: 40px;
@@ -669,6 +770,7 @@
       flex-shrink: 0;
       font-weight: 700;
       font-size: 18px;
+      box-shadow: 0 4px 12px rgba(4, 120, 87, 0.25);
     }
     
     .quick-answer-title {
@@ -691,10 +793,21 @@
       max-width: 100%;
       margin: 32px 0;
       background: white;
-      border: 1px solid #e2e8f0;
+      border: none;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      position: relative;
+    }
+    
+    .evidence-scale::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #10b981, #3b82f6, #f59e0b);
     }
     
     .evidence-header {
@@ -781,6 +894,7 @@
       gap: 12px;
     }
     
+    /* Evidence Items with Left Border + Gradient Fade */
     .evidence-item {
       border-left: 4px solid;
       border-radius: 0 8px 8px 0;
@@ -789,17 +903,17 @@
     
     .evidence-item-green {
       border-color: #34d399;
-      background: #f0fdf4;
+      background: linear-gradient(90deg, #f0fdf4, var(--page-bg));
     }
     
     .evidence-item-blue {
       border-color: #60a5fa;
-      background: #eff6ff;
+      background: linear-gradient(90deg, #eff6ff, var(--page-bg));
     }
     
     .evidence-item-amber {
       border-color: #fbbf24;
-      background: #fffbeb;
+      background: linear-gradient(90deg, #fffbeb, var(--page-bg));
     }
     
     .item-title {
@@ -822,7 +936,7 @@
     
     .evidence-verdict {
       padding: 24px;
-      background: #f0fdf4;
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
       border-top: 1px solid #bbf7d0;
       display: flex;
       align-items: flex-start;
@@ -833,13 +947,14 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: #10b981;
+      background: linear-gradient(135deg, #047857, #10b981);
       color: white;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
       font-weight: 700;
+      box-shadow: 0 4px 12px rgba(4, 120, 87, 0.25);
     }
     
     .verdict-title {
