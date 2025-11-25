@@ -23,11 +23,11 @@ if (document.readyState === 'loading') {
 // Note: This waits for components to load before initializing
 
 function initializeHeaderFunctionality() {
-  // Mobile Menu Toggle
+  const header = document.getElementById('header');
   const mobileMenuButton = document.getElementById('mobileMenuButton');
-  const navMenu = document.getElementById('navMenu');
+  const mobileMenu = document.getElementById('mobileMenu');
 
-  if (mobileMenuButton && navMenu) {
+  if (mobileMenuButton && mobileMenu) {
     console.log('Mobile menu initialized'); // Debug log
     
     // Remove any existing listeners (prevent duplicates)
@@ -39,28 +39,46 @@ function initializeHeaderFunctionality() {
       e.preventDefault();
       e.stopPropagation();
       console.log('Mobile menu button clicked'); // Debug log
-      navMenu.classList.toggle('active');
+      newButton.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      
+      // Add scrolled class when menu is open for solid background
+      if (header) {
+        if (mobileMenu.classList.contains('active')) {
+          header.classList.add('scrolled');
+        } else if (window.scrollY <= 50) {
+          header.classList.remove('scrolled');
+        }
+      }
     });
 
     // Close mobile menu when clicking outside
     document.addEventListener('click', function(event) {
-      const isClickInsideMenu = navMenu.contains(event.target);
+      const isClickInsideMenu = mobileMenu.contains(event.target);
       const isClickOnButton = newButton.contains(event.target);
       
-      if (!isClickInsideMenu && !isClickOnButton && navMenu.classList.contains('active')) {
-        navMenu.classList.remove('active');
+      if (!isClickInsideMenu && !isClickOnButton && mobileMenu.classList.contains('active')) {
+        newButton.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        if (header && window.scrollY <= 50) {
+          header.classList.remove('scrolled');
+        }
       }
     });
     
     // Close menu when clicking a nav link
-    const navLinks = navMenu.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
+    const mobileNavLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
+    mobileNavLinks.forEach(link => {
       link.addEventListener('click', function() {
-        navMenu.classList.remove('active');
+        newButton.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        if (header && window.scrollY <= 50) {
+          header.classList.remove('scrolled');
+        }
       });
     });
   } else {
-    console.log('Mobile menu elements not found', { mobileMenuButton, navMenu }); // Debug log
+    console.log('Mobile menu elements not found', { mobileMenuButton, mobileMenu }); // Debug log
   }
 }
 
@@ -88,8 +106,8 @@ window.addEventListener('load', function() {
 // ============================================
 
 function initializeStickyHeader() {
-  const header = document.querySelector('.header');
-  let lastScrollTop = 0;
+  const header = document.getElementById('header') || document.querySelector('.header');
+  const mobileMenu = document.getElementById('mobileMenu');
   let scrollThreshold = 50; // Pixels to scroll before adding "scrolled" class
 
   if (!header) return;
@@ -98,13 +116,12 @@ function initializeStickyHeader() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
     // Add/remove "scrolled" class based on scroll position
-    if (scrollTop > scrollThreshold) {
+    // But keep it if mobile menu is open
+    if (scrollTop > scrollThreshold || (mobileMenu && mobileMenu.classList.contains('active'))) {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
     }
-    
-    lastScrollTop = scrollTop;
   }, { passive: true }); // passive: true for better scroll performance
 }
 
