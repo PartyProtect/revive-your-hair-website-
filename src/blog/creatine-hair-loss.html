@@ -2822,55 +2822,74 @@
   </main>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Sticky CTA Logic
-      const stickyCta = document.getElementById('stickyCta');
-      const closeBtn = document.getElementById('closeStickyCta');
-      
-      if (stickyCta && closeBtn) {
-        closeBtn.addEventListener('click', function() {
-          stickyCta.classList.remove('visible');
-        });
-        window.addEventListener('scroll', function() {
-          if (window.scrollY > 600) {
-            stickyCta.classList.add('visible');
-          } else {
-            stickyCta.classList.remove('visible');
-          }
+    // FAQ Accordion Logic - Direct binding approach
+    (function() {
+      function initFAQ() {
+        const questions = document.querySelectorAll('.faq-question');
+        
+        if (questions.length === 0) {
+          // If FAQ not loaded yet, try again in 100ms
+          setTimeout(initFAQ, 100);
+          return;
+        }
+        
+        questions.forEach(function(button) {
+          button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const item = this.closest('.faq-item');
+            if (!item) return;
+            
+            const isActive = item.classList.contains('active');
+            
+            // Close others (except sources section)
+            if (!item.classList.contains('sources-item')) {
+              document.querySelectorAll('.faq-item:not(.sources-item)').forEach(function(otherItem) {
+                if (otherItem !== item) {
+                  otherItem.classList.remove('active');
+                  var otherBtn = otherItem.querySelector('.faq-question');
+                  if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+                }
+              });
+            }
+            
+            // Toggle current
+            if (isActive) {
+              item.classList.remove('active');
+              this.setAttribute('aria-expanded', 'false');
+            } else {
+              item.classList.add('active');
+              this.setAttribute('aria-expanded', 'true');
+            }
+          });
         });
       }
-
-      // FAQ Accordion Logic - using event delegation for reliability
-      document.addEventListener('click', function(e) {
-        const button = e.target.closest('.faq-question');
-        if (!button) return;
+      
+      // Initialize when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initFAQ);
+      } else {
+        initFAQ();
+      }
+      
+      // Sticky CTA Logic
+      document.addEventListener('DOMContentLoaded', function() {
+        var stickyCta = document.getElementById('stickyCta');
+        var closeBtn = document.getElementById('closeStickyCta');
         
-        const item = button.closest('.faq-item');
-        if (!item) return;
-        
-        const isActive = item.classList.contains('active');
-        
-        // Close others ONLY if it's not the Sources section
-        if (!item.classList.contains('sources-item')) {
-          document.querySelectorAll('.faq-item:not(.sources-item)').forEach(otherItem => {
-            if (otherItem !== item) {
-              otherItem.classList.remove('active');
-              const otherBtn = otherItem.querySelector('.faq-question');
-              if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+        if (stickyCta && closeBtn) {
+          closeBtn.addEventListener('click', function() {
+            stickyCta.classList.remove('visible');
+          });
+          window.addEventListener('scroll', function() {
+            if (window.scrollY > 600) {
+              stickyCta.classList.add('visible');
+            } else {
+              stickyCta.classList.remove('visible');
             }
           });
         }
-
-        // Toggle current
-        if (isActive) {
-          item.classList.remove('active');
-          button.setAttribute('aria-expanded', 'false');
-        } else {
-          item.classList.add('active');
-          button.setAttribute('aria-expanded', 'true');
-        }
       });
-    });
+    })();
   </script>
 
   <!-- Footer -->
