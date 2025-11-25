@@ -855,6 +855,131 @@
       margin-bottom: 0;
       line-height: 1.5;
     }
+
+    /* ===== MOBILE RESPONSIVE STYLES ===== */
+    @media (max-width: 640px) {
+      /* CTA Buttons - Stack vertically on mobile */
+      .cta-buttons {
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+      }
+      
+      /* Quick Answer Box - Stack icon and text */
+      .quick-answer {
+        flex-direction: column;
+        padding: 20px;
+        gap: 12px;
+      }
+      
+      .quick-answer-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+      }
+      
+      /* Evidence Scale - Reduce padding */
+      .evidence-header {
+        padding: 16px;
+      }
+      
+      .evidence-body {
+        padding: 16px;
+      }
+      
+      .evidence-title {
+        font-size: 1.1rem;
+      }
+      
+      .section-header {
+        font-size: 13px;
+        flex-wrap: wrap;
+      }
+      
+      /* Evidence Items - Smaller padding */
+      .evidence-item {
+        padding: 12px;
+      }
+      
+      .item-title {
+        font-size: 0.95em;
+      }
+      
+      .item-description {
+        font-size: 13px;
+      }
+      
+      /* Evidence Verdict - Stack on mobile */
+      .evidence-verdict {
+        flex-direction: column;
+        padding: 16px;
+        gap: 12px;
+      }
+      
+      .verdict-icon {
+        width: 28px;
+        height: 28px;
+      }
+      
+      /* Hero Meta - Stack items */
+      .hero-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      
+      /* Stat Cards - Already handled, but ensure padding */
+      .stat-card {
+        padding: 16px;
+      }
+      
+      .stat-number {
+        font-size: 1.5rem;
+      }
+      
+      /* FAQ Items - Better mobile spacing */
+      .faq-question {
+        padding: 16px;
+      }
+      
+      .faq-content {
+        padding: 0 16px 16px 16px;
+      }
+      
+      /* Study Highlight Box */
+      .study-highlight {
+        padding: 16px;
+      }
+      
+      /* TL;DR Box */
+      .tldr-box {
+        padding: 16px;
+      }
+    }
+
+    /* Slightly larger mobile screens (tablets) */
+    @media (max-width: 768px) and (min-width: 641px) {
+      .cta-buttons {
+        justify-content: center;
+      }
+      
+      .quick-answer {
+        padding: 20px;
+      }
+      
+      .evidence-header {
+        padding: 20px;
+      }
+      
+      .evidence-body {
+        padding: 20px;
+      }
+    }
   </style>
   <script src="/scripts/component-loader.js"></script>
 </head>
