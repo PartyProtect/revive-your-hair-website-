@@ -19,7 +19,8 @@
  */
 
 const blogPostSlugs = [
-  'hair-loss-guide'
+  'hair-loss-guide',
+  'creatine-hair-loss'
   // Add more slugs here as you create posts
   // 'microneedling-guide',
   // 'finasteride-guide',
