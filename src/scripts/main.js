@@ -125,9 +125,11 @@ function initializeStickyHeader() {
   }, { passive: true }); // passive: true for better scroll performance
 }
 
-// Initialize sticky header on DOM load
+// Initialize sticky header on DOM load and after components are loaded
 document.addEventListener('DOMContentLoaded', initializeStickyHeader);
 window.addEventListener('load', initializeStickyHeader);
+// Also initialize after components load (header is loaded asynchronously)
+window.addEventListener('componentsLoaded', initializeStickyHeader);
 
 // ============================================
 // QUIZ MAINTENANCE POPUP

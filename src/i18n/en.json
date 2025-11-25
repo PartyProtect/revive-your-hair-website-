@@ -8,10 +8,21 @@
     "storeTitle": "Store"
   },
   "hero": {
+    "badge": "Evidence-Based Protocols",
     "title": "Why is finding information on",
     "titleHighlight": "hair loss",
     "titleEnd": "so difficult?",
-    "subtitle": "We've read the studies, so you don't have to."
+    "subtitle": "We've read the studies, so you don't have to.",
+    "stat1Label": "Better Results",
+    "stat1Sublabel": "Combination therapy vs single treatment",
+    "stat2Label": "See Improvement",
+    "stat2Sublabel": "With proper multi-mechanism approach",
+    "stat3Label": "Per Month",
+    "stat3Sublabel": "Full protocol, no hidden costs",
+    "ctaPrimary": "Get Your Protocol",
+    "ctaSecondary": "Read the Science",
+    "trust1": "70+ studies analysed",
+    "trust2": "2-minute personalised quiz"
   },
   "homepage": {
     "timelineIntro": "Here's what the research actually shows:",

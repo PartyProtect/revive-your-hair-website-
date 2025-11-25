@@ -8,10 +8,21 @@
     "storeTitle": "Winkel"
   },
   "hero": {
+    "badge": "Wetenschappelijk Onderbouwd",
     "title": "Waarom is het zo moeilijk om goede informatie over",
     "titleHighlight": "haaruitval",
     "titleEnd": "te vinden?",
-    "subtitle": "Wij hebben de onderzoeken gelezen, zodat jij dat niet hoeft te doen."
+    "subtitle": "Wij hebben de onderzoeken gelezen, zodat jij dat niet hoeft te doen.",
+    "stat1Label": "Betere Resultaten",
+    "stat1Sublabel": "Combinatietherapie vs. enkele behandeling",
+    "stat2Label": "Zien Verbetering",
+    "stat2Sublabel": "Met de juiste multi-mechanisme aanpak",
+    "stat3Label": "Per Maand",
+    "stat3Sublabel": "Volledig protocol, geen verborgen kosten",
+    "ctaPrimary": "Krijg Jouw Protocol",
+    "ctaSecondary": "Lees het Onderzoek",
+    "trust1": "70+ studies geanalyseerd",
+    "trust2": "2-minuten gepersonaliseerde quiz"
   },
   "homepage": {
     "timelineIntro": "Dit is wat het onderzoek daadwerkelijk laat zien:",

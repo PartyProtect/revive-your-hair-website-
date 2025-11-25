@@ -8,10 +8,21 @@
     "storeTitle": "Shop"
   },
   "hero": {
+    "badge": "Evidenzbasierte Protokolle",
     "title": "Warum ist es so schwierig, gute Informationen über",
     "titleHighlight": "Haarausfall",
     "titleEnd": "zu finden?",
-    "subtitle": "Wir haben die Studien gelesen, damit Sie es nicht tun müssen."
+    "subtitle": "Wir haben die Studien gelesen, damit Sie es nicht tun müssen.",
+    "stat1Label": "Bessere Ergebnisse",
+    "stat1Sublabel": "Kombinationstherapie vs. Einzelbehandlung",
+    "stat2Label": "Sehen Verbesserung",
+    "stat2Sublabel": "Mit richtiger Multi-Mechanismus-Ansatz",
+    "stat3Label": "Pro Monat",
+    "stat3Sublabel": "Vollständiges Protokoll, keine versteckten Kosten",
+    "ctaPrimary": "Holen Sie Sich Ihr Protokoll",
+    "ctaSecondary": "Wissenschaft Lesen",
+    "trust1": "70+ Studien analysiert",
+    "trust2": "2-Minuten personalisiertes Quiz"
   },
   "homepage": {
     "timelineIntro": "Das zeigt die Forschung tatsächlich:",
