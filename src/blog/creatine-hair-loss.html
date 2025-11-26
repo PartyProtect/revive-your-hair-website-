@@ -2821,23 +2821,8 @@
     </article>
   </main>
 
-  <script>
-    // Simple FAQ Toggle
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.onclick = function() {
-        this.closest('.faq-item').classList.toggle('active');
-      };
-    });
-    
-    // Sticky CTA
-    window.onscroll = function() {
-      var cta = document.getElementById('stickyCta');
-      if (cta) cta.classList.toggle('visible', window.scrollY > 600);
-    };
-    document.getElementById('closeStickyCta')?.addEventListener('click', function() {
-      document.getElementById('stickyCta').classList.remove('visible');
-    });
-  </script>
+  <!-- FAQ Script (external due to CSP) -->
+  <script src="/scripts/blog-faq.js"></script>
 
   <!-- Footer -->
   <div id="footer-root"></div>
