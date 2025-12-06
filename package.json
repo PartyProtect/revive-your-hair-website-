@@ -2,13 +2,12 @@
   "name": "revive-your-hair-website",
   "version": "1.0.0",
   "description": "Evidence-based hair loss treatment information website",
-  "main": "src/index.html",
+  "main": "src/templates/index.html",
   "scripts": {
-    "start": "python -m http.server 8000",
-    "dev": "python -m http.server 8000",
-    "update-reddit": "node fetch-reddit-posts-axios.js",
-    "build:seo": "node build-seo-content.js",
-    "prebuild": "npm run build:seo"
+    "build": "node build-i18n.js && node build-sitemap.js",
+    "start": "npm run build && npx serve dist -l 8000",
+    "dev": "npx serve dist -l 8000",
+    "build:seo": "node build-seo-content.js"
   },
   "keywords": [
     "hair-loss",

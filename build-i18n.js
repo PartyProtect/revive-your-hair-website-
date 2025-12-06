@@ -79,7 +79,7 @@ function replaceTranslations(html, translations) {
  * Replace metadata tags (title, description, canonical, hreflang)
  */
 function replaceMetadata(html, lang, pageName, translations) {
-  const domain = 'https://revive-your-hair.com';
+  const domain = 'https://reviveyour.hair';
   const urlSlug = config.urlMappings[pageName]?.[lang] !== undefined 
     ? config.urlMappings[pageName][lang] 
     : pageName;
@@ -608,6 +608,15 @@ function buildAll() {
   if (fs.existsSync(googleVerificationSrc)) {
     fs.copyFileSync(googleVerificationSrc, googleVerificationDest);
     console.log('✓ Copied Google Search Console verification file');
+  }
+  
+  // Copy 404 error page to root
+  const errorPageSrc = './src/404.html';
+  const errorPageDest = path.join(config.outputDir, '404.html');
+  
+  if (fs.existsSync(errorPageSrc)) {
+    fs.copyFileSync(errorPageSrc, errorPageDest);
+    console.log('✓ Copied 404 error page');
   }
   
   // Generate sitemap, robots.txt, and _headers file

@@ -1,6 +1,6 @@
 [build]
   # Build multilingual site structure to dist/ folder
-  command = "node build-i18n.js"
+  command = "node build-i18n.js && node build-sitemap.js"
   
   # Publish the dist directory (multilingual output)
   publish = "dist"
@@ -12,49 +12,19 @@
   # Disable secrets scanning (values in docs are examples only)
   SECRETS_SCAN_ENABLED = "false"
 
-# Multilingual clean URLs with language prefix
-[[redirects]]
-  from = "/en"
-  to = "/en/index.html"
-  status = 200
+# ===========================================
+# REDIRECTS - Clean URLs for all languages
+# ===========================================
+# English is at root (/, /about/, /store/, etc.)
+# Dutch is at /nl/ prefix
+# German is at /de/ prefix
 
+# Dutch routes (nl prefix)
 [[redirects]]
   from = "/nl"
   to = "/nl/index.html"
   status = 200
 
-[[redirects]]
-  from = "/"
-  to = "/en/"
-  status = 302
-
-# English routes
-[[redirects]]
-  from = "/en/about"
-  to = "/en/about/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/en/contact"
-  to = "/en/contact/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/en/quiz"
-  to = "/en/quiz/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/en/store"
-  to = "/en/store/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/en/blog"
-  to = "/en/blog/index.html"
-  status = 200
-
-# Dutch routes
 [[redirects]]
   from = "/nl/over-ons"
   to = "/nl/over-ons/index.html"
@@ -80,14 +50,44 @@
   to = "/nl/blog/index.html"
   status = 200
 
-# Ensure sitemap_index.xml and robots.txt are served directly (not caught by 404 handler)
+# German routes (de prefix)
+[[redirects]]
+  from = "/de"
+  to = "/de/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/de/uber-uns"
+  to = "/de/uber-uns/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/de/kontakt"
+  to = "/de/kontakt/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/de/quiz"
+  to = "/de/quiz/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/de/shop"
+  to = "/de/shop/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/de/blog"
+  to = "/de/blog/index.html"
+  status = 200
+
+# Sitemap and robots.txt - serve directly
 [[redirects]]
   from = "/sitemap_index.xml"
   to = "/sitemap_index.xml"
   status = 200
   force = true
 
-# Legacy redirect for old sitemap.xml (redirect to new name)
 [[redirects]]
   from = "/sitemap.xml"
   to = "/sitemap_index.xml"
@@ -105,34 +105,28 @@
   to = "/404.html"
   status = 404
 
+# ===========================================
+# HEADERS - Security and Content-Type
+# ===========================================
+
 [[headers]]
-  # Apply security headers to all HTML pages (but not sitemap/robots)
   for = "/*.html"
   [headers.values]
-    # SECURITY: Force HTTPS for all future visits (HSTS)
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-    # Prevent clickjacking attacks - DENY is more secure than SAMEORIGIN
     X-Frame-Options = "DENY"
-    # Prevent MIME type sniffing
     X-Content-Type-Options = "nosniff"
-    # Enable XSS filter built into browsers
     X-XSS-Protection = "1; mode=block"
-    # Control referrer information sent to other sites
     Referrer-Policy = "strict-origin-when-cross-origin"
-    # Restrict browser features (geolocation, microphone, camera)
     Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), autoplay=()"
-    # Content Security Policy - Tightened (removed 'unsafe-inline' from script-src, whitelisted Reddit images)
     Content-Security-Policy = "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.reddit.com https://old.reddit.com https://i.redd.it https://external-preview.redd.it https://www.googletagmanager.com; connect-src 'self' https://www.reddit.com https://old.reddit.com https://www.google-analytics.com https://analytics.google.com; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
 
 [[headers]]
-  # Sitemap - proper XML content type for search engines
   for = "/sitemap_index.xml"
   [headers.values]
     Content-Type = "application/xml; charset=utf-8"
     Cache-Control = "public, max-age=300"
 
 [[headers]]
-  # Robots.txt - proper text content type
   for = "/robots.txt"
   [headers.values]
     Content-Type = "text/plain; charset=utf-8"
