@@ -1,6 +1,6 @@
 [build]
   # Build multilingual site structure to dist/ folder
-  command = "node build-i18n.js && node build-sitemap.js"
+  command = "node tools/validate-translations.js && node build-i18n.js && node build-sitemap.js"
   
   # Publish the dist directory (multilingual output)
   publish = "dist"
@@ -18,6 +18,24 @@
 # English is at root (/, /about/, /store/, etc.)
 # Dutch is at /nl/ prefix
 # German is at /de/ prefix
+
+# ===========================================
+# LANGUAGE DETECTION - Auto-redirect by browser language
+# Only for first-time visitors (no cookie set)
+# ===========================================
+[[redirects]]
+  from = "/"
+  to = "/nl/"
+  status = 302
+  force = false
+  conditions = {Language = ["nl", "nl-NL", "nl-BE"]}
+
+[[redirects]]
+  from = "/"
+  to = "/de/"
+  status = 302
+  force = false
+  conditions = {Language = ["de", "de-DE", "de-AT", "de-CH"]}
 
 # Dutch routes (nl prefix)
 [[redirects]]

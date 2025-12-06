@@ -4,7 +4,8 @@
   "description": "Evidence-based hair loss treatment information website",
   "main": "src/templates/index.html",
   "scripts": {
-    "build": "node build-i18n.js && node build-sitemap.js",
+    "validate": "node tools/validate-translations.js",
+    "build": "npm run validate && node build-i18n.js && node build-sitemap.js",
     "start": "npm run build && npx serve dist -l 8000",
     "dev": "npx serve dist -l 8000",
     "build:seo": "node build-seo-content.js"
