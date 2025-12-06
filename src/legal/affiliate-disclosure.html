@@ -28,34 +28,77 @@
   <script src="../../scripts/component-loader.js"></script>
   
   <style>
+    /* Page Hero for Legal Pages */
+    .legal-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #064e3b 100%);
+      color: white;
+      padding: 140px 40px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .legal-hero::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .legal-hero::after {
+      content: '';
+      position: absolute;
+      top: 20%;
+      right: 10%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .legal-hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .legal-hero h1 {
+      font-size: 2.5em;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: white;
+    }
+
+    .legal-hero .last-updated {
+      font-size: 1em;
+      color: #94a3b8;
+      margin: 0;
+    }
+
     .legal-container {
       max-width: 900px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 60px 40px;
       line-height: 1.8;
-    }
-    
-    .legal-container h1 {
-      font-size: 2.5em;
-      margin-bottom: 8px;
-      color: #2c3e50;
-    }
-    
-    .last-updated {
-      color: #6c757d;
-      font-size: 0.9em;
-      margin-bottom: 32px;
+      background: white;
     }
     
     .legal-container h2 {
-      font-size: 1.8em;
+      font-size: 1.5em;
       margin-top: 40px;
       margin-bottom: 16px;
-      color: #34495e;
+      color: var(--charcoal);
+      font-weight: 700;
     }
     
     .legal-container p, .legal-container li {
-      color: #495057;
+      color: var(--gray-dark);
       margin-bottom: 12px;
     }
     
@@ -65,11 +108,40 @@
     }
     
     .highlight-box {
-      background: #fff3cd;
-      border-left: 4px solid #ffc107;
-      padding: 20px;
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left: 4px solid var(--warm-gold);
+      padding: 24px;
       margin: 24px 0;
-      border-radius: 4px;
+      border-radius: 8px;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .legal-hero {
+        padding: 120px 20px 60px;
+      }
+
+      .legal-hero h1 {
+        font-size: 1.8em;
+      }
+
+      .legal-container {
+        padding: 40px 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .legal-hero {
+        padding: 100px 16px 50px;
+      }
+
+      .legal-hero h1 {
+        font-size: 1.5em;
+      }
+
+      .legal-container {
+        padding: 32px 16px;
+      }
     }
   </style>
 </head>
@@ -78,10 +150,15 @@
   <!-- Header -->
   <div id="header-root"></div>
   
+  <!-- Hero Section -->
+  <section class="legal-hero">
+    <div class="legal-hero-content">
+      <h1>Affiliate Disclosure</h1>
+      <p class="last-updated">Last Updated: October 15, 2025</p>
+    </div>
+  </section>
+  
   <div class="legal-container">
-    <h1>Affiliate Disclosure</h1>
-    <p class="last-updated">Last Updated: October 15, 2025</p>
-
     <div class="highlight-box">
       <p><strong>⚠️ Transparency Notice:</strong> Revive Your Hair participates in affiliate marketing programs. Some links on this website are affiliate links, meaning we may earn a commission if you make a purchase through these links at no additional cost to you.</p>
     </div>

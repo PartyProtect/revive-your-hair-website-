@@ -51,6 +51,55 @@
   <!-- i18n -->
   <!-- Scripts -->
   <script src="/scripts/component-loader.js"></script>
+
+  <style>
+    .quiz-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .quiz-content h2 {
+      color: #1f2937;
+      margin-bottom: 24px;
+      font-size: 2rem;
+    }
+
+    .quiz-content > p {
+      color: #6b7280;
+      margin-bottom: 32px;
+      font-size: 1.125rem;
+    }
+
+    .feature-list {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      text-align: left;
+      list-style: none;
+      padding: 0;
+    }
+
+    .feature-list li {
+      padding: 12px 0;
+      display: flex;
+      align-items: center;
+      color: #374151;
+    }
+
+    .feature-list li span:first-child {
+      color: #059669;
+      margin-right: 12px;
+      font-size: 1.5rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
 </head>
 <body>
   <!-- Header -->
@@ -58,42 +107,41 @@
 
   <!-- Main Content -->
   <main>
-    <section class="hero-section">
-      <div class="container">
-        <h1 class="hero-title">{{t.quiz.heroTitle}}</h1>
-        <p class="hero-subtitle">{{t.quiz.heroSubtitle}}</p>
+    <!-- Hero - Using standardized page-hero component -->
+    <section class="page-hero">
+      <div class="page-hero-content">
+        <h1 class="page-hero-title">{{t.quiz.heroTitle}}</h1>
+        <p class="page-hero-subtitle">{{t.quiz.heroSubtitle}}</p>
       </div>
     </section>
 
     <section class="section white">
-      <div class="container" style="max-width: 800px; text-align: center;">
-        <h2 style="color: #1f2937; margin-bottom: 24px; font-size: 2rem;">{{t.quiz.comingSoonTitle}}</h2>
-        <p style="color: #6b7280; margin-bottom: 32px; font-size: 1.125rem;">{{t.quiz.comingSoonText}}</p>
+      <div class="quiz-content">
+        <h2>{{t.quiz.comingSoonTitle}}</h2>
+        <p>{{t.quiz.comingSoonText}}</p>
         
-        <div style="max-width: 600px; margin: 0 auto 40px; text-align: left;">
-          <ul style="list-style: none; padding: 0;">
-            <li style="padding: 12px 0; display: flex; align-items: center; color: #374151;">
-              <span style="color: #059669; margin-right: 12px; font-size: 1.5rem;">✓</span>
-              <span>{{t.quiz.feature1}}</span>
-            </li>
-            <li style="padding: 12px 0; display: flex; align-items: center; color: #374151;">
-              <span style="color: #059669; margin-right: 12px; font-size: 1.5rem;">✓</span>
-              <span>{{t.quiz.feature2}}</span>
-            </li>
-            <li style="padding: 12px 0; display: flex; align-items: center; color: #374151;">
-              <span style="color: #059669; margin-right: 12px; font-size: 1.5rem;">✓</span>
-              <span>{{t.quiz.feature3}}</span>
-            </li>
-            <li style="padding: 12px 0; display: flex; align-items: center; color: #374151;">
-              <span style="color: #059669; margin-right: 12px; font-size: 1.5rem;">✓</span>
-              <span>{{t.quiz.feature4}}</span>
-            </li>
-          </ul>
-        </div>
+        <ul class="feature-list">
+          <li>
+            <span>✓</span>
+            <span>{{t.quiz.feature1}}</span>
+          </li>
+          <li>
+            <span>✓</span>
+            <span>{{t.quiz.feature2}}</span>
+          </li>
+          <li>
+            <span>✓</span>
+            <span>{{t.quiz.feature3}}</span>
+          </li>
+          <li>
+            <span>✓</span>
+            <span>{{t.quiz.feature4}}</span>
+          </li>
+        </ul>
 
-        <p style="color: #6b7280; margin-bottom: 32px;">{{t.quiz.notifyText}}</p>
+        <p>{{t.quiz.notifyText}}</p>
 
-        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <div class="cta-buttons">
           <a href="/en/blog/hair-loss-guide.html" class="cta-button primary">{{t.quiz.guideButton}}</a>
           <a href="/en/contact/" class="cta-button secondary">{{t.quiz.contactButton}}</a>
         </div>

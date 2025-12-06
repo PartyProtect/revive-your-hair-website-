@@ -60,34 +60,12 @@
   <style>
     .page-wrapper {
       min-height: 100vh;
-      padding: 60px 20px;
     }
 
-    .contact-container {
+    .contact-content {
       max-width: 800px;
       margin: 0 auto;
-    }
-
-    .hero-section {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .page-title {
-      font-size: 3em;
-      font-weight: 700;
-      color: var(--charcoal);
-      margin-bottom: 20px;
-      line-height: 1.2;
-    }
-
-    .page-subtitle {
-      font-size: 1.3em;
-      color: var(--gray-dark);
-      font-weight: 400;
-      line-height: 1.6;
-      max-width: 600px;
-      margin: 0 auto;
+      padding: 60px 20px;
     }
 
     .intro-text {
@@ -229,14 +207,6 @@
     }
 
     @media (max-width: 768px) {
-      .page-title {
-        font-size: 2em;
-      }
-
-      .page-subtitle {
-        font-size: 1.1em;
-      }
-
       .form-section {
         padding: 32px 24px;
       }
@@ -250,14 +220,17 @@
   <!-- Main Content -->
   <main>
     <div class="page-wrapper">
-      <div class="contact-container">
-        
-        <!-- Hero -->
-        <div class="hero-section">
-          <h1 class="page-title">{{t.contact.heroTitle}}</h1>
-          <p class="page-subtitle">{{t.contact.heroSubtitle}}</p>
+      
+      <!-- Hero - Using standardized page-hero component -->
+      <section class="page-hero">
+        <div class="page-hero-content">
+          <h1 class="page-hero-title">{{t.contact.heroTitle}}</h1>
+          <p class="page-hero-subtitle">{{t.contact.heroSubtitle}}</p>
         </div>
+      </section>
 
+      <!-- Content -->
+      <div class="contact-content">
         <!-- Intro -->
         <div class="intro-text">
           <p>{{t.contact.introPara1}}</p>

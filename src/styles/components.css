@@ -11,17 +11,15 @@
   z-index: 1000;
 }
 
-/* Header Container */
+/* Header Container - ALWAYS dark background for visibility */
 .header {
-  transition: all 0.3s ease;
-}
-
-.header.scrolled {
   background: rgba(15, 23, 42, 0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
 }
 
+/* Scrolled state - slightly more compact */
 .header.scrolled .header-content {
   padding: 12px 24px;
 }
@@ -36,11 +34,11 @@
   background: linear-gradient(90deg, #10b981, #34d399, #f59e0b);
 }
 
-/* Header Content Container */
+/* Header Content Container - Thicker padding */
 .header-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 16px 24px;
+  padding: 18px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -613,5 +611,92 @@
   
   .footer-disclaimer-icon {
     align-self: center;
+  }
+}
+
+
+/* ============================================
+   PAGE HERO COMPONENT - Dark Theme
+   Standard hero section for all inner pages
+   ============================================ */
+
+.page-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #064e3b 100%);
+  padding: 140px 24px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle glow effect */
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Secondary glow */
+.page-hero::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.page-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.page-hero-title {
+  font-size: 3em;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.page-hero-subtitle {
+  font-size: 1.25em;
+  color: #94a3b8;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Page hero with accent color title */
+.page-hero-title .accent {
+  color: #34d399;
+}
+
+.page-hero-title .gold {
+  color: #f59e0b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-hero {
+    padding: 120px 20px 60px;
+  }
+  
+  .page-hero-title {
+    font-size: 2.2em;
+  }
+  
+  .page-hero-subtitle {
+    font-size: 1.1em;
   }
 }
