@@ -1,8 +1,8 @@
 /* ============================================
-   GLOBAL HEADER COMPONENT - Dark Theme
+   GLOBAL HEADER COMPONENT - Transparent to Dark
    ============================================ */
 
-/* Header Root Container - Fixed positioning for dark header */
+/* Header Root Container - Fixed positioning */
 #header-root {
   position: fixed;
   top: 0;
@@ -11,27 +11,36 @@
   z-index: 1000;
 }
 
-/* Header Container - ALWAYS dark background for visibility */
+/* Header Container - TRANSPARENT by default */
 .header {
-  background: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: 1px solid transparent;
   transition: all 0.3s ease;
 }
 
-/* Scrolled state - slightly more compact */
+/* Scrolled state - dark background */
+.header.scrolled {
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .header.scrolled .header-content {
   padding: 12px 24px;
 }
 
 .header.scrolled .accent-bar {
   height: 2px;
+  opacity: 1;
 }
 
-/* Accent Bar (Green to Orange Gradient) */
+/* Accent Bar (Green to Orange Gradient) - Hidden initially */
 .accent-bar {
   height: 3px;
   background: linear-gradient(90deg, #10b981, #34d399, #f59e0b);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 /* Header Content Container - Thicker padding */
@@ -45,7 +54,7 @@
   transition: all 0.3s ease;
 }
 
-/* Logo */
+/* Logo with green 'Your' */
 .logo {
   font-size: 1.25rem;
   font-weight: 700;
@@ -55,8 +64,12 @@
   transition: color 0.2s;
 }
 
+.logo .logo-accent {
+  color: #10b981;
+}
+
 .logo:hover {
-  color: #34d399;
+  opacity: 0.9;
 }
 
 /* Navigation */
