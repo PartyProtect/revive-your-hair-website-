@@ -5,21 +5,30 @@ document.querySelectorAll('.faq-question').forEach(function(btn) {
   };
 });
 
-// Sticky CTA
-window.onscroll = function() {
-  var cta = document.getElementById('stickyCta');
-  if (cta) {
-    if (window.scrollY > 600) {
-      cta.classList.add('visible');
-    } else {
-      cta.classList.remove('visible');
+// Sticky CTA with persistent dismissal
+(function() {
+  var ctaDismissed = sessionStorage.getItem('stickyCta_dismissed') === 'true';
+  
+  window.onscroll = function() {
+    var cta = document.getElementById('stickyCta');
+    if (cta && !ctaDismissed) {
+      if (window.scrollY > 600) {
+        cta.classList.add('visible');
+      } else {
+        cta.classList.remove('visible');
+      }
     }
-  }
-};
+  };
 
-var closeBtn = document.getElementById('closeStickyCta');
-if (closeBtn) {
-  closeBtn.addEventListener('click', function() {
-    document.getElementById('stickyCta').classList.remove('visible');
-  });
-}
+  var closeBtn = document.getElementById('closeStickyCta');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      var cta = document.getElementById('stickyCta');
+      if (cta) {
+        cta.classList.remove('visible');
+        ctaDismissed = true;
+        sessionStorage.setItem('stickyCta_dismissed', 'true');
+      }
+    });
+  }
+})();

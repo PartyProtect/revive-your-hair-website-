@@ -2010,8 +2010,7 @@
 
   <main id="main-content">
   <div class="sticky-cta" id="stickyCta">
-    <p class="sticky-cta-text">Read Enough? Ready to Take Action?</p>
-    <a href="#quiz" class="sticky-cta-button">Get Your Personalized Plan →</a>
+    <a href="#quiz" class="sticky-cta-button">Take the Quiz</a>
     <button class="sticky-cta-close" id="closeStickyCta" aria-label="Close">×</button>
   </div>
   
@@ -7598,11 +7597,13 @@
         return;
       }
       
-      let dismissed = false;
+      // Check if previously dismissed in this session
+      let dismissed = sessionStorage.getItem('stickyCta_dismissed') === 'true';
       
       closeBtn.addEventListener('click', function() {
         stickyCta.classList.remove('visible');
         dismissed = true;
+        sessionStorage.setItem('stickyCta_dismissed', 'true');
       });
       
       window.addEventListener('scroll', function() {

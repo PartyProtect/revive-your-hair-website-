@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution A: Always Dark Header - Contact Page</title>
+  <style>
+    :root {
+      --forest-green: #047857;
+      --forest-green-light: #059669;
+      --warm-gold: #f59e0b;
+      --charcoal: #1f2937;
+      --gray-dark: #4b5563;
+      --gray-medium: #6b7280;
+      --gray-200: #e5e7eb;
+      --gray-50: #f9fafb;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.7;
+      color: var(--charcoal);
+      background: var(--gray-50);
+    }
+
+    /* ============================================
+       SOLUTION A: Header ALWAYS has dark background
+       No more transparent state!
+       ============================================ */
+    .accent-bar {
+      height: 3px;
+      background: linear-gradient(90deg, #10b981, #34d399, #f59e0b);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1001;
+    }
+
+    .header {
+      /* ALWAYS dark - no more transparent! */
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: fixed;
+      top: 3px;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+    }
+
+    .logo .highlight { color: #34d399; }
+
+    .nav-main {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .nav-link:hover { color: white; background: rgba(255, 255, 255, 0.1); }
+    .nav-link.active { color: #34d399; }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .quiz-cta {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.9em;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .store-link {
+      color: rgba(255, 255, 255, 0.85);
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      text-decoration: none;
+    }
+
+    .store-link svg { width: 22px; height: 22px; }
+
+    /* ============================================
+       CONTACT PAGE CONTENT
+       ============================================ */
+    .page-wrapper {
+      min-height: 100vh;
+      padding: 120px 20px 60px; /* Space for fixed header */
+    }
+
+    .contact-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-section {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .page-title {
+      font-size: 3em;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 20px;
+    }
+
+    .page-subtitle {
+      font-size: 1.3em;
+      color: var(--gray-dark);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .intro-text {
+      background: white;
+      padding: 32px;
+      border-radius: 12px;
+      margin-bottom: 48px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-left: 4px solid var(--forest-green);
+    }
+
+    .intro-text p {
+      font-size: 1.1em;
+      color: var(--gray-dark);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .intro-text p:last-child { margin-bottom: 0; }
+
+    .form-section {
+      background: white;
+      padding: 48px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .form-title {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .form-group { margin-bottom: 28px; }
+
+    .form-label {
+      display: block;
+      font-size: 1em;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+    }
+
+    .form-label .required { color: var(--warm-gold); margin-left: 4px; }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 1em;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      background: white;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--forest-green);
+      box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.1);
+    }
+
+    .form-textarea { min-height: 160px; resize: vertical; }
+
+    .submit-button {
+      width: 100%;
+      background: linear-gradient(135deg, var(--forest-green), var(--forest-green-light));
+      color: white;
+      padding: 16px 32px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 16px;
+    }
+
+    /* Solution Banner */
+    .solution-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, #14532d, #166534);
+      border-top: 3px solid #22c55e;
+      padding: 16px 24px;
+      text-align: center;
+      z-index: 9999;
+    }
+
+    .solution-banner h3 {
+      color: #86efac;
+      font-size: 1.1em;
+      margin-bottom: 4px;
+    }
+
+    .solution-banner p {
+      color: #bbf7d0;
+      font-size: 0.95em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header: ALWAYS dark background -->
+  <div class="accent-bar"></div>
+  <header class="header">
+    <div class="header-content">
+      <a href="/" class="logo">Revive<span class="highlight">Your</span>Hair</a>
+      <nav class="nav-main">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/about/" class="nav-link">About</a>
+        <a href="/blog/" class="nav-link">Blog</a>
+        <a href="/contact/" class="nav-link active">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a href="/quiz/" class="quiz-cta">Take the Quiz</a>
+        <a href="/store/" class="store-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <main class="page-wrapper">
+    <div class="contact-container">
+      <div class="hero-section">
+        <h1 class="page-title">Get in Touch</h1>
+        <p class="page-subtitle">Questions about treatments? Want to work together? We're here.</p>
+      </div>
+      
+      <div class="intro-text">
+        <p>Hair loss is deeply personal. The internet is full of conflicting advice, and people trying to sell you stuff that doesn't work.</p>
+        <p>We're not those people.</p>
+        <p>Got a question about a treatment? Confused about side effects? Need help understanding your options? Reach out.</p>
+      </div>
+      
+      <div class="form-section">
+        <h2 class="form-title">Send Us a Message</h2>
+        <form>
+          <div class="form-group">
+            <label class="form-label">Your Name <span class="required">*</span></label>
+            <input type="text" class="form-input" placeholder="John Smith">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address <span class="required">*</span></label>
+            <input type="email" class="form-input" placeholder="john@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Message <span class="required">*</span></label>
+            <textarea class="form-textarea" placeholder="What's on your mind?"></textarea>
+          </div>
+          <button type="submit" class="submit-button">Send Message →</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Solution Banner -->
+  <div class="solution-banner">
+    <h3>✅ Solution A: Always Dark Header</h3>
+    <p>Header has dark background from the start - no transparency. Works on all pages, simple CSS fix.</p>
+  </div>
+
+</body>
+</html>

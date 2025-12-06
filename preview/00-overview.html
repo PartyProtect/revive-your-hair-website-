@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Header Solutions Comparison - ReviveYourHair</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      line-height: 1.6;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      text-align: center;
+      margin-bottom: 16px;
+      background: linear-gradient(90deg, #34d399, #10b981, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle { text-align: center; color: #94a3b8; font-size: 1.2em; margin-bottom: 24px; }
+
+    .problem-box {
+      max-width: 800px;
+      margin: 0 auto 48px;
+      background: linear-gradient(135deg, #7f1d1d, #991b1b);
+      border: 2px solid #ef4444;
+      border-radius: 16px;
+      padding: 24px 32px;
+    }
+
+    .problem-box h2 { color: #fca5a5; font-size: 1.3em; margin-bottom: 12px; }
+    .problem-box p { color: #fecaca; font-size: 1em; line-height: 1.7; }
+    .problem-box code { background: rgba(0,0,0,0.3); padding: 2px 8px; border-radius: 4px; }
+
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      gap: 32px;
+      max-width: 1400px;
+      margin: 0 auto 48px;
+    }
+
+    .solution-card {
+      background: #1e293b;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid #334155;
+    }
+
+    .solution-card.recommended { border-color: #22c55e; }
+
+    .card-header {
+      padding: 20px 24px;
+      background: #0f172a;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-header h3 { font-size: 1.2em; color: white; }
+
+    .badge {
+      font-size: 0.8em;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    .badge.recommended { background: #22c55e; color: white; }
+    .badge.alternative { background: #3b82f6; color: white; }
+
+    .card-body { padding: 24px; }
+    .description { color: #94a3b8; margin-bottom: 20px; font-size: 0.95em; line-height: 1.7; }
+
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .pros, .cons { padding: 16px; border-radius: 8px; }
+    .pros { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); }
+    .cons { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); }
+    .pros h4 { font-size: 0.9em; margin-bottom: 8px; color: #22c55e; }
+    .cons h4 { font-size: 0.9em; margin-bottom: 8px; color: #ef4444; }
+    .pros ul, .cons ul { list-style: none; font-size: 0.85em; }
+    .pros li, .cons li { padding: 4px 0; color: #cbd5e1; }
+    .pros li::before { content: "✓ "; color: #22c55e; }
+    .cons li::before { content: "✗ "; color: #ef4444; }
+
+    .preview-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #047857, #059669);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .preview-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(4, 120, 87, 0.4);
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #334155, transparent);
+      margin: 32px 0;
+    }
+
+    .decision-box {
+      max-width: 800px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #1e3a5f, #1e40af);
+      border: 2px solid #3b82f6;
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .decision-box h2 { color: #93c5fd; font-size: 1.5em; margin-bottom: 16px; }
+    .decision-box p { color: #bfdbfe; font-size: 1.05em; line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+  <h1>🎨 Header Transparency Problem</h1>
+  <p class="subtitle">Two solutions to fix the visual clash on light-background pages</p>
+
+  <div class="problem-box">
+    <h2>⚠️ The Problem</h2>
+    <p>
+      Your header starts <strong>transparent</strong> and only gets a dark background after scrolling 50px 
+      (via <code>.scrolled</code> class). On the <strong>dark homepage</strong>: white text on dark = ✅ visible. 
+      On <strong>light pages</strong> like Contact: white text on light = ❌ invisible!
+    </p>
+  </div>
+
+  <div class="solutions-grid">
+
+    <div class="solution-card recommended">
+      <div class="card-header">
+        <h3>Solution A: Always Dark Header</h3>
+        <span class="badge recommended">Recommended</span>
+      </div>
+      <div class="card-body">
+        <p class="description">
+          Start with the dark background on ALL pages. The header is always visible, always readable. 
+          One simple CSS change.
+        </p>
+        <div class="pros-cons">
+          <div class="pros">
+            <h4>Pros</h4>
+            <ul>
+              <li>Simple CSS-only fix</li>
+              <li>100% consistent</li>
+              <li>Works on all pages</li>
+              <li>No template changes</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h4>Cons</h4>
+            <ul>
+              <li>Loses transparent effect</li>
+              <li>Less "immersive" homepage</li>
+            </ul>
+          </div>
+        </div>
+        <a href="01-solution-a-always-dark.html" class="preview-link">View Contact Page Preview →</a>
+      </div>
+    </div>
+
+    <div class="solution-card">
+      <div class="card-header">
+        <h3>Solution B: Dark Hero on All Pages</h3>
+        <span class="badge alternative">Alternative</span>
+      </div>
+      <div class="card-body">
+        <p class="description">
+          Add a dark gradient hero section to ALL pages (like homepage). Transparent header 
+          works because it's always over dark content at top.
+        </p>
+        <div class="pros-cons">
+          <div class="pros">
+            <h4>Pros</h4>
+            <ul>
+              <li>Keeps transparent effect</li>
+              <li>Premium feel maintained</li>
+              <li>Brand identity on every page</li>
+              <li>More visual consistency</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h4>Cons</h4>
+            <ul>
+              <li>More template changes</li>
+              <li>Every page needs hero</li>
+            </ul>
+          </div>
+        </div>
+        <a href="02-solution-b-dark-hero.html" class="preview-link">View Contact Page Preview →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="decision-box">
+    <h2>🤔 Which Should You Choose?</h2>
+    <p>
+      <strong>Solution A</strong> = quickest fix, one CSS change.<br>
+      <strong>Solution B</strong> = looks better, requires updating all page templates.<br><br>
+      View both previews and tell me which you prefer!
+    </p>
+  </div>
+
+</body>
+</html>

@@ -509,7 +509,7 @@
     .sticky-cta-button {
       background: linear-gradient(135deg, #10b981, #059669);
       color: white;
-      padding: 12px 28px;
+      padding: 12px 32px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 700;
@@ -519,24 +519,12 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .sticky-cta-button::after {
-      content: '→';
-      font-size: 18px;
-      font-weight: 700;
-      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      letter-spacing: 0.02em;
     }
 
     .sticky-cta-button:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 24px rgba(16, 185, 129, 0.4);
-    }
-
-    .sticky-cta-button:hover::after {
-      transform: translateX(4px);
     }
 
     .sticky-cta-button:active {
@@ -1231,9 +1219,8 @@
 
   <!-- Sticky CTA (Hidden initially) -->
   <div class="sticky-cta" id="stickyCta">
-    <p class="sticky-cta-text">Worried about hair loss?</p>
-    <a href="/blog/hair-loss-guide.html" class="sticky-cta-button">See the Proven Treatment Protocol →</a>
-    <button class="sticky-cta-close" id="closeStickyCta">×</button>
+    <a href="/quiz.html" class="sticky-cta-button">Take the Quiz</a>
+    <button class="sticky-cta-close" id="closeStickyCta" aria-label="Close">×</button>
   </div>
 
   <!-- Hero Section -->
