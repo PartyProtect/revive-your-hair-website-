@@ -887,6 +887,11 @@
       color: #d97706;
     }
     
+    .section-number-red {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+    
     .evidence-items {
       display: flex;
       flex-direction: column;
@@ -913,6 +918,11 @@
     .evidence-item-amber {
       border-color: #fbbf24;
       background: linear-gradient(90deg, #fffbeb, var(--page-bg));
+    }
+    
+    .evidence-item-red {
+      border-color: #f87171;
+      background: linear-gradient(90deg, #fef2f2, var(--page-bg));
     }
     
     .item-title {
@@ -1222,28 +1232,32 @@
           <div class="evidence-header">
             <div class="evidence-label">The Full Picture</div>
             <h3 class="evidence-title">Why There's No Good Reason to Think Creatine Causes Hair Loss</h3>
-            <p class="evidence-subtitle">The claim fails on three separate levels: the clinical data, the mechanism, and even on its own logic.</p>
+            <p class="evidence-subtitle">The claim fails on four separate levels: the direct evidence, the mechanism, the origin of the myth, and even its own logic.</p>
           </div>
           
           <div class="evidence-body">
-            <!-- Section 1: Clinical Evidence -->
+            <!-- Section 1: Direct Evidence on Hair -->
             <div class="evidence-section">
               <h4 class="section-header">
                 <span class="section-number section-number-green">1</span>
-                The Clinical Data Doesn't Show It
+                The Direct Evidence on Hair
               </h4>
               <div class="evidence-items">
                 <div class="evidence-item evidence-item-green">
                   <div class="item-title">12-Week Hair RCT (2025)</div>
-                  <p class="item-description">First study to actually measure hair. Tracked density, thickness, follicular units, and shedding. <strong>No difference vs placebo.</strong></p>
+                  <p class="item-description">38 men. 5g/day creatine vs placebo. Measured hair density, thickness, follicular units, shedding, AND serum DHT. <strong>No difference in any measure.</strong></p>
+                </div>
+                <div class="evidence-item evidence-item-green">
+                  <div class="item-title">Is 12 weeks long enough?</div>
+                  <p class="item-description">Yes. Steroid users report hair loss within 1–3 weeks. If creatine raised DHT meaningfully, early changes would show. They didn't.</p>
                 </div>
                 <div class="evidence-item evidence-item-green">
                   <div class="item-title">12+ Hormone Studies</div>
-                  <p class="item-description">Measured creatine's effect on testosterone and DHT. No consistent increase found in any of them.</p>
+                  <p class="item-description">No consistent DHT increase found in any of them. The 2009 study is an outlier, not a pattern.</p>
                 </div>
                 <div class="evidence-item evidence-item-green">
                   <div class="item-title">Decades of Safety Data</div>
-                  <p class="item-description">Creatine has been studied up to 30g/day for 5 years. Hair loss has never emerged as a side effect in any safety review.</p>
+                  <p class="item-description">Studied up to 30g/day for 5 years. Hundreds of studies. Hair loss has never emerged as a side effect. If the effect were real, we'd have seen it by now.</p>
                 </div>
               </div>
             </div>
@@ -1256,42 +1270,72 @@
               </h4>
               <div class="evidence-items">
                 <div class="evidence-item evidence-item-blue">
-                  <div class="item-title">Creatine can't bind androgen receptors</div>
-                  <p class="item-description">It's not a hormone. It literally cannot act on hair follicles the way DHT does.</p>
+                  <div class="item-title">It's an energy buffer, not a hormone</div>
+                  <p class="item-description">Your body already makes 1–2g/day. It's stored in muscles to regenerate ATP. That's it.</p>
+                </div>
+                <div class="evidence-item evidence-item-blue">
+                  <div class="item-title">Can't bind androgen receptors</div>
+                  <p class="item-description">DHT causes hair loss by binding to follicle receptors. Creatine is structurally incapable of this. It's not a steroid.</p>
                 </div>
                 <div class="evidence-item evidence-item-blue">
                   <div class="item-title">Doesn't stimulate 5-α-reductase</div>
-                  <p class="item-description">There's no known pathway for creatine to increase DHT conversion from testosterone.</p>
+                  <p class="item-description">No known pathway connects creatine to DHT production. For this to work, creatine would need to convert to testosterone (it can't) or stimulate the conversion enzyme (no evidence it does).</p>
                 </div>
                 <div class="evidence-item evidence-item-blue">
-                  <div class="item-title">It's an energy buffer, not a hormone</div>
-                  <p class="item-description">Creatine replenishes ATP in muscles. That's it. It has nothing to do with hair biology.</p>
+                  <div class="item-title">What about indirect effects?</div>
+                  <p class="item-description">Training doesn't cause hair loss. Creatine doesn't raise cortisol. No increase in inflammatory markers in long-term studies. Nothing checks out.</p>
                 </div>
               </div>
             </div>
             
-            <!-- Section 3: Even IF -->
+            <!-- Section 3: Where The Myth Comes From -->
             <div class="evidence-section">
               <h4 class="section-header">
                 <span class="section-number section-number-amber">3</span>
-                Even If DHT Increased, It Wouldn't Matter
+                Where The Myth Comes From
               </h4>
               <div class="evidence-items">
                 <div class="evidence-item evidence-item-amber">
-                  <div class="item-title">Serum DHT ≠ scalp DHT</div>
-                  <p class="item-description">What matters for hair loss is local DHT at the follicle and receptor density — not a blood test number.</p>
+                  <div class="item-title">One study. That's it.</div>
+                  <p class="item-description">Van der Merwe 2009. 20 rugby players. 3 weeks. Measured blood DHT. Never looked at hair. Never claimed creatine causes baldness.</p>
                 </div>
                 <div class="evidence-item evidence-item-amber">
-                  <div class="item-title">The 2009 increase stayed in normal range</div>
-                  <p class="item-description">0.98 → 1.26 nmol/L. Both values are normal for healthy adult males. Two people with identical serum DHT can have completely different hairlines.</p>
+                  <div class="item-title">The actual numbers</div>
+                  <p class="item-description">DHT went from 0.98 → 1.53 nmol/L (28 → 44 ng/dL). Normal range is 30–85 ng/dL. This is a fluctuation within normal, not a pathological spike.</p>
                 </div>
                 <div class="evidence-item evidence-item-amber">
-                  <div class="item-title">Hair loss requires years, not weeks</div>
-                  <p class="item-description">Androgenetic alopecia is driven by chronic exposure over many hair cycles. A 3-week blip is biologically irrelevant.</p>
+                  <div class="item-title">Never replicated</div>
+                  <p class="item-description">15+ years. Hundreds of creatine studies. Multiple hormone analyses. The 2025 RCT looked specifically for this. No one has reproduced the finding.</p>
                 </div>
                 <div class="evidence-item evidence-item-amber">
-                  <div class="item-title">No hair loss signal in 5+ years of studies</div>
-                  <p class="item-description">If creatine caused hair loss, we'd have noticed by now — even in studies that weren't looking for it. It's never emerged as a side effect.</p>
+                  <div class="item-title">How myths spread</div>
+                  <p class="item-description">Small study finds interesting result → media writes "may raise DHT" → forums say "raises DHT" → years later it's "causes baldness." The study never claimed this.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Section 4: If The 2009 Finding Were True -->
+            <div class="evidence-section">
+              <h4 class="section-header">
+                <span class="section-number section-number-red">4</span>
+                If The 2009 Finding Were True, Who Would It Actually Affect?
+              </h4>
+              <div class="evidence-items">
+                <div class="evidence-item evidence-item-red">
+                  <div class="item-title">Only the extreme edge</div>
+                  <p class="item-description">A ~16 ng/dL increase within normal range would only matter if your genetic threshold sits exactly there. That makes you more sensitive than the vast majority of men.</p>
+                </div>
+                <div class="evidence-item evidence-item-red">
+                  <div class="item-title">You'd notice within 2–3 months</div>
+                  <p class="item-description">That's how fast DHT-driven shedding becomes visible. You wouldn't wait years to find out.</p>
+                </div>
+                <div class="evidence-item evidence-item-red">
+                  <div class="item-title">You were likely losing your hair anyway</div>
+                  <p class="item-description">If a fluctuation this small triggers your loss, natural variation from stress, sleep, illness, or aging would have done the same. Creatine was just there when it happened.</p>
+                </div>
+                <div class="evidence-item evidence-item-red">
+                  <div class="item-title">The timing tricks people</div>
+                  <p class="item-description">Men start creatine in their 20s–30s. That's exactly when genetic hair loss starts showing. Coincidence feels like causation.</p>
                 </div>
               </div>
             </div>
@@ -1302,7 +1346,7 @@
             <div class="verdict-icon">✓</div>
             <div>
               <div class="verdict-title">The verdict</div>
-              <p class="verdict-text">No clinical evidence. No plausible mechanism. And even the myth's own logic doesn't hold up. The "creatine causes hair loss" claim fails at every level.</p>
+              <p class="verdict-text">No direct evidence of hair loss. No plausible mechanism. The myth traces back to one unreplicated study. And even if that study were right, it would only affect an extreme genetic minority. The "creatine causes hair loss" claim fails at every level.</p>
             </div>
           </div>
         </div>
