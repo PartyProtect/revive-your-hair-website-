@@ -156,6 +156,123 @@
       color: #064e3b;
     }
 
+    /* Skip Ahead CTA Box */
+    .skip-ahead-cta {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #064e3b 100%);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin: 32px 0;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skip-ahead-cta::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .skip-ahead-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #10b981, #34d399);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+    }
+
+    .skip-ahead-icon svg {
+      width: 28px;
+      height: 28px;
+      color: white;
+    }
+
+    .skip-ahead-content {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .skip-ahead-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #34d399;
+      margin-bottom: 6px;
+    }
+
+    .skip-ahead-title {
+      font-size: 1.15em;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .skip-ahead-desc {
+      font-size: 0.95em;
+      color: #94a3b8;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .skip-ahead-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95em;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    .skip-ahead-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    }
+
+    .skip-ahead-btn svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.2s ease;
+    }
+
+    .skip-ahead-btn:hover svg {
+      transform: translateX(3px);
+    }
+
+    @media (max-width: 768px) {
+      .skip-ahead-cta {
+        flex-direction: column;
+        text-align: center;
+        padding: 24px;
+      }
+
+      .skip-ahead-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
     /* Callout Icon Container */
     .callout-icon {
       width: 28px;
@@ -1353,7 +1470,25 @@
 
         <p>Still have questions? The Q&A below covers the specific creatine worries — what about higher doses, what if you're already prone to balding, what about women, and why so many people online swear it wrecked their hair.</p>
         
-        <p>And if you're genuinely concerned about hair loss (whether or not you use creatine), skip to <a href="#what-to-do">Section 10</a> to see which treatments actually work, how effective they really are, and what a no-regrets starting protocol looks like.</p>
+        <!-- Skip Ahead CTA -->
+        <div class="skip-ahead-cta">
+          <div class="skip-ahead-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <div class="skip-ahead-content">
+            <div class="skip-ahead-label">Actually worried about hair loss?</div>
+            <div class="skip-ahead-title">See what treatments actually work</div>
+            <p class="skip-ahead-desc">Evidence-based options, realistic expectations, and a no-regrets starting protocol.</p>
+          </div>
+          <a href="#what-to-do" class="skip-ahead-btn">
+            Jump to Section 10
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
       </section>
 
       <!-- Q&A Section -->
