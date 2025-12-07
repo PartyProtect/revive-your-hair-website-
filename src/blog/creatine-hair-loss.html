@@ -340,38 +340,86 @@
 
     /* Q&A Specific Styles */
     .qa-section {
-      margin: 40px 0;
+      margin: 60px 0;
+      padding: 0;
+    }
+
+    /* Q&A Section Label */
+    .qa-section-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .qa-section-label::before,
+    .qa-section-label::after {
+      content: '';
+      flex: 1;
+      max-width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #10b981);
+    }
+
+    .qa-section-label::after {
+      background: linear-gradient(90deg, #10b981, transparent);
+    }
+
+    .qa-section-label span {
+      color: #10b981;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .qa-section h2 {
+      font-size: 1.75em;
+      font-weight: 700;
+      color: #1a202c;
+      margin-bottom: 8px;
+      padding-left: 0;
+    }
+
+    .qa-section h2::before {
+      display: none;
+    }
+
+    .qa-subtitle {
+      color: #64748b;
+      font-size: 0.95em;
+      margin-bottom: 28px;
     }
 
     .faq-container {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
     }
 
     .faq-item {
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      overflow: hidden;
       background: white;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      border: none;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
       transition: all 0.2s ease;
+      border-left: 4px solid #10b981;
     }
 
     .faq-item:hover {
-      border-color: #34d399;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     .faq-question {
       width: 100%;
       background: white;
       border: none;
-      padding: 20px 24px;
+      padding: 18px 24px;
       text-align: left;
-      font-size: 1.1em;
-      font-weight: 600;
-      color: #2d3748;
+      font-size: 1em;
+      font-weight: 500;
+      color: #1e293b;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -380,27 +428,27 @@
     }
 
     .faq-question:hover {
-      background-color: #f8fafc;
+      background-color: #fafafa;
     }
 
     .faq-title {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 0;
     }
 
-    /* FAQ Icon - Gradient Circle */
+    /* FAQ Icon - Simple Plus */
     .faq-icon {
-      width: 28px;
-      height: 28px;
-      background: linear-gradient(135deg, #10b981, #047857);
-      border-radius: 50%;
+      width: auto;
+      height: auto;
+      background: none;
+      border-radius: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 14px;
-      font-weight: 600;
+      color: #10b981;
+      font-size: 24px;
+      font-weight: 300;
       transition: transform 0.3s ease;
       flex-shrink: 0;
     }
@@ -411,20 +459,19 @@
     }
 
     .faq-item.active .faq-question {
-      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-      color: var(--forest-green);
+      background: #f8fafc;
     }
 
     .faq-answer {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.4s ease-in-out;
-      background-color: #fff;
+      background-color: #f8fafc;
     }
 
     /* Active state - expand the answer */
     .faq-item.active .faq-answer {
-      max-height: 2000px; /* Regular FAQ items */
+      max-height: 2000px;
     }
 
     /* Sources section needs much more height for all 32+ citations */
@@ -436,7 +483,7 @@
       padding: 0 24px 24px 24px;
       color: #4a5568;
       line-height: 1.7;
-      font-size: 1.05em;
+      font-size: 1em;
       border-top: 1px solid #e2e8f0;
     }
 
@@ -444,11 +491,11 @@
     .faq-content ul {
       margin: 16px 0;
       padding-left: 24px;
-      list-style-type: none; /* Remove default bullets to replace them */
+      list-style-type: none;
     }
 
     .faq-content li {
-      margin-bottom: 12px; /* Adds breathing room between bullets */
+      margin-bottom: 12px;
       padding-left: 4px;
       position: relative;
     }
@@ -679,69 +726,62 @@
       }
     }
     
-    /* Stat Cards */
-    .stat-cards {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
+    /* Question Boxes */
+    .question-boxes {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
       margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
     
-    @media (min-width: 768px) {
-      .stat-cards {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-    
-    .stat-card {
-      background: rgba(255, 255, 255, 0.1);
+    .question-box {
+      background: rgba(30, 41, 59, 0.8);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
       transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
     }
     
-    .stat-card:hover {
-      background: rgba(255, 255, 255, 0.15);
+    .question-box:hover {
+      background: rgba(30, 41, 59, 0.95);
       border-color: rgba(52, 211, 153, 0.3);
       transform: translateY(-2px);
     }
     
-    .stat-card-myth {
-      border-color: rgba(239, 68, 68, 0.3);
-    }
-    
-    .stat-number {
-      font-size: 1.875rem;
-      font-weight: 700;
+    .question-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(52, 211, 153, 0.15);
+      border: 1.5px solid #34d399;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
       color: #34d399;
-      margin-bottom: 8px;
-    }
-    
-    .stat-number-red {
-      color: #f87171;
-    }
-    
-    .stat-label {
-      color: #e2e8f0;
-      font-size: 14px;
-      font-weight: 500;
-    }
-    
-    .stat-sublabel {
-      color: #94a3b8;
-      font-size: 12px;
-      margin-top: 8px;
-    }
-    
-    .stat-sublabel strong {
-      color: white;
+      font-size: 16px;
       font-weight: 600;
     }
     
-    .stat-sublabel-red {
-      color: #f87171;
+    .question-text {
+      color: #e2e8f0;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    
+    .question-text em {
+      color: #34d399;
+      font-style: italic;
     }
     
     /* CTA Buttons */
@@ -1249,28 +1289,20 @@
         We analyzed 15+ years of research, including the first-ever trial to actually measure hair. Here's what the science really shows.
       </p>
       
-      <!-- Stat Cards -->
-      <div class="stat-cards">
-        <!-- The Answer -->
-        <div class="stat-card">
-          <div class="stat-number">4 hair metrics tested</div>
-          <div class="stat-label">Density • Thickness • Follicles • Shedding</div>
-          <div class="stat-sublabel">All identical to placebo <strong>after 12 weeks of creatine supplementation</strong></div>
-        </div>
-        
-        <!-- DHT Studies -->
-        <div class="stat-card">
-          <div class="stat-number">12+ studies</div>
-          <div class="stat-label">Measured creatine's effect on testosterone & DHT</div>
-          <div class="stat-sublabel">No consistent increase in either</div>
-        </div>
-        
-        <!-- The Myth -->
-        <div class="stat-card stat-card-myth">
-          <div class="stat-number stat-number-red">1 study</div>
-          <div class="stat-label">Started the entire myth</div>
-          <div class="stat-sublabel">20 people • 3 weeks • <span class="stat-sublabel-red">Never measured hair</span></div>
-        </div>
+      <!-- Question Boxes -->
+      <div class="question-boxes">
+        <a href="#dht-section" class="question-box">
+          <div class="question-icon">?</div>
+          <div class="question-text">What if creatine <em>did</em> raise DHT?</div>
+        </a>
+        <a href="#evidence-gaps" class="question-box">
+          <div class="question-icon">?</div>
+          <div class="question-text">Where does the evidence fall short?</div>
+        </a>
+        <a href="#myth-origin" class="question-box">
+          <div class="question-icon">?</div>
+          <div class="question-text">Why do so many people believe it?</div>
+        </a>
       </div>
       
       <!-- CTA Buttons -->
@@ -1480,8 +1512,9 @@
 
       <!-- Q&A Section -->
       <section id="qa-section" class="qa-section">
-        <h2>Quick Q&A: The Common Worries</h2>
-        <p style="margin-bottom: 32px; color: #4a5568;">Click on a question to reveal the evidence-based answer.</p>
+        <div class="qa-section-label"><span>Q&A</span></div>
+        <h2>Common Worries</h2>
+        <p class="qa-subtitle">Tap a question to see the evidence-based answer.</p>
 
         <div class="faq-container">
           
