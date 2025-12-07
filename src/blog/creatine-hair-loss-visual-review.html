@@ -338,49 +338,111 @@
       color: #1e3a5f;
     }
 
-    /* Q&A Specific Styles */
+    /* ========================================
+       Q&A SECTION - Distinct "Terminal" Design
+       ======================================== */
+
+    /* Q&A Wrapper - Dark background, full-bleed */
+    .qa-section-wrapper {
+      background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+      margin: 60px -40px;
+      padding: 60px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .qa-section-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #34d399, transparent);
+    }
+
+    .qa-section-wrapper::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #34d399, transparent);
+    }
+
+    /* Subtle grid pattern */
+    .qa-grid-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.03;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
     .qa-section {
-      margin: 40px 0;
+      margin: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .qa-section > h2 {
+      color: white;
+      padding-left: 0;
+      margin-top: 0;
+    }
+
+    .qa-section > h2::before {
+      display: none;
+    }
+
+    .qa-section-intro {
+      color: #94a3b8;
+      margin-bottom: 32px;
+      font-size: 1.05em;
     }
 
     .faq-container {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
     }
 
     .faq-item {
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
       overflow: hidden;
-      background: white;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-      transition: all 0.2s ease;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(8px);
+      transition: all 0.25s ease;
     }
 
     .faq-item:hover {
-      border-color: #34d399;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+      border-color: rgba(52, 211, 153, 0.3);
+      background: rgba(255, 255, 255, 0.05);
     }
 
     .faq-question {
       width: 100%;
-      background: white;
+      background: transparent;
       border: none;
-      padding: 20px 24px;
+      padding: 18px 20px;
       text-align: left;
-      font-size: 1.1em;
-      font-weight: 600;
-      color: #2d3748;
+      font-size: 1em;
+      font-weight: 500;
+      color: #e2e8f0;
       display: flex;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: all 0.2s ease;
     }
 
     .faq-question:hover {
-      background-color: #f8fafc;
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .faq-title {
@@ -389,42 +451,45 @@
       gap: 12px;
     }
 
-    /* FAQ Icon - Gradient Circle */
+    /* FAQ Icon - Terminal style */
     .faq-icon {
-      width: 28px;
-      height: 28px;
-      background: linear-gradient(135deg, #10b981, #047857);
-      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      background: transparent;
+      border: 1px solid #34d399;
+      border-radius: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
+      color: #34d399;
       font-size: 14px;
-      font-weight: 600;
-      transition: transform 0.3s ease;
+      font-weight: 500;
+      transition: all 0.3s ease;
       flex-shrink: 0;
     }
 
     /* Active state styling */
     .faq-item.active .faq-icon {
-      transform: rotate(45deg);
+      background: #34d399;
+      color: #0f172a;
+      transform: none;
     }
 
     .faq-item.active .faq-question {
-      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-      color: var(--forest-green);
+      background: rgba(52, 211, 153, 0.1);
+      color: #34d399;
     }
 
     .faq-answer {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.4s ease-in-out;
-      background-color: #fff;
+      background: rgba(0, 0, 0, 0.2);
     }
 
     /* Active state - expand the answer */
     .faq-item.active .faq-answer {
-      max-height: 2000px; /* Regular FAQ items */
+      max-height: 2000px;
     }
 
     /* Sources section needs much more height for all 32+ citations */
@@ -433,48 +498,252 @@
     }
 
     .faq-content {
-      padding: 0 24px 24px 24px;
-      color: #4a5568;
+      padding: 20px 24px;
+      color: #cbd5e1;
       line-height: 1.7;
-      font-size: 1.05em;
-      border-top: 1px solid #e2e8f0;
+      font-size: 1em;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* FIX: Better List Styling inside Q&A Answers */
+    /* Deep dive link in FAQ answers */
+    .faq-deep-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      padding: 8px 14px;
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      border-radius: 6px;
+      color: #34d399;
+      font-size: 0.9em;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .faq-deep-link:hover {
+      background: rgba(52, 211, 153, 0.2);
+      border-color: rgba(52, 211, 153, 0.4);
+    }
+
+    .faq-deep-link svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* List styling inside Q&A */
     .faq-content ul {
       margin: 16px 0;
       padding-left: 24px;
-      list-style-type: none; /* Remove default bullets to replace them */
+      list-style-type: none;
     }
 
     .faq-content li {
-      margin-bottom: 12px; /* Adds breathing room between bullets */
+      margin-bottom: 10px;
       padding-left: 4px;
       position: relative;
     }
 
-    /* Custom Green Bullet Point */
     .faq-content li::before {
-      content: "•";
-      color: var(--forest-green);
+      content: "›";
+      color: #34d399;
       font-weight: bold;
-      font-size: 1.2em;
+      font-size: 1.1em;
       position: absolute;
-      left: -18px;
-      top: -2px;
+      left: -16px;
+      top: 0;
     }
 
     .faq-content li strong {
-      color: #2d3748;
-      font-weight: 700;
+      color: #e2e8f0;
+      font-weight: 600;
     }
 
     .faq-content p {
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
-    
+
     .faq-content p:last-child {
       margin-bottom: 0;
+    }
+
+    @media (max-width: 768px) {
+      .qa-section-wrapper {
+        margin: 40px -24px;
+        padding: 40px 24px;
+      }
+    }
+
+    /* ========================================
+       DEEP DIVE SECTION - Reference Mode
+       ======================================== */
+
+    .deep-dive-wrapper {
+      background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+      margin: 0 -40px;
+      padding: 60px 40px 80px;
+      position: relative;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .deep-dive-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #047857 0%, #10b981 50%, #34d399 100%);
+    }
+
+    /* Deep Dive Header */
+    .deep-dive-header {
+      text-align: center;
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .deep-dive-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #047857, #10b981);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    .deep-dive-title {
+      font-size: 1.5em;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 0 0 12px 0;
+      padding-left: 0;
+    }
+
+    .deep-dive-title::before {
+      display: none;
+    }
+
+    .deep-dive-subtitle {
+      color: #64748b;
+      font-size: 1.05em;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Section Navigation Pills */
+    .deep-dive-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .deep-dive-nav-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      color: #475569;
+      font-size: 0.85em;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .deep-dive-nav-item:hover {
+      border-color: #10b981;
+      color: #047857;
+      background: #f0fdf4;
+    }
+
+    .deep-dive-nav-item span {
+      background: #e2e8f0;
+      color: #64748b;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    .deep-dive-nav-item:hover span {
+      background: #d1fae5;
+      color: #047857;
+    }
+
+    /* Deep Dive Content Area */
+    .deep-dive-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Section styling within deep dive */
+    .deep-dive-content section {
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+    }
+
+    .deep-dive-content section h2 {
+      margin-top: 0;
+      padding-left: 0;
+      font-size: 1.5em;
+    }
+
+    .deep-dive-content section h2::before {
+      display: none;
+    }
+
+    /* Section number badge */
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #047857, #10b981);
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      border-radius: 8px;
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 768px) {
+      .deep-dive-wrapper {
+        margin: 0 -24px;
+        padding: 40px 24px 60px;
+      }
+
+      .deep-dive-content section {
+        padding: 24px;
+        border-radius: 8px;
+      }
+
+      .deep-dive-nav {
+        gap: 6px;
+      }
+
+      .deep-dive-nav-item {
+        padding: 6px 10px;
+        font-size: 0.8em;
+      }
     }
 
     /* Sticky CTA */
@@ -743,7 +1012,75 @@
     .stat-sublabel-red {
       color: #f87171;
     }
-    
+
+    /* Hero Questions - Curious question links */
+    .hero-questions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 40px;
+      max-width: 480px;
+    }
+
+    .hero-question {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .hero-question:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(52, 211, 153, 0.4);
+      transform: translateX(4px);
+    }
+
+    .question-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, rgba(52, 211, 153, 0.2), rgba(16, 185, 129, 0.1));
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #34d399;
+      font-weight: 700;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .question-text {
+      color: #e2e8f0;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .question-text em {
+      color: #34d399;
+      font-style: italic;
+    }
+
+    @media (min-width: 768px) {
+      .hero-questions {
+        max-width: 520px;
+      }
+
+      .hero-question {
+        padding: 18px 24px;
+      }
+
+      .question-text {
+        font-size: 1.05rem;
+      }
+    }
+
     /* CTA Buttons */
     .cta-buttons {
       display: flex;
@@ -1241,65 +1578,46 @@
       <!-- Headline -->
       <h1 class="hero-title">
         Does Creatine Cause Hair Loss?
-        <span class="hero-title-accent">The Evidence Says No.</span>
+        <span class="hero-title-accent">Let's look at what we actually know.</span>
       </h1>
-      
+
       <!-- Subtitle -->
       <p class="hero-subtitle">
-        We analyzed 15+ years of research, including the first-ever trial to actually measure hair. Here's what the science really shows.
+        The internet is full of strong opinions. We went through 15 years of research to find the honest answers.
       </p>
-      
-      <!-- Stat Cards -->
-      <div class="stat-cards">
-        <!-- The Answer -->
-        <div class="stat-card">
-          <div class="stat-number">4 hair metrics tested</div>
-          <div class="stat-label">Density • Thickness • Follicles • Shedding</div>
-          <div class="stat-sublabel">All identical to placebo <strong>after 12 weeks of creatine supplementation</strong></div>
-        </div>
-        
-        <!-- DHT Studies -->
-        <div class="stat-card">
-          <div class="stat-number">12+ studies</div>
-          <div class="stat-label">Measured creatine's effect on testosterone & DHT</div>
-          <div class="stat-sublabel">No consistent increase in either</div>
-        </div>
-        
-        <!-- The Myth -->
-        <div class="stat-card stat-card-myth">
-          <div class="stat-number stat-number-red">1 study</div>
-          <div class="stat-label">Started the entire myth</div>
-          <div class="stat-sublabel">20 people • 3 weeks • <span class="stat-sublabel-red">Never measured hair</span></div>
-        </div>
+
+      <!-- Curious Questions -->
+      <div class="hero-questions">
+        <a href="#evidence-glance" class="hero-question">
+          <span class="question-icon">?</span>
+          <span class="question-text">What if creatine <em>did</em> raise DHT?</span>
+        </a>
+        <a href="#limitations" class="hero-question">
+          <span class="question-icon">?</span>
+          <span class="question-text">Where does the evidence fall short?</span>
+        </a>
+        <a href="#why-people-believe" class="hero-question">
+          <span class="question-icon">?</span>
+          <span class="question-text">Why do so many people believe it?</span>
+        </a>
       </div>
-      
+
       <!-- CTA Buttons -->
       <div class="cta-buttons">
         <a href="#main-content" class="btn btn-primary">
-          Read the Full Analysis
+          Read the Analysis
           <span>↓</span>
         </a>
         <a href="#qa-section" class="btn btn-secondary">
           Jump to Q&A
         </a>
-        <a href="#what-to-do" class="btn btn-amber">
-          What Actually Works for Hair Loss
-          <span>→</span>
-        </a>
       </div>
-      
+
       <!-- Meta Info -->
       <div class="hero-meta">
-        <span class="meta-item">
-          <span>📚</span> 12-15 min read
-        </span>
-        <span class="meta-item">
-          <span>📅</span> Updated Nov 2025
-        </span>
-        <span class="meta-item">
-          <span>🔬</span> 32 sources cited
-        </span>
-        <span class="meta-badge">Evidence-based</span>
+        <span class="meta-item">12-15 min read</span>
+        <span class="meta-item">Updated Nov 2025</span>
+        <span class="meta-item">32 sources cited</span>
       </div>
     </div>
   </section>
@@ -1478,12 +1796,14 @@
         </div>
       </section>
 
-      <!-- Q&A Section -->
-      <section id="qa-section" class="qa-section">
-        <h2>Quick Q&A: The Common Worries</h2>
-        <p style="margin-bottom: 32px; color: #4a5568;">Click on a question to reveal the evidence-based answer.</p>
+      <!-- Q&A Section - Distinct Dark Zone -->
+      <div class="qa-section-wrapper">
+        <div class="qa-grid-pattern"></div>
+        <section id="qa-section" class="qa-section">
+          <h2>Quick Q&A: The Common Worries</h2>
+          <p class="qa-section-intro">Click any question. Each answer links to the deeper evidence if you want it.</p>
 
-        <div class="faq-container">
+          <div class="faq-container">
           
           <!-- Q1 -->
           <div class="faq-item">
@@ -1496,6 +1816,10 @@
                 <p>Based on everything we have right now, <strong>no</strong> – there's no good evidence that creatine causes or accelerates hair loss.</p>
                 <p>In the one randomized controlled trial that actually looked at hair, men took 5 g/day creatine monohydrate or placebo for 12 weeks. Researchers measured hair density, follicular units, hair thickness, shedding and hormones. They found <strong>no differences at all</strong> between creatine and placebo for any hair outcome or hormone.</p>
                 <p>On top of that, creatine has been used in <strong>hundreds of human studies</strong> over several decades, in athletes, older adults and clinical populations. If it meaningfully triggered hair loss in a noticeable chunk of users, we'd expect that to show up in adverse-event tables or safety reviews by now. It doesn't.</p>
+                <a href="#evidence-glance" class="faq-deep-link">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                  See the studies in Section 6
+                </a>
               </div>
             </div>
           </div>
@@ -1563,6 +1887,10 @@
                 </ul>
                 <p>What happened after is basically a game of telephone: "Small rugby study: DHT up a bit" → "Creatine raises DHT" → "More DHT = more hair loss" → "Creatine causes baldness."</p>
                 <p>That chain sounds neat, but the middle links are weak, and the study never looked at hair in the first place.</p>
+                <a href="#why-people-believe" class="faq-deep-link">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                  Full breakdown in Section 5
+                </a>
               </div>
             </div>
           </div>
@@ -1589,6 +1917,10 @@
                   <li>…and still doesn't come with any evidence of actual hair changes.</li>
                 </ul>
                 <p>So the scary "creatine → DHT → bald" story is <strong>biologically shaky</strong> and not supported by the broader literature.</p>
+                <a href="#mechanism" class="faq-deep-link">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                  The mechanism question in Section 8
+                </a>
               </div>
             </div>
           </div>
@@ -1749,14 +2081,35 @@
             </div>
           </div>
 
+          </div>
+        </section>
+      </div>
+      <!-- End Q&A Section Wrapper -->
+
+      <!-- ========================================
+           DEEP DIVE - Reference Mode Wrapper
+           ======================================== -->
+      <div class="deep-dive-wrapper">
+        <div class="deep-dive-header">
+          <div class="deep-dive-label">Deep Dive</div>
+          <h2 class="deep-dive-title">The Full Evidence &amp; Science</h2>
+          <p class="deep-dive-subtitle">For those who want the complete picture. Each section is self-contained - jump to what interests you.</p>
+
+          <nav class="deep-dive-nav">
+            <a href="#science-deep-dive" class="deep-dive-nav-item"><span>4</span> Hair Loss Basics</a>
+            <a href="#why-people-believe" class="deep-dive-nav-item"><span>5</span> The Myth Origins</a>
+            <a href="#evidence-glance" class="deep-dive-nav-item"><span>6</span> Key Studies</a>
+            <a href="#limitations" class="deep-dive-nav-item"><span>7</span> Limitations</a>
+            <a href="#mechanism" class="deep-dive-nav-item"><span>8</span> Mechanism</a>
+            <a href="#mega-dosing" class="deep-dive-nav-item"><span>9</span> Mega-Dosing</a>
+          </nav>
         </div>
-      </section>
 
-      <hr style="border: 0; height: 1px; background: #e2e8f0; margin: 40px 0;">
+        <div class="deep-dive-content">
 
-      <!-- Deep Dive Section 1 -->
+      <!-- Deep Dive Section 4 -->
       <section id="science-deep-dive">
-        <h2>4. How Hair Loss Actually Works (So We Don't Blame the Wrong Thing)</h2>
+        <h2><span class="section-badge">4</span> How Hair Loss Actually Works</h2>
         
         <!-- Mini TL;DR for Section 4 -->
         <div style="background-color: #f0fdf4; border-left: 5px solid var(--forest-green); padding: 24px 28px; border-radius: 8px; margin: 24px 0 32px 0;">
@@ -1958,11 +2311,10 @@
         <p style="font-size: 1.1em; font-style: italic; color: #4a5568; margin-bottom: 32px;">"I took 5 g/day of creatine for a few weeks and suddenly my hair vanished – therefore creatine did it."</p>
       </section>
 
-      <hr style="border: 0; height: 1px; background: #e2e8f0; margin: 40px 0;">
-
+      
       <!-- Deep Dive Section 2: Why People Believe It -->
       <section id="why-people-believe">
-        <h2>5. Why People Think Creatine Causes Hair Loss</h2>
+        <h2><span class="section-badge">5</span> Why People Think Creatine Causes Hair Loss</h2>
         
         <!-- Mini TL;DR for Section 5 -->
         <div style="background-color: #fff7ed; border-left: 5px solid #ea580c; padding: 24px 28px; border-radius: 8px; margin: 24px 0 32px 0;">
@@ -2181,7 +2533,7 @@
 
       <!-- Deep Dive Section 3: Evidence at a Glance -->
       <section id="evidence-glance">
-        <h2>6. Evidence at a Glance: Key Studies on Creatine & Hair</h2>
+        <h2><span class="section-badge">6</span> Evidence at a Glance: Key Studies</h2>
         
         <!-- Mini TL;DR for Section 6 -->
         <div style="background-color: #ebf8ff; border-left: 5px solid #3182ce; padding: 24px 28px; border-radius: 8px; margin: 24px 0 32px 0;">
@@ -2310,11 +2662,10 @@
 
       </section>
 
-      <hr style="border: 0; height: 1px; background: #e2e8f0; margin: 40px 0;">
-
+      
       <!-- Section 7: Limitations -->
       <section id="limitations">
-        <h2>7. Limitations of the Current Evidence</h2>
+        <h2><span class="section-badge">7</span> Limitations of the Current Evidence</h2>
         
         <p>So far we've mostly talked about what the creatine data <em>does</em> show. To be honest and not oversell it, we also need to be super clear about what the data can't tell us (yet).</p>
 
@@ -2435,11 +2786,10 @@
 
       </section>
 
-      <hr style="border: 0; height: 1px; background: #e2e8f0; margin: 40px 0;">
-
+      
       <!-- Section 8: Mechanism -->
       <section id="mechanism">
-        <h2>8. Is There Even a Plausible Mechanism for Creatine to Cause Hair Loss?</h2>
+        <h2><span class="section-badge">8</span> Is There a Plausible Mechanism?</h2>
         
         <p>At this point you might be thinking: "Okay, but could creatine <em>logically</em> make me lose hair, even if the studies haven't shown it yet?"</p>
         
@@ -2565,11 +2915,10 @@
 
       </section>
 
-      <hr style="border: 0; height: 1px; background: #e2e8f0; margin: 40px 0;">
-
+      
       <!-- Section 9: Mega-Dosing -->
       <section id="mega-dosing">
-        <h2>9. What If You Just Mega-Dose Creatine? Do You "Pee It Out" – And Could That Cause Hair Loss?</h2>
+        <h2><span class="section-badge">9</span> What About Mega-Dosing?</h2>
         
         <p>Let's zoom in on the exact fear a lot of people have but don't say out loud:</p>
         
@@ -2704,7 +3053,10 @@
 
       </section>
 
-      <hr style="border: 0; height: 1px; background: #e2e8f0; margin: 40px 0;">
+        </div>
+        <!-- End deep-dive-content -->
+      </div>
+      <!-- End deep-dive-wrapper -->
 
       <!-- Section 10: What To Actually Do -->
       <section id="what-to-do">
@@ -2842,8 +3194,7 @@
 
       </section>
 
-      <hr style="border: 0; height: 1px; background: #e2e8f0; margin: 40px 0;">
-
+      
       <!-- Sources Accordion (Fixed Toggle Logic) -->
       <section id="sources-section" style="margin-top: 60px; border-top: 1px solid #e2e8f0; padding-top: 32px;">
         <div class="faq-item sources-item">
