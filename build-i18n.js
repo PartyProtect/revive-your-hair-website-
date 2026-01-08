@@ -11,6 +11,54 @@ const path = require('path');
 // Import centralized page configuration
 const pagesConfig = require('./config/pages');
 
+// Use domain from centralized config
+const domain = pagesConfig.domain;
+
+/**
+ * Replace language-specific paths in HTML content
+ * This is a centralized function to avoid code duplication
+ * @param {string} html - HTML content to process
+ * @param {string} lang - Target language code
+ * @returns {string} - HTML with replaced paths
+ */
+function replaceLanguagePaths(html, lang) {
+  const defaultLanguage = pagesConfig.defaultLanguage;
+  
+  if (lang === defaultLanguage) {
+    // English: Remove /en/ prefix, use root paths
+    html = html.replace(/href="\/en\/"/g, 'href="/"');
+    html = html.replace(/href="\/en\/blog\/"/g, 'href="/blog/"');
+    html = html.replace(/href="\/en\/about\/"/g, 'href="/about/"');
+    html = html.replace(/href="\/en\/contact\/"/g, 'href="/contact/"');
+    html = html.replace(/href="\/en\/store\/"/g, 'href="/store/"');
+    html = html.replace(/href="\/en\/quiz\/"/g, 'href="/quiz/"');
+    html = html.replace(/href="\/en\/legal\//g, 'href="/legal/');
+    html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/blog/hair-loss-guide.html"');
+  } else if (lang === 'nl') {
+    // Dutch: Replace /en/ with /nl/
+    html = html.replace(/href="\/en\/"/g, 'href="/nl/"');
+    html = html.replace(/href="\/en\/blog\/"/g, 'href="/nl/blog/"');
+    html = html.replace(/href="\/en\/about\/"/g, 'href="/nl/over-ons/"');
+    html = html.replace(/href="\/en\/contact\/"/g, 'href="/nl/contact/"');
+    html = html.replace(/href="\/en\/store\/"/g, 'href="/nl/winkel/"');
+    html = html.replace(/href="\/en\/quiz\/"/g, 'href="/nl/quiz/"');
+    html = html.replace(/href="\/en\/legal\//g, 'href="/nl/legal/');
+    html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/nl/blog/hair-loss-guide.html"');
+  } else if (lang === 'de') {
+    // German: Replace /en/ with /de/
+    html = html.replace(/href="\/en\/"/g, 'href="/de/"');
+    html = html.replace(/href="\/en\/blog\/"/g, 'href="/de/blog/"');
+    html = html.replace(/href="\/en\/about\/"/g, 'href="/de/uber-uns/"');
+    html = html.replace(/href="\/en\/contact\/"/g, 'href="/de/kontakt/"');
+    html = html.replace(/href="\/en\/store\/"/g, 'href="/de/shop/"');
+    html = html.replace(/href="\/en\/quiz\/"/g, 'href="/de/quiz/"');
+    html = html.replace(/href="\/en\/legal\//g, 'href="/de/legal/');
+    html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/de/blog/hair-loss-guide.html"');
+  }
+  
+  return html;
+}
+
 // Configuration
 const config = {
   templatesDir: './src/templates',
@@ -56,7 +104,7 @@ function replaceTranslations(html, translations) {
  * Replace metadata tags (title, description, canonical, hreflang)
  */
 function replaceMetadata(html, lang, pageName, translations) {
-  const domain = 'https://reviveyour.hair';
+  // Uses centralized domain from pagesConfig
   const urlSlug = config.urlMappings[pageName]?.[lang] !== undefined 
     ? config.urlMappings[pageName][lang] 
     : pageName;
@@ -179,41 +227,8 @@ function buildPage(templateName, lang) {
   // Replace translation keys
   html = replaceTranslations(html, translations);
   
-  // Replace language-specific paths in content
-  // For English (default): /en/ → /
-  // For Dutch: /en/ → /nl/
-  // For German: /en/ → /de/
-  if (lang === config.defaultLanguage) {
-    // English: Remove /en/ prefix, use root paths
-    html = html.replace(/href="\/en\/"/g, 'href="/"');
-    html = html.replace(/href="\/en\/blog\/"/g, 'href="/blog/"');
-    html = html.replace(/href="\/en\/about\/"/g, 'href="/about/"');
-    html = html.replace(/href="\/en\/contact\/"/g, 'href="/contact/"');
-    html = html.replace(/href="\/en\/store\/"/g, 'href="/store/"');
-    html = html.replace(/href="\/en\/quiz\/"/g, 'href="/quiz/"');
-    html = html.replace(/href="\/en\/legal\//g, 'href="/legal/');
-    html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/blog/hair-loss-guide.html"');
-  } else if (lang === 'nl') {
-    // Dutch: Replace /en/ with /nl/
-    html = html.replace(/href="\/en\/"/g, 'href="/nl/"');
-    html = html.replace(/href="\/en\/blog\/"/g, 'href="/nl/blog/"');
-    html = html.replace(/href="\/en\/about\/"/g, 'href="/nl/over-ons/"');
-    html = html.replace(/href="\/en\/contact\/"/g, 'href="/nl/contact/"');
-    html = html.replace(/href="\/en\/store\/"/g, 'href="/nl/winkel/"');
-    html = html.replace(/href="\/en\/quiz\/"/g, 'href="/nl/quiz/"');
-    html = html.replace(/href="\/en\/legal\//g, 'href="/nl/legal/');
-    html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/nl/blog/hair-loss-guide.html"');
-  } else if (lang === 'de') {
-    // German: Replace /en/ with /de/
-    html = html.replace(/href="\/en\/"/g, 'href="/de/"');
-    html = html.replace(/href="\/en\/blog\/"/g, 'href="/de/blog/"');
-    html = html.replace(/href="\/en\/about\/"/g, 'href="/de/uber-uns/"');
-    html = html.replace(/href="\/en\/contact\/"/g, 'href="/de/kontakt/"');
-    html = html.replace(/href="\/en\/store\/"/g, 'href="/de/shop/"');
-    html = html.replace(/href="\/en\/quiz\/"/g, 'href="/de/quiz/"');
-    html = html.replace(/href="\/en\/legal\//g, 'href="/de/legal/');
-    html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/de/blog/hair-loss-guide.html"');
-  }
+  // Replace language-specific paths using centralized function
+  html = replaceLanguagePaths(html, lang);
   
   // Replace metadata
   html = replaceMetadata(html, lang, templateName, translations);
@@ -293,38 +308,8 @@ function processComponents(lang) {
         // Replace translations
         html = replaceTranslations(html, translations);
         
-        // Replace language-specific paths
-        if (lang === config.defaultLanguage) {
-          // English: Remove /en/ to make root-level paths
-          html = html.replace(/href="\/en\/"/g, 'href="/"');
-          html = html.replace(/href="\/en\/blog\/"/g, 'href="/blog/"');
-          html = html.replace(/href="\/en\/about\/"/g, 'href="/about/"');
-          html = html.replace(/href="\/en\/contact\/"/g, 'href="/contact/"');
-          html = html.replace(/href="\/en\/store\/"/g, 'href="/store/"');
-          html = html.replace(/href="\/en\/quiz\/"/g, 'href="/quiz/"');
-          html = html.replace(/href="\/en\/legal\//g, 'href="/legal/');
-          html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/blog/hair-loss-guide.html"');
-        } else if (lang === 'nl') {
-          // Dutch: Replace /en/ with /nl/ and adjust page paths
-          html = html.replace(/href="\/en\/"/g, 'href="/nl/"');
-          html = html.replace(/href="\/en\/blog\/"/g, 'href="/nl/blog/"');
-          html = html.replace(/href="\/en\/about\/"/g, 'href="/nl/over-ons/"');
-          html = html.replace(/href="\/en\/contact\/"/g, 'href="/nl/contact/"');
-          html = html.replace(/href="\/en\/store\/"/g, 'href="/nl/winkel/"');
-          html = html.replace(/href="\/en\/quiz\/"/g, 'href="/nl/quiz/"');
-          html = html.replace(/href="\/en\/legal\//g, 'href="/nl/legal/');
-          html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/nl/blog/hair-loss-guide.html"');
-        } else if (lang === 'de') {
-          // German: Replace /en/ with /de/ and adjust page paths
-          html = html.replace(/href="\/en\/"/g, 'href="/de/"');
-          html = html.replace(/href="\/en\/blog\/"/g, 'href="/de/blog/"');
-          html = html.replace(/href="\/en\/about\/"/g, 'href="/de/uber-uns/"');
-          html = html.replace(/href="\/en\/contact\/"/g, 'href="/de/kontakt/"');
-          html = html.replace(/href="\/en\/store\/"/g, 'href="/de/shop/"');
-          html = html.replace(/href="\/en\/quiz\/"/g, 'href="/de/quiz/"');
-          html = html.replace(/href="\/en\/legal\//g, 'href="/de/legal/');
-          html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/de/blog/hair-loss-guide.html"');
-        }
+        // Replace language-specific paths using centralized function
+        html = replaceLanguagePaths(html, lang);
         
         fs.writeFileSync(destPath, html, 'utf8');
       } else {
@@ -419,6 +404,10 @@ function buildAll() {
             srcFile = 'terms-of-service-nl.html';
             destFile = 'terms-of-service.html'; // Still output as terms-of-service.html
           }
+          if (file === 'cookie-policy.html' && fs.existsSync(path.join(legalSrc, 'cookie-policy-nl.html'))) {
+            srcFile = 'cookie-policy-nl.html';
+            destFile = 'cookie-policy.html'; // Still output as cookie-policy.html
+          }
         }
         
         // For German, use language-specific versions if they exist
@@ -457,47 +446,16 @@ function buildAll() {
           // Replace language attribute
           html = html.replace(/lang="[^"]*"/, `lang="${lang}"`);
           
-          // Replace paths based on language
-          if (lang === config.defaultLanguage) {
-            // English: Convert /en/ to root paths
-            html = html.replace(/href="\/en\/legal\//g, 'href="/legal/');
-            html = html.replace(/href="\/en\/blog\/"/g, 'href="/blog/"');
-            html = html.replace(/href="\/en\/contact\/"/g, 'href="/contact/"');
-            html = html.replace(/href="\/en\/about\/"/g, 'href="/about/"');
-            html = html.replace(/href="\/en\/store\/"/g, 'href="/store/"');
-            html = html.replace(/href="\/en\/quiz\/"/g, 'href="/quiz/"');
-            html = html.replace(/href="\/en\/"/g, 'href="/"');
-            html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/blog/hair-loss-guide.html"');
-          } else if (lang === 'nl') {
-            // Dutch: Convert /en/ to /nl/ paths
-            html = html.replace(/href="\/en\/legal\//g, 'href="/nl/legal/');
+          // Replace paths using centralized function
+          html = replaceLanguagePaths(html, lang);
+          
+          // Additional legal-specific path replacements
+          if (lang === 'nl') {
+            // Dutch: Also handle /legal/ → /nl/legal/ paths
             html = html.replace(/href="\/legal\//g, 'href="/nl/legal/');
-            html = html.replace(/href="\/en\/blog\/"/g, 'href="/nl/blog/"');
-            html = html.replace(/href="\/en\/contact\/"/g, 'href="/nl/contact/"');
-            html = html.replace(/href="\/en\/about\/"/g, 'href="/nl/over-ons/"');
-            html = html.replace(/href="\/en\/store\/"/g, 'href="/nl/winkel/"');
-            html = html.replace(/href="\/en\/quiz\/"/g, 'href="/nl/quiz/"');
-            html = html.replace(/href="\/en\/"/g, 'href="/nl/"');
-            html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/nl/blog/hair-loss-guide.html"');
-            
-            // Update asset paths (go up one level since we're in /nl/legal/)
-            html = html.replace(/href="\.\.\/\.\.\//g, 'href="../../');
-            html = html.replace(/src="\.\.\/\.\.\//g, 'src="../../');
           } else if (lang === 'de') {
-            // German: Convert /en/ to /de/ paths
-            html = html.replace(/href="\/en\/legal\//g, 'href="/de/legal/');
+            // German: Also handle /legal/ → /de/legal/ paths
             html = html.replace(/href="\/legal\//g, 'href="/de/legal/');
-            html = html.replace(/href="\/en\/blog\/"/g, 'href="/de/blog/"');
-            html = html.replace(/href="\/en\/contact\/"/g, 'href="/de/kontakt/"');
-            html = html.replace(/href="\/en\/about\/"/g, 'href="/de/uber-uns/"');
-            html = html.replace(/href="\/en\/store\/"/g, 'href="/de/shop/"');
-            html = html.replace(/href="\/en\/quiz\/"/g, 'href="/de/quiz/"');
-            html = html.replace(/href="\/en\/"/g, 'href="/de/"');
-            html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/de/blog/hair-loss-guide.html"');
-            
-            // Update asset paths (go up one level since we're in /de/legal/)
-            html = html.replace(/href="\.\.\/\.\.\//g, 'href="../../');
-            html = html.replace(/src="\.\.\/\.\.\//g, 'src="../../');
           }
           
           fs.writeFileSync(destPath, html);
@@ -526,12 +484,35 @@ function buildAll() {
         fs.mkdirSync(blogDest, { recursive: true });
       }
       
+      // Get blog page config for language-specific file mapping
+      const blogConfig = pagesConfig.blogPages;
+      
       // Process each file in blog directory
       const blogFiles = fs.readdirSync(blogSrc);
       
       for (const file of blogFiles) {
-        const srcPath = path.join(blogSrc, file);
-        const destPath = path.join(blogDest, file);
+        // Skip language-specific files (they'll be copied with correct names)
+        if (file.endsWith('-nl.html') || file.endsWith('-de.html')) continue;
+        
+        // Check if this file has language-specific versions
+        const baseName = file.replace('.html', '');
+        const blogPageConfig = blogConfig.find(p => p.template === baseName);
+        
+        let srcFile = file;
+        let destFile = file;
+        
+        // If this page has language-specific source files, use the correct one
+        if (blogPageConfig?.sourceFiles) {
+          const langSpecificFile = blogPageConfig.sourceFiles[lang];
+          if (langSpecificFile && fs.existsSync(path.join(blogSrc, langSpecificFile))) {
+            srcFile = langSpecificFile;
+            // Output file should be the base name (e.g., creatine-hair-loss.html)
+            destFile = `${baseName}.html`;
+          }
+        }
+        
+        const srcPath = path.join(blogSrc, srcFile);
+        const destPath = path.join(blogDest, destFile);
         
         // If it's index.html, process translations
         if (file === 'index.html') {
@@ -543,30 +524,12 @@ function buildAll() {
           // Replace language attribute
           html = html.replace(/lang="[^"]*"/, `lang="${lang}"`);
           
-          // Replace paths based on language
-          if (lang === config.defaultLanguage) {
-            // English: Convert /en/ to root paths
-            html = html.replace(/href="\/en\/blog\/"/g, 'href="/blog/"');
-            html = html.replace(/href="\/en\/contact\/"/g, 'href="/contact/"');
-            html = html.replace(/href="\/en\/about\/"/g, 'href="/about/"');
-            html = html.replace(/href="\/en\/store\/"/g, 'href="/store/"');
-            html = html.replace(/href="\/en\/quiz\/"/g, 'href="/quiz/"');
-            html = html.replace(/href="\/en\/"/g, 'href="/"');
-            html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/blog/hair-loss-guide.html"');
-          } else if (lang === 'nl') {
-            // Dutch: Convert /en/ to /nl/ paths
-            html = html.replace(/href="\/en\/blog\/"/g, 'href="/nl/blog/"');
-            html = html.replace(/href="\/en\/contact\/"/g, 'href="/nl/contact/"');
-            html = html.replace(/href="\/en\/about\/"/g, 'href="/nl/over-ons/"');
-            html = html.replace(/href="\/en\/store\/"/g, 'href="/nl/winkel/"');
-            html = html.replace(/href="\/en\/quiz\/"/g, 'href="/nl/quiz/"');
-            html = html.replace(/href="\/en\/"/g, 'href="/nl/"');
-            html = html.replace(/href="\/en\/blog\/hair-loss-guide\.html"/g, 'href="/nl/blog/hair-loss-guide.html"');
-          }
+          // Replace paths using centralized function
+          html = replaceLanguagePaths(html, lang);
           
           fs.writeFileSync(destPath, html);
         } else {
-          // For other files (like hair-loss-guide.html), just copy as-is
+          // For other blog files, copy with correct language version
           fs.copyFileSync(srcPath, destPath);
         }
       }
@@ -600,7 +563,7 @@ function buildAll() {
   console.log('\nGenerating sitemap_index.xml...');
   generateSitemap();
   generateRobotsTxt();
-  generateHeadersFile();
+  // Note: Headers are defined in netlify.toml, no need to generate _headers file
 }
 
 /**
@@ -668,26 +631,6 @@ Sitemap: https://reviveyour.hair/sitemap_index.xml
   const robotsPath = path.join(config.outputDir, 'robots.txt');
   fs.writeFileSync(robotsPath, robotsTxt, 'utf8');
   console.log('✓ Generated robots.txt with component exclusions');
-}
-
-/**
- * Generate _headers file for Netlify to ensure proper content types
- */
-function generateHeadersFile() {
-  const headersContent = `/sitemap_index.xml
-  Content-Type: application/xml; charset=utf-8
-  X-Content-Type-Options: nosniff
-  Cache-Control: public, max-age=0, must-revalidate
-  Content-Encoding: identity
-
-/robots.txt
-  Content-Type: text/plain; charset=utf-8
-  Cache-Control: public, max-age=300
-`;
-
-  const headersPath = path.join(config.outputDir, '_headers');
-  fs.writeFileSync(headersPath, headersContent, 'utf8');
-  console.log('✓ Generated _headers file for proper content types');
 }
 
 /**

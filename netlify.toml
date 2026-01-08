@@ -38,6 +38,32 @@
   force = false
   conditions = {Language = ["de", "de-DE", "de-AT", "de-CH"]}
 
+# English routes (root level - for consistency)
+[[redirects]]
+  from = "/about"
+  to = "/about/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/quiz"
+  to = "/quiz/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/store"
+  to = "/store/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog"
+  to = "/blog/index.html"
+  status = 200
+
 # Dutch routes (nl prefix)
 [[redirects]]
   from = "/nl"
