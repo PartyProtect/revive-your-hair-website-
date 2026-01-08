@@ -1,6 +1,7 @@
 // Simple i18n (internationalization) configuration
-// This file manages language detection and switching
-// NOTE: Currently being restructured for multi-language template system
+// This file manages client-side language detection for legal pages
+// NOTE: Main i18n is handled by build-i18n.js which generates pre-built language versions
+// This script provides runtime language detection where build-time translation isn't applied
 
 const i18n = {
   // Default language

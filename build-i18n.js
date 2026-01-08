@@ -361,6 +361,21 @@ function buildAll() {
     }
   });
   
+  // Copy public folder files to root of dist
+  console.log('\nCopying public files...');
+  const publicSrc = './public';
+  if (fs.existsSync(publicSrc)) {
+    const publicFiles = fs.readdirSync(publicSrc);
+    publicFiles.forEach(file => {
+      const srcPath = path.join(publicSrc, file);
+      const destPath = path.join(config.outputDir, file);
+      if (fs.statSync(srcPath).isFile()) {
+        fs.copyFileSync(srcPath, destPath);
+        console.log(`✓ Copied ${file}`);
+      }
+    });
+  }
+
   // Copy legal pages to each language
   console.log('\nCopying legal pages...');
   config.languages.forEach(lang => {
