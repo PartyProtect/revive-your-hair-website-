@@ -1,79 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 
-const domain = 'https://reviveyour.hair';
+// Import centralized page configuration
+const pagesConfig = require('./config/pages');
 
-// Define all pages with their language-specific slugs
-const pages = [
-  {
-    en: '/',
-    nl: '/nl/',
-    de: '/de/',
-    priority: '1.0',
-    changefreq: 'weekly'
-  },
-  {
-    en: '/about/',
-    nl: '/nl/over-ons/',
-    de: '/de/uber-uns/',
-    priority: '0.8',
-    changefreq: 'monthly'
-  },
-  {
-    en: '/store/',
-    nl: '/nl/winkel/',
-    de: '/de/shop/',
-    priority: '0.9',
-    changefreq: 'weekly'
-  },
-  {
-    en: '/contact/',
-    nl: '/nl/contact/',
-    de: '/de/kontakt/',
-    priority: '0.7',
-    changefreq: 'monthly'
-  },
-  {
-    en: '/quiz/',
-    nl: '/nl/quiz/',
-    de: '/de/quiz/',
-    priority: '0.8',
-    changefreq: 'weekly'
-  },
-  {
-    en: '/blog/',
-    nl: '/nl/blog/',
-    de: '/de/blog/',
-    priority: '0.8',
-    changefreq: 'weekly'
-  },
-  {
-    en: '/blog/hair-loss-guide.html',
-    nl: '/nl/blog/hair-loss-guide.html',
-    de: '/de/blog/hair-loss-guide.html',
-    priority: '0.7',
-    changefreq: 'monthly'
-  }
-];
+const domain = pagesConfig.domain;
 
-// Legal pages (same content for now)
-const legalPages = [
-  'privacy-policy.html',
-  'terms-of-service.html',
-  'cookie-policy.html',
-  'disclaimer.html',
-  'affiliate-disclosure.html'
-];
-
-legalPages.forEach(page => {
-  pages.push({
-    en: `/legal/${page}`,
-    nl: `/nl/legal/${page}`,
-    de: `/de/legal/${page}`,
-    priority: '0.3',
-    changefreq: 'yearly'
-  });
-});
+// Get all pages from centralized config
+const pages = pagesConfig.getSitemapPages();
 
 // Generate sitemap XML
 function generateSitemap() {

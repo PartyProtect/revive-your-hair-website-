@@ -1,6 +1,7 @@
 [build]
   # Build multilingual site structure to dist/ folder
-  command = "node tools/validate-translations.js && node build-i18n.js && node build-sitemap.js"
+  # Note: build-i18n.js generates the sitemap internally using config/pages.js
+  command = "node tools/validate-translations.js && node build-i18n.js"
   
   # Publish the dist directory (multilingual output)
   publish = "dist"

@@ -5,7 +5,8 @@
   "main": "src/templates/index.html",
   "scripts": {
     "validate": "node tools/validate-translations.js",
-    "build": "npm run validate && node build-i18n.js && node build-sitemap.js",
+    "build": "npm run validate && node build-i18n.js",
+    "build:sitemap": "node build-sitemap.js",
     "start": "npm run build && npx serve dist -l 8000",
     "dev": "npx serve dist -l 8000",
     "build:seo": "node build-seo-content.js"

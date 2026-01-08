@@ -8,42 +8,19 @@
 const fs = require('fs');
 const path = require('path');
 
+// Import centralized page configuration
+const pagesConfig = require('./config/pages');
+
 // Configuration
 const config = {
   templatesDir: './src/templates',
   i18nDir: './src/i18n',
   outputDir: './dist',
-  languages: ['en', 'nl', 'de'], // English, Dutch, German
-  defaultLanguage: 'en',
+  languages: pagesConfig.languages,
+  defaultLanguage: pagesConfig.defaultLanguage,
   
-  // Map template names to localized URLs
-  urlMappings: {
-    'index': {
-      en: '',  // Root path for English (no /en/)
-      nl: '',  // Root path for Dutch (/nl/)
-      de: ''   // Root path for German (/de/)
-    },
-    'about': {
-      en: 'about',      // /about/
-      nl: 'over-ons',   // /nl/over-ons/
-      de: 'uber-uns'    // /de/uber-uns/
-    },
-    'contact': {
-      en: 'contact',    // /contact/
-      nl: 'contact',    // /nl/contact/
-      de: 'kontakt'     // /de/kontakt/
-    },
-    'store': {
-      en: 'store',      // /store/
-      nl: 'winkel',     // /nl/winkel/
-      de: 'shop'        // /de/shop/
-    },
-    'quiz': {
-      en: 'quiz',       // /quiz/
-      nl: 'quiz',       // /nl/quiz/
-      de: 'quiz'        // /de/quiz/
-    }
-  }
+  // Get URL mappings from centralized config
+  urlMappings: pagesConfig.getUrlMappings()
 };
 
 /**
@@ -631,72 +608,10 @@ function buildAll() {
  * Excludes components, verification files, and sets proper priorities
  */
 function generateSitemap() {
-  const domain = 'https://reviveyour.hair';
+  const domain = pagesConfig.domain;
   
-  // Define pages with their translations and metadata
-  const pages = [
-    {
-      en: '/',
-      nl: '/nl/',
-      de: '/de/',
-      priority: '1.0',
-      changefreq: 'weekly'
-    },
-    {
-      en: '/about/',
-      nl: '/nl/over-ons/',
-      de: '/de/uber-uns/',
-      priority: '0.8',
-      changefreq: 'monthly'
-    },
-    {
-      en: '/store/',
-      nl: '/nl/winkel/',
-      de: '/de/shop/',
-      priority: '0.9',
-      changefreq: 'weekly'
-    },
-    {
-      en: '/contact/',
-      nl: '/nl/contact/',
-      de: '/de/kontakt/',
-      priority: '0.7',
-      changefreq: 'monthly'
-    },
-    {
-      en: '/quiz/',
-      nl: '/nl/quiz/',
-      de: '/de/quiz/',
-      priority: '0.8',
-      changefreq: 'weekly'
-    },
-    {
-      en: '/blog/',
-      nl: '/nl/blog/',
-      de: '/de/blog/',
-      priority: '0.9',
-      changefreq: 'weekly'
-    },
-    {
-      en: '/blog/hair-loss-guide.html',
-      nl: '/nl/blog/hair-loss-guide.html',
-      de: '/de/blog/hair-loss-guide.html',
-      priority: '0.9',
-      changefreq: 'monthly'
-    }
-  ];
-
-  // Add legal pages
-  const legalPages = ['privacy-policy.html', 'terms-of-service.html', 'cookie-policy.html', 'disclaimer.html', 'affiliate-disclosure.html'];
-  legalPages.forEach(page => {
-    pages.push({
-      en: `/legal/${page}`,
-      nl: `/nl/legal/${page}`,
-      de: `/de/legal/${page}`,
-      priority: '0.3',
-      changefreq: 'yearly'
-    });
-  });
+  // Get all pages from centralized config
+  const pages = pagesConfig.getSitemapPages();
 
   // Generate XML
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
