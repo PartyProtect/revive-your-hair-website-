@@ -164,10 +164,10 @@ function replaceMetadata(html, lang, pageName, translations) {
     hreflangTags += `  <link rel="alternate" hreflang="${l}" href="${lUrl}">\n`;
   });
   
-  // Replace hreflang section
+  // Replace hreflang section - preserve canonical URL
   html = html.replace(
     /<!-- SEO -->[\s\S]*?<!-- Open Graph -->/,
-    `<!-- SEO -->\n${hreflangTags}\n  <!-- Open Graph -->`
+    `<!-- SEO -->\n  <link rel="canonical" href="${canonicalUrl}">\n${hreflangTags}\n  <!-- Open Graph -->`
   );
   
   // Add Open Graph locale tags
