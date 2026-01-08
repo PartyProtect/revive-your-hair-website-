@@ -97,6 +97,21 @@
     "researchDesc": "Duik diep in de wetenschap: volledige protocollen, bijwerkingen uitgelegd, klinische studies geciteerd en verwachtingen per maand. 18 minuten lezen.",
     "researchButton": "Lees de Volledige Gids →"
   },
+  "cookieConsent": {
+    "title": "🍪 We gebruiken cookies en analytics",
+    "intro": "We verzamelen de volgende gegevens om je ervaring te verbeteren:",
+    "item1": "Paginaweergaven en sessieduur",
+    "item2": "Apparaattype, schermresolutie, browsertaal, tijdzone",
+    "item3": "Scrolldiepte en klikinteracties op CTA's",
+    "item4": "Verwijzingsbronnen en UTM-campagnegegevens",
+    "item5": "Formulierinzendingen (geanonimiseerd)",
+    "privacyNote": "Je IP-adres wordt geanonimiseerd via one-way hashing. Gegevens worden maximaal 90 dagen bewaard en nooit verkocht aan derden.",
+    "seeOur": "Zie ons",
+    "and": "en",
+    "forDetails": "voor details.",
+    "acceptAll": "Alles Accepteren",
+    "rejectNonEssential": "Niet-essentiële Weigeren"
+  },
   "footer": {
     "description": "Evidence-based oplossingen voor haaruitval. We combineren wetenschappelijk onderzoek met bewezen behandelingen om haaruitval te stoppen en haargroei te herstellen.",
     "quickLinks": "MENU",
@@ -111,6 +126,10 @@
     "cookiePolicy": "Cookiebeleid",
     "affiliateDisclosure": "Affiliate Verklaring",
     "tagline": "Wij hebben de onderzoeken gelezen, zodat jij dat niet hoeft te doen",
+    "statStudiesNumber": "70+",
+    "statStudiesLabel": "Studies Geanalyseerd",
+    "statMechanismsNumber": "4",
+    "statMechanismsLabel": "Mechanismen Aangepakt",
     "copyright": "© 2025 Revive Your Hair. Alle rechten voorbehouden.",
     "disclaimerLabel": "Medische Disclaimer:",
     "disclaimerText": "Deze website biedt alleen informatie voor educatieve doeleinden en is niet bedoeld als medisch advies. De inhoud mag niet worden gebruikt als vervanging voor professioneel medisch advies, diagnose of behandeling. Raadpleeg altijd een gekwalificeerde zorgverlener voordat u een behandeling start of wijzigingen aanbrengt in uw gezondheidsregime."

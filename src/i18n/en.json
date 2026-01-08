@@ -97,6 +97,21 @@
     "researchDesc": "Deep dive into the science: full protocols, side effect breakdowns, clinical study citations, and month-by-month expectations. 18-minute read.",
     "researchButton": "Read the Full Guide →"
   },
+  "cookieConsent": {
+    "title": "🍪 We use cookies and analytics",
+    "intro": "We collect the following data to improve your experience:",
+    "item1": "Page views and session duration",
+    "item2": "Device type, screen resolution, browser language, timezone",
+    "item3": "Scroll depth and click interactions on CTAs",
+    "item4": "Referral sources and UTM campaign data",
+    "item5": "Form submissions (anonymized)",
+    "privacyNote": "Your IP address is anonymized via one-way hashing. Data is retained for 90 days maximum and never sold to third parties.",
+    "seeOur": "See our",
+    "and": "and",
+    "forDetails": "for details.",
+    "acceptAll": "Accept All",
+    "rejectNonEssential": "Reject Non-Essential"
+  },
   "footer": {
     "description": "Evidence-based solutions for hair loss. We combine clinical research with proven treatments to help you stop hair loss and restore growth.",
     "quickLinks": "Quick Links",
@@ -111,6 +126,10 @@
     "cookiePolicy": "Cookie Policy",
     "affiliateDisclosure": "Affiliate Disclosure",
     "tagline": "We read the clinical studies so you don't have to",
+    "statStudiesNumber": "70+",
+    "statStudiesLabel": "Studies Analysed",
+    "statMechanismsNumber": "4",
+    "statMechanismsLabel": "Mechanisms Targeted",
     "copyright": "© 2025 Revive Your Hair. All rights reserved.",
     "disclaimerLabel": "Medical Disclaimer:",
     "disclaimerText": "This website provides information for educational purposes only and is not intended as medical advice. The content should not be used as a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider before starting any treatment or making changes to your health regimen."

@@ -97,6 +97,21 @@
     "researchDesc": "Tauchen Sie tief in die Wissenschaft ein: vollständige Protokolle, erklärte Nebenwirkungen, zitierte klinische Studien und monatliche Erwartungen. 18 Minuten Lesezeit.",
     "researchButton": "Zum vollständigen Leitfaden →"
   },
+  "cookieConsent": {
+    "title": "🍪 Wir verwenden Cookies und Analytics",
+    "intro": "Wir sammeln folgende Daten, um Ihre Erfahrung zu verbessern:",
+    "item1": "Seitenaufrufe und Sitzungsdauer",
+    "item2": "Gerätetyp, Bildschirmauflösung, Browsersprache, Zeitzone",
+    "item3": "Scrolltiefe und Klickinteraktionen auf CTAs",
+    "item4": "Verweisquellen und UTM-Kampagnendaten",
+    "item5": "Formularübermittlungen (anonymisiert)",
+    "privacyNote": "Ihre IP-Adresse wird durch One-Way-Hashing anonymisiert. Daten werden maximal 90 Tage aufbewahrt und niemals an Dritte verkauft.",
+    "seeOur": "Siehe unsere",
+    "and": "und",
+    "forDetails": "für Details.",
+    "acceptAll": "Alle Akzeptieren",
+    "rejectNonEssential": "Nicht-essentielle Ablehnen"
+  },
   "footer": {
     "description": "Evidenzbasierte Lösungen für Haarausfall. Wir kombinieren wissenschaftliche Forschung mit bewährten Behandlungen, um Haarausfall zu stoppen und Haarwachstum wiederherzustellen.",
     "quickLinks": "MENÜ",
@@ -111,6 +126,10 @@
     "cookiePolicy": "Cookie-Richtlinie",
     "affiliateDisclosure": "Affiliate-Offenlegung",
     "tagline": "Wir haben die Studien gelesen, damit Sie es nicht tun müssen",
+    "statStudiesNumber": "70+",
+    "statStudiesLabel": "Studien Analysiert",
+    "statMechanismsNumber": "4",
+    "statMechanismsLabel": "Mechanismen Gezielt",
     "copyright": "© 2025 Revive Your Hair. Alle Rechte vorbehalten.",
     "disclaimerLabel": "Medizinischer Haftungsausschluss:",
     "disclaimerText": "Diese Website bietet nur Informationen zu Bildungszwecken und ist nicht als medizinische Beratung gedacht. Der Inhalt darf nicht als Ersatz für professionelle medizinische Beratung, Diagnose oder Behandlung verwendet werden. Konsultieren Sie immer einen qualifizierten Arzt, bevor Sie eine Behandlung beginnen oder Änderungen an Ihrem Gesundheitsregime vornehmen."

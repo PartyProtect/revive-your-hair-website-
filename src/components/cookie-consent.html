@@ -2,24 +2,24 @@
 <div id="cookie-consent-banner" class="cookie-banner" style="display: none;">
   <div class="cookie-banner-content">
     <div class="cookie-banner-text">
-      <p><strong>🍪 We use cookies and analytics</strong></p>
-      <p>We collect the following data to improve your experience:</p>
+      <p><strong>{{t.cookieConsent.title}}</strong></p>
+      <p>{{t.cookieConsent.intro}}</p>
       <ul style="font-size: 0.85em; margin: 8px 0 8px 20px; line-height: 1.5;">
-        <li>Page views and session duration</li>
-        <li>Device type, screen resolution, browser language, timezone</li>
-        <li>Scroll depth and click interactions on CTAs</li>
-        <li>Referral sources and UTM campaign data</li>
-        <li>Form submissions (anonymized)</li>
+        <li>{{t.cookieConsent.item1}}</li>
+        <li>{{t.cookieConsent.item2}}</li>
+        <li>{{t.cookieConsent.item3}}</li>
+        <li>{{t.cookieConsent.item4}}</li>
+        <li>{{t.cookieConsent.item5}}</li>
       </ul>
       <p style="font-size: 0.85em; margin-top: 8px;">
-        Your IP address is anonymized via one-way hashing. Data is retained for 90 days maximum and never sold to third parties. 
-        See our <a href="/legal/cookie-policy" style="color: #FF4500; text-decoration: underline;">Cookie Policy</a> and 
-        <a href="/legal/privacy-policy" style="color: #FF4500; text-decoration: underline;">Privacy Policy</a> for details.
+        {{t.cookieConsent.privacyNote}} 
+        {{t.cookieConsent.seeOur}} <a href="/en/legal/cookie-policy" style="color: #FF4500; text-decoration: underline;">{{t.footer.cookiePolicy}}</a> {{t.cookieConsent.and}} 
+        <a href="/en/legal/privacy-policy" style="color: #FF4500; text-decoration: underline;">{{t.footer.privacyPolicy}}</a> {{t.cookieConsent.forDetails}}
       </p>
     </div>
     <div class="cookie-banner-buttons">
-      <button id="cookie-accept-all" class="cookie-btn cookie-btn-primary">Accept All</button>
-      <button id="cookie-reject" class="cookie-btn cookie-btn-secondary">Reject Non-Essential</button>
+      <button id="cookie-accept-all" class="cookie-btn cookie-btn-primary">{{t.cookieConsent.acceptAll}}</button>
+      <button id="cookie-reject" class="cookie-btn cookie-btn-secondary">{{t.cookieConsent.rejectNonEssential}}</button>
     </div>
   </div>
 </div>
