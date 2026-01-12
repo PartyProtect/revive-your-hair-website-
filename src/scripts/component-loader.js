@@ -158,27 +158,6 @@ class ComponentLoader {
       window.dispatchEvent(new CustomEvent('componentsLoaded'));
       console.log('✅ All components loaded, dispatched componentsLoaded event');
       
-      // Initialize language switcher after components are loaded
-      // Note: We can't use eval() due to CSP restrictions, so we extract and re-insert the script
-      setTimeout(() => {
-        const langScriptEl = document.querySelector('#language-switcher-root script');
-        if (langScriptEl) {
-          try {
-            // Create a new script element and copy the content
-            const newScript = document.createElement('script');
-            newScript.textContent = langScriptEl.textContent;
-            // Remove the old script and append the new one - this makes it execute
-            langScriptEl.remove();
-            document.body.appendChild(newScript);
-            console.log('✅ Language switcher initialized');
-          } catch (e) {
-            console.error('Error initializing language switcher:', e);
-          }
-        } else {
-          console.warn('Language switcher script not found');
-        }
-      }, 100);
-      
     } catch (error) {
       console.error('Error loading components:', error);
     }
