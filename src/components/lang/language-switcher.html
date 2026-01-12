@@ -131,6 +131,19 @@
   nlLink.href = nlPath;
   deLink.href = dePath;
   
+  // Save language preference when user clicks a language option
+  const STORAGE_KEY = 'lang_preference';
+  
+  enLink.addEventListener('click', function() {
+    try { localStorage.setItem(STORAGE_KEY, 'en'); } catch(e) {}
+  });
+  nlLink.addEventListener('click', function() {
+    try { localStorage.setItem(STORAGE_KEY, 'nl'); } catch(e) {}
+  });
+  deLink.addEventListener('click', function() {
+    try { localStorage.setItem(STORAGE_KEY, 'de'); } catch(e) {}
+  });
+  
   // Toggle dropdown on button click
   toggle.addEventListener('click', function(e) {
     e.preventDefault();
