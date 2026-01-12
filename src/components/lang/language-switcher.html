@@ -161,18 +161,38 @@
   });
   
   console.log('Language switcher initialized successfully', {
-    currentLang: isNL ? 'nl' : 'en',
+    currentLang: isNL ? 'nl' : (isDE ? 'de' : 'en'),
     enPath,
-    nlPath
+    nlPath,
+    dePath
   });
 })();
 
-// Also listen for componentsLoaded event in case this script runs before component loads
+// Also listen for componentsLoaded event in case this script runs before component load
 window.addEventListener('componentsLoaded', function() {
-  console.log('Components loaded event received, initializing language switcher...');
-  const script = document.querySelector('.language-switcher + script');
-  if (script) {
-    eval(script.textContent);
+  console.log('Components loaded event received, re-initializing language switcher...');
+  // Re-run the initialization to ensure event listeners are attached
+  const toggle = document.getElementById('langToggle');
+  const dropdown = document.getElementById('langDropdown');
+  
+  if (toggle && dropdown && !toggle.hasAttribute('data-initialized')) {
+    toggle.setAttribute('data-initialized', 'true');
+    
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const switcher = toggle.closest('.language-switcher');
+      switcher.classList.toggle('open');
+    });
+    
+    document.addEventListener('click', function(e) {
+      const switcher = document.querySelector('.language-switcher');
+      if (switcher && !switcher.contains(e.target)) {
+        switcher.classList.remove('open');
+      }
+    });
+    
+    console.log('Language switcher event listeners attached via componentsLoaded');
   }
 });
 </script>

@@ -160,7 +160,7 @@ class ComponentLoader {
       
       // Initialize language switcher after components are loaded
       setTimeout(() => {
-        const langScript = document.querySelector('.language-switcher + script');
+        const langScript = document.querySelector('#language-switcher-root script');
         if (langScript) {
           try {
             eval(langScript.textContent);
@@ -168,6 +168,8 @@ class ComponentLoader {
           } catch (e) {
             console.error('Error initializing language switcher:', e);
           }
+        } else {
+          console.warn('Language switcher script not found');
         }
       }, 100);
       
