@@ -95,6 +95,13 @@
   to = "/nl/blog/index.html"
   status = 200
 
+# NL hair-loss-guide redirect to English (no translated version yet)
+[[redirects]]
+  from = "/nl/blog/hair-loss-guide*"
+  to = "/blog/hair-loss-guide.html"
+  status = 302
+  force = true
+
 # German routes (de prefix)
 [[redirects]]
   from = "/de"
@@ -125,6 +132,13 @@
   from = "/de/blog"
   to = "/de/blog/index.html"
   status = 200
+
+# DE hair-loss-guide redirect to English (no translated version yet)
+[[redirects]]
+  from = "/de/blog/hair-loss-guide*"
+  to = "/blog/hair-loss-guide.html"
+  status = 302
+  force = true
 
 # Sitemap and robots.txt - serve directly
 [[redirects]]
