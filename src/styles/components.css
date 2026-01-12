@@ -1,5 +1,5 @@
 /* ============================================
-   GLOBAL HEADER COMPONENT - Transparent to Dark
+   GLOBAL HEADER COMPONENT - Always Dark
    ============================================ */
 
 /* Header Root Container - Fixed positioning */
@@ -8,18 +8,18 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 1100;
 }
 
-/* Header Container - TRANSPARENT by default */
+/* Header Container - ALWAYS DARK */
 .header {
-  background: transparent;
-  backdrop-filter: none;
-  border-bottom: 1px solid transparent;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
 }
 
-/* Scrolled state - dark background */
+/* Scrolled state - same as default now */
 .header.scrolled {
   background: rgba(15, 23, 42, 0.95);
   backdrop-filter: blur(12px);
@@ -35,11 +35,11 @@
   opacity: 1;
 }
 
-/* Accent Bar (Green to Orange Gradient) - Hidden initially */
+/* Accent Bar (Green to Orange Gradient) - Always visible */
 .accent-bar {
   height: 3px;
   background: linear-gradient(90deg, #10b981, #34d399, #f59e0b);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s ease;
 }
 
@@ -327,7 +327,7 @@
   transform: translateY(-10px);
   transition: all 0.2s ease;
   overflow: hidden;
-  z-index: 1000;
+  z-index: 1100;
 }
 
 .language-switcher.open .lang-dropdown {
