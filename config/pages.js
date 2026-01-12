@@ -62,17 +62,19 @@ const pages = [
  */
 const blogPages = [
   {
-    // Blog index page
+    // Blog index page - English only (no translations yet)
     template: 'index',
-    slugs: { en: 'blog', nl: 'blog', de: 'blog' },
+    slugs: { en: 'blog' },
     isIndex: true,
+    languages: ['en'], // Only available in English
     priority: '0.9',
     changefreq: 'weekly'
   },
   {
-    // Hair loss guide - same filename for all languages
+    // Hair loss guide - English only (no translations yet)
     template: 'hair-loss-guide',
-    slugs: { en: 'hair-loss-guide.html', nl: 'hair-loss-guide.html', de: 'hair-loss-guide.html' },
+    slugs: { en: 'hair-loss-guide.html' },
+    languages: ['en'], // Only available in English
     priority: '0.9',
     changefreq: 'monthly'
   },
@@ -167,13 +169,39 @@ function getSitemapPages() {
   
   // Blog pages
   blogPages.forEach(page => {
+    // Check if page is language-restricted
+    const pageLanguages = page.languages || languages; // Default to all languages
+    
     if (page.isIndex) {
+      // Blog index - check language restrictions
+      if (pageLanguages.length === 1 && pageLanguages[0] === 'en') {
+        // English-only blog index
+        sitemapEntries.push({
+          en: '/blog/',
+          nl: null,
+          de: null,
+          priority: page.priority,
+          changefreq: page.changefreq,
+          languagesOnly: ['en']
+        });
+      } else {
+        sitemapEntries.push({
+          en: '/blog/',
+          nl: '/nl/blog/',
+          de: '/de/blog/',
+          priority: page.priority,
+          changefreq: page.changefreq
+        });
+      }
+    } else if (pageLanguages.length === 1 && pageLanguages[0] === 'en') {
+      // English-only page - only add English URL, no NL/DE alternates
       sitemapEntries.push({
-        en: '/blog/',
-        nl: '/nl/blog/',
-        de: '/de/blog/',
+        en: `/blog/${page.slugs.en}`,
+        nl: null, // No NL version
+        de: null, // No DE version
         priority: page.priority,
-        changefreq: page.changefreq
+        changefreq: page.changefreq,
+        languagesOnly: ['en'] // Flag for sitemap generator
       });
     } else {
       sitemapEntries.push({

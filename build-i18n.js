@@ -513,6 +513,11 @@ function buildAll() {
         const baseName = file.replace('.html', '');
         const blogPageConfig = blogConfig.find(p => p.template === baseName);
         
+        // Skip if this page is language-restricted and current lang is not supported
+        if (blogPageConfig?.languages && !blogPageConfig.languages.includes(lang)) {
+          continue;
+        }
+        
         let srcFile = file;
         let destFile = file;
         
@@ -596,22 +601,36 @@ function generateSitemap() {
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n';
   xml += '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n';
 
+  let urlCount = 0;
+  
   pages.forEach(page => {
-    // Add entry for each language
-    ['en', 'nl', 'de'].forEach(lang => {
+    // Check if this is a language-restricted page
+    const pageLanguages = page.languagesOnly || ['en', 'nl', 'de'];
+    
+    // Add entry for each supported language
+    pageLanguages.forEach(lang => {
+      // Skip if this language doesn't have a URL for this page
+      if (!page[lang]) return;
+      
       xml += '  <url>\n';
       xml += `    <loc>${domain}${page[lang]}</loc>\n`;
       
-      // Add hreflang links for all languages
-      xml += `    <xhtml:link rel="alternate" hreflang="en" href="${domain}${page.en}"/>\n`;
-      xml += `    <xhtml:link rel="alternate" hreflang="nl" href="${domain}${page.nl}"/>\n`;
-      xml += `    <xhtml:link rel="alternate" hreflang="de" href="${domain}${page.de}"/>\n`;
-      xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${domain}${page.en}"/>\n`;
+      // Add hreflang links only for languages that have this page
+      pageLanguages.forEach(hrefLang => {
+        if (page[hrefLang]) {
+          xml += `    <xhtml:link rel="alternate" hreflang="${hrefLang}" href="${domain}${page[hrefLang]}"/>\n`;
+        }
+      });
+      // x-default always points to English
+      if (page.en) {
+        xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${domain}${page.en}"/>\n`;
+      }
       
       xml += `    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n`;
       xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
       xml += `    <priority>${page.priority}</priority>\n`;
       xml += '  </url>\n';
+      urlCount++;
     });
   });
 
@@ -620,7 +639,7 @@ function generateSitemap() {
   // Write sitemap to dist
   const sitemapPath = path.join(config.outputDir, 'sitemap_index.xml');
   fs.writeFileSync(sitemapPath, xml, 'utf8');
-  console.log(`✓ Generated sitemap_index.xml with ${pages.length * 3} URLs`);
+  console.log(`✓ Generated sitemap_index.xml with ${urlCount} URLs`);
 }
 
 /**
